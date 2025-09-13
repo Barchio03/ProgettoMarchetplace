@@ -49,30 +49,6 @@ public class MarketController {
         return new ResponseEntity<>(productBoard.getProducts(), HttpStatus.OK);
     }
 
-    // -- PRODUCER --
-
-    @RequestMapping(value = "/producer/addProduct")
-    public ResponseEntity<Object> addProducerProduct(@RequestBody ProducerProduct product){
-        if (seller.getTags().contains(Tag.PRODUCER)) {
-            product.setCreator(seller);
-            if (requestHandler.addProduct(product))
-                return new ResponseEntity<>("Prodotto in processo di verifica", HttpStatus.CREATED);
-            else return new ResponseEntity<>("Richiesta già in atto", HttpStatus.BAD_REQUEST);
-        } else return new ResponseEntity<>("Non autorizzato", HttpStatus.UNAUTHORIZED);
-    }
-
-    // -- TRANSFORMER --
-
-    @RequestMapping(value = "/transformer/addProduct")
-    public ResponseEntity<Object> addTransformerProduct(@RequestBody TransformerProduct product){
-        if (seller.getTags().contains(Tag.TRANSFORMER)) {
-            product.setCreator(seller);
-            if (requestHandler.addProduct(product))
-                return new ResponseEntity<>("Prodotto in processo di verifica", HttpStatus.CREATED);
-            else return new ResponseEntity<>("Richiesta già in atto", HttpStatus.BAD_REQUEST);
-        } else return new ResponseEntity<>("Non autorizzato", HttpStatus.UNAUTHORIZED);
-    }
-
 
     @RequestMapping(value = "/profile/{user}")
     public ResponseEntity<Object> showProfile(@PathVariable("user") String user){

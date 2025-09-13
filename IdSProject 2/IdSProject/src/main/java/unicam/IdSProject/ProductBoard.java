@@ -1,5 +1,6 @@
 package unicam.IdSProject;
 
+import jakarta.websocket.server.PathParam;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class ProductBoard {
     /**
      * Adds a new product to the product board
      *
-     * @param the product to add
+     * @param product, the product to add
      *
      * @return true if it is inserted successfully, false otherwise
      */
@@ -38,7 +39,7 @@ public class ProductBoard {
     /**
      * Removes a product to the product board
      *
-     * @param the product to remove
+     * @param product, the product to remove
      *
      * @return true if it is removed successfully, false otherwise
      */
@@ -47,9 +48,26 @@ public class ProductBoard {
     }
 
     /**
+     * Removes a product to the product board
+     *
+     * @param id, the id of the product to remove
+     *
+     * @return true if it is removed successfully, false otherwise
+     */
+    public boolean removeProduct(int id) {
+        for( Product product :  products) {
+            if (product.getId() == id) {
+                products.remove(product);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Verifies whether a product is in the product board
      *
-     * @param the product
+     * @param product, the product searched for
      *
      * @return true if the product is contained, false otherwise
      */
@@ -64,7 +82,7 @@ public class ProductBoard {
     /**
      * Returns a list of all the products a specific seller has published
      *
-     * @param the seller
+     * @param seller, the seller from witch taking the products
      *
      * @return an ArrayList of products created by the seller given
      */

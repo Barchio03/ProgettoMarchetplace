@@ -81,6 +81,9 @@ public class Seller {
         this.location = location;
     }
 
+    /**
+     * @return the tag assigned to the seller
+     */
     public ArrayList<Tag> getTags() {
         return tags;
     }
@@ -92,32 +95,13 @@ public class Seller {
         return id;
     }
 
-    
     /**
-    *
-    * This method is used to add a product to the marketplace.
-    *
-    * @return true if the product is added successfully, false otherwise.
-    *
-    */
-    public boolean addProduct() {
-        return false;
-    }
-
-    /**
-    *
-    * This method is used to remove a product from the marketplace.
-    *
-    * @return true if the product is removed successfully, false otherwise.
-    *
-    */
-    public boolean removeProduct() {
-        return false;
-    }
-
+     * @return the mailbox of the seller
+     */
     public Mailbox getMailbox() {
         return mailbox;
     }
+
 
     public String toString(){
         return "Nome: "+this.getName()+
