@@ -44,6 +44,23 @@ public class EventBoard {
     }
 
     /**
+     * removes an event from the event board
+     *
+     * @param id, the id of the event to delete
+     *
+     * @return true is the event was deleted successfully, false otherwise
+     */
+    public boolean removeEvent(int id) {
+        for( Event event:  events) {
+            if (event.getId() == id) {
+                events.remove(event);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Verifies whether an event is in the event board
      *
      * @param event

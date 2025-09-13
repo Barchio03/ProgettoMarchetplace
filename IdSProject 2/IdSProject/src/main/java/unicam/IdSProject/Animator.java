@@ -39,7 +39,7 @@ public class Animator {
     }
 
     /**
-     * @returnthe name of the animator
+     * @return name, the name of the animator
      */
     public String getName() {
         return name;
@@ -73,18 +73,7 @@ public class Animator {
         return id;
     }
 
-    /**
-     * Creates a new event
-     *
-     * @return
-     */
-    public Event createEvent() {
-        return null;
-    }
 
-    public boolean deleteEvent(Event event) {
-        return false;
-    }
 
     public Mailbox getMailbox() {
         return mailbox;

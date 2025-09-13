@@ -23,16 +23,7 @@ public class SellerController {
 
     }
 
-    /**
-     *
-     * This method is used to remove a product from the marketplace.
-     *
-     * @return true if the product is removed successfully, false otherwise.
-     *
-     */
-    public boolean removeProduct() {
-        return false;
-    }
+
 
 
     // -- PRODUCER --
@@ -41,9 +32,12 @@ public class SellerController {
     public ResponseEntity<Object> addProducerProduct(@RequestBody ProducerProduct product){
         if (seller.getTags().contains(Tag.PRODUCER)) {
             product.setCreator(seller);
-            if (requestHandler.addProduct(product))
-                return new ResponseEntity<>("Prodotto in processo di verifica", HttpStatus.CREATED);
-            else return new ResponseEntity<>("Richiesta già in atto", HttpStatus.BAD_REQUEST);
+            if(!productBoard.contains(product)){
+                if (requestHandler.addProduct(product))
+                    return new ResponseEntity<>("Prodotto in processo di verifica", HttpStatus.CREATED);
+                else return new ResponseEntity<>("Richiesta già in atto", HttpStatus.BAD_REQUEST);
+            }
+            return new ResponseEntity<>("Il prodotto è già presente", HttpStatus.BAD_REQUEST);
         } else return new ResponseEntity<>("Non autorizzato", HttpStatus.UNAUTHORIZED);
     }
 
@@ -53,14 +47,18 @@ public class SellerController {
     public ResponseEntity<Object> addTransformerProduct(@RequestBody TransformerProduct product){
         if (seller.getTags().contains(Tag.TRANSFORMER)) {
             product.setCreator(seller);
-            if (requestHandler.addProduct(product))
-                return new ResponseEntity<>("Prodotto in processo di verifica", HttpStatus.CREATED);
-            else return new ResponseEntity<>("Richiesta già in atto", HttpStatus.BAD_REQUEST);
-        } else return new ResponseEntity<>("Non autorizzato", HttpStatus.UNAUTHORIZED);
+            if(!productBoard.contains(product)){
+                if (requestHandler.addProduct(product))
+                    return new ResponseEntity<>("Prodotto in processo di verifica", HttpStatus.CREATED);
+                else return new ResponseEntity<>("Richiesta già in atto", HttpStatus.BAD_REQUEST);
+            }
+            return new ResponseEntity<>("Il prodotto è già presente", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>("Non autorizzato", HttpStatus.UNAUTHORIZED);
     }
 
 
-    @RequestMapping(value = "/producer/addProduct")
+    @RequestMapping(value = "/removeProduct")
     public ResponseEntity<Object> removeProduct(@PathParam("id") int id) {
         if (productBoard.removeProduct(id)){
             return new ResponseEntity<>("Prodotto rimosso con successo", HttpStatus.OK);
