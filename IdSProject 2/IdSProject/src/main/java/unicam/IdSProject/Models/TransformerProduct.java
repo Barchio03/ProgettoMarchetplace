@@ -1,4 +1,4 @@
-package unicam.IdSProject;
+package unicam.IdSProject.Models;
 
 public class TransformerProduct extends Product {
 

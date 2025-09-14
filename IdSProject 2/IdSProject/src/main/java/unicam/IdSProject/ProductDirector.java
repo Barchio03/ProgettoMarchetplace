@@ -1,6 +1,7 @@
 package unicam.IdSProject;
 
-import org.springframework.web.bind.annotation.RequestBody;
+import unicam.IdSProject.Models.ProducerProduct;
+import unicam.IdSProject.Models.TransformerProduct;
 
 public class ProductDirector {
 

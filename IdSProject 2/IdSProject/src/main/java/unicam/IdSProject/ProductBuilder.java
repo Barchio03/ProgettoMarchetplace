@@ -1,6 +1,8 @@
 package unicam.IdSProject;
 
+import unicam.IdSProject.Models.Product;
 import unicam.IdSProject.Models.Seller;
+import unicam.IdSProject.Models.TransformerProduct;
 
 public class ProductBuilder {
 

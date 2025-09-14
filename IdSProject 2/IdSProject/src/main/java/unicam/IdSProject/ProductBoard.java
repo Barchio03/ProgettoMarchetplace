@@ -1,6 +1,7 @@
 package unicam.IdSProject;
 
 import org.springframework.stereotype.Component;
+import unicam.IdSProject.Models.Product;
 import unicam.IdSProject.Models.Seller;
 
 import java.util.ArrayList;

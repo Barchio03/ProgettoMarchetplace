@@ -1,5 +1,7 @@
 package unicam.IdSProject;
 
+import unicam.IdSProject.Models.Product;
+
 /**
  * This class represents the product inside a shopping cart
  *

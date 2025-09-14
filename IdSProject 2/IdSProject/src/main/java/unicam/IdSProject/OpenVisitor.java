@@ -1,6 +1,7 @@
 package unicam.IdSProject;
 
 import unicam.IdSProject.Models.Event;
+import unicam.IdSProject.Models.Product;
 
 public class OpenVisitor implements Visitor {
 

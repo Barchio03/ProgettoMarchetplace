@@ -1,11 +1,14 @@
-package unicam.IdSProject;
+package unicam.IdSProject.Controllers;
 
 import jakarta.websocket.server.PathParam;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import unicam.IdSProject.AcceptVisitor;
+import unicam.IdSProject.DenyVisitor;
+import unicam.IdSProject.RequestHandler;
+import unicam.IdSProject.Visitable;
 
 /**
  * This class represents a curator
@@ -61,8 +64,6 @@ public class Curator {
 
     /**
      * Approves the visitable
-     *
-     * @param curated, the approved visitable
      */
     @RequestMapping(value="/curator/approve")
     public ResponseEntity<Object> approve(){
@@ -74,7 +75,6 @@ public class Curator {
     /**
      * Denies the visitable
      *
-     * @param curated, the denied visitable
      * @param message, the message to leave the creator of the visitable
      */
     @RequestMapping(value="/curator/deny")

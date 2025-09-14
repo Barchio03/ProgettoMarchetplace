@@ -1,5 +1,7 @@
 package unicam.IdSProject;
 
+import unicam.IdSProject.Models.Product;
+
 public class Distributor {
 
     private int id;

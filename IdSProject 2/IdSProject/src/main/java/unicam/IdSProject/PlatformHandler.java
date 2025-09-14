@@ -1,5 +1,7 @@
 package unicam.IdSProject;
 
+import unicam.IdSProject.Models.Mailbox;
+
 public class PlatformHandler {
 
     private Mailbox mailbox;

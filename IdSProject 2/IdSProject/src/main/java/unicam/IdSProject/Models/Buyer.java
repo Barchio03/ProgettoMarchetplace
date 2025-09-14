@@ -1,7 +1,5 @@
 package unicam.IdSProject.Models;
 
-import unicam.IdSProject.Mailbox;
-import unicam.IdSProject.Product;
 import unicam.IdSProject.QuantifiedProduct;
 import unicam.IdSProject.ShoppingCart;
 
@@ -57,8 +55,7 @@ public class Buyer {
     *
     */
     public boolean addToShoppingCart(Product product, int quantity) {
-        shoppingCart.addQuantifiedProduct(new QuantifiedProduct(product, quantity));
-        return true;
+       return shoppingCart.addQuantifiedProduct(new QuantifiedProduct(product, quantity));
     }
 
 

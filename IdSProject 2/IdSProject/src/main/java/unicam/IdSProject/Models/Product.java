@@ -1,6 +1,7 @@
-package unicam.IdSProject;
+package unicam.IdSProject.Models;
 
-import unicam.IdSProject.Models.Seller;
+import unicam.IdSProject.Visitable;
+import unicam.IdSProject.Visitor;
 
 /**
 *
@@ -9,7 +10,7 @@ import unicam.IdSProject.Models.Seller;
 * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
 *
 */
-public abstract class Product implements Visitable{
+public abstract class Product implements Visitable {
 
     /**
      * The name of the product

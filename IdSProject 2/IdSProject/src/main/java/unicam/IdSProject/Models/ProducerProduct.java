@@ -1,4 +1,4 @@
-package unicam.IdSProject;
+package unicam.IdSProject.Models;
 
 /**
  * This class represents a product made by a producer
