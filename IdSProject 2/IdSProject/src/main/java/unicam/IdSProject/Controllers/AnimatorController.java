@@ -1,4 +1,4 @@
-package unicam.IdSProject;
+package unicam.IdSProject.Controllers;
 
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,8 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import unicam.IdSProject.EventBoard;
 import unicam.IdSProject.Models.Animator;
 import unicam.IdSProject.Models.Event;
+import unicam.IdSProject.RequestHandler;
 
 public class AnimatorController {
 

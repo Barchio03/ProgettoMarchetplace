@@ -1,7 +1,10 @@
-package unicam.IdSProject;
+package unicam.IdSProject.Controllers;
 
+import unicam.IdSProject.EventBoard;
 import unicam.IdSProject.Models.Buyer;
 import unicam.IdSProject.Models.Event;
+import unicam.IdSProject.Product;
+import unicam.IdSProject.ProductBoard;
 
 public class BuyerController {
 
