@@ -147,12 +147,28 @@ public abstract class Product implements Visitable {
         return id;
     }
 
+    public void setCreator(Seller creator) {
+        this.creator = creator;
+    }
+
+
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
 
-    public void setCreator(Seller creator) {
-        this.creator = creator;
+    @Override
+    public boolean equals(Object obj){
+
+        if (obj == null){
+            return false;
+        }
+        if(!(obj instanceof Product product)){
+            return false;
+        }
+        else{
+            return this.id == product.id;
+        }
     }
+
 }

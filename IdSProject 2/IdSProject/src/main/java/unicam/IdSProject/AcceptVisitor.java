@@ -3,7 +3,9 @@ package unicam.IdSProject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import unicam.IdSProject.Models.Event;
+import unicam.IdSProject.Models.EventBoard;
 import unicam.IdSProject.Models.Product;
+import unicam.IdSProject.Models.ProductBoard;
 
 /**
  * This class has the logic behind the acceptance of a Visitable object

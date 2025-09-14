@@ -202,14 +202,24 @@ public class Event implements Visitable {
         }
     }
 
-    /**
-     * Accepts a visitor to be verified by the Curator
-     *
-     * @param visitor to accept
-     */
+
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
+    }
+
+    @Override
+    public boolean equals(Object obj){
+
+        if (obj == null){
+            return false;
+        }
+        if(!(obj instanceof Event event)){
+            return false;
+        }
+        else{
+            return this.id == event.id;
+        }
     }
 
 }

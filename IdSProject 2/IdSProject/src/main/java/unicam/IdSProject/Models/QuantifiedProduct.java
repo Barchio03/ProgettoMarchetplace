@@ -1,6 +1,4 @@
-package unicam.IdSProject;
-
-import unicam.IdSProject.Models.Product;
+package unicam.IdSProject.Models;
 
 /**
  * This class represents the product inside a shopping cart
@@ -28,8 +26,8 @@ public class QuantifiedProduct {
     /**
      * Creates a new quantified product to add to a shopping cart
      *
-     * @param the product
-     * @param the stock number
+     * @param product, the product
+     * @param stockNumber, the number of stocks chosen
      */
     public QuantifiedProduct(Product product, int stockNumber) {
         this.product=product;
@@ -45,7 +43,7 @@ public class QuantifiedProduct {
     }
 
     /**
-     * @param the product
+     * @param product, the product
      */
     public void setProduct(Product product) {
         this.product = product;
@@ -59,7 +57,7 @@ public class QuantifiedProduct {
     }
 
     /**
-     * @param the stock number
+     * @param stockNumber, the number of stocks chosen
      */
     public void setStockNumber(int stockNumber) {
         this.stockNumber = stockNumber;
@@ -69,4 +67,5 @@ public class QuantifiedProduct {
      * @return the total price
      */
     public double getTotalPrice() { return totalPrice; }
+
 }

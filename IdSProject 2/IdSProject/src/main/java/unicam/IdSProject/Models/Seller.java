@@ -1,6 +1,5 @@
 package unicam.IdSProject.Models;
 
-import unicam.IdSProject.Location;
 import unicam.IdSProject.Tag;
 
 import java.util.ArrayList;

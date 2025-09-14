@@ -1,8 +1,5 @@
 package unicam.IdSProject.Models;
 
-import unicam.IdSProject.QuantifiedProduct;
-import unicam.IdSProject.ShoppingCart;
-
 /**
 *
 * This method creates an object Product.

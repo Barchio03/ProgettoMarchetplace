@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import unicam.IdSProject.AcceptVisitor;
 import unicam.IdSProject.DenyVisitor;
-import unicam.IdSProject.RequestHandler;
+import unicam.IdSProject.Models.RequestHandler;
 import unicam.IdSProject.Visitable;
 
 /**

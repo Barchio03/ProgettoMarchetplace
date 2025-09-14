@@ -1,4 +1,4 @@
-package unicam.IdSProject;
+package unicam.IdSProject.Models;
 
 /**
  * This class represents the location that a user can add to its profile,
@@ -49,5 +49,20 @@ public class Location {
         this.longitude = longitude;
     }
 
+    @Override
     public String toString() { return this.latitude+this.longitude; }
+
+    @Override
+    public boolean equals(Object obj){
+
+        if (obj == null){
+            return false;
+        }
+        if (obj instanceof Location location) {
+            if (this.getLatitude().equals(location.getLatitude()) && this.getLongitude().equals(location.getLongitude())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

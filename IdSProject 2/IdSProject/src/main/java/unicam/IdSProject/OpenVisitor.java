@@ -2,6 +2,7 @@ package unicam.IdSProject;
 
 import unicam.IdSProject.Models.Event;
 import unicam.IdSProject.Models.Product;
+import unicam.IdSProject.Models.RequestHandler;
 
 public class OpenVisitor implements Visitor {
 

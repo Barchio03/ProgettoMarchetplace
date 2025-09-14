@@ -7,9 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import unicam.IdSProject.*;
-import unicam.IdSProject.Models.ProducerProduct;
-import unicam.IdSProject.Models.Seller;
-import unicam.IdSProject.Models.TransformerProduct;
+import unicam.IdSProject.Models.*;
 
 public class SellerController {
 
