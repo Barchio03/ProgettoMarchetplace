@@ -70,7 +70,7 @@ public abstract class Product implements Visitable{
     }
 
     /**
-     * @param the name of the product
+     * @param name, the name of the product
      */
     public void setName(String name) {
         this.name = name;
@@ -84,7 +84,7 @@ public abstract class Product implements Visitable{
     }
 
     /**
-     * @param the price of the product
+     * @param price, the price of the product
      */
     public void setPrice(float price) {
         this.price = price;
@@ -98,7 +98,7 @@ public abstract class Product implements Visitable{
     }
 
     /**
-     * @param the description of the product
+     * @param description, the description of the product
      */
     public void setDescription(String description) {
         this.description = description;
@@ -112,7 +112,7 @@ public abstract class Product implements Visitable{
     }
 
     /**
-     * @param the description added by the Distributor
+     * @param distributorDescription, the description added by the Distributor
      */
     public void setDistributorDescription(String distributorDescription) {
         this.distributorDescription = distributorDescription;
@@ -126,7 +126,7 @@ public abstract class Product implements Visitable{
     }
 
     /**
-     * @param the number of stock of the product
+     * @param stockNumber, the number of stock of the product
      */
     public void setStockNumber(int stockNumber) {
         this.stockNumber = stockNumber;
