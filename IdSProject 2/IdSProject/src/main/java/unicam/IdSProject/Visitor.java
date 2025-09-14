@@ -1,5 +1,7 @@
 package unicam.IdSProject;
 
+import unicam.IdSProject.Models.Event;
+
 /**
  * This interface declares the methods to visit the concrete visitables (those who implement the Visitable interface)
  */

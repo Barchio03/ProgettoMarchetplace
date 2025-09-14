@@ -1,5 +1,7 @@
 package unicam.IdSProject;
 
+import unicam.IdSProject.Models.Seller;
+
 import java.util.ArrayList;
 
 public class ProductPackage {

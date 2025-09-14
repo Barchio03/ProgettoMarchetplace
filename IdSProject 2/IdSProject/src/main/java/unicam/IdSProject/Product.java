@@ -1,5 +1,7 @@
 package unicam.IdSProject;
 
+import unicam.IdSProject.Models.Seller;
+
 /**
 *
 * This class represents a product.

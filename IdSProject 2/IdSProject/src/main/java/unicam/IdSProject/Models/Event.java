@@ -1,4 +1,8 @@
-package unicam.IdSProject;
+package unicam.IdSProject.Models;
+
+import unicam.IdSProject.Buyer;
+import unicam.IdSProject.Visitable;
+import unicam.IdSProject.Visitor;
 
 import java.util.ArrayList;
 
@@ -9,7 +13,7 @@ import java.util.ArrayList;
 * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
 *
 */
-public class Event implements Visitable{
+public class Event implements Visitable {
 
     /**
      * The name of the event

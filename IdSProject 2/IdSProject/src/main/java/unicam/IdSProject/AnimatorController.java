@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import unicam.IdSProject.Models.Animator;
+import unicam.IdSProject.Models.Event;
 
 public class AnimatorController {
 

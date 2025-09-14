@@ -1,5 +1,7 @@
 package unicam.IdSProject;
 
+import unicam.IdSProject.Models.Seller;
+
 public class ProductBuilder {
 
     private Product product;

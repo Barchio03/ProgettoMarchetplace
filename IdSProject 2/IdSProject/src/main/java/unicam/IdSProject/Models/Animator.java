@@ -1,4 +1,6 @@
-package unicam.IdSProject;
+package unicam.IdSProject.Models;
+
+import unicam.IdSProject.Mailbox;
 
 /**
  * This class represents the animator

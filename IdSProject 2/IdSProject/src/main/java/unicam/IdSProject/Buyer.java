@@ -1,5 +1,7 @@
 package unicam.IdSProject;
 
+import unicam.IdSProject.Models.Event;
+
 /**
 *
 * This method creates an object Product.

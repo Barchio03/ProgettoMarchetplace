@@ -1,6 +1,9 @@
-package unicam.IdSProject;
+package unicam.IdSProject.Models;
 
-import javax.swing.text.html.HTML;
+import unicam.IdSProject.Location;
+import unicam.IdSProject.Mailbox;
+import unicam.IdSProject.Tag;
+
 import java.util.ArrayList;
 
 

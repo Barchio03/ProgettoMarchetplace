@@ -1,5 +1,7 @@
 package unicam.IdSProject;
 
+import unicam.IdSProject.Models.Event;
+
 public class OpenVisitor implements Visitor {
 
     private RequestHandler requestHandler;

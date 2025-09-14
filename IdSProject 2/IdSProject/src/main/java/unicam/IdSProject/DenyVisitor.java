@@ -1,5 +1,7 @@
 package unicam.IdSProject;
 
+import unicam.IdSProject.Models.Event;
+
 public class DenyVisitor implements Visitor {
 
     private String message;
