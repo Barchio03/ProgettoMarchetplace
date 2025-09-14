@@ -1,6 +1,5 @@
 package unicam.IdSProject.Models;
 
-import unicam.IdSProject.Buyer;
 import unicam.IdSProject.Visitable;
 import unicam.IdSProject.Visitor;
 

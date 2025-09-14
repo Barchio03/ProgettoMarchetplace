@@ -1,6 +1,9 @@
-package unicam.IdSProject;
+package unicam.IdSProject.Models;
 
-import unicam.IdSProject.Models.Event;
+import unicam.IdSProject.Mailbox;
+import unicam.IdSProject.Product;
+import unicam.IdSProject.QuantifiedProduct;
+import unicam.IdSProject.ShoppingCart;
 
 /**
 *
@@ -58,31 +61,6 @@ public class Buyer {
         return true;
     }
 
-    
-    /**
-    *
-    * This method is used to buy all the products in the shopping cart.
-    *
-    * @return true if the products are sold successfully, false otherwise.
-    *
-    */
-    public boolean buyShoppingCart(){
-        return false;
-    }
-
-    
-    /**
-    *
-    * This method is used to buy a ticket of an event.
-    *
-    * @param event, the event from which the user is buying the ticket.
-    *
-    * @return true if the event ticket is sold successfully, false otherwise.
-    *
-    */
-    public boolean buyEventTicket(Event event) {
-        return event.subscribe(this);
-    }
 
     
     /**
