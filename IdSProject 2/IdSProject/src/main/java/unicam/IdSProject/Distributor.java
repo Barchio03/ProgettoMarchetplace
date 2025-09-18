@@ -4,25 +4,30 @@ import unicam.IdSProject.Models.Product;
 
 public class Distributor {
 
+    private String name;
+
     private final int id;
 
-    public Distributor(int id) {
+    public Distributor(int id, String name) {
+
         this.id = id;
+        this.name = name;
     }
 
     public int getId() {
         return id;
     }
 
-    public ProductPackage createPackage() {
+    public ProductBundle createBundle() {
         return null;
     }
 
-    public boolean deletePackage() {
-        return false;
+
+    public String getName() {
+        return name;
     }
 
-    public boolean addInfo(Product product) {
-        return false;
+    public void setName(String name) {
+        this.name = name;
     }
 }
