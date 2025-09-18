@@ -12,39 +12,24 @@ import unicam.IdSProject.Visitor;
 */
 public abstract class Product implements Visitable {
 
-    /**
-     * The name of the product
-     */
+
     private String name;
 
-    /**
-     * The price of the product
-     */
+
     private float price;
 
-    /**
-     * The description of the product
-     */
+
     private String description;
 
-    /**
-     * The description added by a Distributor
-     */
+
     private String distributorDescription;
 
-    /**
-     * The number of products available
-     */
+
     private int stockNumber;
 
-    /**
-     * The creator of the product
-     */
+
     private Seller creator;
 
-    /**
-     * The id of the product
-     */
     private int id;
 
     private static int currentId;

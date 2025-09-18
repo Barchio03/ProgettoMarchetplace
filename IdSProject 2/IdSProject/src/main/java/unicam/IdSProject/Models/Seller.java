@@ -22,11 +22,13 @@ public class Seller {
 
     private ArrayList<Tag> tags;
 
+    private final Mailbox mailbox;
+
     private int id;
 
     private static int currentId;
 
-    private final Mailbox mailbox;
+
 
     
     /**

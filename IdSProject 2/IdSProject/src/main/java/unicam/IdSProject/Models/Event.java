@@ -14,41 +14,26 @@ import java.util.ArrayList;
 */
 public class Event implements Visitable {
 
-    /**
-     * The name of the event
-     */
     private String name;
 
-    /**
-     * The creator of the event
-     */
+
     private Animator creator;
 
-    /**
-     * The maximum number of attendees, if set to 0 there's no limit
-     */
+
     private int maxAttendees;
 
-    /**
-     * The description of the event
-     */
+
     private String description;
 
-    /**
-     * The id of the event
-     */
+
     private final int id;
 
     private static int currentId;
 
-    /**
-     * The collaborators to the event
-     */
+
     private ArrayList<Seller> collaborators;
 
-    /**
-     * The people who have subscribes to join the event
-     */
+
     private ArrayList<Buyer> subscribers;
 
     /**
@@ -78,82 +63,63 @@ public class Event implements Visitable {
         return currentId;
     }
 
-    /**
-     * @return the name of the event
-     */
+
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name of the event
-     */
+
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * @return the creator of the event
-     */
+
     public Animator getCreator() {
         return creator;
     }
 
-    /**
-     * @param creator of the event
-     */
+
     public void setCreator(Animator creator) {
         this.creator = creator;
     }
 
-    /**
-     * @return the maximum number of attendees
-     */
+
     public int getMaxAttendees() {
         return maxAttendees;
     }
 
-    /**
-     * @param maxAttendees, the maximum number of attendees
-     */
+
     public void setMaxAttendees(int maxAttendees) {
         this.maxAttendees = maxAttendees;
     }
 
-    /**
-     * @return the description of the event
-     */
+
     public String getDescription() {
         return description;
     }
 
-    /**
-     * @param description, the description of the event
-     */
+
     public void setDescription(String description) {
         this.description = description;
     }
 
-    /**
-     * @return the id of the event
-     */
+
     public int getId() {
         return id;
     }
 
-    /**
-     * @return the collaborators of the event
-     */
+
     public ArrayList<Seller> getCollaborators() {
         return collaborators;
     }
 
-    /**
-     * @param collaborators, the collaborators of the event
-     */
+
     public void setCollaborators(ArrayList<Seller> collaborators) {
         this.collaborators = collaborators;
     }
+
+
+
 
     /**
     *
@@ -174,6 +140,8 @@ public class Event implements Visitable {
             return true;
         } else return false;
     }
+
+
 
     /**
     *
