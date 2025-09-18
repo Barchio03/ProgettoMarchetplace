@@ -26,7 +26,7 @@ public class Seller {
 
     private static int currentId;
 
-    private Mailbox mailbox;
+    private final Mailbox mailbox;
 
     
     /**

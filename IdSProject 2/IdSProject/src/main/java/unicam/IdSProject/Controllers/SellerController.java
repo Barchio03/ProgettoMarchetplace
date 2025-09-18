@@ -16,10 +16,9 @@ public class SellerController {
     @Autowired
     private ProductBoard productBoard;
 
-    private Seller seller;
+    private final Seller seller;
 
     public SellerController(Seller seller){
-
 
         this.seller = seller;
 

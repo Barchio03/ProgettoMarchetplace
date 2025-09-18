@@ -18,34 +18,21 @@ public class AnimatorController {
     @Autowired
     private EventBoard eventBoard;
 
-    private Animator animator;
+    private final Animator animator;
 
     public AnimatorController(Animator animator){
         this.animator = animator;
     }
 
+
+
     /**
      * This method is used to create a new event
      *
-     * @return true if the event creation was successful, else otherwise
+     * @param event , the body of the event that needs to be created
+     *
+     * @return ResponseEntity<Object>, the response about the procedure
      */
-    public boolean createEvent() {
-        return false;
-    }
-
-    /**
-     *
-     * This method is used to remove an event from the marketplace.
-     *
-     * @return true if the event is removed successfully, false otherwise.
-     *
-     */
-    public boolean deleteEvent(Event event) {
-        return false;
-    }
-
-
-
     @RequestMapping(value = "/animator/addEvent")
     public ResponseEntity<Object> addEvent(@RequestBody Event event){
         event.setCreator(animator);
@@ -55,12 +42,18 @@ public class AnimatorController {
             }
             return new ResponseEntity<>("Richiesta già in atto", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>("L\'evento esiste già", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("L'evento esiste già", HttpStatus.BAD_REQUEST);
 
 
     }
 
-
+    /**
+     * This method is used to create a new event
+     *
+     * @param id , the id of the event that needs to be deleted
+     *
+     * @return ResponseEntity<Object>, the response about the procedure
+     */
     @RequestMapping(value = "/animator/removeEvent")
     public ResponseEntity<Object> removeEvent(@PathParam("id") int id) {
         if (eventBoard.removeEvent(id)) {

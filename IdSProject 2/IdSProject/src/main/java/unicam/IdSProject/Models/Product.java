@@ -57,7 +57,7 @@ public abstract class Product implements Visitable {
     * @return an object Product.
     *
     */
-    public Product() {};
+    public Product() {}
 
     private static int getCurrentId() {
         return currentId;

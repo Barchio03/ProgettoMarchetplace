@@ -1,5 +1,7 @@
 package unicam.IdSProject.Controllers;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import unicam.IdSProject.Models.EventBoard;
 import unicam.IdSProject.Models.Buyer;
 import unicam.IdSProject.Models.Event;
@@ -8,11 +10,11 @@ import unicam.IdSProject.Models.ProductBoard;
 
 public class BuyerController {
 
-    private Buyer buyer;
+    private final Buyer buyer;
 
-    private ProductBoard productBoard;
+    private final ProductBoard productBoard;
 
-    private EventBoard eventboard;
+    private final EventBoard eventboard;
 
     public BuyerController(Buyer buyer, ProductBoard productBoard, EventBoard eventBoard){
         this.buyer = buyer;
@@ -41,11 +43,22 @@ public class BuyerController {
      *
      * This method is used to buy all the products in the shopping cart.
      *
-     * @return true if the products are sold successfully, false otherwise.
+     * @return RespondeEntity<Object>, the response about the procedure
      *
      */
-    public boolean buyShoppingCart(){
-        return false;
+    public ResponseEntity<Object> buyShoppingCart(){
+        if (buyer.getShoppingCart() == null || buyer.getShoppingCart().getQuantifiedProducts().isEmpty()){
+            return new ResponseEntity<>("Carrello vuoto o insesistente", HttpStatus.BAD_REQUEST);
+        }
+
+        //Ci sarebbe la necessità di creare una nuova classe addetta all'acquisto di prodotti ed eventi
+        //Da farlo con la stretta struttura SpringBoot di RequestHandler
+    /*  if(shoppingHandler.callPaymentSystem(paymentSystem)){
+            return new ResponseEntity<>("I prodotti sono stati acquistati", HttpStatus.OK);
+
+        }                                                                                       */
+        return new ResponseEntity<>("Errore nel pagamento!", HttpStatus.EXPECTATION_FAILED);
+
     }
 
 
@@ -56,9 +69,19 @@ public class BuyerController {
      *
      * @param event, the event that is being observed.
      *
+     * @return RespondeEntity<Object>, the response about the procedure
+     *
      */
-    public boolean buyEventTicket(Event event){
-        return false;
+    public ResponseEntity<Object> buyEventTicket(Event event){
+        if (event == null){
+            return new ResponseEntity<>("Carrello vuoto o insesistente", HttpStatus.BAD_REQUEST);
+        }
+
+    /*  if(shoppingHandler.callPaymentSystem(paymentSystem)){
+            return new ResponseEntity<>("Il biglietto per l'evento è stato acquistato", HttpStatus.OK);
+        }                                                                                       */
+
+        return new ResponseEntity<>("Errore nel pagamento!", HttpStatus.EXPECTATION_FAILED);
     }
 }
 

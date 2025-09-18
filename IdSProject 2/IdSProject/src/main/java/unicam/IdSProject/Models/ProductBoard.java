@@ -15,7 +15,7 @@ public class ProductBoard {
     /**
      * The list of products containing all the products
      */
-    private ArrayList<Product> products;
+    private final ArrayList<Product> products;
 
     /**
      * Creates a new product board

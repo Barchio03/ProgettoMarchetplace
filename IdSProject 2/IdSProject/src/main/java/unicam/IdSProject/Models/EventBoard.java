@@ -15,7 +15,7 @@ public class EventBoard {
     /**
      * The list of events
      */
-    private ArrayList<Event> events;
+    private final ArrayList<Event> events;
 
     public EventBoard(){
         this.events = new ArrayList<Event>();

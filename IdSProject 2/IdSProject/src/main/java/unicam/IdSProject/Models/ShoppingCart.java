@@ -9,14 +9,9 @@ import java.util.ArrayList;
  */
 public class ShoppingCart {
 
-    /**
-     * The list of quantified products
-     */
-    private ArrayList<QuantifiedProduct> quantifiedProducts;
 
-    /**
-     * the total price of the shopping cart
-     */
+    private final ArrayList<QuantifiedProduct> quantifiedProducts;
+
     private double totalPrice;
 
     public ShoppingCart(){
@@ -64,9 +59,7 @@ public class ShoppingCart {
         return quantifiedProducts;
     }
 
-    /**
-     * Calculates the total price
-     */
+
     private void calculateTotal() {
         double total = 0;
         for (QuantifiedProduct quantifiedProduct : quantifiedProducts) {

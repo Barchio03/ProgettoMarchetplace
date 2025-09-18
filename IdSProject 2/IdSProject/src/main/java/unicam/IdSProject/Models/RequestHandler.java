@@ -15,12 +15,12 @@ public class RequestHandler {
     /**
      * The list of products to be verified
      */
-    private ArrayList<Product> productRequests;
+    private final ArrayList<Product> productRequests;
 
     /**
      * The list of events to be verified
      */
-    private ArrayList<Event> eventRequests;
+    private final ArrayList<Event> eventRequests;
 
     /**
      * Creates a new request handler

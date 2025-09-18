@@ -37,7 +37,7 @@ public class Event implements Visitable {
     /**
      * The id of the event
      */
-    private int id;
+    private final int id;
 
     private static int currentId;
 

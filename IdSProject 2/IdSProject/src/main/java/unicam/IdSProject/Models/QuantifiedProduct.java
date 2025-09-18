@@ -21,7 +21,7 @@ public class QuantifiedProduct {
      * The total price, obtained by multiplying the stockNumber
      * with the price of the singular product
      */
-    private double totalPrice;
+    private final double totalPrice;
 
     /**
      * Creates a new quantified product to add to a shopping cart

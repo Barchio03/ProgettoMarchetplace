@@ -5,7 +5,7 @@ import unicam.IdSProject.Models.Product;
 
 public class DenyVisitor implements Visitor {
 
-    private String message;
+    private final String message;
 
     public DenyVisitor(String message) {
         this.message=message;

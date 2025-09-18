@@ -19,12 +19,12 @@ public class Curator {
     /**
      * The visitor to approve a visitable
      */
-    private AcceptVisitor acceptVisitor;
+    private final AcceptVisitor acceptVisitor;
 
     /**
      * The request handler
      */
-    private RequestHandler requestHandler;
+    private final RequestHandler requestHandler;
 
     /**
      * The visitable to check

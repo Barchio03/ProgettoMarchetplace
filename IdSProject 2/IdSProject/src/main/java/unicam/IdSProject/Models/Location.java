@@ -59,9 +59,7 @@ public class Location {
             return false;
         }
         if (obj instanceof Location location) {
-            if (this.getLatitude().equals(location.getLatitude()) && this.getLongitude().equals(location.getLongitude())) {
-                return true;
-            }
+            return this.getLatitude().equals(location.getLatitude()) && this.getLongitude().equals(location.getLongitude());
         }
         return false;
     }

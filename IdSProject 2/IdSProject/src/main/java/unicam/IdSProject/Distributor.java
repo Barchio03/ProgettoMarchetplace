@@ -4,7 +4,7 @@ import unicam.IdSProject.Models.Product;
 
 public class Distributor {
 
-    private int id;
+    private final int id;
 
     public Distributor(int id) {
         this.id = id;

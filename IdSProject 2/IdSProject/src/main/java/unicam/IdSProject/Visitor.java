@@ -13,12 +13,12 @@ public interface Visitor {
      *
      * @param product
      */
-    public void visit(Product product);
+    void visit(Product product);
 
     /**
      * Visits an event
      *
      * @param event
      */
-    public void visit(Event event);
+    void visit(Event event);
 }

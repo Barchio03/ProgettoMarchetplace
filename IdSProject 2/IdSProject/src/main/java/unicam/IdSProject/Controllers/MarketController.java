@@ -12,15 +12,15 @@ import unicam.IdSProject.Models.*;
 @Controller
 public class MarketController {
 
-    private ProductBoard productBoard;
+    private final ProductBoard productBoard;
 
     @Autowired
     private RequestHandler requestHandler;
 
-    private Seller seller;
-    private Buyer buyer;
-    private Animator animator;
-    private PlatformHandler platformHandler;
+    private final Seller seller;
+    private final Buyer buyer;
+    private final Animator animator;
+    private final PlatformHandler platformHandler;
 
     public MarketController(){
         this.productBoard = new ProductBoard();

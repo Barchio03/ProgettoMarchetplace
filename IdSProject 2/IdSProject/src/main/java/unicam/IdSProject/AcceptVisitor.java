@@ -19,13 +19,13 @@ public class AcceptVisitor implements Visitor {
      * The product board to add the products to
      */
     @Autowired
-    private ProductBoard productBoard;
+    private final ProductBoard productBoard;
 
     /**
      * The event board to add the events to
      */
     @Autowired
-    private EventBoard eventBoard;
+    private final EventBoard eventBoard;
 
     @Autowired
     public AcceptVisitor(ProductBoard productBoard, EventBoard eventBoard) {

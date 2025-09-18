@@ -5,24 +5,15 @@ package unicam.IdSProject.Models;
  */
 public class Animator {
 
-    /**
-     * The name of the animator profile
-     */
     private String name;
 
-    /**
-     * The description of the animator profile
-     */
     private String description;
 
-    /**
-     * The animator's id
-     */
-    private int id;
+    private final int id;
 
     private static int currentId;
 
-    private Mailbox mailbox;
+    private final Mailbox mailbox;
 
     /**
      * Creates a new animator

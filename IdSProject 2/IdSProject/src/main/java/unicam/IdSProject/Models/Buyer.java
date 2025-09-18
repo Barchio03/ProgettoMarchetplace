@@ -33,6 +33,8 @@ public class Buyer {
         this.name = name;
     }
 
+    public ShoppingCart getShoppingCart(){ return shoppingCart; }
+
     public int getId() {
         return id;
     }

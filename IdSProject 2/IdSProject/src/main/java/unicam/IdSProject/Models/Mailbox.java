@@ -12,7 +12,7 @@ public class Mailbox {
     /**
      * The mailbox where messages are stored
      */
-    private ArrayList<String> mailbox;
+    private final ArrayList<String> mailbox;
 
     /**
      * Creates a new Mailbox
