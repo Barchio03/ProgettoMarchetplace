@@ -6,13 +6,22 @@ import unicam.IdSProject.Models.ProductBundle;
 
 import java.util.ArrayList;
 
+/**
+*
+* This class implements the methods used by the Distributor to interact with the marketplace
+*
+* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+*/
 public class DistributorController {
 
     private final Distributor distributor;
     private ProductBoard productBoard;
     private ArrayList<ProductBundle> bundlesList;
 
-
+    /**
+    *
+    * This method creates a new DistributorController object
+    */
     public DistributorController(Distributor distributor, ProductBoard productBoard, ArrayList<ProductBundle> bundlesList){
         this.distributor = distributor;
         this.productBoard = productBoard;
