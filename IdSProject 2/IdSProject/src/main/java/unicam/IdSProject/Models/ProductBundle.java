@@ -1,19 +1,23 @@
 package unicam.IdSProject.Models;
-
 import unicam.IdSProject.Models.Product;
 import unicam.IdSProject.Models.Seller;
-
 import java.util.ArrayList;
 
 /**
- * This class represents a bundle of products that is made by a distributor
- */
+*
+* This class represents a Bundle of Products made by a Distributor
+*
+* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+*
+*/
 public class ProductBundle {
 
     private ArrayList<Product> products;
-
     private final String creator;
 
+    /**
+    * This method creates a new ProductBundle object
+    */
     public ProductBundle(ArrayList<Product> products, String creator) {
         this.products = products;
         this.creator = creator;
@@ -36,9 +40,9 @@ public class ProductBundle {
 
 
     /**
-     * This method returns all the sellers that made a product that is in this bundle.
+     * This method returns all the Sellers that made a Product that is in this Bundle.
      *
-     * @return the list of sellers.
+     * @return the list of Sellers.
      */
     public ArrayList<Seller> getProductCreators() {
         ArrayList<Seller> prodCreators = new ArrayList<>();
