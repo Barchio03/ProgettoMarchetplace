@@ -18,7 +18,10 @@ public class PurchaseHandler(){
     
   }
 
-  public boolean pay(){
+  public boolean pay(ShoppingCart shoppingCart){
+    for (QuantifiedProduct product : shoppingCart.getProducts()){
+      String product = "Nome: " +
+    }
     String Receipt;
     return true;
   }
