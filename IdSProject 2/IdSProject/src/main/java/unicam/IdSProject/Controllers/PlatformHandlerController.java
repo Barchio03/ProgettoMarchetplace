@@ -1,6 +1,5 @@
 package unicam.IdSProject.Controllers;
 import unicam.IdSProject.Models.PlatformHandler;
-import unicam.IdSProject.Models.Mailbox;
 import java.util.ArrayList;
 
 /**
@@ -12,7 +11,6 @@ import java.util.ArrayList;
 */
 public class PlatformHandlerController {
 
-    private Mailbox mailbox;
     private final PlatformHandler platformHandler;
 
     //Si potrebbe far estendere un'interfaccia User a tutti coloro che utilizzano la piattaforma
@@ -32,11 +30,13 @@ public class PlatformHandlerController {
 
 
     
+    
     //      |                                |
     //      |  Tutti metodi da implementare  |
     //      V                                V
 
 
+    
     /**
     * This method blocks the application to a specific user
     */
