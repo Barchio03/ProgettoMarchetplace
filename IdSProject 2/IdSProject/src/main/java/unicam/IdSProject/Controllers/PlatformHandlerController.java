@@ -15,9 +15,12 @@ public class PlatformHandlerController {
 
     //Si potrebbe far estendere un'interfaccia User a tutti coloro che utilizzano la piattaforma
     //e non sono PlatformHandler in modo tale da poterli raggruppare tutti in una lista.               
-    //Così facendo basta che il platformHandler setti un bool unautorized da false a true e lo user
+    //Così facendo basta che il platformHandler sétti un teorico bool "unautorized" da false a true e lo user
     //sarebbe poi facilmente bannabile dalla piattaforma. Se invece c'è un modo più facile per fare
-    //ciò su SpringBoot, ben venga.       Ora che ci penso, Buyer doveva essere un interfaccia/classe astratta che implementavano tutti.
+    //ciò su SpringBoot, ben venga.     
+    //                                    Ora che ci penso, Buyer doveva essere un'interfaccia/classe astratta che implementavano quasi tutti.
+    //                                    Però se bisogna bannare anche animator o distributor o curator, ciò non sarebbe possibile con Buyer
+    //                                    Insomma da discutere
 
     //private ArrayList<User> allUsers;
 
@@ -41,11 +44,12 @@ public class PlatformHandlerController {
     * This method blocks the application to a specific user
     */
     public void blockUser() {}                                        //Cambiare il teorico bool unauthorized a true
+                                                                      //Con i DTO possiamo nascondere il campo unauthorized all'utente e gestire la cosa facilmente
 
     /**
     * This method unblocks a previously blocked user
     */
-    public void unblockUser() {}                                      //Se è true cambiare a false, dare errore altrimenti
+    public void unblockUser() {}                                      //Se è true cambiare a false, dare eccezione altrimenti
 
     /**
     * This method appoints a new Curator
