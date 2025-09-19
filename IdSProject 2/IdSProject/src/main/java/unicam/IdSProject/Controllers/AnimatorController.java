@@ -11,6 +11,13 @@ import unicam.IdSProject.Models.Animator;
 import unicam.IdSProject.Models.Event;
 import unicam.IdSProject.Models.RequestHandler;
 
+/**
+*
+* This class implements the methods for handling all the Animator interaction with the marketplace
+*
+* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+*
+*/
 public class AnimatorController {
 
     @Autowired
