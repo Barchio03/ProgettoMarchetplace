@@ -1,4 +1,4 @@
-package unicam.IdSProject;
+package unicam.IdSProject.Models;
 
 import unicam.IdSProject.Models.Mailbox;
 import unicam.IdSProject.Controllers.Curator;
