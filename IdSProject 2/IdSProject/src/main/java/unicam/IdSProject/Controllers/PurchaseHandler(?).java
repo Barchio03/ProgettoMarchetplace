@@ -1,5 +1,6 @@
 package unicam.IdSProject.Controllers;
 import unicam.IdSProject.Controllers.BuyerController;
+import unicam.IdSProject.Controllers.PlatformHandler;
 
 /**
 *
@@ -10,9 +11,15 @@ import unicam.IdSProject.Controllers.BuyerController;
 */
 public class PurchaseHandler(){
 
-  public PurchaseHandler() { }
+  private PlatformHandler platformHandler;
+  
+  public PurchaseHandler(PlatformHandler platformHandler) {
+      this.platformHandler = platformHandler;
+    
+  }
 
   public boolean pay(){
+    String Receipt;
     return true;
   }
 
