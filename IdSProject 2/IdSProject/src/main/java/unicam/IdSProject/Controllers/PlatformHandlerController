@@ -1,5 +1,6 @@
 package unicam.IdSProject.Controllers;
 
+import unicam.IdsProject.Models.PlatformHandler
 import java.util.ArrayList;
 
 public class PlatformHandlerController {
@@ -17,6 +18,20 @@ public class PlatformHandlerController {
 
     public PlatformHandlerController(PlatformHandler platformHandler){
         this.platformHandler = platformHandler;
+    }
+
+
+
+    public void blockUser() {}
+
+    public void unblockUser() {}
+
+    public boolean appointCurator() {
+        return false;
+    }
+
+    public boolean verifyReceivedReceipt() {
+        return false;
     }
 
 
