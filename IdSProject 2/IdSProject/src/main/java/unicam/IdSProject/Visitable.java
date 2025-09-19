@@ -1,12 +1,12 @@
 package unicam.IdSProject;
 
 /**
- * This interface is implemented by those need to be verified by the curator
+ * This interface is implemented by those who need to be verified by the Curator
  */
 public interface Visitable {
 
     /**
-     * Accepts the visitor and ridirects the call to the visitor
+     * Accepts the Visitor and ridirects the call to the Visitor
      *
      * @param visitor
      */
