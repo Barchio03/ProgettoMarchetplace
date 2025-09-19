@@ -7,14 +7,6 @@ public class PlatformHandlerController {
 
     private final PlatformHandler platformHandler;
 
-    //Si potrebbe far estendere un'interfaccia User a tutti coloro che utilizzano la piattaforma
-    //e non sono PlatformHandler in modo tale da poterli raggruppare tutti in una lista.
-    //Così facendo basta che il platformHandler setti un bool unautorized da false a true e lo user
-    //sarebbe poi facilmente bannabile dalla piattaforma. Se invece c'è un modo più facile per fare
-    //ciò su SpringBoot, ben venga...
-
-    //private ArrayList<User> allUsers;
-
 
     public PlatformHandlerController(PlatformHandler platformHandler){
         this.platformHandler = platformHandler;
