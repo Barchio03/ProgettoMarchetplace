@@ -5,7 +5,7 @@ package unicam.IdSProject;
 * @see #PRODUCER
 * @see #TRANSFORMER
 *
-* @author Aguiari Erika, Barchiesi Luca, Ilaria Morettini
+* @author Erika Aguiari, Ilaria Morettini; Luca Barchiesi
 */
 public enum Tag {
     /**
