@@ -92,5 +92,32 @@ public class BuyerController {
 
         return new ResponseEntity<>("Errore nel pagamento!", HttpStatus.EXPECTATION_FAILED);
     }
+
+
+    
+    /**
+    *
+    * This method adds a product to the shopping cart.
+    *
+    * @param product, the product that needs to be added.
+    *
+    * @return true if the product is added successfully, false otherwise.
+    *
+    */
+    public boolean addToShoppingCart(Product product, int quantity) {
+       return shoppingCart.addQuantifiedProduct(new QuantifiedProduct(product, quantity));
+    }
+
+    
+    /**
+    *
+    * This method is used to update the buyer about the event status.
+    *
+    * @param event, the event that is being observed.
+    *
+    */
+    public void update(Event event, String message) {
+        this.getMailbox().addMessage("message");
+    }
 }
 
