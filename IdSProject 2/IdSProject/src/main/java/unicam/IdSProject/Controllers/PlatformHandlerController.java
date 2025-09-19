@@ -14,10 +14,10 @@ public class PlatformHandlerController {
     private final PlatformHandler platformHandler;
 
     //Si potrebbe far estendere un'interfaccia User a tutti coloro che utilizzano la piattaforma
-    //e non sono PlatformHandler in modo tale da poterli raggruppare tutti in una lista.
+    //e non sono PlatformHandler in modo tale da poterli raggruppare tutti in una lista.               
     //Così facendo basta che il platformHandler setti un bool unautorized da false a true e lo user
     //sarebbe poi facilmente bannabile dalla piattaforma. Se invece c'è un modo più facile per fare
-    //ciò su SpringBoot, ben venga.
+    //ciò su SpringBoot, ben venga.       Ora che ci penso, Buyer doveva essere un interfaccia/classe astratta che implementavano tutti.
 
     //private ArrayList<User> allUsers;
 
@@ -40,30 +40,30 @@ public class PlatformHandlerController {
     /**
     * This method blocks the application to a specific user
     */
-    public void blockUser() {}
+    public void blockUser() {}                                        //Cambiare il teorico bool unauthorized a true
 
     /**
     * This method unblocks a previously blocked user
     */
-    public void unblockUser() {}
+    public void unblockUser() {}                                      //Se è true cambiare a false, dare errore altrimenti
 
     /**
     * This method appoints a new Curator
     *
     * @return true if it appoints a new Curator, false otherwise
     */
-    public boolean appointCurator() {
-        return false;
+    public boolean appointCurator() {                                 //Anche qui l'interfaccia user e una lista con tutti gli user
+        return false;                                                 //può fare molto comodo
     }
 
     /**
     * This method verifies if a receipt has been received
     *
-    * @return true if the receipt is received, false otherwise
+    * @return true if the receipt is received, false otherwise        //Come cerca la ricevuta? Inserendo uno specifico user?
     */
-    public boolean verifyReceivedReceipt() {
-        return false;
-    }
+    public boolean verifyReceivedReceipt() {                          //Come funziona? 
+        return false;                                                 //Bisogna creare una classe Receipt con dentro Messaggio e Destinatario della ricevuta?
+    }                                                                 //
 
 
 }
