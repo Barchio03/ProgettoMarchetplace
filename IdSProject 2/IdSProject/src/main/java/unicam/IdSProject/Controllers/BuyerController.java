@@ -8,6 +8,13 @@ import unicam.IdSProject.Models.Event;
 import unicam.IdSProject.Models.Product;
 import unicam.IdSProject.Models.ProductBoard;
 
+/**
+*
+* This class implements the methods for handling all the Buyer interaction with the marketplace
+*
+* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+*
+*/
 public class BuyerController {
 
     private final Buyer buyer;
