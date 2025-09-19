@@ -5,25 +5,20 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 
 /**
- * This class contains the lists of objects that need to be verified by the curator
- *
- * @author Luca Barchiesi, Erika Aguiari, Ilaria Morettini
- */
+*
+* This class contains the lists of Objects that need to be verified by the Curator
+*
+* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+*
+*/
 @Component
 public class RequestHandler {
 
-    /**
-     * The list of products to be verified
-     */
     private final ArrayList<Product> productRequests;
-
-    /**
-     * The list of events to be verified
-     */
     private final ArrayList<Event> eventRequests;
 
     /**
-     * Creates a new request handler
+     * This method creates a new RequestHandler object
      */
     public RequestHandler() {
         this.productRequests = new ArrayList<Product>();
@@ -31,20 +26,20 @@ public class RequestHandler {
     }
 
     /**
-     * Adds a product to the list
+     * This method adds a Product to the list
      *
-     * @param product
+     * @param product, the Product to add
      *
-     * @return true if the product was added successfully, false otherwise
+     * @return true if it was added successfully, false otherwise
      */
     public boolean addProduct(Product product) {
         return productRequests.add(product);
     }
 
     /**
-     * Returns and deletes the first product of the list
+     * This method returns the first Product of the list to verify and deletes it from the list
      *
-     * @return the next product to verify
+     * @return the next Product to verify
      */
     public Product getNextProduct(){
         Product temp = productRequests.get(0);
@@ -53,20 +48,20 @@ public class RequestHandler {
     }
 
     /**
-     * Adds an event to the list
+     * This method adds an Event to the list
      *
-     * @param event
+     * @param event, the Event to add
      *
-     * @return true if the event was added successfully, false otherwise
+     * @return true if it was added successfully, false otherwise
      */
     public boolean addEvent(Event event) {
         return eventRequests.add(event);
     }
 
     /**
-     * Returns and deletes the first event of the list
+     * This method returns the first Event of the list to verify and deletes it from the list
      *
-     * @return the next event to verify
+     * @return the next Event to verify
      */
     public Event getNextEvent(){
         Event temp = eventRequests.get(0);
