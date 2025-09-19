@@ -1,7 +1,10 @@
 package unicam.IdSProject.Models;
 
 /**
- * This class represents a product made by a producer
+ * This class represents a Product made by a Producer
+ *
+ * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+ *
  */
 public class ProducerProduct extends Product {
 
