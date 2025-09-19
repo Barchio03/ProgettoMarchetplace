@@ -20,11 +20,13 @@ public class BuyerController {
     private final Buyer buyer;
     private final ProductBoard productBoard;
     private final EventBoard eventboard;
+    private final PurchaseHandler purchaseHandler;
 
-    public BuyerController(Buyer buyer, ProductBoard productBoard, EventBoard eventBoard){
+    public BuyerController(Buyer buyer, ProductBoard productBoard, EventBoard eventBoard, PurchaseHandler purchaseHandler){
         this.buyer = buyer;
         this.productBoard = productBoard;
         this.eventboard = eventBoard;
+        this.purchaseHandler = purchaseHandler;
     }
 
 
@@ -55,9 +57,9 @@ public class BuyerController {
       //Ci sarebbe la necessità di creare una nuova classe addetta all'acquisto di prodotti ed eventi
       //Da farlo con la stretta struttura SpringBoot di RequestHandler
 
-      //if(purchaseHandler.pay(paymentSystem)){
-      //    return true;
-      //}               
+        if (purchaseHandler.pay(paymentSystem)){
+            return true;
+        }               
 
         return false;
     }
@@ -76,9 +78,9 @@ public class BuyerController {
             return false;
         }
 
-      //if(purchaseHandler.pay(paymentSystem)){
-      //return true;
-      //}                                                                                       
+        if(purchaseHandler.pay(paymentSystem)){
+            return true;
+        }                                                                                       
 
         return false;
     }
