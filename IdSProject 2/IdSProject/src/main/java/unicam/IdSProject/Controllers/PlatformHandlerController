@@ -11,7 +11,7 @@ public class PlatformHandlerController {
     //e non sono PlatformHandler in modo tale da poterli raggruppare tutti in una lista.
     //Così facendo basta che il platformHandler setti un bool unautorized da false a true e lo user
     //sarebbe poi facilmente bannabile dalla piattaforma. Se invece c'è un modo più facile per fare
-    //ciò su SpringBoot, ben venga...
+    //ciò su SpringBoot, ben venga.
 
     //private ArrayList<User> allUsers;
 
