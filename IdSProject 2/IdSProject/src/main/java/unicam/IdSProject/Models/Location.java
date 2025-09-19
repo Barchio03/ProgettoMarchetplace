@@ -1,50 +1,38 @@
 package unicam.IdSProject.Models;
 
 /**
- * This class represents the location that a user can add to its profile,
- * expressed through coordinates
+ * This class represents the Location expressed with coordinates that a Seller can add to its profile
+ *
+ * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+ *
  */
 public class Location {
-
-    /**
-     * The latitude of the location
-     */
+    
     private String latitude;
-
-    /**
-     * The longitude of the location
-     */
     private String longitude;
 
+    /**
+    * This method creates a new Location object
+    */
     public Location(String latitude, String longitude){
         this.latitude=latitude;
         this.longitude=longitude;
     }
 
-    /**
-     * @return the latitude of the location
-     */
+
+    
     public String getLatitude() {
         return latitude;
     }
 
-    /**
-     * @param latitude of the location
-     */
     public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
-    /**
-     * @return the longitude of the location
-     */
     public String getLongitude() {
         return longitude;
     }
 
-    /**
-     * @param longitude of the location
-     */
     public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
@@ -54,7 +42,6 @@ public class Location {
 
     @Override
     public boolean equals(Object obj){
-
         if (obj == null){
             return false;
         }
