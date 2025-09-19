@@ -23,6 +23,10 @@ public class ShoppingCart {
     }
 
 
+
+    public Buyer getBuyer(){
+        return buyer;
+    }
     
     public double getTotalPrice() {
         return totalPrice;
