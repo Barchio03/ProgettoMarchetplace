@@ -27,7 +27,8 @@ public class PurchaseHandler(){
       receipt = receipt + printProduct;
     }
     receipt = receipt + "Prezzo totale: " + shoppingCart.getTotalPrice() + "$"
-    //metodo send per inviare la ricevuta al platformHandler
+    shoppingCart.getBuyer().getMailbox().addMessage(receipt);         // Possono andare
+    platformHandler.getMailbox().addMessage(receipt);                 // bene?
     return true;
   }
 
