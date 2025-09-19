@@ -1,7 +1,5 @@
 package unicam.IdSProject.Models;
 
-import unicam.IdSProject.Models.ProductBundle;
-
 public class Distributor {
 
     private String name;
