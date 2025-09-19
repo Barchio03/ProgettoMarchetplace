@@ -1,7 +1,5 @@
 package unicam.IdSProject.Models;
-
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 
 /**
