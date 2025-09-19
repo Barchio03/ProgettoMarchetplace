@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
 *
- * This class represents the  for the product to sell
+ * This class represents a Product Board and it contains all of the Products
  *
  * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
  *
@@ -12,22 +12,25 @@ import java.util.ArrayList;
 @Component
 public class ProductBoard {
 
-    /**
-     * The list of products containing all the products
-     */
     private final ArrayList<Product> products;
 
     /**
-     * Creates a new product board
+     * This method creates a new ProductBoard object
      */
     public ProductBoard(){
         this.products = new ArrayList<Product>();
     }
 
+    public ArrayList<Product> getProducts(){
+        return products;
+    }
+
+    
+    
     /**
-     * Adds a new product to the product board
+     * This method adds a new Product to the Product Board
      *
-     * @param product, the product to add
+     * @param product, the Product to add
      *
      * @return true if it is inserted successfully, false otherwise
      */
@@ -36,9 +39,9 @@ public class ProductBoard {
     }
 
     /**
-     * Removes a product to the product board
+     * This method removes a Product to the Product Board
      *
-     * @param product, the product to remove
+     * @param product, the Product to remove
      *
      * @return true if it is removed successfully, false otherwise
      */
@@ -47,9 +50,9 @@ public class ProductBoard {
     }
 
     /**
-     * Removes a product to the product board
+     * This method removes a Product to the Product Board given its id
      *
-     * @param id, the id of the product to remove
+     * @param id, the id of the Product to remove
      *
      * @return true if it is removed successfully, false otherwise
      */
@@ -64,26 +67,23 @@ public class ProductBoard {
     }
 
     /**
-     * Verifies whether a product is in the product board
+     * This method verifies whether a Product is in the Product Board
      *
-     * @param product, the product searched for
+     * @param product, the Product searched for
      *
-     * @return true if the product is contained, false otherwise
+     * @return true if it is contained, false otherwise
      */
     public boolean contains(Product product) {
         return products.contains(product);
     }
 
-    public ArrayList<Product> getProducts(){
-        return products;
-    }
 
     /**
-     * Returns a list of all the products a specific seller has published
+     * This method returns a list of all the Products a specific Seller has published
      *
-     * @param seller, the seller from witch taking the products
+     * @param seller, the Seller from witch taking the Products
      *
-     * @return an ArrayList of products created by the seller given
+     * @return  the list of Products created by the given Seller
      */
     public ArrayList<Product> getProducts(Seller seller) {
         ArrayList<Product> sublist = new ArrayList<Product>();
