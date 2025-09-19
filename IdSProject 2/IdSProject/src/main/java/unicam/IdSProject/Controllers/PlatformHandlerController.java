@@ -3,6 +3,12 @@ package unicam.IdSProject.Controllers;
 import unicam.IdSProject.Models.PlatformHandler;
 import java.util.ArrayList;
 
+/**
+*
+* This class implements the methods for a PlatFormHandler used to interact with the marketplace.
+*
+* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+*/
 public class PlatformHandlerController {
 
     private final PlatformHandler platformHandler;
