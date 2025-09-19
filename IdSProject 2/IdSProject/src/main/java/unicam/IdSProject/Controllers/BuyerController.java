@@ -53,6 +53,8 @@ public class BuyerController {
 
         //Ci sarebbe la necessità di creare una nuova classe addetta all'acquisto di prodotti ed eventi
         //Da farlo con la stretta struttura SpringBoot di RequestHandler
+
+        
     /*  if(shoppingHandler.callPaymentSystem(paymentSystem)){
             return new ResponseEntity<>("I prodotti sono stati acquistati", HttpStatus.OK);
 
