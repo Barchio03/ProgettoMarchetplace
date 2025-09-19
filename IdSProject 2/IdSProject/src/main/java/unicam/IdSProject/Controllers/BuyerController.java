@@ -57,7 +57,7 @@ public class BuyerController {
       //Ci sarebbe la necessità di creare una nuova classe addetta all'acquisto di prodotti ed eventi
       //Da farlo con la stretta struttura SpringBoot di RequestHandler
 
-        if (purchaseHandler.pay(paymentSystem)){
+        if (purchaseHandler.pay(shoppingCart)){
             return true;
         }               
 
