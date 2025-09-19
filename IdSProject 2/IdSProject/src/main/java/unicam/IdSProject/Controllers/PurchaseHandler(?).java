@@ -19,10 +19,15 @@ public class PurchaseHandler(){
   }
 
   public boolean pay(ShoppingCart shoppingCart){
-    for (QuantifiedProduct product : shoppingCart.getProducts()){
-      String product = "Nome: " +
+    String receipt = "";
+    for (QuantifiedProduct qProduct : shoppingCart.getQuantifiedProducts()){
+      String printProduct = "Nome: " + qProduct.getProduct().getName() +
+                            "\nNumero stock: " + qProduct.getstockNumber() +
+                            "Prezzo: " + qProduct.getProduct().getPrice() * qProduct.getStockNumber() +"€\n\n";
+      receipt = receipt + printProduct;
     }
-    String Receipt;
+    receipt = receipt + "Prezzo totale: " + shoppingCart.getTotalPrice() + "$"
+    //metodo send per inviare la ricevuta al platformHandler
     return true;
   }
 
