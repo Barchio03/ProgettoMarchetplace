@@ -9,7 +9,7 @@ package unicam.IdSProject.Models;
 public class Buyer {
     
     private String name;
-    private ShoppingCart shoppingCart;
+    private ShoppingCart shoppingCart; //Può essere final?
     private Mailbox mailbox;
     private int id;
     private static int currentId;
