@@ -21,7 +21,6 @@ public class PlatformHandlerController {
     }
 
 
-
     public void blockUser() {}
 
     public void unblockUser() {}
