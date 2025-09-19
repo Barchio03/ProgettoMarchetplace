@@ -10,13 +10,15 @@ import java.util.ArrayList;
 */
 public class ShoppingCart {
 
+    private final Buyer buyer;
     private final ArrayList<QuantifiedProduct> quantifiedProducts;
     private double totalPrice;
 
     /**
     * This method creates a new ShoppingCart object
     */
-    public ShoppingCart(){
+    public ShoppingCart(Buyer buyer){
+        this.buyer = buyer;
         this.quantifiedProducts = new ArrayList<>();
     }
 
