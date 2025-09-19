@@ -1,24 +1,23 @@
 package unicam.IdSProject;
 
 import unicam.IdSProject.Models.Mailbox;
+import unicam.IdSProject.Controllers.Curator;
 
 public class PlatformHandler {
 
     private Mailbox mailbox;
 
-    public void blockUser() {}
+    private List<Curator> curators;
 
-    public void unblockUser() {}
-
-    public boolean appointCurator() {
-        return false;
+    public PlatformHandler(Mailbox mailbox){
+        this.mailbox = mailbox
     }
-
-    public boolean verifyReceivedReceipt() {
-        return false;
-    }
-
+    
     public Mailbox getMailbox() {
         return mailbox;
+    }
+
+    public List<Curator> getCurators(){
+        return curators
     }
 }
