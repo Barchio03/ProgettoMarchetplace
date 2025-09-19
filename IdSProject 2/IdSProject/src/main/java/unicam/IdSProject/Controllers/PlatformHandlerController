@@ -1,6 +1,6 @@
 package unicam.IdSProject.Controllers;
 
-import unicam.IdsProject.Models.PlatformHandler
+import unicam.IdsProject.Models.PlatformHandler;
 import java.util.ArrayList;
 
 public class PlatformHandlerController {
