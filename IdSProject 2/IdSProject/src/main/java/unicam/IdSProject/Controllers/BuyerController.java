@@ -18,9 +18,7 @@ import unicam.IdSProject.Models.ProductBoard;
 public class BuyerController {
 
     private final Buyer buyer;
-
     private final ProductBoard productBoard;
-
     private final EventBoard eventboard;
 
     public BuyerController(Buyer buyer, ProductBoard productBoard, EventBoard eventBoard){
@@ -31,13 +29,11 @@ public class BuyerController {
 
 
     /**
+     * This method adds a Product to the Shopping Cart.
      *
-     * This method adds a product to the shopping cart.
+     * @param product, the Product that needs to be added.
      *
-     * @param product, the product that needs to be added.
-     *
-     * @return true if the product is added successfully, false otherwise.
-     *
+     * @return true if it is added successfully, false otherwise.
      */
     public boolean addProduct(Product product, int quantity) {
         buyer.addToShoppingCart(product, quantity);
@@ -47,62 +43,54 @@ public class BuyerController {
 
 
     /**
+     * This method is used to buy all the Products in the Shopping Cart.
      *
-     * This method is used to buy all the products in the shopping cart.
-     *
-     * @return RespondeEntity<Object>, the response about the procedure
-     *
+     * @return true  if the purchase was successfull, false otherwise
      */
-    public ResponseEntity<Object> buyShoppingCart(){
+    public boolean buyShoppingCart(){
         if (buyer.getShoppingCart() == null || buyer.getShoppingCart().getQuantifiedProducts().isEmpty()){
-            return new ResponseEntity<>("Carrello vuoto o insesistente", HttpStatus.BAD_REQUEST);
+            return false;
         }
 
-        //Ci sarebbe la necessità di creare una nuova classe addetta all'acquisto di prodotti ed eventi
-        //Da farlo con la stretta struttura SpringBoot di RequestHandler
+      //Ci sarebbe la necessità di creare una nuova classe addetta all'acquisto di prodotti ed eventi
+      //Da farlo con la stretta struttura SpringBoot di RequestHandler
 
-        
-    /*  if(shoppingHandler.callPaymentSystem(paymentSystem)){
-            return new ResponseEntity<>("I prodotti sono stati acquistati", HttpStatus.OK);
+      //if(purchaseHandler.pay(paymentSystem)){
+      //    return true;
+      //}               
 
-        }                                                                                       */
-        return new ResponseEntity<>("Errore nel pagamento!", HttpStatus.EXPECTATION_FAILED);
-
+        return false;
     }
 
 
 
     /**
+     * This method allows to buy an Event tickey
      *
-     * This method is used to update the buyer about the event status.
+     * @param event, the Event from which buying the ticket
      *
-     * @param event, the event that is being observed.
-     *
-     * @return RespondeEntity<Object>, the response about the procedure
-     *
+     * @return true if the purchase was successfull, false otherwise
      */
-    public ResponseEntity<Object> buyEventTicket(Event event){
+    public boolean buyEventTicket(Event event){
         if (event == null){
-            return new ResponseEntity<>("Carrello vuoto o insesistente", HttpStatus.BAD_REQUEST);
+            return false;
         }
 
-    /*  if(shoppingHandler.callPaymentSystem(paymentSystem)){
-            return new ResponseEntity<>("Il biglietto per l'evento è stato acquistato", HttpStatus.OK);
-        }                                                                                       */
+      //if(purchaseHandler.pay(paymentSystem)){
+      //return true;
+      //}                                                                                       
 
-        return new ResponseEntity<>("Errore nel pagamento!", HttpStatus.EXPECTATION_FAILED);
+        return false;
     }
 
 
     
     /**
+    * This method adds a Product to the Shopping Cart.
     *
-    * This method adds a product to the shopping cart.
+    * @param product, the Product that needs to be added.
     *
-    * @param product, the product that needs to be added.
-    *
-    * @return true if the product is added successfully, false otherwise.
-    *
+    * @return true if it is added successfully, false otherwise.
     */
     public boolean addToShoppingCart(Product product, int quantity) {
        return shoppingCart.addQuantifiedProduct(new QuantifiedProduct(product, quantity));
@@ -110,11 +98,9 @@ public class BuyerController {
 
     
     /**
+    * This method is used to update the Buyer about the Event status.
     *
-    * This method is used to update the buyer about the event status.
-    *
-    * @param event, the event that is being observed.
-    *
+    * @param event, the Event that is being observed.
     */
     public void update(Event event, String message) {
         this.getMailbox().addMessage("message");
