@@ -2,10 +2,9 @@ package unicam.IdSProject.Models;
 
 /**
 *
-* This method creates an object Product.
+* This class represents a Buyer
 *
-* @author Luca Barchiesi
-*
+* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
 */
 public class Buyer {
     
@@ -19,6 +18,13 @@ public class Buyer {
 
     private static int currentId;
 
+
+    /**
+    * This method creates a new Buyer object
+    */
+    public Buyer(){
+        
+    }
 
     
     private static int getCurrentId() {
