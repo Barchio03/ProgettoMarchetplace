@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import unicam.IdSProject.*;
 import unicam.IdSProject.Models.*;
 
+/**
+*
+* This class implements the methods of a Seller used to interact with the marketplace
+*
+* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+*/
 public class SellerController {
 
     @Autowired
@@ -18,17 +24,18 @@ public class SellerController {
 
     private final Seller seller;
 
+    /**
+    * This method creates a new SellerController object
+    */
     public SellerController(Seller seller){
-
         this.seller = seller;
-
     }
 
 
-
-
     // -- PRODUCER --
-
+    /**
+    * This method implements the feature for a Seller with tag Producer to add a Product and sets a route for it
+    */
     @RequestMapping(value = "/producer/addProduct")
     public ResponseEntity<Object> addProducerProduct(@RequestBody ProducerProduct product){
         if (seller.getTags().contains(Tag.PRODUCER)) {
@@ -43,7 +50,9 @@ public class SellerController {
     }
 
     // -- TRANSFORMER --
-
+    /**
+    * This method implements the feature for a Seller with tag Transformer to add a Product and sets a route for it
+    */
     @RequestMapping(value = "/transformer/addProduct")
     public ResponseEntity<Object> addTransformerProduct(@RequestBody TransformerProduct product){
         if (seller.getTags().contains(Tag.TRANSFORMER)) {
@@ -58,7 +67,9 @@ public class SellerController {
         return new ResponseEntity<>("Non autorizzato", HttpStatus.UNAUTHORIZED);
     }
 
-
+    /**
+    * This method implements the method for removing a Product made by the Seller from the marketplace and sets a route for it
+    */
     @RequestMapping(value = "/removeProduct")
     public ResponseEntity<Object> removeProduct(@PathParam("id") int id) {
         if (productBoard.removeProduct(id)){
