@@ -19,7 +19,7 @@ public class PurchaseHandler(){
   }
 
   public boolean pay(ShoppingCart shoppingCart){
-    String receipt = "";
+    String receipt = "Ricevuta di " + shoppingCart.getBuyer().getName() + "\n";
     for (QuantifiedProduct qProduct : shoppingCart.getQuantifiedProducts()){
       String printProduct = "Nome: " + qProduct.getProduct().getName() +
                             "\nNumero stock: " + qProduct.getstockNumber() +
