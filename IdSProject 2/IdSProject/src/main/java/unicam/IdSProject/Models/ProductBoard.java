@@ -1,13 +1,13 @@
 package unicam.IdSProject.Models;
-
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 
 /**
- * This class represents the container for the product to sell
+*
+ * This class represents the  for the product to sell
  *
  * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+ *
  */
 @Component
 public class ProductBoard {
