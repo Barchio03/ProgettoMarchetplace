@@ -71,6 +71,8 @@ public class ShoppingCart {
         return true;
     }
 
+    public void clear() {quantifiedProducts.clear();}
+
 
     /**
     * This method calculates the price of the whole Shopping Cart

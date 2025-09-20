@@ -1,6 +1,16 @@
 package unicam.IdSProject.controllers;
 
+import jakarta.websocket.server.PathParam;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import unicam.IdSProject.dtos.ProductDTO;
 import unicam.IdSProject.models.*;
+import unicam.IdSProject.services.BuyerService;
 
 /**
 *
@@ -9,55 +19,37 @@ import unicam.IdSProject.models.*;
 * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
 *
 */
+
+@Controller
+@RequiredArgsConstructor
 public class BuyerController {
 
-    private final Buyer buyer;
     private final ProductBoard productBoard;
     private final EventBoard eventboard;
-    private final PurchaseHandler purchaseHandler;
 
-    public BuyerController(Buyer buyer, ProductBoard productBoard, EventBoard eventBoard, PurchaseHandler purchaseHandler){
-        this.buyer = buyer;
-        this.productBoard = productBoard;
-        this.eventboard = eventBoard;
-        this.purchaseHandler = purchaseHandler;
-    }
+    private final BuyerService buyerService;
 
 
     /**
      * This method adds a Product to the Shopping Cart.
      *
-     * @param product, the Product that needs to be added.
+     * @param productDto, the Product that needs to be added.
      *
-     * @return true if it is added successfully, false otherwise.
+     * @return
      */
-    public boolean addToShoppingCart(Product product, int quantity) {
-
+    @PostMapping(value = "/addToShoppingKart")
+    public ResponseEntity<Object> addToShoppingCart(@RequestBody ProductDTO productDto, @PathParam("quantity") int quantity) {
+        return buyerService.addProductToShoppingKart(productDto, quantity);
     }
-
-
 
     /**
      * This method is used to buy all the Products in the Shopping Cart.
      *
      * @return true  if the purchase was successfull, false otherwise
      */
-    public boolean buyShoppingCart(){
-        if (buyer.getShoppingCart() == null || buyer.getShoppingCart().getQuantifiedProducts().isEmpty()){
-            return false;
-        }
-
-      //Ci sarebbe la necessità di creare una nuova classe addetta all'acquisto di prodotti ed eventi
-      //Da farlo con la stretta struttura SpringBoot di RequestHandler
-
-        if (purchaseHandler.pay(buyer.getShoppingCart())){
-            return true;
-        }               
-
-        return false;
+    public ResponseEntity<Object> buyShoppingCart(){
+        return buyerService.buyShoppingCart();
     }
-
-
 
     /**
      * This method allows to buy an Event tickey
@@ -67,15 +59,7 @@ public class BuyerController {
      * @return true if the purchase was successfull, false otherwise
      */
     public boolean buyEventTicket(Event event){
-        if (event == null){
-            return false;
-        }
 
-        if(purchaseHandler.pay(buyer.getShoppingCart())){
-            return true;
-        }                                                                                       
-
-        return false;
     }
 
 
