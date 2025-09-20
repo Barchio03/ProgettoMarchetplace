@@ -3,7 +3,6 @@ import unicam.IdSProject.models.Distributor;
 import unicam.IdSProject.models.Product;
 import unicam.IdSProject.models.ProductBoard;
 import unicam.IdSProject.models.ProductBundle;
-
 import java.util.ArrayList;
 
 /**
@@ -11,111 +10,104 @@ import java.util.ArrayList;
 * This class implements the methods used by the Distributor to interact with the marketplace
 *
 * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+ *
 */
 public class DistributorController {
 
     private final Distributor distributor;
     private ProductBoard productBoard;
-    private ArrayList<ProductBundle> bundlesList;
 
     /**
     *
     * This method creates a new DistributorController object
     */
-    public DistributorController(Distributor distributor, ProductBoard productBoard, ArrayList<ProductBundle> bundlesList){
+    public DistributorController(Distributor distributor, ProductBoard productBoard){
         this.distributor = distributor;
         this.productBoard = productBoard;
-        this.bundlesList = bundlesList;
     }
 
 
     /**
      *
-     * This method creates a new bundle with a set of product present in the marketplace
+     * This method creates a new Bundle with a set of Product present in the marketplace
      *
-     * @param products: the products present in the bundle
+     * @param products: the Products present in the Bundle
      *
-     * @return true, if the bundle was created, false otherwise
+     * @return true, if the Bundle was created, false otherwise
      */
     public boolean createBundle(ArrayList<Product> products){
         if (products.isEmpty()){
-            throw new IllegalArgumentException("Deve essere inserito almeno un prodotto");
+            return false;
         }
         for(Product product : products){
             if((product == null || !productBoard.contains(product))) {
-                throw new IllegalArgumentException("Prodotti inseriti non validi");
+               return false;
             }
         }
         ProductBundle bundle = new ProductBundle(products, distributor.getName());
-        bundlesList.add(bundle);
         return true;
     }
 
+
+
     /**
      *
-     * This method adds a product from the marketplace inside a bundle
+     * This method adds a Product from the marketplace inside a Bundle
      *
-     * @param bundle: the bundle in question
+     * @param bundle: the Bundle in question
      *
-     * @param product: the product that needs to be added
+     * @param product: the Product that needs to be added
      *
-     * @return true, if the bundle was created, false otherwise
+     * @return true, if the Bundle was created, false otherwise
      */
     public boolean addProductToBundle(ProductBundle bundle, Product product){
         if(product == null || !productBoard.contains(product)){
-            throw new IllegalArgumentException("Prodotto inserito non valido");
+            return false;
         }
         if(bundle.getProducts().contains(product)){
-            throw new IllegalArgumentException("Il prodotto è già presente nel bundle");
+            return false;
         }
         bundle.getProducts().add(product);
         return true;
     }
 
 
+
     /**
      *
-     * This method deletes a product from a bundle
+     * This method deletes a Bundle from the marketplace
      *
-     * @param bundle: the bundle in question
+     * @param bundle: the Bundle in question
      *
-     * @param product: the product that needs to be added
-     *
-     * @return true, if the product was deleted, false otherwise
+     * @return true, if the Product was deleted, false otherwise
      */
-    public boolean deleteBundle(ProductBundle bundle, Product product) {
-        if(product == null || !productBoard.contains(product)){
-            throw new IllegalArgumentException("Prodotto inserito non valido");
+    public boolean deleteBundle(ProductBundle bundle) {
+        if(bundle == null || !productBoard.contains(bundle)){
+            return false;
         }
-        if(!bundle.getProducts().contains(product)){
-            throw new IllegalArgumentException("Il prodotto non presente nel bundle");
-        }
-        bundle.getProducts().remove(product);
+        productBoard.removeProduct(bundle);
         return true;
     }
 
 
     /**
      *
-     * This method adds distributor infos to a product
+     * This method adds Distributor infos to a Product
      *
-     * @param product: the product to witch add the information
+     * @param product: the Product to witch add the information
      *
-     * @param info: the info abouct the product
+     * @param info: the info about the Product
      *
      * @return true, if the information was added, false otherwise
      */
     public boolean addInfo(Product product, String info) {
-        if(product == null || !productBoard.contains(product)){
-            throw new IllegalArgumentException("Prodotto inserito non valido");
+        if (product == null || !productBoard.contains(product)) {
+            return false;
         }
-        for(ProductBundle bundles : bundlesList){
-            ArrayList<Product> products = bundles.getProducts();
-            if (products.contains(product)){
-                product.setDistributorDescription(info);
-                return true;
-            }
+        if (info == null || info.isEmpty()){
+            return false;
         }
-        throw new IllegalArgumentException("Prodotto non presente in alcun bundle");
+        product.setDistributorDescription(info);
+        return true;
     }
 }

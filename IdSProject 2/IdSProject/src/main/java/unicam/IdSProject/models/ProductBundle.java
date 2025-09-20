@@ -8,17 +8,15 @@ import java.util.ArrayList;
 * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
 *
 */
-public class ProductBundle {
+public class ProductBundle extends Product{
 
     private ArrayList<Product> products;
-    private final String creator;
 
     /**
     * This method creates a new ProductBundle object
     */
     public ProductBundle(ArrayList<Product> products, String creator) {
         this.products = products;
-        this.creator = creator;
     }
 
 
@@ -31,9 +29,6 @@ public class ProductBundle {
         this.products = products;
     }
 
-    public String getCreator() {
-        return creator;
-    }
 
 
 
