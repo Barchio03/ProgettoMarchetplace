@@ -32,8 +32,7 @@ public class BuyerController {
      * @return true if it is added successfully, false otherwise.
      */
     public boolean addToShoppingCart(Product product, int quantity) {
-        QuantifiedProduct qProduct = new QuantifiedProduct(product, quantity);
-        return buyer.getShoppingCart().addQuantifiedProduct(qProduct);
+
     }
 
 

@@ -1,11 +1,14 @@
 package unicam.IdSProject.models;
 
+import lombok.Getter;
+
 /**
 *
 * This class represents a Buyer
 *
 * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
 */
+@Getter
 public class Buyer {
     
     private String name;
