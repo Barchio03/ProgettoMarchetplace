@@ -1,10 +1,10 @@
 package unicam.IdSProject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import unicam.IdSProject.Models.Event;
-import unicam.IdSProject.Models.EventBoard;
-import unicam.IdSProject.Models.Product;
-import unicam.IdSProject.Models.ProductBoard;
+import unicam.IdSProject.models.Event;
+import unicam.IdSProject.models.EventBoard;
+import unicam.IdSProject.models.Product;
+import unicam.IdSProject.models.ProductBoard;
 
 /**
 *
