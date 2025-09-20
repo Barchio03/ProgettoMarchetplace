@@ -9,19 +9,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import unicam.IdSProject.*;
 import unicam.IdSProject.Models.*;
 
+
+/**
+*
+* This class implements the methods and the features of the marketplace
+*
+* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+*/
 @Controller
 public class MarketController {
 
-    private ProductBoard productBoard;
+    private final ProductBoard productBoard;
 
     @Autowired
     private RequestHandler requestHandler;
 
-    private Seller seller;
-    private Buyer buyer;
-    private Animator animator;
-    private PlatformHandler platformHandler;
+    private final Seller seller;
+    private final Buyer buyer;
+    private final Animator animator;
+    private final PlatformHandler platformHandler;
 
+    /**
+    * This method creates a new MarketController object
+    */
     public MarketController(){
         this.productBoard = new ProductBoard();
         //this.requestHandler = new RequestHandler();
@@ -44,13 +54,17 @@ public class MarketController {
     }
 
     // -- MARKET --
-
+    /**
+    * This method return the products from the product board and sets a route to it
+    */
     @RequestMapping(value="/market")
     public ResponseEntity<Object> getProducts(){
         return new ResponseEntity<>(productBoard.getProducts(), HttpStatus.OK);
     }
 
-
+    /**
+    * This method return the profile of a specified user and sets a route to it
+    */
     @RequestMapping(value = "/profile/{user}")
     public ResponseEntity<Object> showProfile(@PathVariable("user") String user){
         return switch (user) {
@@ -61,6 +75,9 @@ public class MarketController {
         };
     }
 
+    /**
+    * This method returns the mailbox of a specified user and sets a route to it
+    */
     @RequestMapping(value="/profile/{user}/mailbox")
     public ResponseEntity<Object> openSellerMailbox(@PathVariable("user") String user){
         return switch (user) {

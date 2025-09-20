@@ -1,101 +1,111 @@
 package unicam.IdSProject.Controllers;
 
-import jakarta.websocket.server.PathParam;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import unicam.IdSProject.EventBoard;
+import unicam.IdSProject.Models.EventBoard;
 import unicam.IdSProject.Models.Buyer;
 import unicam.IdSProject.Models.Event;
 import unicam.IdSProject.Models.Product;
-import unicam.IdSProject.ProductBoard;
-
-import java.util.ResourceBundle;
+import unicam.IdSProject.Models.ProductBoard;
 
 /**
- * This class represents the buyer's controller
- */
-@Controller
+*
+* This class implements the methods for handling all the Buyer interaction with the marketplace
+*
+* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+*
+*/
 public class BuyerController {
 
-    /**
-     * The buyer, for testing purposes
-     */
-    private Buyer buyer;
+    private final Buyer buyer;
+    private final ProductBoard productBoard;
+    private final EventBoard eventboard;
+    private final PurchaseHandler purchaseHandler;
 
-    /**
-     * The product board
-     */
-    @Autowired
-    private ProductBoard productBoard;
-
-    /**
-     * The event board
-     */
-    @Autowired
-    private EventBoard eventboard;
-
-    /**
-     * Creates a new Controller
-     *
-     * @param productBoard
-     * @param eventBoard
-     */
-    @Autowired
-    public BuyerController(ProductBoard productBoard, EventBoard eventBoard){
-        this.buyer = new Buyer();
+    public BuyerController(Buyer buyer, ProductBoard productBoard, EventBoard eventBoard, PurchaseHandler purchaseHandler){
+        this.buyer = buyer;
         this.productBoard = productBoard;
         this.eventboard = eventBoard;
+        this.purchaseHandler = purchaseHandler;
     }
 
+
     /**
+     * This method adds a Product to the Shopping Cart.
      *
-     * This method adds a product to the shopping cart.
+     * @param product, the Product that needs to be added.
      *
-     * @param id, the product id
-     *
-     * @param quantity, the quantity of products
-     *
-     * @return true if the product is added successfully, false otherwise.
-     *
+     * @return true if it is added successfully, false otherwise.
      */
-    @RequestMapping(value="/buyer/addToCart")
-    public ResponseEntity<Object> addProduct(@PathParam("id") int id,@PathParam("quantity") int quantity) {
-        Product product = productBoard.getProduct(id);
-        if (product == null) return new ResponseEntity<>("Id Prodotto invalido", HttpStatus.NOT_FOUND);
-        if (buyer.addToShoppingCart(product, quantity))
-            return new ResponseEntity<>("Prodotto aggiunto al carrello", HttpStatus.OK);
-        else return new ResponseEntity<>("Prodotto invalido",HttpStatus.BAD_REQUEST);
+    public boolean addProduct(Product product, int quantity) {
+        buyer.addToShoppingCart(product, quantity);
+        return true;
     }
 
 
 
     /**
+     * This method is used to buy all the Products in the Shopping Cart.
      *
-     * This method is used to buy all the products in the shopping cart.
-     *
-     * @return true if the products are sold successfully, false otherwise.
-     *
+     * @return true  if the purchase was successfull, false otherwise
      */
-
     public boolean buyShoppingCart(){
+        if (buyer.getShoppingCart() == null || buyer.getShoppingCart().getQuantifiedProducts().isEmpty()){
+            return false;
+        }
+
+      //Ci sarebbe la necessità di creare una nuova classe addetta all'acquisto di prodotti ed eventi
+      //Da farlo con la stretta struttura SpringBoot di RequestHandler
+
+        if (purchaseHandler.pay(shoppingCart)){
+            return true;
+        }               
+
         return false;
     }
 
 
 
     /**
+     * This method allows to buy an Event tickey
      *
-     * This method is used to update the buyer about the event status.
+     * @param event, the Event from which buying the ticket
      *
-     * @param event, the event that is being observed.
-     *
+     * @return true if the purchase was successfull, false otherwise
      */
     public boolean buyEventTicket(Event event){
+        if (event == null){
+            return false;
+        }
+
+        if(purchaseHandler.pay(paymentSystem)){
+            return true;
+        }                                                                                       
+
         return false;
+    }
+
+
+    
+    /**
+    * This method adds a Product to the Shopping Cart.
+    *
+    * @param product, the Product that needs to be added.
+    *
+    * @return true if it is added successfully, false otherwise.
+    */
+    public boolean addToShoppingCart(Product product, int quantity) {
+       return shoppingCart.addQuantifiedProduct(new QuantifiedProduct(product, quantity));
+    }
+
+    
+    /**
+    * This method is used to update the Buyer about the Event status.
+    *
+    * @param event, the Event that is being observed.
+    */
+    public void update(Event event, String message) {
+        this.getMailbox().addMessage("message");
     }
 }
 

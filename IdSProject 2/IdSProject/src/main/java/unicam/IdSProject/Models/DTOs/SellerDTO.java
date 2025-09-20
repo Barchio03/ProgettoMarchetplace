@@ -1,36 +1,27 @@
-package unicam.IdSProject.Models;
+package unicam.IdSProject.Models.DTOs;
+
+import unicam.IdSProject.Models.Location;
+import unicam.IdSProject.Models.Mailbox;
 import unicam.IdSProject.Tag;
+
 import java.util.ArrayList;
 
-/**
-*
-* This class represents a Seller
-*
-* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
-*
-*/
-public class Seller {
+public class SellerDTO {
 
     private String name;
     private String description;
     private Location location;
     private ArrayList<Tag> tags;
     private final Mailbox mailbox;
-    private int id;
-    private static int currentId;
 
-    
-    /**
-    * This method creates a new Seller object
-    */
-    public Seller(String name, String description ) {
-        this.mailbox=new Mailbox();
+    public SellerDTO(String name, String description, Location location, ArrayList<Tag> tags ,Mailbox mailbox){
+        this.name = name;
+        this.description = description;
+        this.location = location;
+        this.tags = tags;
+        this.mailbox = mailbox;
     }
 
-    
-    private static int getCurrentId() {
-        return currentId;
-    }
 
     public String getName() {
         return name;
@@ -60,18 +51,11 @@ public class Seller {
         return tags;
     }
 
-    public int getId() {
-        return id;
+    public void setTags(ArrayList<Tag> tags) {
+        this.tags = tags;
     }
 
     public Mailbox getMailbox() {
         return mailbox;
-    }
-
-    @Override
-    public String toString(){
-        return "Nome: "+this.getName() +
-                "\nDescrizione: "+this.getDescription() +
-                "\nLocation: "+this.getLocation().toString();
     }
 }

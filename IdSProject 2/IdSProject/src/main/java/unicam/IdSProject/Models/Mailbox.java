@@ -3,42 +3,46 @@ package unicam.IdSProject.Models;
 import java.util.ArrayList;
 
 /**
- * This class represents the mailbox where users receive messages
- *
- * @author Aguiari Erika, Ilaria Morettini, Barchiesi Luca
- */
+*
+* This class represents the Mailbox where users receive messages
+*
+* @author Aguiari Erika, Ilaria Morettini, Barchiesi Luca
+*
+*/
 public class Mailbox {
 
-    /**
-     * The mailbox where messages are stored
-     */
-    private ArrayList<String> mailbox;
+    private final ArrayList<String> mailbox;
 
     /**
-     * Creates a new Mailbox
+     * This method creates a new Mailbox object
      */
     public Mailbox(){
         mailbox = new ArrayList<String>();
     }
 
+
+    
     /**
-     * Adds a message to the mailbox
+     * This method adds a message into the Mailbox
      *
-     * @param message to add
+     * @param message, the message to add
      */
     public void addMessage(String message) {
             mailbox.add(message);
     }
+    
 
     /**
-     * @return the messages inside the mailbox
+     * This method returns all the messages inside the Mailbox
+     *
+     * @return the messages inside the Mailbox
      */
     public ArrayList<String> getMessages() {
         return mailbox;
     }
 
     /**
-     * Deletes all the messages inside the mailbox
+     * This method deletes all the messages inside the Mailbox
      */
     public void refresh() {
         mailbox.clear();

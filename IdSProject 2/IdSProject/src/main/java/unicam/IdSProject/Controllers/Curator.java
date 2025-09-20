@@ -7,35 +7,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import unicam.IdSProject.AcceptVisitor;
 import unicam.IdSProject.DenyVisitor;
-import unicam.IdSProject.RequestHandler;
+import unicam.IdSProject.Models.RequestHandler;
 import unicam.IdSProject.Visitable;
 
 /**
- * This class represents a curator
- */
+*
+* This class represents a Curator
+*
+* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+*
+*/
 @Controller
 public class Curator {
 
-    /**
-     * The visitor to approve a visitable
-     */
-    private AcceptVisitor acceptVisitor;
-
-    /**
-     * The request handler
-     */
-    private RequestHandler requestHandler;
-
-    /**
-     * The visitable to check
-     */
+    private final AcceptVisitor acceptVisitor;
+    private final RequestHandler requestHandler;
     private Visitable toCheck;
 
     /**
-     * Creates a new curator object
-     *
-     * @param acceptVisitor
-     * @param requestHandler
+     * This method creates a new Curator object
      */
     public Curator(AcceptVisitor acceptVisitor, RequestHandler requestHandler) {
         this.acceptVisitor=acceptVisitor;
@@ -43,7 +33,9 @@ public class Curator {
     }
 
     /**
-     * Gets the next product to verify
+     * This method gets the next Product to verify
+     *
+     * @return responce, the Responce Entity for the method
      */
     @RequestMapping(value="/curator/getProduct")
     public ResponseEntity<Object> getProduct() {
@@ -53,7 +45,9 @@ public class Curator {
     }
 
     /**
-     * Gets the next event to verify
+     * This method gets the next Event to verify
+     *
+     * @return responce, the Responce Entity for the method
      */
     @RequestMapping(value="/curator/getEvent")
     public ResponseEntity<Object> getEvent() {
@@ -63,7 +57,9 @@ public class Curator {
     }
 
     /**
-     * Approves the visitable
+     * This method approves the Visitable
+     *
+     * @return responce, the Responce Entity for the method
      */
     @RequestMapping(value="/curator/approve")
     public ResponseEntity<Object> approve(){
@@ -73,9 +69,9 @@ public class Curator {
     }
 
     /**
-     * Denies the visitable
+     * This method denies the Visitable
      *
-     * @param message, the message to leave the creator of the visitable
+     * @return responce, the Responce Entity for the method
      */
     @RequestMapping(value="/curator/deny")
     public ResponseEntity<Object> deny( @PathParam("message") String message){

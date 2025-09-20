@@ -1,30 +1,29 @@
 package unicam.IdSProject;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import unicam.IdSProject.Models.Event;
+import unicam.IdSProject.Models.EventBoard;
 import unicam.IdSProject.Models.Product;
+import unicam.IdSProject.Models.ProductBoard;
 
 /**
- * This class has the logic behind the acceptance of a Visitable object
+*
+ * This class contains the logic behind the acceptance of a Visitable object
  *
- * @author Erika Aguiari, Luca Barchiesi, Ilaria Morettini
+ * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi 
+ *
  */
 @Component
 public class AcceptVisitor implements Visitor {
 
-    /**
-     * The product board to add the products to
-     */
     @Autowired
-    private ProductBoard productBoard;
+    private final ProductBoard productBoard;
+    @Autowired
+    private final EventBoard eventBoard;
 
     /**
-     * The event board to add the events to
-     */
-    @Autowired
-    private EventBoard eventBoard;
-
+    * This method creates a new AcceptVisitor object
+    */
     @Autowired
     public AcceptVisitor(ProductBoard productBoard, EventBoard eventBoard) {
         this.productBoard=productBoard;

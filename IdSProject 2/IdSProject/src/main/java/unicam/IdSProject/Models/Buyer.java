@@ -1,28 +1,27 @@
 package unicam.IdSProject.Models;
 
-import unicam.IdSProject.QuantifiedProduct;
-import unicam.IdSProject.ShoppingCart;
-
 /**
 *
-* This method creates an object Product.
+* This class represents a Buyer
 *
-* @author Luca Barchiesi
-*
+* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
 */
 public class Buyer {
     
     private String name;
-
-    private ShoppingCart shoppingCart;
-
+    private ShoppingCart shoppingCart; //Può essere final?
     private Mailbox mailbox;
-
     private int id;
-
     private static int currentId;
 
+    /**
+    * This method creates a new Buyer object
+    */
+    public Buyer(String name){
+        this.name = name;
+    }
 
+    
     
     private static int getCurrentId() {
         return currentId;
@@ -36,6 +35,8 @@ public class Buyer {
         this.name = name;
     }
 
+    public ShoppingCart getShoppingCart(){ return shoppingCart; }
+
     public int getId() {
         return id;
     }
@@ -44,31 +45,5 @@ public class Buyer {
         return mailbox;
     }
 
-    
-    /**
-    *
-    * This method adds a product to the shopping cart.
-    *
-    * @param product, the product that needs to be added.
-    *
-    * @return true if the product is added successfully, false otherwise.
-    *
-    */
-    public boolean addToShoppingCart(Product product, int quantity) {
-       return shoppingCart.addQuantifiedProduct(new QuantifiedProduct(product, quantity));
-    }
-
-
-    
-    /**
-    *
-    * This method is used to update the buyer about the event status.
-    *
-    * @param event, the event that is being observed.
-    *
-    */
-    public void update(Event event, String message) {
-        this.getMailbox().addMessage("message");
-    }
 
 }

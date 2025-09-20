@@ -1,12 +1,21 @@
 package unicam.IdSProject;
-
 import unicam.IdSProject.Models.Event;
 import unicam.IdSProject.Models.Product;
 
+/**
+*
+ * This class contains the logic behind the denial of a Visitable object
+ *
+ * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi 
+ *
+ */
 public class DenyVisitor implements Visitor {
 
-    private String message;
+    private final String message;
 
+    /**
+    * This method creates a new DenyVisitor object
+    */
     public DenyVisitor(String message) {
         this.message=message;
     }

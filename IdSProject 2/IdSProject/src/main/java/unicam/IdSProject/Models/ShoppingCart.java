@@ -1,32 +1,47 @@
-package unicam.IdSProject;
-
+package unicam.IdSProject.Models;
 import java.util.ArrayList;
 
 /**
- * This class represents a shopping cart
- *
- * @author Luca Barchiesi, Erika Aguiari, Ilaria Morettini
- */
+*
+* This class represents a Shopping Cart
+*
+* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+*
+*/
 public class ShoppingCart {
 
-    /**
-     * The list of quantified products
-     */
-    private ArrayList<QuantifiedProduct> quantifiedProducts;
-
-    /**
-     * the total price of the shopping cart
-     */
+    private final Buyer buyer;
+    private final ArrayList<QuantifiedProduct> quantifiedProducts;
     private double totalPrice;
 
-    public ShoppingCart(){
+    /**
+    * This method creates a new ShoppingCart object
+    */
+    public ShoppingCart(Buyer buyer){
+        this.buyer = buyer;
         this.quantifiedProducts = new ArrayList<>();
     }
 
+
+
+    public Buyer getBuyer(){
+        return buyer;
+    }
+    
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public ArrayList<QuantifiedProduct> getQuantifiedProducts() {
+        return quantifiedProducts;
+    }
+
+    
+
     /**
-     * Adds a product to the shopping cart
+     * This method adds a Product to the Shopping Cart
      *
-     * @param quantifiedProduct, the product
+     * @param quantifiedProduct, the Product with the number of stocks
      *
      * @return true if it was added successfully, false otherwise
      */
@@ -44,9 +59,10 @@ public class ShoppingCart {
     }
 
     /**
-     * Removes a product from the shopping cart
+     * This method removes a Product from the Shopping Cart
      *
-     * @param quantifiedProduct
+     * @param quantifiedProduct, the Product to remove
+     
      * @returntrue if it was removed successfully, false otherwise
      */
     public boolean removeQuantifiedProduct(QuantifiedProduct quantifiedProduct) {
@@ -55,25 +71,10 @@ public class ShoppingCart {
         return true;
     }
 
-    /**
-     * @return the total price
-     */
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    //private void setTotalPrice(float totalPrice) { this.totalPrice = totalPrice; }
 
     /**
-     * @return the list of quantified products
-     */
-    public ArrayList<QuantifiedProduct> getQuantifiedProducts() {
-        return quantifiedProducts;
-    }
-
-    /**
-     * Calculates the total price
-     */
+    * This method calculates the price of the whole Shopping Cart
+    */
     private void calculateTotal() {
         double total = 0;
         for (QuantifiedProduct quantifiedProduct : quantifiedProducts) {

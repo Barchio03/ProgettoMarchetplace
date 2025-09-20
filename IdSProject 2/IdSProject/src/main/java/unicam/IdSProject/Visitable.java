@@ -1,14 +1,18 @@
 package unicam.IdSProject;
 
 /**
- * This interface is implemented by those need to be verified by the curator
+*
+ * This interface is implemented by those who need to be verified by the Curator
+ *
+ * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+ *
  */
 public interface Visitable {
 
     /**
-     * Accepts the visitor and ridirects the call to the visitor
+     * This method accepts the Visitor and ridirects the call to the Visitor
      *
      * @param visitor
      */
-    public void accept(Visitor visitor);
+    void accept(Visitor visitor);
 }

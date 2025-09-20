@@ -6,11 +6,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import unicam.IdSProject.EventBoard;
+import unicam.IdSProject.Models.EventBoard;
 import unicam.IdSProject.Models.Animator;
 import unicam.IdSProject.Models.Event;
-import unicam.IdSProject.RequestHandler;
+import unicam.IdSProject.Models.RequestHandler;
 
+/**
+*
+* This class implements the methods for handling all the Animator interaction with the marketplace
+*
+* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+*
+*/
 public class AnimatorController {
 
     @Autowired
@@ -18,34 +25,21 @@ public class AnimatorController {
     @Autowired
     private EventBoard eventBoard;
 
-    private Animator animator;
+    private final Animator animator;
 
     public AnimatorController(Animator animator){
         this.animator = animator;
     }
 
+
+
     /**
      * This method is used to create a new event
      *
-     * @return true if the event creation was successful, else otherwise
+     * @param event , the body of the event that needs to be created
+     *
+     * @return ResponseEntity<Object>, the response about the procedure
      */
-    public boolean createEvent() {
-        return false;
-    }
-
-    /**
-     *
-     * This method is used to remove an event from the marketplace.
-     *
-     * @return true if the event is removed successfully, false otherwise.
-     *
-     */
-    public boolean deleteEvent(Event event) {
-        return false;
-    }
-
-
-
     @RequestMapping(value = "/animator/addEvent")
     public ResponseEntity<Object> addEvent(@RequestBody Event event){
         event.setCreator(animator);
@@ -55,12 +49,18 @@ public class AnimatorController {
             }
             return new ResponseEntity<>("Richiesta già in atto", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>("L\'evento esiste già", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("L'evento esiste già", HttpStatus.BAD_REQUEST);
 
 
     }
 
-
+    /**
+     * This method is used to create a new event
+     *
+     * @param id , the id of the event that needs to be deleted
+     *
+     * @return ResponseEntity<Object>, the response about the procedure
+     */
     @RequestMapping(value = "/animator/removeEvent")
     public ResponseEntity<Object> removeEvent(@PathParam("id") int id) {
         if (eventBoard.removeEvent(id)) {

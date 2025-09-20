@@ -1,16 +1,8 @@
-package unicam.IdSProject.Models;
+package unicam.IdSProject.Models.DTOs;
 
-import unicam.IdSProject.Visitable;
-import unicam.IdSProject.Visitor;
+import unicam.IdSProject.Models.Seller;
 
-/**
-*
-* This class represents a Product.
-*
-* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
-*
-*/
-public abstract class Product implements Visitable {
+public class ProductDTO {
 
     private String name;
     private float price;
@@ -18,18 +10,14 @@ public abstract class Product implements Visitable {
     private String distributorDescription;
     private int stockNumber;
     private Seller creator;
-    private int id;
-    private static int currentId;
 
-
-    /**
-    * This method creates a new Product object.
-    */
-    public Product() {}
-
-    
-    private static int getCurrentId() {
-        return currentId;
+    public ProductDTO( String name, float price, String description, String distributorDescription, int stockNumber, Seller creator){
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.distributorDescription = distributorDescription;
+        this.stockNumber = stockNumber;
+        this.creator = creator;
     }
 
     public String getName() {
@@ -76,33 +64,7 @@ public abstract class Product implements Visitable {
         return creator;
     }
 
-    public int getId() {
-        return id;
-    }
-
     public void setCreator(Seller creator) {
         this.creator = creator;
     }
-
-    
-
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
-
-    @Override
-    public boolean equals(Object obj){
-
-        if (obj == null){
-            return false;
-        }
-        if(!(obj instanceof Product product)){
-            return false;
-        }
-        else{
-            return this.id == product.id;
-        }
-    }
-
 }

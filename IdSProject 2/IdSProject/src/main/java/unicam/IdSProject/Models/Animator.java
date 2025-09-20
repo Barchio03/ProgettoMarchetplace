@@ -1,31 +1,25 @@
 package unicam.IdSProject.Models;
 
 /**
- * This class represents the animator
- */
+*
+* This class represents an Animator
+*
+* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+*/
 public class Animator {
 
-    /**
-     * The name of the animator profile
-     */
     private String name;
 
-    /**
-     * The description of the animator profile
-     */
     private String description;
 
-    /**
-     * The animator's id
-     */
-    private int id;
+    private final int id;
 
     private static int currentId;
 
-    private Mailbox mailbox;
+    private final Mailbox mailbox;
 
     /**
-     * Creates a new animator
+     * This method creates a new Animator object
      */
     public Animator(String name, String description) {
         this.name=name;
@@ -38,42 +32,26 @@ public class Animator {
         return currentId;
     }
 
-    /**
-     * @return name, the name of the animator
-     */
+
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name, the name of the animator
-     */
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * @return the description of the animator
-     */
     public String getDescription() {
         return description;
     }
 
-    /**
-     * @param description, the description of the animator
-     */
     public void setDescription(String description) {
         this.description = description;
     }
 
-    /**
-     * @return the animator's id
-     */
     public int getId() {
         return id;
     }
-
-
 
     public Mailbox getMailbox() {
         return mailbox;

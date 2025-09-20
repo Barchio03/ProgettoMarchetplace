@@ -7,52 +7,25 @@ import java.util.ArrayList;
 
 /**
 *
-* This class represents an event.
+* This class represents an Event.
 *
 * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
 *
 */
 public class Event implements Visitable {
 
-    /**
-     * The name of the event
-     */
     private String name;
-
-    /**
-     * The creator of the event
-     */
     private Animator creator;
-
-    /**
-     * The maximum number of attendees, if set to 0 there's no limit
-     */
     private int maxAttendees;
-
-    /**
-     * The description of the event
-     */
     private String description;
-
-    /**
-     * The id of the event
-     */
-    private int id;
-
+    private ArrayList<Seller> collaborators;
+    private ArrayList<Buyer> subscribers;
+    private final int id;
     private static int currentId;
 
-    /**
-     * The collaborators to the event
-     */
-    private ArrayList<Seller> collaborators;
 
     /**
-     * The people who have subscribes to join the event
-     */
-    private ArrayList<Buyer> subscribers;
-
-    /**
-     * Creates a new event
+     * This method creates a new Event object
      */
     public Event(String name, String description, Animator creator, ArrayList<Seller> collaborators){
         this.name=name;
@@ -63,7 +36,7 @@ public class Event implements Visitable {
     }
 
     /**
-     * Creates a new event with a set number of attendees
+     * This method creates a new Event object with a setted number of attendees
      */
     public Event(String name, String description, Animator creator, ArrayList<Seller> collaborators, int maxAttendees){
         this.name=name;
@@ -78,91 +51,59 @@ public class Event implements Visitable {
         return currentId;
     }
 
-    /**
-     * @return the name of the event
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name of the event
-     */
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * @return the creator of the event
-     */
     public Animator getCreator() {
         return creator;
     }
 
-    /**
-     * @param creator of the event
-     */
     public void setCreator(Animator creator) {
         this.creator = creator;
     }
 
-    /**
-     * @return the maximum number of attendees
-     */
     public int getMaxAttendees() {
         return maxAttendees;
     }
 
-    /**
-     * @param maxAttendees, the maximum number of attendees
-     */
     public void setMaxAttendees(int maxAttendees) {
         this.maxAttendees = maxAttendees;
     }
 
-    /**
-     * @return the description of the event
-     */
     public String getDescription() {
         return description;
     }
 
-    /**
-     * @param description, the description of the event
-     */
     public void setDescription(String description) {
         this.description = description;
     }
 
-    /**
-     * @return the id of the event
-     */
     public int getId() {
         return id;
     }
 
-    /**
-     * @return the collaborators of the event
-     */
     public ArrayList<Seller> getCollaborators() {
         return collaborators;
     }
 
-    /**
-     * @param collaborators, the collaborators of the event
-     */
     public void setCollaborators(ArrayList<Seller> collaborators) {
         this.collaborators = collaborators;
     }
 
+
+
     /**
     *
-    * This method is used by a buyer to subscribe to an event.
+    * This method is used by a Buyer to subscribe to an Event.
     *
-    * @param buyer, the buyer who wants to subscribe to an event.
+    * @param buyer, the Buyer who wants to subscribe to an Event.
     *
     * @return true if the operation ended successfully, false otherwise.
-    *
     */
     public boolean subscribe(Buyer buyer) {
         if(maxAttendees!=0) {
@@ -175,11 +116,13 @@ public class Event implements Visitable {
         } else return false;
     }
 
+
+
     /**
     *
-    * This method is used by a buyer to unsubscribe to an event.
+    * This method is used by a Buyer to unsubscribe to an Event.
     *
-    * @param buyer, the buyer who wants to unsubscribe to an event.
+    * @param buyer, the Buyer who wants to unsubscribe to an Event.
     *
     * @return true if the operation ended successfully, false otherwise.
     *
@@ -192,7 +135,7 @@ public class Event implements Visitable {
     }
 
     /**
-     * Notifies the subscribers when needed
+     * This method notifies the subscribers when needed
      *
      * @param message, the message to spread
      */
@@ -202,14 +145,23 @@ public class Event implements Visitable {
         }
     }
 
-    /**
-     * Accepts a visitor to be verified by the Curator
-     *
-     * @param visitor to accept
-     */
+
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if (obj == null){
+            return false;
+        }
+        if(!(obj instanceof Event event)){
+            return false;
+        }
+        else{
+            return this.id == event.id;
+        }
     }
 
 }
