@@ -1,6 +1,7 @@
 package unicam.IdSProject.models;
 
 import unicam.IdSProject.controllers.Curator;
+import java.util.ArrayList;
 
 /**
 *
@@ -12,13 +13,12 @@ import unicam.IdSProject.controllers.Curator;
 public class PlatformHandler {
 
     private Mailbox mailbox;
-    private List<Curator> curators;
+    private ArrayList<Curator> curators;
 
     /**
     * This method creates a new PlatformHandler object
     */
-    public PlatformHandler(Mailbox mailbox){
-        this.mailbox = mailbox
+    public PlatformHandler(){
     }
 
 
@@ -27,7 +27,8 @@ public class PlatformHandler {
         return mailbox;
     }
 
-    public List<Curator> getCurators(){
-        return curators
+    public ArrayList<Curator> getCurators(){
+        return curators;
     }
+
 }

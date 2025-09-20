@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class DistributorController {
 
     private final Distributor distributor;
-    private ProductBoard productBoard;
+    private final ProductBoard productBoard;
 
     /**
     *

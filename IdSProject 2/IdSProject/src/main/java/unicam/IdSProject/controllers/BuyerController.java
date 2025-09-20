@@ -1,10 +1,6 @@
 package unicam.IdSProject.controllers;
 
-import unicam.IdSProject.models.EventBoard;
-import unicam.IdSProject.models.Buyer;
-import unicam.IdSProject.models.Event;
-import unicam.IdSProject.models.Product;
-import unicam.IdSProject.models.ProductBoard;
+import unicam.IdSProject.models.*;
 
 /**
 *
@@ -35,9 +31,9 @@ public class BuyerController {
      *
      * @return true if it is added successfully, false otherwise.
      */
-    public boolean addProduct(Product product, int quantity) {
-        buyer.addToShoppingCart(product, quantity);
-        return true;
+    public boolean addToShoppingCart(Product product, int quantity) {
+        QuantifiedProduct qProduct = new QuantifiedProduct(product, quantity);
+        return buyer.getShoppingCart().addQuantifiedProduct(qProduct);
     }
 
 
@@ -55,7 +51,7 @@ public class BuyerController {
       //Ci sarebbe la necessità di creare una nuova classe addetta all'acquisto di prodotti ed eventi
       //Da farlo con la stretta struttura SpringBoot di RequestHandler
 
-        if (purchaseHandler.pay(shoppingCart)){
+        if (purchaseHandler.pay(buyer.getShoppingCart())){
             return true;
         }               
 
@@ -76,7 +72,7 @@ public class BuyerController {
             return false;
         }
 
-        if(purchaseHandler.pay(paymentSystem)){
+        if(purchaseHandler.pay(buyer.getShoppingCart())){
             return true;
         }                                                                                       
 
@@ -84,17 +80,6 @@ public class BuyerController {
     }
 
 
-    
-    /**
-    * This method adds a Product to the Shopping Cart.
-    *
-    * @param product, the Product that needs to be added.
-    *
-    * @return true if it is added successfully, false otherwise.
-    */
-    public boolean addToShoppingCart(Product product, int quantity) {
-       return shoppingCart.addQuantifiedProduct(new QuantifiedProduct(product, quantity));
-    }
 
     
     /**
@@ -103,7 +88,7 @@ public class BuyerController {
     * @param event, the Event that is being observed.
     */
     public void update(Event event, String message) {
-        this.getMailbox().addMessage("message");
+        buyer.getMailbox().addMessage("message");
     }
 }
 
