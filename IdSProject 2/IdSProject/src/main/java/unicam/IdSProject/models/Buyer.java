@@ -34,10 +34,6 @@ public class Buyer {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public ShoppingCart getShoppingCart(){ return shoppingCart; }
 
     public int getId() {
@@ -49,4 +45,14 @@ public class Buyer {
     }
 
 
+
+
+    /**
+     * This method is used to update the Buyer about the Event status.
+     *
+     * @param event, the Event that is being observed.
+     */
+    public void update(Event event, String message) {
+        this.getMailbox().addMessage("message");
+    }
 }

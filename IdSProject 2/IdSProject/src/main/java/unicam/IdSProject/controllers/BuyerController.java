@@ -34,8 +34,7 @@ public class BuyerController {
      * This method adds a Product to the Shopping Cart.
      *
      * @param productDto, the Product that needs to be added.
-     *
-     * @return
+     * @return the response of the moethod
      */
     @PostMapping(value = "/addToShoppingKart")
     public ResponseEntity<Object> addToShoppingCart(@RequestBody ProductDTO productDto, @PathParam("quantity") int quantity) {
@@ -47,7 +46,7 @@ public class BuyerController {
      *
      * @return true  if the purchase was successfull, false otherwise
      */
-    public ResponseEntity<Object> buyShoppingCart(){
+    public ResponseEntity<Object> buyShoppingCart() {
         return buyerService.buyShoppingCart();
     }
 
@@ -58,20 +57,9 @@ public class BuyerController {
      *
      * @return true if the purchase was successfull, false otherwise
      */
-    public boolean buyEventTicket(Event event){
-
-    }
-
-
-
-    
-    /**
-    * This method is used to update the Buyer about the Event status.
-    *
-    * @param event, the Event that is being observed.
-    */
-    public void update(Event event, String message) {
-        buyer.getMailbox().addMessage("message");
+    public boolean buyEventTicket(Event event) {
+        return false;
     }
 }
+
 
