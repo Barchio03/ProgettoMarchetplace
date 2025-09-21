@@ -23,8 +23,8 @@ public class Event implements Visitable {
     private String description;
     private ArrayList<Seller> collaborators;
     private ArrayList<Buyer> subscribers;
-    private final int id;
-    private static int currentId;
+    private final Long id;
+    private static Long currentId;
 
 
     /**
@@ -50,7 +50,7 @@ public class Event implements Visitable {
         this.id=currentId++;
     }
 
-    private static int getCurrentId() {
+    private static Long getCurrentId() {
         return currentId;
     }
 
@@ -86,7 +86,7 @@ public class Event implements Visitable {
         this.description = description;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 

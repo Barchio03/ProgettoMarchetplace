@@ -23,8 +23,8 @@ public abstract class Product implements Visitable {
     private String distributorDescription;
     private int stockNumber;
     private Seller creator;
-    private int id;
-    private static int currentId;
+    private Long id;
+    private static Long currentId;
 
 
     /**
@@ -35,7 +35,7 @@ public abstract class Product implements Visitable {
     }
 
     
-    private static int getCurrentId() {
+    private static Long getCurrentId() {
         return currentId;
     }
 

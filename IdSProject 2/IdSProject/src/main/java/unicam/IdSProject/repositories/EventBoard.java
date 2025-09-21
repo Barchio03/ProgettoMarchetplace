@@ -1,28 +1,34 @@
 package unicam.IdSProject.repositories;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
+import unicam.IdSProject.models.Product;
 import unicam.IdSProject.users.Animator;
 import unicam.IdSProject.models.Event;
 
 import java.util.ArrayList;
 
 /**
- * This class represents an Event Board and it contains all the Events
+ * This class represents an Event Board, it contains all the Events
  *
  * @author Luca Barchiesi, Erika Aguiari, Ilaria Morettini
  */
+@AllArgsConstructor
 @Component
 public class EventBoard {
 
+    private final EventRepository eventRepository ;
 
-    private final ArrayList<Event> events;
 
     /**
-    * This method creates a new EventBoard object
-    */
-    public EventBoard(){
-        this.events = new ArrayList<Event>();
+     * This method returns a list of all the Event in the repository
+     *
+     * @return a list of all the Event in the repository
+     */
+    public ArrayList<Event> getEvents(){
+        return (ArrayList<Event>) eventRepository.findAll();
     }
+
 
     /**
      * This method adds an Event to the Event Board
@@ -32,7 +38,11 @@ public class EventBoard {
      * @return true if the Event was added successfully, false otherwise
      */
     public boolean addEvent(Event event) {
-        return events.add(event);
+        if (eventRepository.existsById(event.getId())){
+            return false;
+        }
+        eventRepository.save(event);
+        return true;
     }
 
     /**
@@ -43,7 +53,11 @@ public class EventBoard {
      * @return true is the Event was deleted successfully, false otherwise
      */
     public boolean removeEvent(Event event) {
-        return events.remove(event);
+        if (!eventRepository.existsById(event.getId())){
+            return false;
+        }
+        eventRepository.delete(event);
+        return true;
     }
 
     /**
@@ -53,14 +67,12 @@ public class EventBoard {
      *
      * @return true is the Event was deleted successfully, false otherwise
      */
-    public boolean removeEvent(int id) {
-        for( Event event:  events) {
-            if (event.getId() == id) {
-                events.remove(event);
-                return true;
-            }
+    public boolean removeEvent(Long id) {
+        if (eventRepository.existsById(id)){
+            return false;
         }
-        return false;
+        eventRepository.deleteById(id);
+        return true;
     }
 
     /**
@@ -71,7 +83,7 @@ public class EventBoard {
      * @return true if the Event is present, false otherwise
      */
     public boolean contains(Event event) {
-        return events.contains(event);
+        return eventRepository.existsById(event.getId());
     }
 
      /**
@@ -82,7 +94,8 @@ public class EventBoard {
      * @return the list of Events organized by the Animator
      */
     public ArrayList<Event> getEvents(Animator animator) {
-        ArrayList<Event> sublist = new ArrayList<Event>();
+        ArrayList<Event> sublist = new ArrayList<>();
+        ArrayList<Event> events = (ArrayList<Event>) eventRepository.findAll();
         for (Event event : events) {
             if (event.getCreator().equals(animator)) sublist.add(event);
         }
