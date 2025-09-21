@@ -1,6 +1,8 @@
-package unicam.IdSProject.models;
+package unicam.IdSProject.repositories;
 
 import org.springframework.stereotype.Component;
+import unicam.IdSProject.models.Animator;
+import unicam.IdSProject.models.Event;
 
 import java.util.ArrayList;
 

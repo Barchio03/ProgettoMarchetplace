@@ -2,15 +2,14 @@ package unicam.IdSProject.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 import unicam.IdSProject.dtos.EventDTO;
 import unicam.IdSProject.dtos.ProductDTO;
 import unicam.IdSProject.mappers.EventMapper;
 import unicam.IdSProject.mappers.ProductMapper;
 import unicam.IdSProject.models.*;
+import unicam.IdSProject.repositories.ProductBoard;
 
 @RequiredArgsConstructor
 @Service
@@ -81,8 +80,6 @@ public class BuyerService {
         product.getProduct().setStockNumber(product.getProduct().getStockNumber()-product.getStockNumber());
         return product;
     }
-
-
 
     private String makeReceipt(ShoppingCart shoppingCart){
         String receipt = "Ricevuta di " + shoppingCart.getBuyer().getName() + "\n";

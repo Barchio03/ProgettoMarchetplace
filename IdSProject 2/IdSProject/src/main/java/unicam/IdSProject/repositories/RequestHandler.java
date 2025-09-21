@@ -1,5 +1,8 @@
-package unicam.IdSProject.models;
+package unicam.IdSProject.repositories;
 import org.springframework.stereotype.Component;
+import unicam.IdSProject.models.Event;
+import unicam.IdSProject.models.Product;
+
 import java.util.ArrayList;
 
 /**

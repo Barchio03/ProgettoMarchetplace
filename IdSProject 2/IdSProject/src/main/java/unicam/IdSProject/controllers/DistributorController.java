@@ -1,7 +1,7 @@
 package unicam.IdSProject.controllers;
 import unicam.IdSProject.models.Distributor;
 import unicam.IdSProject.models.Product;
-import unicam.IdSProject.models.ProductBoard;
+import unicam.IdSProject.repositories.ProductBoard;
 import unicam.IdSProject.models.ProductBundle;
 import java.util.ArrayList;
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import unicam.IdSProject.AcceptVisitor;
 import unicam.IdSProject.DenyVisitor;
-import unicam.IdSProject.models.RequestHandler;
+import unicam.IdSProject.repositories.RequestHandler;
 import unicam.IdSProject.Visitable;
 
 /**
@@ -18,7 +18,7 @@ import unicam.IdSProject.Visitable;
 *
 */
 @Controller
-public class Curator {
+public class CuratorController {
 
     private final AcceptVisitor acceptVisitor;
     private final RequestHandler requestHandler;
@@ -27,7 +27,7 @@ public class Curator {
     /**
      * This method creates a new Curator object
      */
-    public Curator(AcceptVisitor acceptVisitor, RequestHandler requestHandler) {
+    public CuratorController(AcceptVisitor acceptVisitor, RequestHandler requestHandler) {
         this.acceptVisitor=acceptVisitor;
         this.requestHandler=requestHandler;
     }

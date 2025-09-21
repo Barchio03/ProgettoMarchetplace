@@ -1,5 +1,9 @@
 package unicam.IdSProject.controllers;
+import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import unicam.IdSProject.models.PlatformHandler;
+import unicam.IdSProject.services.PlatformHandlerService;
 
 /**
 *
@@ -8,45 +12,27 @@ import unicam.IdSProject.models.PlatformHandler;
 * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
 *
 */
+
+@Controller
+@AllArgsConstructor
 public class PlatformHandlerController {
 
-    private final PlatformHandler platformHandler;
-
-
-    /**
-    * This method creates a new PlatformHandler object
-    */
-    public PlatformHandlerController(PlatformHandler platformHandler){
-        this.platformHandler = platformHandler;
-    }
-
-
-    
-    
-    //      |                                |
-    //      |  Tutti metodi da implementare  |
-    //      V                                V
-
-
+    private final PlatformHandlerService platformHandlerService;
     
     /**
     * This method blocks the application to a specific user
     */
-    public void blockUser() {}                                        //Cambiare il teorico bool unauthorized a true
+    public void blockBuyer() {}                                        //Cambiare il teorico bool unauthorized a true
                                                                       //Con i DTO possiamo nascondere il campo unauthorized all'utente e gestire la cosa facilmente
 
     /**
     * This method unblocks a previously blocked user
     */
-    public void unblockUser() {}                                      //Se è true cambiare a false, dare eccezione altrimenti
+    public void unblockBuyer() {}                                      //Se è true cambiare a false, dare eccezione altrimenti
 
-    /**
-    * This method appoints a new Curator
-    *
-    * @return true if it appoints a new Curator, false otherwise
-    */
-    public boolean appointCurator() {                                 //Anche qui l'interfaccia user e una lista con tutti gli user
-        return false;                                                 //può fare molto comodo
+
+    public ResponseEntity<Object> viewReceipts() {
+        return platformHandlerService.getReceipts();
     }
 
     /**
@@ -54,9 +40,9 @@ public class PlatformHandlerController {
     *
     * @return true if the receipt is received, false otherwise        //Come cerca la ricevuta? Inserendo uno specifico user?
     */
-    public boolean verifyReceivedReceipt() {                          //Come funziona? 
-        return false;                                                 //Bisogna creare una classe Receipt con dentro Messaggio e Destinatario della ricevuta?
-    }                                                                 //
+    public ResponseEntity<Object> viewMessages() {
+        return platformHandlerService.openMailbox();
+    }
 
 
 }

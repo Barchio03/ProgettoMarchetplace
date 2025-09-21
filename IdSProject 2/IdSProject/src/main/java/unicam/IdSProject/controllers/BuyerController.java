@@ -1,15 +1,16 @@
 package unicam.IdSProject.controllers;
 
 import jakarta.websocket.server.PathParam;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import unicam.IdSProject.dtos.EventDTO;
 import unicam.IdSProject.dtos.ProductDTO;
 import unicam.IdSProject.models.*;
+import unicam.IdSProject.repositories.EventBoard;
+import unicam.IdSProject.repositories.ProductBoard;
 import unicam.IdSProject.services.BuyerService;
 
 /**
@@ -53,12 +54,16 @@ public class BuyerController {
     /**
      * This method allows to buy an Event tickey
      *
-     * @param event, the Event from which buying the ticket
+     * @param eventDto, the Event from which buying the ticket
      *
      * @return true if the purchase was successfull, false otherwise
      */
-    public boolean buyEventTicket(Event event) {
-        return false;
+    public ResponseEntity<Object> subscribeToEvent(EventDTO eventDto) {
+        return buyerService.subscribeToEvent(eventDto);
+    }
+
+    public ResponseEntity<Object> unsubscribeToEvent(EventDTO eventDto) {
+        return buyerService.unsubscribeToEvent(eventDto);
     }
 }
 

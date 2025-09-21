@@ -2,7 +2,7 @@ package unicam.IdSProject.dtos;
 
 import unicam.IdSProject.models.Location;
 import unicam.IdSProject.models.Mailbox;
-import unicam.IdSProject.Tag;
+import unicam.IdSProject.enumerations.Tag;
 
 import java.util.ArrayList;
 

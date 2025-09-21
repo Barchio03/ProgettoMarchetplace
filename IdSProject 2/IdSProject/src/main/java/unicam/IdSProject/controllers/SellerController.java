@@ -4,10 +4,13 @@ import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import unicam.IdSProject.*;
+import unicam.IdSProject.enumerations.Tag;
 import unicam.IdSProject.models.*;
+import unicam.IdSProject.repositories.ProductBoard;
+import unicam.IdSProject.repositories.RequestHandler;
 
 /**
 *
@@ -15,6 +18,8 @@ import unicam.IdSProject.models.*;
 *
 * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
 */
+
+@Controller
 public class SellerController {
 
     @Autowired

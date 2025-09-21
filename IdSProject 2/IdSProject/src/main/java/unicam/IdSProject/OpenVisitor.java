@@ -1,7 +1,7 @@
 package unicam.IdSProject;
 import unicam.IdSProject.models.Event;
 import unicam.IdSProject.models.Product;
-import unicam.IdSProject.models.RequestHandler;
+import unicam.IdSProject.repositories.RequestHandler;
 
 /**
 *
