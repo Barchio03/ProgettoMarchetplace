@@ -1,14 +1,16 @@
 package unicam.IdSProject.controllers;
 
 import jakarta.websocket.server.PathParam;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import unicam.IdSProject.dtos.EventDTO;
 import unicam.IdSProject.repositories.EventBoard;
+import unicam.IdSProject.services.AnimatorService;
 import unicam.IdSProject.users.Animator;
-import unicam.IdSProject.models.Event;
 import unicam.IdSProject.repositories.RequestHandler;
 
 /**
@@ -18,20 +20,12 @@ import unicam.IdSProject.repositories.RequestHandler;
 * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
 *
 */
+
+@Controller
+@RequiredArgsConstructor
 public class AnimatorController {
 
-    @Autowired
-    private RequestHandler requestHandler;
-    @Autowired
-    private EventBoard eventBoard;
-
-    private final Animator animator;
-
-    public AnimatorController(Animator animator){
-        this.animator = animator;
-    }
-
-
+    private final AnimatorService animatorService;
 
     /**
      * This method is used to create a new event
@@ -41,17 +35,8 @@ public class AnimatorController {
      * @return ResponseEntity<Object>, the response about the procedure
      */
     @RequestMapping(value = "/animator/addEvent")
-    public ResponseEntity<Object> addEvent(@RequestBody Event event){
-        event.setCreator(animator);
-        if(!eventBoard.contains(event)){
-            if (requestHandler.addEvent(event)) {
-                return new ResponseEntity<>("Evento in processo di verifica", HttpStatus.CREATED);
-            }
-            return new ResponseEntity<>("Richiesta già in atto", HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<>("L'evento esiste già", HttpStatus.BAD_REQUEST);
-
-
+    public ResponseEntity<Object> addEvent(@RequestBody EventDTO event){
+        return animatorService.addEvent(event);
     }
 
     /**
@@ -63,9 +48,6 @@ public class AnimatorController {
      */
     @RequestMapping(value = "/animator/removeEvent")
     public ResponseEntity<Object> removeEvent(@PathParam("id") int id) {
-        if (eventBoard.removeEvent(id)) {
-            return new ResponseEntity<>("Evento rimosso con successo", HttpStatus.OK);
-        }
-        return new ResponseEntity<>("Id non pervenuto", HttpStatus.NOT_FOUND);
+        return animatorService.removeEvent(id);
     }
 }

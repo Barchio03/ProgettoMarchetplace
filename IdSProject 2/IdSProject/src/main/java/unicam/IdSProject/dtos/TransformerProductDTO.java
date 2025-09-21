@@ -4,7 +4,7 @@ import unicam.IdSProject.models.Product;
 import unicam.IdSProject.users.Seller;
 
 @Data
-public class TrasformerProductDTO implements ProductDTO {
+public class TransformerProductDTO implements ProductDTO {
 
     private String name;
     private float price;
