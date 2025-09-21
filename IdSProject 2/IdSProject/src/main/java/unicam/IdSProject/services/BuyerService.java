@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import unicam.IdSProject.dtos.EventDTO;
 import unicam.IdSProject.dtos.ProductDTO;
+import unicam.IdSProject.mappers.EventMapper;
 import unicam.IdSProject.mappers.ProductMapper;
 import unicam.IdSProject.models.*;
 
@@ -16,6 +17,7 @@ import unicam.IdSProject.models.*;
 public class BuyerService {
 
     private final ProductMapper productMapper;
+    private final EventMapper eventMapper;
 
     private final ProductBoard productBoard;
 
@@ -49,18 +51,29 @@ public class BuyerService {
 
     }
 
-    public ResponseEntity buyEventTicket(EventDTO eventDTO) {
-        Event event =
+    public ResponseEntity<Object> subscribeToEvent(EventDTO eventDTO) {
+        Event event = eventMapper.toEntityWithAllFields(eventDTO);
 
         if (event == null){
-            return false;
+            return new ResponseEntity<>("Evento nullo", HttpStatus.BAD_REQUEST);
         }
 
-        if(purchaseHandler.pay(buyer.getShoppingCart())){
-            return true;
+        if (event.subscribe(buyer))
+            return new ResponseEntity<>("Iscrizione avvenuta con successo", HttpStatus.OK);
+        else return new ResponseEntity<>("Utente già iscritto", HttpStatus.CONFLICT);
+
+    }
+
+    public ResponseEntity<Object> unsubscribeToEvent(EventDTO eventDTO) {
+        Event event = eventMapper.toEntityWithAllFields(eventDTO);
+
+        if (event == null){
+            return new ResponseEntity<>("Evento nullo", HttpStatus.BAD_REQUEST);
         }
 
-        return false;
+        if (event.unsubscribe(buyer))
+            return new ResponseEntity<>("Disiscrizione avvenuta con successo", HttpStatus.OK);
+        else return new ResponseEntity<>("Iscrizione non possibile", HttpStatus.CONFLICT);
     }
 
 

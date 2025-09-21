@@ -112,6 +112,7 @@ public class Event implements Visitable {
         }
         if (!subscribers.contains(buyer)){
             subscribers.add(buyer);
+
             return true;
         } else return false;
     }
