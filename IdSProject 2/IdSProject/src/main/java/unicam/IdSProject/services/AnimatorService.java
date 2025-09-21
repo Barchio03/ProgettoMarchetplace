@@ -40,7 +40,7 @@ public class AnimatorService {
         return new ResponseEntity<>("L'evento esiste già", HttpStatus.BAD_REQUEST);
     }
 
-    public ResponseEntity<Object> removeEvent(int id) {
+    public ResponseEntity<Object> removeEvent(Long id) {
         if (eventBoard.removeEvent(id)) {
             return new ResponseEntity<>("Evento rimosso con successo", HttpStatus.OK);
         }

@@ -47,7 +47,7 @@ public class AnimatorController {
      * @return ResponseEntity<Object>, the response about the procedure
      */
     @RequestMapping(value = "/animator/removeEvent")
-    public ResponseEntity<Object> removeEvent(@PathParam("id") int id) {
+    public ResponseEntity<Object> removeEvent(@PathParam("id") Long id) {
         return animatorService.removeEvent(id);
     }
 }
