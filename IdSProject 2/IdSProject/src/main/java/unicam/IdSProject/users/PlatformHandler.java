@@ -1,5 +1,6 @@
 package unicam.IdSProject.users;
 
+import lombok.Getter;
 import unicam.IdSProject.models.Mailbox;
 
 /**

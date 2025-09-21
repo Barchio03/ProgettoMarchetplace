@@ -20,14 +20,12 @@ import unicam.IdSProject.services.BuyerService;
 * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
 *
 */
-
 @Controller
 @RequiredArgsConstructor
 public class BuyerController {
 
     private final ProductBoard productBoard;
     private final EventBoard eventboard;
-
     private final BuyerService buyerService;
 
 
@@ -57,7 +55,7 @@ public class BuyerController {
      *
      * @param eventDto, the Event from which buying the ticket
      *
-     * @return true if the purchase was successfull, false otherwise
+     * @return the response of the method
      */
     public ResponseEntity<Object> subscribeToEvent(EventDTO eventDto) {
         return buyerService.subscribeToEvent(eventDto);

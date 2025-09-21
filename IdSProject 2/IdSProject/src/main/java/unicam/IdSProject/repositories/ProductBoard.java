@@ -1,4 +1,5 @@
 package unicam.IdSProject.repositories;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import unicam.IdSProject.models.Product;
 import unicam.IdSProject.users.Seller;
@@ -7,27 +8,25 @@ import java.util.ArrayList;
 
 /**
 *
- * This class represents a Product Board and it contains all of the Products
+ * This class represents a Product Board, it contains all the Products
  *
  * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
  *
  */
 @Component
+@AllArgsConstructor
 public class ProductBoard {
 
-    private final ArrayList<Product> products;
+    private final ProductRepository productRepository;
 
     /**
-     * This method creates a new ProductBoard object
+     * This method returns a list of all the Product in the repository
+     *
+     * @return a list of all the Product in the repository
      */
-    public ProductBoard(){
-        this.products = new ArrayList<Product>();
-    }
-
     public ArrayList<Product> getProducts(){
-        return products;
+        return (ArrayList<Product>) productRepository.findAll();
     }
-
     
     
     /**
@@ -38,7 +37,8 @@ public class ProductBoard {
      * @return true if it is inserted successfully, false otherwise
      */
     public boolean addProduct(Product product) {
-        return products.add(product);
+        productRepository.save(product);
+        return true;
     }
 
     /**
@@ -49,7 +49,8 @@ public class ProductBoard {
      * @return true if it is removed successfully, false otherwise
      */
     public boolean removeProduct(Product product) {
-        return products.remove(product);
+        productRepository.delete(product);
+        return true;
     }
 
     /**
@@ -59,12 +60,10 @@ public class ProductBoard {
      *
      * @return true if it is removed successfully, false otherwise
      */
-    public boolean removeProduct(int id) {
-        for( Product product :  products) {
-            if (product.getId() == id) {
-                products.remove(product);
-                return true;
-            }
+    public boolean removeProduct(long id) {
+        if(productRepository.existsById(id)){
+            productRepository.deleteById(id);
+            return true;
         }
         return false;
     }
@@ -77,7 +76,7 @@ public class ProductBoard {
      * @return true if it is contained, false otherwise
      */
     public boolean contains(Product product) {
-        return products.contains(product);
+        return productRepository.existsById(product.getId());
     }
 
 
@@ -89,7 +88,8 @@ public class ProductBoard {
      * @return  the list of Products created by the given Seller
      */
     public ArrayList<Product> getProducts(Seller seller) {
-        ArrayList<Product> sublist = new ArrayList<Product>();
+        ArrayList<Product> sublist = new ArrayList<>();
+        ArrayList<Product> products = (ArrayList<Product>) productRepository.findAll();
         for (Product product : products) {
             if (product.getCreator().equals(seller)) sublist.add(product);
         }

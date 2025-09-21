@@ -41,7 +41,7 @@ public class MarketController {
         this.productBoard = new ProductBoard();
         //this.requestHandler = new RequestHandler();
         this.seller=new Seller("Vendor 1", "Just a vendor");
-        this.buyer=new Buyer();
+        this.buyer=new Buyer("Generic Buyer");
         this.animator=new Animator("Animator 1", "Just an animator");
         this.platformHandler=new PlatformHandler();
 
