@@ -27,7 +27,7 @@ public class AnimatorService {
     private final Animator animator;
 
 
-    public ResponseEntity<Object> addEvent(@RequestBody EventDTO eventDTO){
+    public ResponseEntity<Object> addEvent(EventDTO eventDTO){
         Event event = eventMapper.toEntityWithAllFields(eventDTO);
 
         event.setCreator(animator);
@@ -40,7 +40,7 @@ public class AnimatorService {
         return new ResponseEntity<>("L'evento esiste già", HttpStatus.BAD_REQUEST);
     }
 
-    public ResponseEntity<Object> removeEvent(@PathParam("id") int id) {
+    public ResponseEntity<Object> removeEvent(int id) {
         if (eventBoard.removeEvent(id)) {
             return new ResponseEntity<>("Evento rimosso con successo", HttpStatus.OK);
         }

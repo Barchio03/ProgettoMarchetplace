@@ -31,7 +31,7 @@ public class SellerService {
     private final Seller seller;
 
 
-    public ResponseEntity<Object> addProducerProduct(@RequestBody ProducerProductDTO productDTO){
+    public ResponseEntity<Object> addProducerProduct(ProducerProductDTO productDTO){
         ProducerProduct product = productMapper.toEntityWithAllFields(productDTO);
 
         if (seller.getTags().contains(Tag.PRODUCER)) {
@@ -45,7 +45,7 @@ public class SellerService {
         } else return new ResponseEntity<>("Non autorizzato", HttpStatus.UNAUTHORIZED);
     }
 
-    public ResponseEntity<Object> addTransformerProduct(@RequestBody TransformerProductDTO productDTO){
+    public ResponseEntity<Object> addTransformerProduct(TransformerProductDTO productDTO){
         TransformerProduct product = productMapper.toEntityWithAllFields(productDTO);
 
         if (seller.getTags().contains(Tag.TRANSFORMER)) {
@@ -60,7 +60,7 @@ public class SellerService {
         return new ResponseEntity<>("Non autorizzato", HttpStatus.UNAUTHORIZED);
     }
 
-    public ResponseEntity<Object> removeProduct(@PathParam("id") int id) {
+    public ResponseEntity<Object> removeProduct(int id) {
         if (productBoard.removeProduct(id)){
             return new ResponseEntity<>("Prodotto rimosso con successo", HttpStatus.OK);
         }
