@@ -36,9 +36,7 @@ public class CuratorController {
      */
     @RequestMapping(value="/curator/getEvent")
     public ResponseEntity<Object> getEvent() {
-        toCheck= requestHandler.getNextEvent();
-        if (toCheck!=null) return new ResponseEntity<>(toCheck, HttpStatus.OK);
-        else return new ResponseEntity<>("Nessun evento da verificare", HttpStatus.NOT_FOUND);
+        return curatorService.getEvent();
     }
 
     /**
@@ -48,9 +46,7 @@ public class CuratorController {
      */
     @RequestMapping(value="/curator/approve")
     public ResponseEntity<Object> approve(){
-        if (toCheck==null) return new ResponseEntity<>("Nessun elemento selezionato", HttpStatus.NOT_FOUND);
-        toCheck.accept(acceptVisitor);
-        return new ResponseEntity<>("Elemento verificato con successo", HttpStatus.OK);
+        return curatorService.accept();
     }
 
     /**
@@ -60,9 +56,7 @@ public class CuratorController {
      */
     @RequestMapping(value="/curator/deny")
     public ResponseEntity<Object> deny( @PathParam("message") String message){
-        if (toCheck==null) return new ResponseEntity<>("Nessun elemento selezionato", HttpStatus.NOT_FOUND);
-        toCheck.accept(new DenyVisitor(message));
-        return new ResponseEntity<>("Elemento rifiutato con successo", HttpStatus.OK);
+        return curatorService.deny(message);
     }
 
 }
