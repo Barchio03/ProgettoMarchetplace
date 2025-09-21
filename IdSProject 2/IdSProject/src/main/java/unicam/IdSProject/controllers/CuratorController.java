@@ -1,6 +1,7 @@
 package unicam.IdSProject.controllers;
 
 import jakarta.websocket.server.PathParam;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -9,28 +10,14 @@ import unicam.IdSProject.AcceptVisitor;
 import unicam.IdSProject.DenyVisitor;
 import unicam.IdSProject.repositories.RequestHandler;
 import unicam.IdSProject.Visitable;
+import unicam.IdSProject.services.CuratorService;
 
-/**
-*
-* This class represents a Curator
-*
-* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
-*
-*/
+
 @Controller
+@RequiredArgsConstructor
 public class CuratorController {
 
-    private final AcceptVisitor acceptVisitor;
-    private final RequestHandler requestHandler;
-    private Visitable toCheck;
-
-    /**
-     * This method creates a new Curator object
-     */
-    public CuratorController(AcceptVisitor acceptVisitor, RequestHandler requestHandler) {
-        this.acceptVisitor=acceptVisitor;
-        this.requestHandler=requestHandler;
-    }
+    private final CuratorService curatorService;
 
     /**
      * This method gets the next Product to verify
@@ -39,9 +26,7 @@ public class CuratorController {
      */
     @RequestMapping(value="/curator/getProduct")
     public ResponseEntity<Object> getProduct() {
-        toCheck= requestHandler.getNextProduct();
-        if (toCheck!=null) return new ResponseEntity<>(toCheck, HttpStatus.OK);
-        else return new ResponseEntity<>("Nessun prodotto da verificare", HttpStatus.NOT_FOUND);
+        return curatorService.getProduct();
     }
 
     /**

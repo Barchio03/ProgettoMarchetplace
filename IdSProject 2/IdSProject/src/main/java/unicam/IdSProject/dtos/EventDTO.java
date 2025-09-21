@@ -1,8 +1,8 @@
 package unicam.IdSProject.dtos;
 
-import unicam.IdSProject.models.Animator;
-import unicam.IdSProject.models.Buyer;
-import unicam.IdSProject.models.Seller;
+import unicam.IdSProject.users.Animator;
+import unicam.IdSProject.users.Buyer;
+import unicam.IdSProject.users.Seller;
 
 import java.util.ArrayList;
 

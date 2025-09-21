@@ -1,6 +1,9 @@
-package unicam.IdSProject.models;
+package unicam.IdSProject.users;
 
 import lombok.Getter;
+import unicam.IdSProject.models.Event;
+import unicam.IdSProject.models.Mailbox;
+import unicam.IdSProject.models.ShoppingCart;
 
 /**
 *

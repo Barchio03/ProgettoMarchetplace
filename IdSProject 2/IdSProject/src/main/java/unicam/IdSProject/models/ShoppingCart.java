@@ -1,4 +1,6 @@
 package unicam.IdSProject.models;
+import unicam.IdSProject.users.Buyer;
+
 import java.util.ArrayList;
 
 /**

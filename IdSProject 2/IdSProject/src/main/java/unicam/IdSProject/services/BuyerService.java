@@ -10,6 +10,7 @@ import unicam.IdSProject.mappers.EventMapper;
 import unicam.IdSProject.mappers.ProductMapper;
 import unicam.IdSProject.models.*;
 import unicam.IdSProject.repositories.ProductBoard;
+import unicam.IdSProject.users.Buyer;
 
 @RequiredArgsConstructor
 @Service

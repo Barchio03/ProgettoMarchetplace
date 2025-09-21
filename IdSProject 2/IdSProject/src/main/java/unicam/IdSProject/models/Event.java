@@ -2,6 +2,9 @@ package unicam.IdSProject.models;
 
 import unicam.IdSProject.Visitable;
 import unicam.IdSProject.Visitor;
+import unicam.IdSProject.users.Animator;
+import unicam.IdSProject.users.Buyer;
+import unicam.IdSProject.users.Seller;
 
 import java.util.ArrayList;
 

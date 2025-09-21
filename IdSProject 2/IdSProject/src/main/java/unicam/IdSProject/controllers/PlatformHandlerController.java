@@ -2,7 +2,6 @@ package unicam.IdSProject.controllers;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import unicam.IdSProject.models.PlatformHandler;
 import unicam.IdSProject.services.PlatformHandlerService;
 
 /**

@@ -2,7 +2,7 @@ package unicam.IdSProject.mappers;
 
 import org.mapstruct.Mapper;
 import unicam.IdSProject.dtos.SellerDTO;
-import unicam.IdSProject.models.Seller;
+import unicam.IdSProject.users.Seller;
 
 @Mapper(componentModel = "spring")
 public interface SellerMapper {

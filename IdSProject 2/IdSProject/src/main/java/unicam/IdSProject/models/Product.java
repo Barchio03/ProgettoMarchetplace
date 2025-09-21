@@ -2,6 +2,7 @@ package unicam.IdSProject.models;
 
 import unicam.IdSProject.Visitable;
 import unicam.IdSProject.Visitor;
+import unicam.IdSProject.users.Seller;
 
 /**
 *

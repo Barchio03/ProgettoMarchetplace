@@ -1,4 +1,6 @@
-package unicam.IdSProject.models;
+package unicam.IdSProject.users;
+
+import unicam.IdSProject.models.ProductBundle;
 
 /**
 *

@@ -2,7 +2,7 @@ package unicam.IdSProject.mappers;
 
 import org.mapstruct.Mapper;
 import unicam.IdSProject.dtos.AnimatorDTO;
-import unicam.IdSProject.models.Animator;
+import unicam.IdSProject.users.Animator;
 
 @Mapper(componentModel = "spring")
 public interface AnimatorMapper {

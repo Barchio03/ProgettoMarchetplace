@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import unicam.IdSProject.repositories.EventBoard;
-import unicam.IdSProject.models.Animator;
+import unicam.IdSProject.users.Animator;
 import unicam.IdSProject.models.Event;
 import unicam.IdSProject.repositories.RequestHandler;
 

@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import unicam.IdSProject.models.*;
 import unicam.IdSProject.repositories.ProductBoard;
 import unicam.IdSProject.repositories.RequestHandler;
+import unicam.IdSProject.users.Animator;
+import unicam.IdSProject.users.Buyer;
+import unicam.IdSProject.users.PlatformHandler;
+import unicam.IdSProject.users.Seller;
 
 
 /**

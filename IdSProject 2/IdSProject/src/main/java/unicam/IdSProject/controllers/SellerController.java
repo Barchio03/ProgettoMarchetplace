@@ -11,6 +11,7 @@ import unicam.IdSProject.enumerations.Tag;
 import unicam.IdSProject.models.*;
 import unicam.IdSProject.repositories.ProductBoard;
 import unicam.IdSProject.repositories.RequestHandler;
+import unicam.IdSProject.users.Seller;
 
 /**
 *

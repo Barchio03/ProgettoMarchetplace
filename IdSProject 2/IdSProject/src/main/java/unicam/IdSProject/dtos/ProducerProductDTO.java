@@ -1,6 +1,6 @@
 package unicam.IdSProject.dtos;
 import lombok.Data;
-import unicam.IdSProject.models.Seller;
+import unicam.IdSProject.users.Seller;
 
 @Data
 public class ProducerProductDTO implements ProductDTO {

@@ -1,5 +1,7 @@
 package unicam.IdSProject.models;
 
+import unicam.IdSProject.users.Seller;
+
 /**
  * This class represents a Product made by a Producer
  *

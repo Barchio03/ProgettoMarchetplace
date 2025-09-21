@@ -1,5 +1,8 @@
-package unicam.IdSProject.models;
+package unicam.IdSProject.users;
 import unicam.IdSProject.enumerations.Tag;
+import unicam.IdSProject.models.Location;
+import unicam.IdSProject.models.Mailbox;
+
 import java.util.ArrayList;
 
 /**

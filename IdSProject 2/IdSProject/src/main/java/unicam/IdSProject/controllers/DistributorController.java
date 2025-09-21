@@ -1,5 +1,5 @@
 package unicam.IdSProject.controllers;
-import unicam.IdSProject.models.Distributor;
+import unicam.IdSProject.users.Distributor;
 import unicam.IdSProject.models.Product;
 import unicam.IdSProject.repositories.ProductBoard;
 import unicam.IdSProject.models.ProductBundle;

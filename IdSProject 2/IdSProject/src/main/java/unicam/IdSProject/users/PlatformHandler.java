@@ -1,7 +1,6 @@
-package unicam.IdSProject.models;
+package unicam.IdSProject.users;
 
-import unicam.IdSProject.controllers.CuratorController;
-import java.util.ArrayList;
+import unicam.IdSProject.models.Mailbox;
 
 /**
 *
