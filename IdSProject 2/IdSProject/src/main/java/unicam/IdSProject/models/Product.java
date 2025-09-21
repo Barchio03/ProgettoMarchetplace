@@ -1,5 +1,7 @@
 package unicam.IdSProject.models;
 
+import lombok.Getter;
+import lombok.Setter;
 import unicam.IdSProject.Visitable;
 import unicam.IdSProject.Visitor;
 import unicam.IdSProject.users.Seller;
@@ -11,6 +13,8 @@ import unicam.IdSProject.users.Seller;
 * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
 *
 */
+@Getter
+@Setter
 public abstract class Product implements Visitable {
 
     private String name;
@@ -26,12 +30,8 @@ public abstract class Product implements Visitable {
     /**
     * This method creates a new Product object.
     */
-    public Product(String name, float price, String description, int stockNumber, Seller creator ) {
-        this.name = name;
-        this.price = price;
-        this.description = description;
-        this.stockNumber = stockNumber;
-        this.creator = creator;
+    public Product() {
+
     }
 
     
@@ -39,59 +39,6 @@ public abstract class Product implements Visitable {
         return currentId;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getDistributorDescription() {
-        return distributorDescription;
-    }
-
-    public void setDistributorDescription(String distributorDescription) {
-        this.distributorDescription = distributorDescription;
-    }
-
-    public int getStockNumber() {
-        return stockNumber;
-    }
-
-    public void setStockNumber(int stockNumber) {
-        this.stockNumber = stockNumber;
-    }
-
-    public Seller getCreator() {
-        return creator;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setCreator(Seller creator) {
-        this.creator = creator;
-    }
-
-    
 
     @Override
     public void accept(Visitor visitor) {
