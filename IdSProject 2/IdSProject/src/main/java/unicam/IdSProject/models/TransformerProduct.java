@@ -1,5 +1,8 @@
 package unicam.IdSProject.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
 *
 * This class represents a Product made by a Transformer
@@ -7,6 +10,8 @@ package unicam.IdSProject.models;
 * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
 *
 */
+@Getter
+@Setter
 public class TransformerProduct extends Product {
 
     private Product sourceProduct;
@@ -18,12 +23,4 @@ public class TransformerProduct extends Product {
         super();
     }
 
-
-    public Product getSourceProduct() {
-        return sourceProduct;
-    }
-
-    public void setSourceProduct(Product sourceProduct) {
-        this.sourceProduct = sourceProduct;
-    }
 }
