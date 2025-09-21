@@ -25,7 +25,13 @@ public abstract class Product implements Visitable {
     /**
     * This method creates a new Product object.
     */
-    public Product() {}
+    public Product(String name, float price, String description, int stockNumber, Seller creator ) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.stockNumber = stockNumber;
+        this.creator = creator;
+    }
 
     
     private static int getCurrentId() {

@@ -35,7 +35,8 @@ public class BuyerController {
      * This method adds a Product to the Shopping Cart.
      *
      * @param productDto, the Product that needs to be added.
-     * @return the response of the moethod
+     *
+     * @return the response of the method
      */
     @PostMapping(value = "/addToShoppingKart")
     public ResponseEntity<Object> addToShoppingCart(@RequestBody ProductDTO productDto, @PathParam("quantity") int quantity) {
@@ -45,7 +46,7 @@ public class BuyerController {
     /**
      * This method is used to buy all the Products in the Shopping Cart.
      *
-     * @return true  if the purchase was successfull, false otherwise
+     * @return the response of the method
      */
     public ResponseEntity<Object> buyShoppingCart() {
         return buyerService.buyShoppingCart();
