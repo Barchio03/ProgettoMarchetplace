@@ -5,6 +5,7 @@ import unicam.IdSProject.models.Product;
 import unicam.IdSProject.users.Seller;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 /**
 *
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
  *
  */
-@Component
+
 @AllArgsConstructor
 public class ProductBoard {
 
@@ -60,7 +61,7 @@ public class ProductBoard {
      *
      * @return true if it is removed successfully, false otherwise
      */
-    public boolean removeProduct(long id) {
+    public boolean removeProduct(Long id) {
         if(productRepository.existsById(id)){
             productRepository.deleteById(id);
             return true;

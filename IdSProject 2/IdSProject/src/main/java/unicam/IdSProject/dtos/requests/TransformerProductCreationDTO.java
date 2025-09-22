@@ -1,17 +1,16 @@
-package unicam.IdSProject.dtos;
+package unicam.IdSProject.dtos.requests;
+
 import lombok.Data;
 import unicam.IdSProject.models.Product;
 import unicam.IdSProject.users.Seller;
 
 @Data
-public class TransformerProductDTO implements ProductDTO {
+public class TransformerProductCreationDTO {
 
     private String name;
     private float price;
     private String description;
-    private String distributorDescription;
     private int stockNumber;
-    private Seller creator;
     private Product sourceProduct;
 
 }

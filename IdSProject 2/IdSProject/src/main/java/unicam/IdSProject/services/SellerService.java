@@ -1,17 +1,14 @@
 package unicam.IdSProject.services;
 
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import unicam.IdSProject.dtos.ProducerProductDTO;
-import unicam.IdSProject.dtos.TransformerProductDTO;
+import unicam.IdSProject.dtos.requests.ProducerProductCreationDTO;
+import unicam.IdSProject.dtos.requests.TransformerProductCreationDTO;
 import unicam.IdSProject.enumerations.Tag;
 import unicam.IdSProject.mappers.ProductMapper;
 import unicam.IdSProject.models.ProducerProduct;
-import unicam.IdSProject.models.Product;
 import unicam.IdSProject.models.TransformerProduct;
 import unicam.IdSProject.repositories.ProductBoard;
 import unicam.IdSProject.repositories.RequestHandler;
@@ -31,8 +28,9 @@ public class SellerService {
     private final Seller seller;
 
 
-    public ResponseEntity<Object> addProducerProduct(ProducerProductDTO productDTO){
+    public ResponseEntity<Object> addProducerProduct(ProducerProductCreationDTO productDTO){
         ProducerProduct product = productMapper.toEntityWithAllFields(productDTO);
+        product.setCreator(seller);
 
         if (seller.getTags().contains(Tag.PRODUCER)) {
             product.setCreator(seller);
@@ -45,8 +43,9 @@ public class SellerService {
         } else return new ResponseEntity<>("Non autorizzato", HttpStatus.UNAUTHORIZED);
     }
 
-    public ResponseEntity<Object> addTransformerProduct(TransformerProductDTO productDTO){
+    public ResponseEntity<Object> addTransformerProduct(TransformerProductCreationDTO productDTO){
         TransformerProduct product = productMapper.toEntityWithAllFields(productDTO);
+        product.setCreator(seller);
 
         if (seller.getTags().contains(Tag.TRANSFORMER)) {
             product.setCreator(seller);
@@ -60,7 +59,7 @@ public class SellerService {
         return new ResponseEntity<>("Non autorizzato", HttpStatus.UNAUTHORIZED);
     }
 
-    public ResponseEntity<Object> removeProduct(int id) {
+    public ResponseEntity<Object> removeProduct(Long id) {
         if (productBoard.removeProduct(id)){
             return new ResponseEntity<>("Prodotto rimosso con successo", HttpStatus.OK);
         }

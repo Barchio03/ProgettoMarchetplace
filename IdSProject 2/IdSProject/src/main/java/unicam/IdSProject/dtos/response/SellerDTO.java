@@ -1,4 +1,4 @@
-package unicam.IdSProject.dtos;
+package unicam.IdSProject.dtos.response;
 
 import unicam.IdSProject.models.Location;
 import unicam.IdSProject.models.Mailbox;

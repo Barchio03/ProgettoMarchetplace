@@ -2,16 +2,13 @@ package unicam.IdSProject.controllers;
 
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import unicam.IdSProject.dtos.EventDTO;
-import unicam.IdSProject.repositories.EventBoard;
+import unicam.IdSProject.dtos.requests.EventCreationDTO;
+import unicam.IdSProject.dtos.response.EventDTO;
 import unicam.IdSProject.services.AnimatorService;
-import unicam.IdSProject.users.Animator;
-import unicam.IdSProject.repositories.RequestHandler;
 
 /**
 *
@@ -23,6 +20,7 @@ import unicam.IdSProject.repositories.RequestHandler;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping(value="/animator")
 public class AnimatorController {
 
     private final AnimatorService animatorService;
@@ -34,8 +32,8 @@ public class AnimatorController {
      *
      * @return ResponseEntity<Object>, the response about the procedure
      */
-    @RequestMapping(value = "/animator/addEvent")
-    public ResponseEntity<Object> addEvent(@RequestBody EventDTO event){
+    @RequestMapping(value = "/addEvent")
+    public ResponseEntity<Object> addEvent(@RequestBody EventCreationDTO event){
         return animatorService.addEvent(event);
     }
 
@@ -46,7 +44,7 @@ public class AnimatorController {
      *
      * @return ResponseEntity<Object>, the response about the procedure
      */
-    @RequestMapping(value = "/animator/removeEvent")
+    @RequestMapping(value = "/removeEvent")
     public ResponseEntity<Object> removeEvent(@PathParam("id") Long id) {
         return animatorService.removeEvent(id);
     }

@@ -1,13 +1,11 @@
 package unicam.IdSProject.services;
 
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import unicam.IdSProject.dtos.EventDTO;
+import unicam.IdSProject.dtos.requests.EventCreationDTO;
+import unicam.IdSProject.dtos.response.EventDTO;
 import unicam.IdSProject.mappers.EventMapper;
 import unicam.IdSProject.models.Event;
 import unicam.IdSProject.repositories.EventBoard;
@@ -27,8 +25,9 @@ public class AnimatorService {
     private final Animator animator;
 
 
-    public ResponseEntity<Object> addEvent(EventDTO eventDTO){
+    public ResponseEntity<Object> addEvent(EventCreationDTO eventDTO){
         Event event = eventMapper.toEntityWithAllFields(eventDTO);
+        event.setCreator(animator);
 
         event.setCreator(animator);
         if(!eventBoard.contains(event)){

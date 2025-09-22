@@ -4,13 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import unicam.IdSProject.dtos.EventDTO;
-import unicam.IdSProject.dtos.ProductDTO;
+import unicam.IdSProject.dtos.requests.ProductBoughtDTO;
+import unicam.IdSProject.dtos.response.EventDTO;
+import unicam.IdSProject.dtos.response.ProductDTO;
 import unicam.IdSProject.mappers.EventMapper;
 import unicam.IdSProject.mappers.ProductMapper;
 import unicam.IdSProject.models.*;
 import unicam.IdSProject.repositories.ProductBoard;
 import unicam.IdSProject.users.Buyer;
+
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -24,8 +27,9 @@ public class BuyerService {
     private final Buyer buyer;
 
 
-    public ResponseEntity<Object> addProductToShoppingKart(ProductDTO productDto, int quantity) {
-        Product product = productMapper.toEntityWithAllFields(productDto);
+    public ResponseEntity<Object> addProductToShoppingKart(ProductBoughtDTO productBoughtDTO, int quantity) {
+        Product product = productMapper.toEntityWithAllFields(productBoughtDTO);
+
         if (!productBoard.contains(product)) return new ResponseEntity<>("Il prodotto non esiste", HttpStatus.BAD_REQUEST);
         if (product.getStockNumber()> quantity) return new ResponseEntity<>("Non ci sono abbastanza scorte di questo prodotto", HttpStatus.BAD_REQUEST);
 

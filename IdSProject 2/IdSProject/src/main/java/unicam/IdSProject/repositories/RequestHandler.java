@@ -12,7 +12,7 @@ import java.util.ArrayList;
 * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
 *
 */
-@Component
+
 public class RequestHandler {
 
     private final ArrayList<Product> productRequests;

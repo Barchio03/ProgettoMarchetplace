@@ -1,4 +1,4 @@
-package unicam.IdSProject.dtos;
+package unicam.IdSProject.dtos.response;
 
 import lombok.Data;
 import unicam.IdSProject.models.Mailbox;

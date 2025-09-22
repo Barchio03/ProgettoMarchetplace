@@ -14,7 +14,6 @@ import java.util.ArrayList;
  * @author Luca Barchiesi, Erika Aguiari, Ilaria Morettini
  */
 @AllArgsConstructor
-@Component
 public class EventBoard {
 
     private final EventRepository eventRepository ;

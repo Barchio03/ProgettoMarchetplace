@@ -1,7 +1,7 @@
 package unicam.IdSProject.mappers;
 
 import org.mapstruct.Mapper;
-import unicam.IdSProject.dtos.SellerDTO;
+import unicam.IdSProject.dtos.response.SellerDTO;
 import unicam.IdSProject.users.Seller;
 
 @Mapper(componentModel = "spring")

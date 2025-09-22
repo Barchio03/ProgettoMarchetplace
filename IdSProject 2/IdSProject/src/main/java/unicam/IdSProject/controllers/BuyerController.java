@@ -6,9 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import unicam.IdSProject.dtos.EventDTO;
-import unicam.IdSProject.dtos.ProductDTO;
-import unicam.IdSProject.models.*;
+import unicam.IdSProject.dtos.requests.ProductBoughtDTO;
+import unicam.IdSProject.dtos.response.EventDTO;
+import unicam.IdSProject.dtos.response.ProductDTO;
 import unicam.IdSProject.repositories.EventBoard;
 import unicam.IdSProject.repositories.ProductBoard;
 import unicam.IdSProject.services.BuyerService;
@@ -24,8 +24,6 @@ import unicam.IdSProject.services.BuyerService;
 @RequiredArgsConstructor
 public class BuyerController {
 
-    private final ProductBoard productBoard;
-    private final EventBoard eventboard;
     private final BuyerService buyerService;
 
 
@@ -37,7 +35,7 @@ public class BuyerController {
      * @return the response of the method
      */
     @PostMapping(value = "/addToShoppingKart")
-    public ResponseEntity<Object> addToShoppingCart(@RequestBody ProductDTO productDto, @PathParam("quantity") int quantity) {
+    public ResponseEntity<Object> addToShoppingCart(@RequestBody ProductBoughtDTO productDto, @PathParam("quantity") int quantity) {
         return buyerService.addProductToShoppingKart(productDto, quantity);
     }
 
