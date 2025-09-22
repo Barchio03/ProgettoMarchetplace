@@ -37,7 +37,7 @@ public class PlatformHandlerController {
     /**
     * This method verifies if a receipt has been received
     *
-    * @return true if the receipt is received, false otherwise        //Come cerca la ricevuta? Inserendo uno specifico user?
+    * @return true if the receipt is received, false otherwise
     */
     public ResponseEntity<Object> viewMessages() {
         return platformHandlerService.openMailbox();
