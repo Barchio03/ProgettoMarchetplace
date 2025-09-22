@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import unicam.IdSProject.AcceptVisitor;
-import unicam.IdSProject.DenyVisitor;
-import unicam.IdSProject.Visitable;
+import unicam.IdSProject.visitor.AcceptVisitor;
+import unicam.IdSProject.visitor.DenyVisitor;
+import unicam.IdSProject.visitor.Visitable;
 import unicam.IdSProject.repositories.RequestHandler;
 
 @Service

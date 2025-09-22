@@ -2,14 +2,9 @@ package unicam.IdSProject.controllers;
 
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import unicam.IdSProject.AcceptVisitor;
-import unicam.IdSProject.DenyVisitor;
-import unicam.IdSProject.repositories.RequestHandler;
-import unicam.IdSProject.Visitable;
 import unicam.IdSProject.services.CuratorService;
 
 

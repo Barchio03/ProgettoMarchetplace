@@ -1,4 +1,4 @@
-package unicam.IdSProject;
+package unicam.IdSProject.visitor;
 import unicam.IdSProject.models.Event;
 import unicam.IdSProject.models.Product;
 

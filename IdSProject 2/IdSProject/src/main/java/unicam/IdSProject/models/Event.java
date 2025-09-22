@@ -1,7 +1,7 @@
 package unicam.IdSProject.models;
 
-import unicam.IdSProject.Visitable;
-import unicam.IdSProject.Visitor;
+import unicam.IdSProject.visitor.Visitable;
+import unicam.IdSProject.visitor.Visitor;
 import unicam.IdSProject.users.Animator;
 import unicam.IdSProject.users.Buyer;
 import unicam.IdSProject.users.Seller;

@@ -1,4 +1,4 @@
-package unicam.IdSProject;
+package unicam.IdSProject.visitor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import unicam.IdSProject.models.Event;
