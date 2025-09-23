@@ -31,7 +31,7 @@ public class BuyerService {
         Product product = productMapper.toEntityWithAllFields(productBoughtDTO);
 
         if (!productBoard.contains(product)) return new ResponseEntity<>("Il prodotto non esiste", HttpStatus.BAD_REQUEST);
-        if (product.getStockNumber()> quantity) return new ResponseEntity<>("Non ci sono abbastanza scorte di questo prodotto", HttpStatus.BAD_REQUEST); 
+        if (product.getStockNumber()> quantity) return new ResponseEntity<>("Non ci sono abbastanza scorte di questo prodotto", HttpStatus.BAD_REQUEST);  //Non dovrebbe essere <=?
 
         QuantifiedProduct qProduct = new QuantifiedProduct(product, quantity);
 
