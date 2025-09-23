@@ -28,8 +28,6 @@ public class AnimatorService {
     public ResponseEntity<Object> addEvent(EventCreationDTO eventDTO){
         Event event = eventMapper.toEntityWithAllFields(eventDTO);
         event.setCreator(animator);
-
-        event.setCreator(animator);
         if(!eventBoard.contains(event)){
             if (requestHandler.addEvent(event)) {
                 return new ResponseEntity<>("Evento in processo di verifica", HttpStatus.CREATED);
