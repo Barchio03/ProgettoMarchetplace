@@ -9,7 +9,7 @@ import java.util.ArrayList;
 *
 * This class implements the methods used by the Distributor to interact with the marketplace
 *
-* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+* @author Erika Aguiari, Luca Barchiesi
  *
 */
 public class DistributorController {
@@ -31,7 +31,7 @@ public class DistributorController {
      *
      * This method creates a new Bundle with a set of Product present in the marketplace
      *
-     * @param products: the Products present in the Bundle
+     * @param products , the Products present in the Bundle
      *
      * @return true, if the Bundle was created, false otherwise
      */
@@ -54,9 +54,9 @@ public class DistributorController {
      *
      * This method adds a Product from the marketplace inside a Bundle
      *
-     * @param bundle: the Bundle in question
+     * @param bundle , the Bundle in question
      *
-     * @param product: the Product that needs to be added
+     * @param product , the Product that needs to be added
      *
      * @return true, if the Bundle was created, false otherwise
      */
@@ -77,7 +77,7 @@ public class DistributorController {
      *
      * This method deletes a Bundle from the marketplace
      *
-     * @param bundle: the Bundle in question
+     * @param bundle , the Bundle in question
      *
      * @return true, if the Product was deleted, false otherwise
      */
@@ -94,9 +94,9 @@ public class DistributorController {
      *
      * This method adds Distributor infos to a Product
      *
-     * @param product: the Product to witch add the information
+     * @param product , the Product to witch add the information
      *
-     * @param info: the info about the Product
+     * @param info , the info about the Product
      *
      * @return true, if the information was added, false otherwise
      */
