@@ -30,10 +30,10 @@ public class SellerService {
 
     public ResponseEntity<Object> addProducerProduct(ProducerProductCreationDTO productDTO){
         ProducerProduct product = productMapper.toEntityWithAllFields(productDTO);
-        product.setCreator(seller);
+        product.setCreator(seller); // Ripetizioni?
 
         if (seller.getTags().contains(Tag.PRODUCER)) {
-            product.setCreator(seller);
+            product.setCreator(seller); // Ripetizioni?
             if(!productBoard.contains(product)){
                 if (requestHandler.addProduct(product))
                     return new ResponseEntity<>("Prodotto in processo di verifica", HttpStatus.CREATED);
@@ -45,10 +45,10 @@ public class SellerService {
 
     public ResponseEntity<Object> addTransformerProduct(TransformerProductCreationDTO productDTO){
         TransformerProduct product = productMapper.toEntityWithAllFields(productDTO);
-        product.setCreator(seller);
+        product.setCreator(seller); // Ripetizioni?
 
         if (seller.getTags().contains(Tag.TRANSFORMER)) {
-            product.setCreator(seller);
+            product.setCreator(seller); // Ripetizioni?
             if(!productBoard.contains(product)){
                 if (requestHandler.addProduct(product))
                     return new ResponseEntity<>("Prodotto in processo di verifica", HttpStatus.CREATED);
