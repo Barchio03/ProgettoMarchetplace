@@ -31,7 +31,7 @@ public class BuyerService {
         Product product = productMapper.toEntityWithAllFields(productBoughtDTO);
 
         if (!productBoard.contains(product)) return new ResponseEntity<>("Il prodotto non esiste", HttpStatus.BAD_REQUEST);
-        if (product.getStockNumber()> quantity) return new ResponseEntity<>("Non ci sono abbastanza scorte di questo prodotto", HttpStatus.BAD_REQUEST);
+        if (product.getStockNumber()> quantity) return new ResponseEntity<>("Non ci sono abbastanza scorte di questo prodotto", HttpStatus.BAD_REQUEST); 
 
         QuantifiedProduct qProduct = new QuantifiedProduct(product, quantity);
 
@@ -49,7 +49,7 @@ public class BuyerService {
         buyer.getShoppingCart().getQuantifiedProducts()
                 .stream().map(quantifiedProduct -> this.decreaseStock(quantifiedProduct));
 
-        buyer.getShoppingCart().clear();
+        buyer.getShoppingCart().clear();     //Non dovrebbe prima fare la ricevuta e poi levare le robe dal carrello??
         String receipt = this.makeReceipt(buyer.getShoppingCart());
         return new ResponseEntity<>(receipt, HttpStatus.OK);
 
