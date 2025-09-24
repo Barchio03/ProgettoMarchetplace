@@ -1,5 +1,5 @@
 # Presentazione
-## Che cos'è Marchetplace?
+## Che cos'è "Marchetplace"?
 
 Marchetplace è una *piattaforma digitale di e-commerce* pensata per **gestire**, **valorizzare** e **tracciare** la vendita dei prodotti della filiera agricola di una realtà comunale, sviluppata in Java e Springboot.
 
