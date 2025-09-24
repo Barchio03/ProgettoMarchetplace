@@ -1,4 +1,6 @@
-package unicam.IdSProject.models;
+package unicam.IdSProject;
+
+import unicam.IdSProject.models.Product;
 
 /**
 *

@@ -96,7 +96,7 @@ public class EventBoard {
         ArrayList<Event> sublist = new ArrayList<>();
         ArrayList<Event> events = (ArrayList<Event>) eventRepository.findAll();
         for (Event event : events) {
-            if (event.getCreator().equals(animator)) sublist.add(event);
+            if (event.getCreator().equals(animator.getId())) sublist.add(event);
         }
         return sublist;
     }

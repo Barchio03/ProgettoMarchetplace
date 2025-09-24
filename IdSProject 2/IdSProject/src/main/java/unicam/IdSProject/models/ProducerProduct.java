@@ -1,5 +1,8 @@
 package unicam.IdSProject.models;
 
+import jakarta.persistence.Entity;
+import lombok.Getter;
+import lombok.Setter;
 import unicam.IdSProject.users.Seller;
 
 /**
@@ -8,6 +11,9 @@ import unicam.IdSProject.users.Seller;
  * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
  *
  */
+@Getter
+@Setter
+@Entity
 public class ProducerProduct extends Product {
 
 

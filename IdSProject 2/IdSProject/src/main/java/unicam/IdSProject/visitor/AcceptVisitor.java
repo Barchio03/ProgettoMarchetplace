@@ -1,7 +1,9 @@
 package unicam.IdSProject.visitor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import unicam.IdSProject.models.Event;
+import unicam.IdSProject.repositories.AnimatorRepository;
 import unicam.IdSProject.repositories.EventBoard;
 import unicam.IdSProject.models.Product;
 import unicam.IdSProject.repositories.ProductBoard;
@@ -13,22 +15,16 @@ import unicam.IdSProject.repositories.ProductBoard;
  * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi 
  *
  */
-@Component
+
+@RequiredArgsConstructor
 public class AcceptVisitor implements Visitor {
 
-    @Autowired
-    private final ProductBoard productBoard;
-    @Autowired
-    private final EventBoard eventBoard;
+    private final AnimatorRepository animatorRepository;
 
-    /**
-    * This method creates a new AcceptVisitor object
-    */
-    @Autowired
-    public AcceptVisitor(ProductBoard productBoard, EventBoard eventBoard) {
-        this.productBoard=productBoard;
-        this.eventBoard=eventBoard;
-    }
+
+    private final ProductBoard productBoard;
+
+    private final EventBoard eventBoard;
 
     @Override
     public void visit(Product product) {
@@ -40,7 +36,7 @@ public class AcceptVisitor implements Visitor {
     @Override
     public void visit(Event event) {
         eventBoard.addEvent(event);
-        event.getCreator().getMailbox().addMessage("La tua richiesta per l'evento "+
+        animatorRepository.findById(event.getCreator()).getMailbox().addMessage("La tua richiesta per l'evento "+
                 event.getName()+ " è stata accettata");
     }
 }

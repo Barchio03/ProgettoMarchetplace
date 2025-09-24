@@ -1,8 +1,5 @@
 package unicam.IdSProject.dtos.requests;
 
-import lombok.Data;
-
-@Data
-public class ProductBoughtDTO {
+public class EventBoughtDTO {
     private Long id;
 }

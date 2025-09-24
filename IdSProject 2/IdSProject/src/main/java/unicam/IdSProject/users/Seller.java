@@ -1,4 +1,11 @@
 package unicam.IdSProject.users;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 import unicam.IdSProject.enumerations.Tag;
 import unicam.IdSProject.models.Location;
 import unicam.IdSProject.models.Mailbox;
@@ -12,15 +19,29 @@ import java.util.ArrayList;
 * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
 *
 */
+@Getter
+@Setter
+@Entity
 public class Seller {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
+
+    @NotNull
     private String name;
+
+    @NotNull
     private String description;
+
+    @NotNull
     private Location location;
+
     private ArrayList<Tag> tags;
+
     private final Mailbox mailbox;
-    private int id;
-    private static int currentId;
+
+
 
     
     /**
@@ -30,46 +51,6 @@ public class Seller {
         this.mailbox=new Mailbox();
     }
 
-    
-    private static int getCurrentId() {
-        return currentId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public ArrayList<Tag> getTags() {
-        return tags;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public Mailbox getMailbox() {
-        return mailbox;
-    }
 
     @Override
     public String toString(){

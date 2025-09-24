@@ -1,5 +1,7 @@
 package unicam.IdSProject.models;
 
+import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,8 +14,10 @@ import lombok.Setter;
 */
 @Getter
 @Setter
+@Entity
 public class TransformerProduct extends Product {
 
+    @NotNull
     private Product sourceProduct;
 
     /**

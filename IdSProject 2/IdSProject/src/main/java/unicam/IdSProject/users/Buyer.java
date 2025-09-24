@@ -1,9 +1,10 @@
 package unicam.IdSProject.users;
 
 import lombok.Getter;
+import lombok.Setter;
 import unicam.IdSProject.models.Event;
 import unicam.IdSProject.models.Mailbox;
-import unicam.IdSProject.models.ShoppingCart;
+import unicam.IdSProject.ShoppingCart;
 
 /**
 *
@@ -12,6 +13,7 @@ import unicam.IdSProject.models.ShoppingCart;
 * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
 */
 @Getter
+@Setter
 public class Buyer {
     
     private String name;
