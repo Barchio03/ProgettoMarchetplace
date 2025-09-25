@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import unicam.IdSProject.dtos.requests.EventBoughtDTO;
 import unicam.IdSProject.dtos.requests.ProductBoughtDTO;
 import unicam.IdSProject.dtos.response.EventDTO;
 import unicam.IdSProject.dtos.response.ProductDTO;
@@ -44,6 +46,7 @@ public class BuyerController {
      *
      * @return the response of the method
      */
+    @RequestMapping(value = "/buyCart")
     public ResponseEntity<Object> buyShoppingCart() {
         return buyerService.buyShoppingCart();
     }
@@ -55,11 +58,13 @@ public class BuyerController {
      *
      * @return the response of the method
      */
-    public ResponseEntity<Object> subscribeToEvent(EventDTO eventDto) {
+    @PostMapping("/subscribe")
+    public ResponseEntity<Object> subscribeToEvent(@RequestBody EventBoughtDTO eventDto) {
         return buyerService.subscribeToEvent(eventDto);
     }
 
-    public ResponseEntity<Object> unsubscribeToEvent(EventDTO eventDto) {
+    @PostMapping(value = "/unsubscribe")
+    public ResponseEntity<Object> unsubscribeToEvent(@RequestBody EventBoughtDTO eventDto) {
         return buyerService.unsubscribeToEvent(eventDto);
     }
 }

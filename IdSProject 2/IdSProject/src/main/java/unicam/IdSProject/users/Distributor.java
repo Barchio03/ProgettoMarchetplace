@@ -1,5 +1,7 @@
 package unicam.IdSProject.users;
 
+import lombok.Getter;
+import lombok.Setter;
 import unicam.IdSProject.models.ProductBundle;
 
 /**
@@ -8,6 +10,8 @@ import unicam.IdSProject.models.ProductBundle;
 *
 * @author Erika Aguiari, Luca Barchiesi
 */
+@Getter
+@Setter
 public class Distributor {
 
     private String name;
@@ -23,17 +27,8 @@ public class Distributor {
     }
 
 
-    
-    public int getId() {
-        return id;
-    }
-
     public ProductBundle createBundle() {
         return null;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void setName(String name) {

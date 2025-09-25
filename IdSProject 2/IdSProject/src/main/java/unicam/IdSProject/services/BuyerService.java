@@ -4,16 +4,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import unicam.IdSProject.QuantifiedProduct;
+import unicam.IdSProject.ShoppingCart;
+import unicam.IdSProject.dtos.requests.EventBoughtDTO;
 import unicam.IdSProject.dtos.requests.ProductBoughtDTO;
-import unicam.IdSProject.dtos.response.EventDTO;
-import unicam.IdSProject.dtos.response.ProductDTO;
 import unicam.IdSProject.mappers.EventMapper;
 import unicam.IdSProject.mappers.ProductMapper;
 import unicam.IdSProject.models.*;
 import unicam.IdSProject.repositories.ProductBoard;
 import unicam.IdSProject.users.Buyer;
-
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -55,8 +54,8 @@ public class BuyerService {
 
     }
 
-    public ResponseEntity<Object> subscribeToEvent(EventDTO eventDTO) {
-        Event event = eventMapper.toEntityWithAllFields(eventDTO);
+    public ResponseEntity<Object> subscribeToEvent(EventBoughtDTO eventBoughtDTO) {
+        Event event = eventMapper.toEntityWithAllFields(eventBoughtDTO);
 
         if (event == null){
             return new ResponseEntity<>("Evento nullo", HttpStatus.BAD_REQUEST);
@@ -68,8 +67,8 @@ public class BuyerService {
 
     }
 
-    public ResponseEntity<Object> unsubscribeToEvent(EventDTO eventDTO) {
-        Event event = eventMapper.toEntityWithAllFields(eventDTO);
+    public ResponseEntity<Object> unsubscribeToEvent(EventBoughtDTO eventBoughtDTO) {
+        Event event = eventMapper.toEntityWithAllFields(eventBoughtDTO);
 
         if (event == null){
             return new ResponseEntity<>("Evento nullo", HttpStatus.BAD_REQUEST);

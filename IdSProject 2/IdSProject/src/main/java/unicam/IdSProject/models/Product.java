@@ -1,10 +1,14 @@
 package unicam.IdSProject.models;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import unicam.IdSProject.visitor.Visitable;
 import unicam.IdSProject.visitor.Visitor;
 import unicam.IdSProject.users.Seller;
+
+import java.util.Objects;
 
 /**
 *
@@ -15,29 +19,30 @@ import unicam.IdSProject.users.Seller;
 */
 @Getter
 @Setter
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Product implements Visitable {
 
-    private String name;
-    private float price;
-    private String description;
-    private String distributorDescription;
-    private int stockNumber;
-    private Seller creator;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private static Long currentId;
+    @NotNull
+    private String name;
+    @NotNull
+    private float price;
+    @NotNull
+    private String description;
 
+    private String distributorDescription;
+    @NotNull
+    private int stockNumber;
+    @NotNull
+    private Long creator;
 
     /**
     * This method creates a new Product object.
     */
-    public Product() {
-
-    }
-
-    
-    private static Long getCurrentId() {
-        return currentId;
-    }
+    public Product() {}
 
 
     @Override
@@ -55,7 +60,7 @@ public abstract class Product implements Visitable {
             return false;
         }
         else{
-            return this.id == product.id;
+            return Objects.equals(this.id, product.id);
         }
     }
 

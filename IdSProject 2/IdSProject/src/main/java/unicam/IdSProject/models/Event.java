@@ -1,7 +1,5 @@
 package unicam.IdSProject.models;
 
-import lombok.Getter;
-import lombok.Setter;
 import unicam.IdSProject.visitor.Visitable;
 import unicam.IdSProject.visitor.Visitor;
 import unicam.IdSProject.users.Animator;
@@ -14,48 +12,90 @@ import java.util.ArrayList;
 *
 * This class represents an Event.
 *
-* @author Erika Aguiari, Luca Barchiesi
+* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
 *
 */
-@Getter
 public class Event implements Visitable {
 
-    @Setter
     private String name;
-    @Setter
     private Animator creator;
-    @Setter
     private int maxAttendees;
-    @Setter
     private String description;
-    @Setter
     private ArrayList<Seller> collaborators;
-    @Setter
     private ArrayList<Buyer> subscribers;
     private final Long id;
+    private static Long currentId;
 
 
     /**
      * This method creates a new Event object
      */
-    public Event(String name, String description, Animator creator, ArrayList<Seller> collaborators, Long id){
+    public Event(String name, String description, Animator creator, ArrayList<Seller> collaborators){
         this.name=name;
         this.description=description;
         this.creator=creator;
         this.collaborators=collaborators;
-        this.id = id;
+        this.id=currentId++;
     }
 
     /**
      * This method creates a new Event object with a setted number of attendees
      */
-    public Event(String name, String description, Animator creator, ArrayList<Seller> collaborators, Long id, int maxAttendees){
+    public Event(String name, String description, Animator creator, ArrayList<Seller> collaborators, int maxAttendees){
         this.name=name;
         this.description=description;
         this.creator=creator;
         this.collaborators=collaborators;
-        this.id = id;
         this.maxAttendees=maxAttendees;
+        this.id=currentId++;
+    }
+
+    private static Long getCurrentId() {
+        return currentId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Animator getCreator() {
+        return creator;
+    }
+
+    public void setCreator(Animator creator) {
+        this.creator = creator;
+    }
+
+    public int getMaxAttendees() {
+        return maxAttendees;
+    }
+
+    public void setMaxAttendees(int maxAttendees) {
+        this.maxAttendees = maxAttendees;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public ArrayList<Seller> getCollaborators() {
+        return collaborators;
+    }
+
+    public void setCollaborators(ArrayList<Seller> collaborators) {
+        this.collaborators = collaborators;
     }
 
 
@@ -124,7 +164,7 @@ public class Event implements Visitable {
             return false;
         }
         else{
-            return this.id.equals(event.id);
+            return this.id == event.id;
         }
     }
 

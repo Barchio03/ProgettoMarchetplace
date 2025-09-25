@@ -1,5 +1,10 @@
 package unicam.IdSProject.users;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 import unicam.IdSProject.models.Mailbox;
 
 /**
@@ -8,16 +13,24 @@ import unicam.IdSProject.models.Mailbox;
 *
 * @author Erika Aguiari, Luca Barchiesi
 */
+
+@Getter
+@Setter
+@Entity
 public class Animator {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
+
+    @NotNull
     private String name;
 
+    @NotNull
     private String description;
 
-    private final int id;
-
-    private static int currentId;
-
+    @JsonInclude()
+    @Transient
     private final Mailbox mailbox;
 
     /**
@@ -27,35 +40,6 @@ public class Animator {
         this.name=name;
         this.description=description;
         this.mailbox = new Mailbox();
-        this.id=currentId++;
     }
 
-    private static int getCurrentId() {
-        return currentId;
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public Mailbox getMailbox() {
-        return mailbox;
-    }
 }

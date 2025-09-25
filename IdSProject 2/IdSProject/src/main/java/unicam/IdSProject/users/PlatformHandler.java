@@ -1,6 +1,7 @@
 package unicam.IdSProject.users;
 
 import lombok.Getter;
+import lombok.Setter;
 import unicam.IdSProject.models.Mailbox;
 
 /**
@@ -10,6 +11,8 @@ import unicam.IdSProject.models.Mailbox;
  * @author Erika Aguiari, Luca Barchiesi
 *
 */
+@Getter
+@Setter
 public class PlatformHandler {
 
     private Mailbox mailbox;

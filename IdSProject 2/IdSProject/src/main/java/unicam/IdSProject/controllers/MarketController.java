@@ -44,7 +44,4 @@ public class MarketController {
         return marketService.getEvents();
     }
 
-
-
-
 }

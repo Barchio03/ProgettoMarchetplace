@@ -92,7 +92,7 @@ public class ProductBoard {
         ArrayList<Product> sublist = new ArrayList<>();
         ArrayList<Product> products = (ArrayList<Product>) productRepository.findAll();
         for (Product product : products) {
-            if (product.getCreator().equals(seller)) sublist.add(product);
+            if (product.getCreator().equals(seller.getId())) sublist.add(product);
         }
         return sublist;
     }
