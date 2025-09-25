@@ -1,4 +1,5 @@
 package unicam.IdSProject.users;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -6,7 +7,10 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import unicam.IdSProject.enumerations.Tag;
 import unicam.IdSProject.models.Location;
+
+import java.util.ArrayList;
 
 /**
 *
@@ -31,9 +35,9 @@ public class Seller {
     private String description;
 
     @NotNull
-    private Location location;
+    private Long location;
 
-//    private ArrayList<Tag> tags;
+    private ArrayList<Tag> tags;
 
 //    private final Mailbox mailbox;
 
