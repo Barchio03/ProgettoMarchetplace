@@ -1,0 +1,823 @@
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/BuyerService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package unicam.IdSProject.services;\n\nimport lombok.RequiredArgsConstructor;\nimport org.springframework.http.HttpStatus;\nimport org.springframework.http.ResponseEntity;\nimport org.springframework.stereotype.Service;\nimport unicam.IdSProject.dtos.requests.ProductBoughtDTO;\nimport unicam.IdSProject.dtos.response.EventDTO;\nimport unicam.IdSProject.dtos.response.ProductDTO;\nimport unicam.IdSProject.mappers.EventMapper;\nimport unicam.IdSProject.mappers.ProductMapper;\nimport unicam.IdSProject.models.*;\nimport unicam.IdSProject.repositories.ProductBoard;\nimport unicam.IdSProject.users.Buyer;\n\nimport java.util.Optional;\n\n@RequiredArgsConstructor\n@Service\npublic class BuyerService {\n\n    private final ProductMapper productMapper;\n    private final EventMapper eventMapper;\n\n    private final ProductBoard productBoard;\n\n    private final Buyer buyer;\n\n\n    public ResponseEntity<Object> addProductToShoppingKart(ProductBoughtDTO productBoughtDTO, int quantity) {\n        Product product = productMapper.toEntityWithAllFields(productBoughtDTO);\n\n        if (!productBoard.contains(product)) return new ResponseEntity<>(\"Il prodotto non esiste\", HttpStatus.BAD_REQUEST);\n        if (product.getStockNumber()> quantity) return new ResponseEntity<>(\"Non ci sono abbastanza scorte di questo prodotto\", HttpStatus.BAD_REQUEST);  //Non dovrebbe essere <=?\n\n        QuantifiedProduct qProduct = new QuantifiedProduct(product, quantity);\n\n        if (buyer.getShoppingCart().addQuantifiedProduct(qProduct)) {\n            return new ResponseEntity<>(\"Prodotto aggiunto al carrello\", HttpStatus.OK);\n        } else return new ResponseEntity<>(\"Errore\", HttpStatus.BAD_REQUEST);\n\n    }\n\n    public ResponseEntity<Object> buyShoppingCart() {\n        if (buyer.getShoppingCart() == null || buyer.getShoppingCart().getQuantifiedProducts().isEmpty()){\n            return new ResponseEntity<>(\"Carrello Vuoto\", HttpStatus.BAD_REQUEST);\n        }\n\n        buyer.getShoppingCart().getQuantifiedProducts()\n                .stream().map(quantifiedProduct -> this.decreaseStock(quantifiedProduct));\n\n        buyer.getShoppingCart().clear();     //Non dovrebbe prima fare la ricevuta e poi levare le robe dal carrello??\n        String receipt = this.makeReceipt(buyer.getShoppingCart());\n        return new ResponseEntity<>(receipt, HttpStatus.OK);\n\n    }\n\n    public ResponseEntity<Object> subscribeToEvent(EventDTO eventDTO) {\n        Event event = eventMapper.toEntityWithAllFields(eventDTO);\n\n        if (event == null){\n            return new ResponseEntity<>(\"Evento nullo\", HttpStatus.BAD_REQUEST);\n        }\n\n        if (event.subscribe(buyer))\n            return new ResponseEntity<>(\"Iscrizione avvenuta con successo\", HttpStatus.OK);\n        else return new ResponseEntity<>(\"Utente già iscritto\", HttpStatus.CONFLICT);\n\n    }\n\n    public ResponseEntity<Object> unsubscribeToEvent(EventDTO eventDTO) {\n        Event event = eventMapper.toEntityWithAllFields(eventDTO);\n\n        if (event == null){\n            return new ResponseEntity<>(\"Evento nullo\", HttpStatus.BAD_REQUEST);\n        }\n\n        if (event.unsubscribe(buyer))\n            return new ResponseEntity<>(\"Disiscrizione avvenuta con successo\", HttpStatus.OK);\n        else return new ResponseEntity<>(\"Iscrizione non possibile\", HttpStatus.CONFLICT);\n    }\n\n\n    private QuantifiedProduct decreaseStock(QuantifiedProduct product) {\n        product.getProduct().setStockNumber(product.getProduct().getStockNumber()-product.getStockNumber());\n        return product;\n    }\n\n    private String makeReceipt(ShoppingCart shoppingCart){\n        String receipt = \"Ricevuta di \" + shoppingCart.getBuyer().getName() + \"\\n\";\n        for (QuantifiedProduct qProduct : shoppingCart.getQuantifiedProducts()){\n            String printProduct = \"Nome: \" + qProduct.getProduct().getName() +\n                    \"\\nNumero stock: \" + qProduct.getStockNumber() +\n                    \"\\nPrezzo: \" + qProduct.getProduct().getPrice() * qProduct.getStockNumber() +\"€\\n\\n\";\n            receipt = receipt + printProduct;\n        }\n        receipt = receipt + \"Prezzo totale: \" + shoppingCart.getTotalPrice() + \"$\";\n        shoppingCart.getBuyer().getMailbox().addMessage(receipt);\n        // Aggiungere ReceiptRepository per PlatformHandler\n        return receipt;\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/BuyerService.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/BuyerService.java
+--- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/BuyerService.java	(revision c63b1351bded97972f60699ebb57581e9f869d8a)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/BuyerService.java	(date 1758737500782)
+@@ -4,6 +4,7 @@
+ import org.springframework.http.HttpStatus;
+ import org.springframework.http.ResponseEntity;
+ import org.springframework.stereotype.Service;
++import unicam.IdSProject.dtos.requests.EventBoughtDTO;
+ import unicam.IdSProject.dtos.requests.ProductBoughtDTO;
+ import unicam.IdSProject.dtos.response.EventDTO;
+ import unicam.IdSProject.dtos.response.ProductDTO;
+@@ -55,8 +56,8 @@
+ 
+     }
+ 
+-    public ResponseEntity<Object> subscribeToEvent(EventDTO eventDTO) {
+-        Event event = eventMapper.toEntityWithAllFields(eventDTO);
++    public ResponseEntity<Object> subscribeToEvent(EventBoughtDTO eventBoughtDTO) {
++        Event event = eventMapper.toEntityWithAllFields(eventBoughtDTO);
+ 
+         if (event == null){
+             return new ResponseEntity<>("Evento nullo", HttpStatus.BAD_REQUEST);
+@@ -68,8 +69,8 @@
+ 
+     }
+ 
+-    public ResponseEntity<Object> unsubscribeToEvent(EventDTO eventDTO) {
+-        Event event = eventMapper.toEntityWithAllFields(eventDTO);
++    public ResponseEntity<Object> unsubscribeToEvent(EventBoughtDTO eventBoughtDTO) {
++        Event event = eventMapper.toEntityWithAllFields(eventBoughtDTO);
+ 
+         if (event == null){
+             return new ResponseEntity<>("Evento nullo", HttpStatus.BAD_REQUEST);
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/visitor/AcceptVisitor.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package unicam.IdSProject.visitor;\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.stereotype.Component;\nimport unicam.IdSProject.models.Event;\nimport unicam.IdSProject.repositories.EventBoard;\nimport unicam.IdSProject.models.Product;\nimport unicam.IdSProject.repositories.ProductBoard;\n\n/**\n*\n * This class contains the logic behind the acceptance of a Visitable object\n *\n * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi \n *\n */\n@Component\npublic class AcceptVisitor implements Visitor {\n\n    @Autowired\n    private final ProductBoard productBoard;\n    @Autowired\n    private final EventBoard eventBoard;\n\n    /**\n    * This method creates a new AcceptVisitor object\n    */\n    @Autowired\n    public AcceptVisitor(ProductBoard productBoard, EventBoard eventBoard) {\n        this.productBoard=productBoard;\n        this.eventBoard=eventBoard;\n    }\n\n    @Override\n    public void visit(Product product) {\n        productBoard.addProduct(product);\n        product.getCreator().getMailbox().addMessage(\"La tua richiesta per il prodotto \"+\n                product.getName()+ \" è stata accettata\");\n    }\n\n    @Override\n    public void visit(Event event) {\n        eventBoard.addEvent(event);\n        event.getCreator().getMailbox().addMessage(\"La tua richiesta per l'evento \"+\n                event.getName()+ \" è stata accettata\");\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/visitor/AcceptVisitor.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/visitor/AcceptVisitor.java
+--- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/visitor/AcceptVisitor.java	(revision c63b1351bded97972f60699ebb57581e9f869d8a)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/visitor/AcceptVisitor.java	(date 1758738790579)
+@@ -1,7 +1,9 @@
+ package unicam.IdSProject.visitor;
++import lombok.RequiredArgsConstructor;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.stereotype.Component;
+ import unicam.IdSProject.models.Event;
++import unicam.IdSProject.repositories.AnimatorRepository;
+ import unicam.IdSProject.repositories.EventBoard;
+ import unicam.IdSProject.models.Product;
+ import unicam.IdSProject.repositories.ProductBoard;
+@@ -13,23 +15,17 @@
+  * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi 
+  *
+  */
+-@Component
++
++@RequiredArgsConstructor
+ public class AcceptVisitor implements Visitor {
+ 
+-    @Autowired
++    private final AnimatorRepository animatorRepository;
++
++
+     private final ProductBoard productBoard;
+-    @Autowired
++
+     private final EventBoard eventBoard;
+ 
+-    /**
+-    * This method creates a new AcceptVisitor object
+-    */
+-    @Autowired
+-    public AcceptVisitor(ProductBoard productBoard, EventBoard eventBoard) {
+-        this.productBoard=productBoard;
+-        this.eventBoard=eventBoard;
+-    }
+-
+     @Override
+     public void visit(Product product) {
+         productBoard.addProduct(product);
+@@ -40,7 +36,7 @@
+     @Override
+     public void visit(Event event) {
+         eventBoard.addEvent(event);
+-        event.getCreator().getMailbox().addMessage("La tua richiesta per l'evento "+
++        animatorRepository.findById(event.getCreator()).getMailbox().addMessage("La tua richiesta per l'evento "+
+                 event.getName()+ " è stata accettata");
+     }
+ }
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/requests/ProductBoughtDTO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package unicam.IdSProject.dtos.requests;\n\n@Data\npublic class ProductBoughtDTO {\n    private Long id;\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/requests/ProductBoughtDTO.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/requests/ProductBoughtDTO.java
+--- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/requests/ProductBoughtDTO.java	(revision c63b1351bded97972f60699ebb57581e9f869d8a)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/requests/ProductBoughtDTO.java	(date 1758653936253)
+@@ -1,5 +1,7 @@
+ package unicam.IdSProject.dtos.requests;
+ 
++import lombok.Data;
++
+ @Data
+ public class ProductBoughtDTO {
+     private Long id;
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Animator.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package unicam.IdSProject.users;\n\nimport unicam.IdSProject.models.Mailbox;\n\n/**\n*\n* This class represents an Animator\n*\n* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi\n*/\npublic class Animator {\n\n    private String name;\n\n    private String description;\n\n    private final int id;\n\n    private static int currentId;\n\n    private final Mailbox mailbox;\n\n    /**\n     * This method creates a new Animator object\n     */\n    public Animator(String name, String description) {\n        this.name=name;\n        this.description=description;\n        this.mailbox = new Mailbox();\n        this.id=currentId++;\n    }\n\n    private static int getCurrentId() {\n        return currentId;\n    }\n\n\n    public String getName() {\n        return name;\n    }\n\n    public void setName(String name) {\n        this.name = name;\n    }\n\n    public String getDescription() {\n        return description;\n    }\n\n    public void setDescription(String description) {\n        this.description = description;\n    }\n\n    public int getId() {\n        return id;\n    }\n\n    public Mailbox getMailbox() {\n        return mailbox;\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Animator.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Animator.java
+--- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Animator.java	(revision c63b1351bded97972f60699ebb57581e9f869d8a)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Animator.java	(date 1758738790585)
+@@ -1,5 +1,10 @@
+ package unicam.IdSProject.users;
+ 
++import com.fasterxml.jackson.annotation.JsonInclude;
++import jakarta.persistence.*;
++import jakarta.validation.constraints.NotNull;
++import lombok.Getter;
++import lombok.Setter;
+ import unicam.IdSProject.models.Mailbox;
+ 
+ /**
+@@ -8,16 +13,24 @@
+ *
+ * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+ */
++
++@Getter
++@Setter
++@Entity
+ public class Animator {
+ 
++    @Id
++    @GeneratedValue(strategy = GenerationType.IDENTITY)
++    private Long id;
++
++    @NotNull
+     private String name;
+ 
++    @NotNull
+     private String description;
+ 
+-    private final int id;
+-
+-    private static int currentId;
+-
++    @JsonInclude()
++    @Transient
+     private final Mailbox mailbox;
+ 
+     /**
+@@ -27,35 +40,6 @@
+         this.name=name;
+         this.description=description;
+         this.mailbox = new Mailbox();
+-        this.id=currentId++;
+-    }
+-
+-    private static int getCurrentId() {
+-        return currentId;
+-    }
+-
+-
+-    public String getName() {
+-        return name;
+-    }
+-
+-    public void setName(String name) {
+-        this.name = name;
+-    }
+-
+-    public String getDescription() {
+-        return description;
+-    }
+-
+-    public void setDescription(String description) {
+-        this.description = description;
+     }
+ 
+-    public int getId() {
+-        return id;
+-    }
+-
+-    public Mailbox getMailbox() {
+-        return mailbox;
+-    }
+ }
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Event.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package unicam.IdSProject.models;\n\nimport unicam.IdSProject.visitor.Visitable;\nimport unicam.IdSProject.visitor.Visitor;\nimport unicam.IdSProject.users.Animator;\nimport unicam.IdSProject.users.Buyer;\nimport unicam.IdSProject.users.Seller;\n\nimport java.util.ArrayList;\n\n/**\n*\n* This class represents an Event.\n*\n* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi\n*\n*/\npublic class Event implements Visitable {\n\n    private String name;\n    private Animator creator;\n    private int maxAttendees;\n    private String description;\n    private ArrayList<Seller> collaborators;\n    private ArrayList<Buyer> subscribers;\n    private final Long id;\n    private static Long currentId;\n\n\n    /**\n     * This method creates a new Event object\n     */\n    public Event(String name, String description, Animator creator, ArrayList<Seller> collaborators){\n        this.name=name;\n        this.description=description;\n        this.creator=creator;\n        this.collaborators=collaborators;\n        this.id=currentId++;\n    }\n\n    /**\n     * This method creates a new Event object with a setted number of attendees\n     */\n    public Event(String name, String description, Animator creator, ArrayList<Seller> collaborators, int maxAttendees){\n        this.name=name;\n        this.description=description;\n        this.creator=creator;\n        this.collaborators=collaborators;\n        this.maxAttendees=maxAttendees;\n        this.id=currentId++;\n    }\n\n    private static Long getCurrentId() {\n        return currentId;\n    }\n\n    public String getName() {\n        return name;\n    }\n\n    public void setName(String name) {\n        this.name = name;\n    }\n\n    public Animator getCreator() {\n        return creator;\n    }\n\n    public void setCreator(Animator creator) {\n        this.creator = creator;\n    }\n\n    public int getMaxAttendees() {\n        return maxAttendees;\n    }\n\n    public void setMaxAttendees(int maxAttendees) {\n        this.maxAttendees = maxAttendees;\n    }\n\n    public String getDescription() {\n        return description;\n    }\n\n    public void setDescription(String description) {\n        this.description = description;\n    }\n\n    public Long getId() {\n        return id;\n    }\n\n    public ArrayList<Seller> getCollaborators() {\n        return collaborators;\n    }\n\n    public void setCollaborators(ArrayList<Seller> collaborators) {\n        this.collaborators = collaborators;\n    }\n\n\n\n    /**\n    *\n    * This method is used by a Buyer to subscribe to an Event.\n    *\n    * @param buyer, the Buyer who wants to subscribe to an Event.\n    *\n    * @return true if the operation ended successfully, false otherwise.\n    */\n    public boolean subscribe(Buyer buyer) {\n        if(maxAttendees!=0) {\n            if(subscribers.size()==maxAttendees)\n                return false;\n        }\n        if (!subscribers.contains(buyer)){\n            subscribers.add(buyer);\n\n            return true;\n        } else return false;\n    }\n\n\n\n    /**\n    *\n    * This method is used by a Buyer to unsubscribe to an Event.\n    *\n    * @param buyer, the Buyer who wants to unsubscribe to an Event.\n    *\n    * @return true if the operation ended successfully, false otherwise.\n    *\n    */\n    public boolean unsubscribe(Buyer buyer) {\n        if (subscribers.contains(buyer)){\n            subscribers.remove(buyer);\n            return true;\n        } else return false;\n    }\n\n    /**\n     * This method notifies the subscribers when needed\n     *\n     * @param message, the message to spread\n     */\n    public void notifySubscribers(String message) {\n        for (Buyer sub : subscribers) {\n            sub.update(this, message);\n        }\n    }\n\n\n    @Override\n    public void accept(Visitor visitor) {\n        visitor.visit(this);\n    }\n\n    @Override\n    public boolean equals(Object obj){\n        if (obj == null){\n            return false;\n        }\n        if(!(obj instanceof Event event)){\n            return false;\n        }\n        else{\n            return this.id == event.id;\n        }\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Event.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Event.java
+--- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Event.java	(revision c63b1351bded97972f60699ebb57581e9f869d8a)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Event.java	(date 1758738124543)
+@@ -1,5 +1,9 @@
+ package unicam.IdSProject.models;
+ 
++import jakarta.persistence.*;
++import jakarta.validation.constraints.NotNull;
++import lombok.Getter;
++import lombok.Setter;
+ import unicam.IdSProject.visitor.Visitable;
+ import unicam.IdSProject.visitor.Visitor;
+ import unicam.IdSProject.users.Animator;
+@@ -7,6 +11,7 @@
+ import unicam.IdSProject.users.Seller;
+ 
+ import java.util.ArrayList;
++import java.util.Objects;
+ 
+ /**
+ *
+@@ -15,88 +20,29 @@
+ * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+ *
+ */
++
++@Entity
++@Getter
++@Setter
++@Table(name="events")
+ public class Event implements Visitable {
+ 
++    @Id
++    @GeneratedValue(strategy = GenerationType.IDENTITY)
++    private Long id;
++    @NotNull
+     private String name;
+-    private Animator creator;
++    @NotNull
++    private Long creator;
++    @NotNull
+     private int maxAttendees;
++    @NotNull
+     private String description;
++    @NotNull
+     private ArrayList<Seller> collaborators;
++
++
+     private ArrayList<Buyer> subscribers;
+-    private final Long id;
+-    private static Long currentId;
+-
+-
+-    /**
+-     * This method creates a new Event object
+-     */
+-    public Event(String name, String description, Animator creator, ArrayList<Seller> collaborators){
+-        this.name=name;
+-        this.description=description;
+-        this.creator=creator;
+-        this.collaborators=collaborators;
+-        this.id=currentId++;
+-    }
+-
+-    /**
+-     * This method creates a new Event object with a setted number of attendees
+-     */
+-    public Event(String name, String description, Animator creator, ArrayList<Seller> collaborators, int maxAttendees){
+-        this.name=name;
+-        this.description=description;
+-        this.creator=creator;
+-        this.collaborators=collaborators;
+-        this.maxAttendees=maxAttendees;
+-        this.id=currentId++;
+-    }
+-
+-    private static Long getCurrentId() {
+-        return currentId;
+-    }
+-
+-    public String getName() {
+-        return name;
+-    }
+-
+-    public void setName(String name) {
+-        this.name = name;
+-    }
+-
+-    public Animator getCreator() {
+-        return creator;
+-    }
+-
+-    public void setCreator(Animator creator) {
+-        this.creator = creator;
+-    }
+-
+-    public int getMaxAttendees() {
+-        return maxAttendees;
+-    }
+-
+-    public void setMaxAttendees(int maxAttendees) {
+-        this.maxAttendees = maxAttendees;
+-    }
+-
+-    public String getDescription() {
+-        return description;
+-    }
+-
+-    public void setDescription(String description) {
+-        this.description = description;
+-    }
+-
+-    public Long getId() {
+-        return id;
+-    }
+-
+-    public ArrayList<Seller> getCollaborators() {
+-        return collaborators;
+-    }
+-
+-    public void setCollaborators(ArrayList<Seller> collaborators) {
+-        this.collaborators = collaborators;
+-    }
+ 
+ 
+ 
+@@ -164,7 +110,7 @@
+             return false;
+         }
+         else{
+-            return this.id == event.id;
++            return Objects.equals(this.id, event.id);
+         }
+     }
+ 
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Seller.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package unicam.IdSProject.users;\nimport unicam.IdSProject.enumerations.Tag;\nimport unicam.IdSProject.models.Location;\nimport unicam.IdSProject.models.Mailbox;\n\nimport java.util.ArrayList;\n\n/**\n*\n* This class represents a Seller\n*\n* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi\n*\n*/\npublic class Seller {\n\n    private String name;\n    private String description;\n    private Location location;\n    private ArrayList<Tag> tags;\n    private final Mailbox mailbox;\n    private int id;\n    private static int currentId;\n\n    \n    /**\n    * This method creates a new Seller object\n    */\n    public Seller(String name, String description ) {\n        this.mailbox=new Mailbox();\n    }\n\n    \n    private static int getCurrentId() {\n        return currentId;\n    }\n\n    public String getName() {\n        return name;\n    }\n\n    public void setName(String name) {\n        this.name = name;\n    }\n\n    public String getDescription() {\n        return description;\n    }\n\n    public void setDescription(String description) {\n        this.description = description;\n    }\n\n    public Location getLocation() {\n        return location;\n    }\n\n    public void setLocation(Location location) {\n        this.location = location;\n    }\n\n    public ArrayList<Tag> getTags() {\n        return tags;\n    }\n\n    public int getId() {\n        return id;\n    }\n\n    public Mailbox getMailbox() {\n        return mailbox;\n    }\n\n    @Override\n    public String toString(){\n        return \"Nome: \"+this.getName() +\n                \"\\nDescrizione: \"+this.getDescription() +\n                \"\\nLocation: \"+this.getLocation().toString();\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Seller.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Seller.java
+--- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Seller.java	(revision c63b1351bded97972f60699ebb57581e9f869d8a)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Seller.java	(date 1758738124546)
+@@ -1,4 +1,6 @@
+ package unicam.IdSProject.users;
++import lombok.Getter;
++import lombok.Setter;
+ import unicam.IdSProject.enumerations.Tag;
+ import unicam.IdSProject.models.Location;
+ import unicam.IdSProject.models.Mailbox;
+@@ -12,6 +14,8 @@
+ * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+ *
+ */
++@Getter
++@Setter
+ public class Seller {
+ 
+     private String name;
+@@ -19,8 +23,8 @@
+     private Location location;
+     private ArrayList<Tag> tags;
+     private final Mailbox mailbox;
+-    private int id;
+-    private static int currentId;
++    private Long id;
++
+ 
+     
+     /**
+@@ -30,46 +34,6 @@
+         this.mailbox=new Mailbox();
+     }
+ 
+-    
+-    private static int getCurrentId() {
+-        return currentId;
+-    }
+-
+-    public String getName() {
+-        return name;
+-    }
+-
+-    public void setName(String name) {
+-        this.name = name;
+-    }
+-
+-    public String getDescription() {
+-        return description;
+-    }
+-
+-    public void setDescription(String description) {
+-        this.description = description;
+-    }
+-
+-    public Location getLocation() {
+-        return location;
+-    }
+-
+-    public void setLocation(Location location) {
+-        this.location = location;
+-    }
+-
+-    public ArrayList<Tag> getTags() {
+-        return tags;
+-    }
+-
+-    public int getId() {
+-        return id;
+-    }
+-
+-    public Mailbox getMailbox() {
+-        return mailbox;
+-    }
+ 
+     @Override
+     public String toString(){
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/TransformerProduct.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package unicam.IdSProject.models;\n\nimport lombok.Getter;\nimport lombok.Setter;\n\n/**\n*\n* This class represents a Product made by a Transformer\n*\n* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi\n*\n*/\n@Getter\n@Setter\npublic class TransformerProduct extends Product {\n\n    private Product sourceProduct;\n\n    /**\n    * This method creates a new TrasformerProduct object\n    */\n    public TransformerProduct() {\n        super();\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/TransformerProduct.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/TransformerProduct.java
+--- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/TransformerProduct.java	(revision c63b1351bded97972f60699ebb57581e9f869d8a)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/TransformerProduct.java	(date 1758653936256)
+@@ -1,5 +1,7 @@
+ package unicam.IdSProject.models;
+ 
++import jakarta.persistence.Entity;
++import jakarta.validation.constraints.NotNull;
+ import lombok.Getter;
+ import lombok.Setter;
+ 
+@@ -12,8 +14,10 @@
+ */
+ @Getter
+ @Setter
++@Entity
+ public class TransformerProduct extends Product {
+ 
++    @NotNull
+     private Product sourceProduct;
+ 
+     /**
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/BuyerController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package unicam.IdSProject.controllers;\n\nimport jakarta.websocket.server.PathParam;\nimport lombok.RequiredArgsConstructor;\nimport org.springframework.http.ResponseEntity;\nimport org.springframework.stereotype.Controller;\nimport org.springframework.web.bind.annotation.PostMapping;\nimport org.springframework.web.bind.annotation.RequestBody;\nimport unicam.IdSProject.dtos.requests.ProductBoughtDTO;\nimport unicam.IdSProject.dtos.response.EventDTO;\nimport unicam.IdSProject.dtos.response.ProductDTO;\nimport unicam.IdSProject.repositories.EventBoard;\nimport unicam.IdSProject.repositories.ProductBoard;\nimport unicam.IdSProject.services.BuyerService;\n\n/**\n*\n* This class implements the methods for handling all the Buyer interaction with the marketplace\n*\n* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi\n*\n*/\n@Controller\n@RequiredArgsConstructor\npublic class BuyerController {\n\n    private final BuyerService buyerService;\n\n\n    /**\n     * This method adds a Product to the Shopping Cart.\n     *\n     * @param productDto, the Product that needs to be added.\n     *\n     * @return the response of the method\n     */\n    @PostMapping(value = \"/addToShoppingKart\")\n    public ResponseEntity<Object> addToShoppingCart(@RequestBody ProductBoughtDTO productDto, @PathParam(\"quantity\") int quantity) {\n        return buyerService.addProductToShoppingKart(productDto, quantity);\n    }\n\n    /**\n     * This method is used to buy all the Products in the Shopping Cart.\n     *\n     * @return the response of the method\n     */\n    public ResponseEntity<Object> buyShoppingCart() {\n        return buyerService.buyShoppingCart();\n    }\n\n    /**\n     * This method allows to buy an Event tickey\n     *\n     * @param eventDto, the Event from which buying the ticket\n     *\n     * @return the response of the method\n     */\n    public ResponseEntity<Object> subscribeToEvent(EventDTO eventDto) {\n        return buyerService.subscribeToEvent(eventDto);\n    }\n\n    public ResponseEntity<Object> unsubscribeToEvent(EventDTO eventDto) {\n        return buyerService.unsubscribeToEvent(eventDto);\n    }\n}\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/BuyerController.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/BuyerController.java
+--- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/BuyerController.java	(revision c63b1351bded97972f60699ebb57581e9f869d8a)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/BuyerController.java	(date 1758737591754)
+@@ -6,6 +6,8 @@
+ import org.springframework.stereotype.Controller;
+ import org.springframework.web.bind.annotation.PostMapping;
+ import org.springframework.web.bind.annotation.RequestBody;
++import org.springframework.web.bind.annotation.RequestMapping;
++import unicam.IdSProject.dtos.requests.EventBoughtDTO;
+ import unicam.IdSProject.dtos.requests.ProductBoughtDTO;
+ import unicam.IdSProject.dtos.response.EventDTO;
+ import unicam.IdSProject.dtos.response.ProductDTO;
+@@ -44,6 +46,7 @@
+      *
+      * @return the response of the method
+      */
++    @RequestMapping(value = "/buyCart")
+     public ResponseEntity<Object> buyShoppingCart() {
+         return buyerService.buyShoppingCart();
+     }
+@@ -55,11 +58,13 @@
+      *
+      * @return the response of the method
+      */
+-    public ResponseEntity<Object> subscribeToEvent(EventDTO eventDto) {
++    @PostMapping("/subscribe")
++    public ResponseEntity<Object> subscribeToEvent(@RequestBody EventBoughtDTO eventDto) {
+         return buyerService.subscribeToEvent(eventDto);
+     }
+ 
+-    public ResponseEntity<Object> unsubscribeToEvent(EventDTO eventDto) {
++    @PostMapping(value = "/unsubscribe")
++    public ResponseEntity<Object> unsubscribeToEvent(@RequestBody EventBoughtDTO eventDto) {
+         return buyerService.unsubscribeToEvent(eventDto);
+     }
+ }
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Product.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package unicam.IdSProject.models;\n\nimport lombok.Getter;\nimport lombok.Setter;\nimport unicam.IdSProject.visitor.Visitable;\nimport unicam.IdSProject.visitor.Visitor;\nimport unicam.IdSProject.users.Seller;\n\n/**\n*\n* This class represents a Product.\n*\n* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi\n*\n*/\n@Getter\n@Setter\npublic abstract class Product implements Visitable {\n\n    private String name;\n    private float price;\n    private String description;\n    private String distributorDescription;\n    private int stockNumber;\n    private Seller creator;\n    private Long id;\n    private static Long currentId;\n\n\n    /**\n    * This method creates a new Product object.\n    */\n    public Product() {\n\n    }\n\n    \n    private static Long getCurrentId() {\n        return currentId;\n    }\n\n\n    @Override\n    public void accept(Visitor visitor) {\n        visitor.visit(this);\n    }\n\n    @Override\n    public boolean equals(Object obj){\n\n        if (obj == null){\n            return false;\n        }\n        if(!(obj instanceof Product product)){\n            return false;\n        }\n        else{\n            return this.id == product.id;\n        }\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Product.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Product.java
+--- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Product.java	(revision c63b1351bded97972f60699ebb57581e9f869d8a)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Product.java	(date 1758738124554)
+@@ -1,11 +1,15 @@
+ package unicam.IdSProject.models;
+ 
++import jakarta.persistence.*;
++import jakarta.validation.constraints.NotNull;
+ import lombok.Getter;
+ import lombok.Setter;
+ import unicam.IdSProject.visitor.Visitable;
+ import unicam.IdSProject.visitor.Visitor;
+ import unicam.IdSProject.users.Seller;
+ 
++import java.util.Objects;
++
+ /**
+ *
+ * This class represents a Product.
+@@ -15,29 +19,30 @@
+ */
+ @Getter
+ @Setter
++@Entity
++@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+ public abstract class Product implements Visitable {
+ 
++    @Id
++    @GeneratedValue(strategy = GenerationType.IDENTITY)
++    private Long id;
++    @NotNull
+     private String name;
++    @NotNull
+     private float price;
++    @NotNull
+     private String description;
++
+     private String distributorDescription;
++    @NotNull
+     private int stockNumber;
+-    private Seller creator;
+-    private Long id;
+-    private static Long currentId;
+-
++    @NotNull
++    private Long creator;
+ 
+     /**
+     * This method creates a new Product object.
+     */
+-    public Product() {
+-
+-    }
+-
+-    
+-    private static Long getCurrentId() {
+-        return currentId;
+-    }
++    public Product() {}
+ 
+ 
+     @Override
+@@ -55,7 +60,7 @@
+             return false;
+         }
+         else{
+-            return this.id == product.id;
++            return Objects.equals(this.id, product.id);
+         }
+     }
+ 
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/ProducerProduct.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package unicam.IdSProject.models;\n\nimport unicam.IdSProject.users.Seller;\n\n/**\n * This class represents a Product made by a Producer\n *\n * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi\n *\n */\npublic class ProducerProduct extends Product {\n\n\n    /**\n     * This method creates a new Product object.\n     */\n    public ProducerProduct() {\n        super();\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/ProducerProduct.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/ProducerProduct.java
+--- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/ProducerProduct.java	(revision c63b1351bded97972f60699ebb57581e9f869d8a)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/ProducerProduct.java	(date 1758653936248)
+@@ -1,5 +1,8 @@
+ package unicam.IdSProject.models;
+ 
++import jakarta.persistence.Entity;
++import lombok.Getter;
++import lombok.Setter;
+ import unicam.IdSProject.users.Seller;
+ 
+ /**
+@@ -8,6 +11,9 @@
+  * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+  *
+  */
++@Getter
++@Setter
++@Entity
+ public class ProducerProduct extends Product {
+ 
+ 
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/EventBoard.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package unicam.IdSProject.repositories;\n\nimport lombok.AllArgsConstructor;\nimport org.springframework.stereotype.Component;\nimport unicam.IdSProject.models.Product;\nimport unicam.IdSProject.users.Animator;\nimport unicam.IdSProject.models.Event;\n\nimport java.util.ArrayList;\n\n/**\n * This class represents an Event Board, it contains all the Events\n *\n * @author Luca Barchiesi, Erika Aguiari, Ilaria Morettini\n */\n@AllArgsConstructor\npublic class EventBoard {\n\n    private final EventRepository eventRepository ;\n\n\n    /**\n     * This method returns a list of all the Event in the repository\n     *\n     * @return a list of all the Event in the repository\n     */\n    public ArrayList<Event> getEvents(){\n        return (ArrayList<Event>) eventRepository.findAll();\n    }\n\n\n    /**\n     * This method adds an Event to the Event Board\n     *\n     * @param event, the Event to add\n     *\n     * @return true if the Event was added successfully, false otherwise\n     */\n    public boolean addEvent(Event event) {\n        if (eventRepository.existsById(event.getId())){\n            return false;\n        }\n        eventRepository.save(event);\n        return true;\n    }\n\n    /**\n     * This method removes an Event from the Event Board\n     *\n     * @param event, the Event to delete\n     *\n     * @return true is the Event was deleted successfully, false otherwise\n     */\n    public boolean removeEvent(Event event) {\n        if (!eventRepository.existsById(event.getId())){\n            return false;\n        }\n        eventRepository.delete(event);\n        return true;\n    }\n\n    /**\n     * This method removes an Event from the Event Board\n     *\n     * @param id, the id of the Event to delete\n     *\n     * @return true is the Event was deleted successfully, false otherwise\n     */\n    public boolean removeEvent(Long id) {\n        if (eventRepository.existsById(id)){\n            return false;\n        }\n        eventRepository.deleteById(id);\n        return true;\n    }\n\n    /**\n     * This method verifies whether an Event is in the Event Board\n     *\n     * @param event, the Event to search for\n     *\n     * @return true if the Event is present, false otherwise\n     */\n    public boolean contains(Event event) {\n        return eventRepository.existsById(event.getId());\n    }\n\n     /**\n     * This method return a list of Events organized by the same Animator\n     *\n     * @param animator, the Animator from witch searching the Events\n     *\n     * @return the list of Events organized by the Animator\n     */\n    public ArrayList<Event> getEvents(Animator animator) {\n        ArrayList<Event> sublist = new ArrayList<>();\n        ArrayList<Event> events = (ArrayList<Event>) eventRepository.findAll();\n        for (Event event : events) {\n            if (event.getCreator().equals(animator)) sublist.add(event);\n        }\n        return sublist;\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/EventBoard.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/EventBoard.java
+--- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/EventBoard.java	(revision c63b1351bded97972f60699ebb57581e9f869d8a)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/EventBoard.java	(date 1758738124532)
+@@ -96,7 +96,7 @@
+         ArrayList<Event> sublist = new ArrayList<>();
+         ArrayList<Event> events = (ArrayList<Event>) eventRepository.findAll();
+         for (Event event : events) {
+-            if (event.getCreator().equals(animator)) sublist.add(event);
++            if (event.getCreator().equals(animator.getId())) sublist.add(event);
+         }
+         return sublist;
+     }
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/ProductBoard.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package unicam.IdSProject.repositories;\nimport lombok.AllArgsConstructor;\nimport org.springframework.stereotype.Component;\nimport unicam.IdSProject.models.Product;\nimport unicam.IdSProject.users.Seller;\n\nimport java.util.ArrayList;\nimport java.util.Optional;\n\n/**\n*\n * This class represents a Product Board, it contains all the Products\n *\n * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi\n *\n */\n\n@AllArgsConstructor\npublic class ProductBoard {\n\n    private final ProductRepository productRepository;\n\n    /**\n     * This method returns a list of all the Product in the repository\n     *\n     * @return a list of all the Product in the repository\n     */\n    public ArrayList<Product> getProducts(){\n        return (ArrayList<Product>) productRepository.findAll();\n    }\n    \n    \n    /**\n     * This method adds a new Product to the Product Board\n     *\n     * @param product, the Product to add\n     *\n     * @return true if it is inserted successfully, false otherwise\n     */\n    public boolean addProduct(Product product) {\n        productRepository.save(product);\n        return true;\n    }\n\n    /**\n     * This method removes a Product to the Product Board\n     *\n     * @param product, the Product to remove\n     *\n     * @return true if it is removed successfully, false otherwise\n     */\n    public boolean removeProduct(Product product) {\n        productRepository.delete(product);\n        return true;\n    }\n\n    /**\n     * This method removes a Product to the Product Board given its id\n     *\n     * @param id, the id of the Product to remove\n     *\n     * @return true if it is removed successfully, false otherwise\n     */\n    public boolean removeProduct(Long id) {\n        if(productRepository.existsById(id)){\n            productRepository.deleteById(id);\n            return true;\n        }\n        return false;\n    }\n\n    /**\n     * This method verifies whether a Product is in the Product Board\n     *\n     * @param product, the Product searched for\n     *\n     * @return true if it is contained, false otherwise\n     */\n    public boolean contains(Product product) {\n        return productRepository.existsById(product.getId());\n    }\n\n\n    /**\n     * This method returns a list of all the Products a specific Seller has published\n     *\n     * @param seller, the Seller from witch taking the Products\n     *\n     * @return  the list of Products created by the given Seller\n     */\n    public ArrayList<Product> getProducts(Seller seller) {\n        ArrayList<Product> sublist = new ArrayList<>();\n        ArrayList<Product> products = (ArrayList<Product>) productRepository.findAll();\n        for (Product product : products) {\n            if (product.getCreator().equals(seller)) sublist.add(product);\n        }\n        return sublist;\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/ProductBoard.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/ProductBoard.java
+--- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/ProductBoard.java	(revision c63b1351bded97972f60699ebb57581e9f869d8a)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/ProductBoard.java	(date 1758738124538)
+@@ -92,7 +92,7 @@
+         ArrayList<Product> sublist = new ArrayList<>();
+         ArrayList<Product> products = (ArrayList<Product>) productRepository.findAll();
+         for (Product product : products) {
+-            if (product.getCreator().equals(seller)) sublist.add(product);
++            if (product.getCreator().equals(seller.getId())) sublist.add(product);
+         }
+         return sublist;
+     }
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"CompilerConfiguration\">\n    <annotationProcessing>\n      <profile name=\"Maven default annotation processors profile\" enabled=\"true\">\n        <sourceOutputDir name=\"target/generated-sources/annotations\" />\n        <sourceTestOutputDir name=\"target/generated-test-sources/test-annotations\" />\n        <outputRelativeToContentRoot value=\"true\" />\n        <module name=\"IdSProject\" />\n      </profile>\n    </annotationProcessing>\n  </component>\n  <component name=\"JavacSettings\">\n    <option name=\"ADDITIONAL_OPTIONS_OVERRIDE\">\n      <module name=\"IdSProject\" options=\"-parameters\" />\n    </option>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+--- a/.idea/compiler.xml	(revision c63b1351bded97972f60699ebb57581e9f869d8a)
++++ b/.idea/compiler.xml	(date 1758737500853)
+@@ -2,6 +2,7 @@
+ <project version="4">
+   <component name="CompilerConfiguration">
+     <annotationProcessing>
++      <profile default="true" name="Default" enabled="true" />
+       <profile name="Maven default annotation processors profile" enabled="true">
+         <sourceOutputDir name="target/generated-sources/annotations" />
+         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Distributor.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package unicam.IdSProject.users;\n\nimport unicam.IdSProject.models.ProductBundle;\n\n/**\n*\n* This class represents a Distributor\n*\n* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi\n*/\npublic class Distributor {\n\n    private String name;\n    private final int id;\n\n    /**\n    * This method creates a new Distributor object\n    */\n    public Distributor(int id, String name) {\n\n        this.id = id;\n        this.name = name;\n    }\n\n\n    \n    public int getId() {\n        return id;\n    }\n\n    public ProductBundle createBundle() {\n        return null;\n    }\n\n    public String getName() {\n        return name;\n    }\n\n    public void setName(String name) {\n        this.name = name;\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Distributor.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Distributor.java
+--- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Distributor.java	(revision c63b1351bded97972f60699ebb57581e9f869d8a)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Distributor.java	(date 1758737796800)
+@@ -1,5 +1,7 @@
+ package unicam.IdSProject.users;
+ 
++import lombok.Getter;
++import lombok.Setter;
+ import unicam.IdSProject.models.ProductBundle;
+ 
+ /**
+@@ -8,6 +10,8 @@
+ *
+ * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+ */
++@Getter
++@Setter
+ public class Distributor {
+ 
+     private String name;
+@@ -23,19 +27,10 @@
+     }
+ 
+ 
+-    
+-    public int getId() {
+-        return id;
+-    }
+-
+     public ProductBundle createBundle() {
+         return null;
+     }
+ 
+-    public String getName() {
+-        return name;
+-    }
+-
+     public void setName(String name) {
+         this.name = name;
+     }
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/requests/EventBoughtDTO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/requests/EventBoughtDTO.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/requests/EventBoughtDTO.java
+new file mode 100644
+--- /dev/null	(date 1758737500773)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/requests/EventBoughtDTO.java	(date 1758737500773)
+@@ -0,0 +1,5 @@
++package unicam.IdSProject.dtos.requests;
++
++public class EventBoughtDTO {
++    private Long id;
++}
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/PlatformHandler.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package unicam.IdSProject.users;\n\nimport lombok.Getter;\nimport unicam.IdSProject.models.Mailbox;\n\n/**\n*\n* This class represents the Platform Handler of the marketplace\n*\n* @author Aguiari Erika, Ilaria Morettini, Barchiesi Luca\n*\n*/\npublic class PlatformHandler {\n\n    private Mailbox mailbox;\n\n\n\n    /**\n    * This method creates a new PlatformHandler object\n    */\n    public PlatformHandler(){\n    }\n\n\n    \n    public Mailbox getMailbox() {\n        return mailbox;\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/PlatformHandler.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/PlatformHandler.java
+--- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/PlatformHandler.java	(revision c63b1351bded97972f60699ebb57581e9f869d8a)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/PlatformHandler.java	(date 1758737861349)
+@@ -1,6 +1,7 @@
+ package unicam.IdSProject.users;
+ 
+ import lombok.Getter;
++import lombok.Setter;
+ import unicam.IdSProject.models.Mailbox;
+ 
+ /**
+@@ -10,6 +11,8 @@
+ * @author Aguiari Erika, Ilaria Morettini, Barchiesi Luca
+ *
+ */
++@Getter
++@Setter
+ public class PlatformHandler {
+ 
+     private Mailbox mailbox;
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/AnimatorRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/AnimatorRepository.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/AnimatorRepository.java
+new file mode 100644
+--- /dev/null	(date 1758738790587)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/AnimatorRepository.java	(date 1758738790587)
+@@ -0,0 +1,8 @@
++package unicam.IdSProject.repositories;
++
++import org.springframework.data.repository.CrudRepository;
++import unicam.IdSProject.models.Product;
++import unicam.IdSProject.users.Animator;
++
++public interface AnimatorRepository extends CrudRepository<Animator, Long> {
++}
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/mappers/EventMapper.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package unicam.IdSProject.mappers;\n\nimport org.mapstruct.Mapper;\nimport unicam.IdSProject.dtos.requests.EventCreationDTO;\nimport unicam.IdSProject.dtos.response.EventDTO;\nimport unicam.IdSProject.models.Event;\n\n@Mapper(componentModel = \"spring\")\npublic interface EventMapper {\n    Event toEntityWithAllFields(EventCreationDTO dto);\n    EventDTO toDtoWithAllFields(Event product);\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/mappers/EventMapper.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/mappers/EventMapper.java
+--- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/mappers/EventMapper.java	(revision c63b1351bded97972f60699ebb57581e9f869d8a)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/mappers/EventMapper.java	(date 1758737500777)
+@@ -1,6 +1,7 @@
+ package unicam.IdSProject.mappers;
+ 
+ import org.mapstruct.Mapper;
++import unicam.IdSProject.dtos.requests.EventBoughtDTO;
+ import unicam.IdSProject.dtos.requests.EventCreationDTO;
+ import unicam.IdSProject.dtos.response.EventDTO;
+ import unicam.IdSProject.models.Event;
+@@ -8,5 +9,6 @@
+ @Mapper(componentModel = "spring")
+ public interface EventMapper {
+     Event toEntityWithAllFields(EventCreationDTO dto);
++    Event toEntityWithAllFields(EventBoughtDTO dto);
+     EventDTO toDtoWithAllFields(Event product);
+ }
+\ No newline at end of file
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Buyer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package unicam.IdSProject.users;\n\nimport lombok.Getter;\nimport unicam.IdSProject.models.Event;\nimport unicam.IdSProject.models.Mailbox;\nimport unicam.IdSProject.models.ShoppingCart;\n\n/**\n*\n* This class represents a Buyer\n*\n* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi\n*/\n@Getter\npublic class Buyer {\n    \n    private String name;\n    private ShoppingCart shoppingCart;\n    private Mailbox mailbox;\n    private int id;\n    private static int currentId;\n\n    /**\n    * This method creates a new Buyer object\n    */\n    public Buyer(String name){\n        this.name = name;\n    }\n\n    \n    \n    private static int getCurrentId() {\n        return currentId;\n    }\n\n    public String getName() {\n        return name;\n    }\n\n    public ShoppingCart getShoppingCart(){ return shoppingCart; }\n\n    public int getId() {\n        return id;\n    }\n\n    public Mailbox getMailbox() {\n        return mailbox;\n    }\n\n\n\n\n    /**\n     * This method is used to update the Buyer about the Event status.\n     *\n     * @param event, the Event that is being observed.\n     */\n    public void update(Event event, String message) {\n        this.getMailbox().addMessage(\"message\");\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Buyer.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Buyer.java
+--- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Buyer.java	(revision c63b1351bded97972f60699ebb57581e9f869d8a)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Buyer.java	(date 1758737796796)
+@@ -1,6 +1,7 @@
+ package unicam.IdSProject.users;
+ 
+ import lombok.Getter;
++import lombok.Setter;
+ import unicam.IdSProject.models.Event;
+ import unicam.IdSProject.models.Mailbox;
+ import unicam.IdSProject.models.ShoppingCart;
+@@ -12,6 +13,7 @@
+ * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+ */
+ @Getter
++@Setter
+ public class Buyer {
+     
+     private String name;

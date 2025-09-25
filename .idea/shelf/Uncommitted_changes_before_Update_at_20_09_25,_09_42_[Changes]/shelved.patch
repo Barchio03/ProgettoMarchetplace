@@ -1,0 +1,45 @@
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/Controllers/SellerController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package unicam.IdSProject.Controllers;\n\nimport jakarta.websocket.server.PathParam;\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.http.HttpStatus;\nimport org.springframework.http.ResponseEntity;\nimport org.springframework.web.bind.annotation.RequestBody;\nimport org.springframework.web.bind.annotation.RequestMapping;\nimport unicam.IdSProject.*;\nimport unicam.IdSProject.Models.ProducerProduct;\nimport unicam.IdSProject.Models.Seller;\nimport unicam.IdSProject.Models.TransformerProduct;\n\npublic class SellerController {\n\n    @Autowired\n    private RequestHandler requestHandler;\n    @Autowired\n    private ProductBoard productBoard;\n\n    private Seller seller;\n\n    public SellerController(Seller seller){\n\n\n        this.seller = seller;\n\n    }\n\n\n\n\n    // -- PRODUCER --\n\n    @RequestMapping(value = \"/producer/addProduct\")\n    public ResponseEntity<Object> addProducerProduct(@RequestBody ProducerProduct product){\n        if (seller.getTags().contains(Tag.PRODUCER)) {\n            product.setCreator(seller);\n            if(!productBoard.contains(product)){\n                if (requestHandler.addProduct(product))\n                    return new ResponseEntity<>(\"Prodotto in processo di verifica\", HttpStatus.CREATED);\n                else return new ResponseEntity<>(\"Richiesta già in atto\", HttpStatus.BAD_REQUEST);\n            }\n            return new ResponseEntity<>(\"Il prodotto è già presente\", HttpStatus.BAD_REQUEST);\n        } else return new ResponseEntity<>(\"Non autorizzato\", HttpStatus.UNAUTHORIZED);\n    }\n\n    // -- TRANSFORMER --\n\n    @RequestMapping(value = \"/transformer/addProduct\")\n    public ResponseEntity<Object> addTransformerProduct(@RequestBody TransformerProduct product){\n        if (seller.getTags().contains(Tag.TRANSFORMER)) {\n            product.setCreator(seller);\n            if(!productBoard.contains(product)){\n                if (requestHandler.addProduct(product))\n                    return new ResponseEntity<>(\"Prodotto in processo di verifica\", HttpStatus.CREATED);\n                else return new ResponseEntity<>(\"Richiesta già in atto\", HttpStatus.BAD_REQUEST);\n            }\n            return new ResponseEntity<>(\"Il prodotto è già presente\", HttpStatus.BAD_REQUEST);\n        }\n        return new ResponseEntity<>(\"Non autorizzato\", HttpStatus.UNAUTHORIZED);\n    }\n\n\n    @RequestMapping(value = \"/removeProduct\")\n    public ResponseEntity<Object> removeProduct(@PathParam(\"id\") int id) {\n        if (productBoard.removeProduct(id)){\n            return new ResponseEntity<>(\"Prodotto rimosso con successo\", HttpStatus.OK);\n        }\n        return new ResponseEntity<>(\"Id non pervenuto\", HttpStatus.NOT_FOUND);\n\n    }\n\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/Controllers/SellerController.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/Controllers/SellerController.java
+--- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/Controllers/SellerController.java	(revision 1d8519477bf2e79d13ae322411d2ae25684664bc)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/Controllers/SellerController.java	(date 1758090786378)
+@@ -27,9 +27,6 @@
+ 
+     }
+ 
+-
+-
+-
+     // -- PRODUCER --
+ 
+     @RequestMapping(value = "/producer/addProduct")
+@@ -61,7 +58,6 @@
+         return new ResponseEntity<>("Non autorizzato", HttpStatus.UNAUTHORIZED);
+     }
+ 
+-
+     @RequestMapping(value = "/removeProduct")
+     public ResponseEntity<Object> removeProduct(@PathParam("id") int id) {
+         if (productBoard.removeProduct(id)){
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/ShoppingCart.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package unicam.IdSProject;\n\nimport java.util.ArrayList;\n\n/**\n * This class represents a shopping cart\n *\n * @author Luca Barchiesi, Erika Aguiari, Ilaria Morettini\n */\npublic class ShoppingCart {\n\n    /**\n     * The list of quantified products\n     */\n    private ArrayList<QuantifiedProduct> quantifiedProducts;\n\n    /**\n     * the total price of the shopping cart\n     */\n    private double totalPrice;\n\n    public ShoppingCart(){\n        this.quantifiedProducts = new ArrayList<>();\n    }\n\n    /**\n     * Adds a product to the shopping cart\n     *\n     * @param quantifiedProduct, the product\n     *\n     * @return true if it was added successfully, false otherwise\n     */\n    public boolean addQuantifiedProduct(QuantifiedProduct quantifiedProduct) {\n        if (quantifiedProduct == null) return false;\n        for (QuantifiedProduct product : quantifiedProducts) {\n            if (product.getProduct().equals(quantifiedProduct.getProduct())) {\n                product.setStockNumber(product.getStockNumber()+quantifiedProduct.getStockNumber());\n                return true;\n            }\n        }\n        quantifiedProducts.add(quantifiedProduct);\n        this.calculateTotal();\n        return true;\n    }\n\n    /**\n     * Removes a product from the shopping cart\n     *\n     * @param quantifiedProduct\n     * @returntrue if it was removed successfully, false otherwise\n     */\n    public boolean removeQuantifiedProduct(QuantifiedProduct quantifiedProduct) {\n        quantifiedProducts.remove(quantifiedProduct);\n        this.calculateTotal();\n        return true;\n    }\n\n    /**\n     * @return the total price\n     */\n    public double getTotalPrice() {\n        return totalPrice;\n    }\n\n    //private void setTotalPrice(float totalPrice) { this.totalPrice = totalPrice; }\n\n    /**\n     * @return the list of quantified products\n     */\n    public ArrayList<QuantifiedProduct> getQuantifiedProducts() {\n        return quantifiedProducts;\n    }\n\n    /**\n     * Calculates the total price\n     */\n    private void calculateTotal() {\n        double total = 0;\n        for (QuantifiedProduct quantifiedProduct : quantifiedProducts) {\n            total*=quantifiedProduct.getTotalPrice();\n        }\n        this.totalPrice=total;\n    }\n}\n
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/ShoppingCart.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/ShoppingCart.java
+--- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/ShoppingCart.java	(revision 1d8519477bf2e79d13ae322411d2ae25684664bc)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/ShoppingCart.java	(date 1757877875104)
+@@ -47,7 +47,7 @@
+      * Removes a product from the shopping cart
+      *
+      * @param quantifiedProduct
+-     * @returntrue if it was removed successfully, false otherwise
++     * @return true if it was removed successfully, false otherwise
+      */
+     public boolean removeQuantifiedProduct(QuantifiedProduct quantifiedProduct) {
+         quantifiedProducts.remove(quantifiedProduct);
