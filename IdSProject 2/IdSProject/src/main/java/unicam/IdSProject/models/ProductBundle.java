@@ -7,7 +7,7 @@ import java.util.ArrayList;
 *
 * This class represents a Bundle of Products made by a Distributor
 *
-* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+* @author Erika Aguiari, Luca Barchiesi
 *
 */
 public class ProductBundle extends Product{

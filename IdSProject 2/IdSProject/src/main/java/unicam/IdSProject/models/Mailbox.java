@@ -6,7 +6,7 @@ import java.util.ArrayList;
 *
 * This class represents the Mailbox where users receive messages
 *
-* @author Aguiari Erika, Ilaria Morettini, Barchiesi Luca
+* @author Aguiari Erika, Barchiesi Luca
 *
 */
 public class Mailbox {

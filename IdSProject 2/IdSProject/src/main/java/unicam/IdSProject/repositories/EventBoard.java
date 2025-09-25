@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * This class represents an Event Board, it contains all the Events
  *
- * @author Luca Barchiesi, Erika Aguiari, Ilaria Morettini
+ * @author Luca Barchiesi, Erika Aguiari
  */
 @AllArgsConstructor
 public class EventBoard {

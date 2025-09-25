@@ -14,7 +14,7 @@ import unicam.IdSProject.services.AnimatorService;
 *
 * This class implements the methods for handling all the Animator interaction with the marketplace
 *
-* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+* @author Erika Aguiari, Luca Barchiesi
 *
 */
 

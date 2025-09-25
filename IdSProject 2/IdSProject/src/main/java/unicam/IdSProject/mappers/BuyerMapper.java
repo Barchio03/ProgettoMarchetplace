@@ -7,5 +7,5 @@ import unicam.IdSProject.users.Buyer;
 @Mapper(componentModel = "spring")
 public interface BuyerMapper {
     Buyer toEntityWithAllFields(BuyerDTO dto);
-    BuyerDTO toDtoWithAllFields(Buyer product);
+    BuyerDTO toDtoWithAllFields(Buyer buyer);
 }

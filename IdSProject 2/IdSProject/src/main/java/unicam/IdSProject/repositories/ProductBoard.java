@@ -11,7 +11,7 @@ import java.util.Optional;
 *
  * This class represents a Product Board, it contains all the Products
  *
- * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+ * @author Erika Aguiari, Luca Barchiesi
  *
  */
 

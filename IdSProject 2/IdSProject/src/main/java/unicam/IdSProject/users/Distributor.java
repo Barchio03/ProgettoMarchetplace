@@ -6,7 +6,7 @@ import unicam.IdSProject.models.ProductBundle;
 *
 * This class represents a Distributor
 *
-* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+* @author Erika Aguiari, Luca Barchiesi
 */
 public class Distributor {
 

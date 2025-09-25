@@ -4,7 +4,7 @@ package unicam.IdSProject.visitor;
 *
  * This interface is implemented by those who need to be verified by the Curator
  *
- * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+ * @author Erika Aguiari, Luca Barchiesi
  *
  */
 public interface Visitable {

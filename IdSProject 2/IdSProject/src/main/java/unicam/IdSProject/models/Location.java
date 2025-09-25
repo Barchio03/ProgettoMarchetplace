@@ -3,7 +3,7 @@ package unicam.IdSProject.models;
 /**
  * This class represents the Location expressed with coordinates that a Seller can add to its profile
  *
- * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+ * @author Erika Aguiari, Luca Barchiesi
  *
  */
 public class Location {

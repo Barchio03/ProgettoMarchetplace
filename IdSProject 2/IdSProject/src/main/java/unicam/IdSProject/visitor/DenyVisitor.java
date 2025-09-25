@@ -6,7 +6,7 @@ import unicam.IdSProject.models.Product;
 *
  * This class contains the logic behind the denial of a Visitable object
  *
- * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi 
+ * @author Erika Aguiari, Luca Barchiesi
  *
  */
 public class DenyVisitor implements Visitor {

@@ -6,6 +6,13 @@ import lombok.Getter;
 import lombok.Setter;
 import unicam.IdSProject.users.Buyer;
 
+/**
+ *
+ * This class represents the receipt created after a successful transaction
+ *
+ * @author Erika Aguiari, Luca Barchiesi
+ *
+ */
 @Entity
 @Getter
 @Setter

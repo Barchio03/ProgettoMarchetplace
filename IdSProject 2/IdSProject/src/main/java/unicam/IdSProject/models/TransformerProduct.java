@@ -7,7 +7,7 @@ import lombok.Setter;
 *
 * This class represents a Product made by a Transformer
 *
-* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+* @author Erika Aguiari, Luca Barchiesi
 *
 */
 @Getter

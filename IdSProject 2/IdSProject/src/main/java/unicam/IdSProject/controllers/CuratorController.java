@@ -7,7 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import unicam.IdSProject.services.CuratorService;
 
-
+/**
+ *
+ * This class implements the methods used by the Curator to interact with the marketplace
+ *
+ * @author Erika Aguiari, Luca Barchiesi
+ *
+ */
 @Controller
 @RequiredArgsConstructor
 public class CuratorController {

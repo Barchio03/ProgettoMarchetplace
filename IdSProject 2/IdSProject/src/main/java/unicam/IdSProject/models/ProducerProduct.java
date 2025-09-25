@@ -5,7 +5,7 @@ import unicam.IdSProject.users.Seller;
 /**
  * This class represents a Product made by a Producer
  *
- * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+ * @author Erika Aguiari, Luca Barchiesi
  *
  */
 public class ProducerProduct extends Product {

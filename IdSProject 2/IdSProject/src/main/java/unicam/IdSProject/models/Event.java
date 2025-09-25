@@ -12,7 +12,7 @@ import java.util.ArrayList;
 *
 * This class represents an Event.
 *
-* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+* @author Erika Aguiari, Luca Barchiesi
 *
 */
 public class Event implements Visitable {
@@ -24,35 +24,31 @@ public class Event implements Visitable {
     private ArrayList<Seller> collaborators;
     private ArrayList<Buyer> subscribers;
     private final Long id;
-    private static Long currentId;
 
 
     /**
      * This method creates a new Event object
      */
-    public Event(String name, String description, Animator creator, ArrayList<Seller> collaborators){
+    public Event(String name, String description, Animator creator, ArrayList<Seller> collaborators, Long id){
         this.name=name;
         this.description=description;
         this.creator=creator;
         this.collaborators=collaborators;
-        this.id=currentId++;
+        this.id = id;
     }
 
     /**
      * This method creates a new Event object with a setted number of attendees
      */
-    public Event(String name, String description, Animator creator, ArrayList<Seller> collaborators, int maxAttendees){
+    public Event(String name, String description, Animator creator, ArrayList<Seller> collaborators, Long id, int maxAttendees){
         this.name=name;
         this.description=description;
         this.creator=creator;
         this.collaborators=collaborators;
+        this.id = id;
         this.maxAttendees=maxAttendees;
-        this.id=currentId++;
     }
 
-    private static Long getCurrentId() {
-        return currentId;
-    }
 
     public String getName() {
         return name;

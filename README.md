@@ -6,5 +6,5 @@
 Questa applicazione è figlia di una specifica di un progetto relativa al corso di "Ingegneria del Software" erogato dall'Università degli studi di Camerino.
 
 GeoSpotter è stata pensata, documentata e implementata dal team - **MARCHET PROJECT** - composto da:
-* Erika Aguiari : erika.aguiari@studenti.unicam.it , Matricola: 
+* Erika Aguiari : erika.aguiari@studenti.unicam.it , Matricola: 122628
 * Luca Barchiesi : luca.barchiesi@studenti.unicam.it , Matricola: 123552

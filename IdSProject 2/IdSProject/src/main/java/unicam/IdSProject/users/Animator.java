@@ -6,7 +6,7 @@ import unicam.IdSProject.models.Mailbox;
 *
 * This class represents an Animator
 *
-* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+* @author Erika Aguiari, Luca Barchiesi
 */
 public class Animator {
 

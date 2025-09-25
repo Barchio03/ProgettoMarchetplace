@@ -6,7 +6,7 @@ import unicam.IdSProject.models.Product;
 *
 * This interface declares the methods to visit the concrete visitables (those who implement the Visitable interface)
 *
-* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+* @author Erika Aguiari, Luca Barchiesi
 *
 */
 public interface Visitor {

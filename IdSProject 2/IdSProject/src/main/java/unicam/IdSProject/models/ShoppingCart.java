@@ -7,7 +7,7 @@ import java.util.ArrayList;
 *
 * This class represents a Shopping Cart
 *
-* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+* @author Erika Aguiari, Luca Barchiesi
 *
 */
 public class ShoppingCart {

@@ -10,7 +10,7 @@ import unicam.IdSProject.users.Seller;
 *
 * This class represents a Product.
 *
-* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+* @author Erika Aguiari, Luca Barchiesi
 *
 */
 @Getter

@@ -17,7 +17,7 @@ import unicam.IdSProject.services.BuyerService;
 *
 * This class implements the methods for handling all the Buyer interaction with the marketplace
 *
-* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+* @author Erika Aguiari, Luca Barchiesi
 *
 */
 @Controller

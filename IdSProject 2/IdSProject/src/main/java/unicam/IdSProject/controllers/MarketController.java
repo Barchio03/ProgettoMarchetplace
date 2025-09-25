@@ -22,7 +22,7 @@ import unicam.IdSProject.users.Seller;
 *
 * This class implements the methods and the features of the marketplace
 *
-* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+* @author Erika Aguiari, Luca Barchiesi
 */
 @Controller
 @RequiredArgsConstructor

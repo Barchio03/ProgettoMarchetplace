@@ -9,7 +9,7 @@ import unicam.IdSProject.models.ShoppingCart;
 *
 * This class represents a Buyer
 *
-* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+* @author Erika Aguiari, Luca Barchiesi
 */
 @Getter
 public class Buyer {

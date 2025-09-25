@@ -4,14 +4,14 @@ package unicam.IdSProject.models;
 *
 * This class represents the Product inside a Shopping Cart
 *
-* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+* @author Erika Aguiari, Luca Barchiesi
 *
 */
 public class QuantifiedProduct {
 
     private Product product;
     private int stockNumber;
-    private final double totalPrice;
+    private double totalPrice;
 
     /**
      * This method creates a new QuantifiedProduct object

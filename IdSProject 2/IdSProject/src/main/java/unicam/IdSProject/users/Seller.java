@@ -9,7 +9,7 @@ import java.util.ArrayList;
 *
 * This class represents a Seller
 *
-* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+* @author Erika Aguiari, Luca Barchiesi
 *
 */
 public class Seller {

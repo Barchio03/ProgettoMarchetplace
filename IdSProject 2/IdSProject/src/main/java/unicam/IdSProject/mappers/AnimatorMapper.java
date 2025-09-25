@@ -7,5 +7,5 @@ import unicam.IdSProject.users.Animator;
 @Mapper(componentModel = "spring")
 public interface AnimatorMapper {
     Animator toEntityWithAllFields(AnimatorDTO dto);
-    AnimatorDTO toDtoWithAllFields(Animator product);
+    AnimatorDTO toDtoWithAllFields(Animator animator);
 }

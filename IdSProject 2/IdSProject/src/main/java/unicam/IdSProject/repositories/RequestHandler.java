@@ -9,7 +9,7 @@ import java.util.ArrayList;
 *
 * This class contains the lists of Objects that need to be verified by the Curator
 *
-* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+* @author Erika Aguiari, Luca Barchiesi
 *
 */
 

@@ -7,7 +7,7 @@ import unicam.IdSProject.models.Mailbox;
 *
 * This class represents the Platform Handler of the marketplace
 *
-* @author Aguiari Erika, Ilaria Morettini, Barchiesi Luca
+ * @author Erika Aguiari, Luca Barchiesi
 *
 */
 public class PlatformHandler {

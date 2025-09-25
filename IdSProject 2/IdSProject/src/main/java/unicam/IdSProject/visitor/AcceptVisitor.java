@@ -10,7 +10,7 @@ import unicam.IdSProject.repositories.ProductBoard;
 *
  * This class contains the logic behind the acceptance of a Visitable object
  *
- * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi 
+ * @author Erika Aguiari, Luca Barchiesi
  *
  */
 @Component
