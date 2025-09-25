@@ -10,10 +10,9 @@ import java.util.ArrayList;
 @Data
 public class EventDTO {
     private String name;
-    private Animator creator;
+    private AnimatorDTO creator;
     private int maxAttendees;
     private String description;
-    private ArrayList<Seller> collaborators;
-    private ArrayList<Buyer> subscribers;
+    private String collaborators;
 
 }

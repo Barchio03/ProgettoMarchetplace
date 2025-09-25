@@ -1,4 +1,4 @@
-package unicam.IdSProject.dtos.response;
+package unicam.IdSProject.repositories;
 
 public interface LocationRepository {
 }

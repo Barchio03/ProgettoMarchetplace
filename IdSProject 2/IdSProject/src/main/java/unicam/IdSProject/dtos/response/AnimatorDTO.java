@@ -9,6 +9,5 @@ public class AnimatorDTO
 {
     private String name;
     private String description;
-    private Mailbox mailbox;
 
 }
