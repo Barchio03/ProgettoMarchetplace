@@ -8,7 +8,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import unicam.IdSProject.enumerations.Tag;
-import unicam.IdSProject.models.Location;
 
 import java.util.ArrayList;
 
