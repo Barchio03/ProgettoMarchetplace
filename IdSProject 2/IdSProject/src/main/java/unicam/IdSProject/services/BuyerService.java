@@ -9,7 +9,6 @@ import unicam.IdSProject.ShoppingCart;
 import unicam.IdSProject.dtos.requests.ProductBoughtDTO;
 import unicam.IdSProject.mappers.EventMapper;
 import unicam.IdSProject.mappers.ProductMapper;
-import unicam.IdSProject.models.*;
 import unicam.IdSProject.repositories.MessageRepository;
 import unicam.IdSProject.repositories.ProductBoard;
 import unicam.IdSProject.users.Buyer;
