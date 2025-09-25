@@ -1,7 +1,6 @@
 package unicam.IdSProject.repositories;
 
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
 import unicam.IdSProject.users.Animator;
 import unicam.IdSProject.models.Event;
 

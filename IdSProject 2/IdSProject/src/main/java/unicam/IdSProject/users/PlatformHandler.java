@@ -15,6 +15,7 @@ import unicam.IdSProject.models.Mailbox;
 @Setter
 public class PlatformHandler {
 
+    private String mailCode;
     private Mailbox mailbox;
 
 

@@ -1,11 +1,9 @@
 package unicam.IdSProject.users;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import unicam.IdSProject.models.Mailbox;
 
 /**
 *
@@ -39,7 +37,6 @@ public class Animator {
     public Animator(String name, String description) {
         this.name=name;
         this.description=description;
-        this.mailbox = new Mailbox();
     }
 
 }

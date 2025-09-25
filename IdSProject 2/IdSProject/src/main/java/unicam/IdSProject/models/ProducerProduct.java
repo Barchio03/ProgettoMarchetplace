@@ -3,7 +3,6 @@ package unicam.IdSProject.models;
 import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
-import unicam.IdSProject.users.Seller;
 
 /**
  * This class represents a Product made by a Producer

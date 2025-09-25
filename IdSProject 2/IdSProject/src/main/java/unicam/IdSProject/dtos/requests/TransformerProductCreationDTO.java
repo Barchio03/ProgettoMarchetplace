@@ -2,7 +2,6 @@ package unicam.IdSProject.dtos.requests;
 
 import lombok.Data;
 import unicam.IdSProject.models.Product;
-import unicam.IdSProject.users.Seller;
 
 @Data
 public class TransformerProductCreationDTO {

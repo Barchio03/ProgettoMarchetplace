@@ -6,11 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import unicam.IdSProject.enumerations.Tag;
 import unicam.IdSProject.models.Location;
-import unicam.IdSProject.models.Mailbox;
-
-import java.util.ArrayList;
 
 /**
 *

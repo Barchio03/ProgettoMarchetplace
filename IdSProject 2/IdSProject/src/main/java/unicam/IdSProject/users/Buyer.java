@@ -1,10 +1,12 @@
 package unicam.IdSProject.users;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import unicam.IdSProject.models.Event;
-import unicam.IdSProject.models.Mailbox;
-import unicam.IdSProject.ShoppingCart;
 
 /**
 *
@@ -15,11 +17,16 @@ import unicam.IdSProject.ShoppingCart;
 @Getter
 @Setter
 public class Buyer {
-    
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
+    @NotNull
     private String name;
-    private ShoppingCart shoppingCart;
+    @NotNull
+    private Long shoppingCart;
 //    private Mailbox mailbox;
-    private int id;
+
 
     /**
     * This method creates a new Buyer object
@@ -28,16 +35,6 @@ public class Buyer {
         this.name = name;
     }
 
-
-    public String getName() {
-        return name;
-    }
-
-    public ShoppingCart getShoppingCart(){ return shoppingCart; }
-
-    public int getId() {
-        return id;
-    }
 
 //    public Mailbox getMailbox() {
 //        return mailbox;
@@ -52,6 +49,6 @@ public class Buyer {
      * @param event, the Event that is being observed.
      */
     public void update(Event event, String message) {
-        this.getMailbox().addMessage("message");
+//        this.getMailbox().addMessage("message");
     }
 }

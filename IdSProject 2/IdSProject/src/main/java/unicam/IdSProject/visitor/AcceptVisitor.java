@@ -1,7 +1,5 @@
 package unicam.IdSProject.visitor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import unicam.IdSProject.models.Event;
 import unicam.IdSProject.models.Message;
 import unicam.IdSProject.repositories.AnimatorRepository;

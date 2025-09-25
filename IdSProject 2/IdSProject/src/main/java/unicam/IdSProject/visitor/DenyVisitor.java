@@ -1,6 +1,4 @@
 package unicam.IdSProject.visitor;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import unicam.IdSProject.models.Event;

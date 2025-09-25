@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import unicam.IdSProject.dtos.requests.EventCreationDTO;
-import unicam.IdSProject.dtos.response.EventDTO;
 import unicam.IdSProject.mappers.EventMapper;
 import unicam.IdSProject.models.Event;
 import unicam.IdSProject.repositories.EventBoard;
@@ -27,7 +26,7 @@ public class AnimatorService {
 
     public ResponseEntity<Object> addEvent(EventCreationDTO eventDTO){
         Event event = eventMapper.toEntityWithAllFields(eventDTO);
-        event.setCreator(animator);
+        event.setCreator(animator.getId());
         if(!eventBoard.contains(event)){
             if (requestHandler.addEvent(event)) {
                 return new ResponseEntity<>("Evento in processo di verifica", HttpStatus.CREATED);

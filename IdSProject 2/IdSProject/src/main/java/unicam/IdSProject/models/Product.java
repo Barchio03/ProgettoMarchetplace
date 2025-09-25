@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import unicam.IdSProject.visitor.Visitable;
 import unicam.IdSProject.visitor.Visitor;
-import unicam.IdSProject.users.Seller;
 
 import java.util.Objects;
 

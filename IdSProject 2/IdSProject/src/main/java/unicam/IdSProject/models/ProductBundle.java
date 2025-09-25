@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import lombok.Getter;
 import lombok.Setter;
-import unicam.IdSProject.users.Seller;
 
 import java.util.ArrayList;
 

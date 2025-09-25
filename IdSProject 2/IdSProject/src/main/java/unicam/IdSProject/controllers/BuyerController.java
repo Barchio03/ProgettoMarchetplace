@@ -9,10 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import unicam.IdSProject.dtos.requests.EventBoughtDTO;
 import unicam.IdSProject.dtos.requests.ProductBoughtDTO;
-import unicam.IdSProject.dtos.response.EventDTO;
-import unicam.IdSProject.dtos.response.ProductDTO;
-import unicam.IdSProject.repositories.EventBoard;
-import unicam.IdSProject.repositories.ProductBoard;
 import unicam.IdSProject.services.BuyerService;
 
 /**

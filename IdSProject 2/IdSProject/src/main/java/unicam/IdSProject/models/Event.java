@@ -6,11 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import unicam.IdSProject.visitor.Visitable;
 import unicam.IdSProject.visitor.Visitor;
-import unicam.IdSProject.users.Animator;
-import unicam.IdSProject.users.Buyer;
-import unicam.IdSProject.users.Seller;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -54,17 +50,17 @@ public class Event implements Visitable {
      *
      * @return true if the operation ended successfully, false otherwise.
      */
-    public boolean subscribe(Buyer buyer) {
-        if(maxAttendees!=0) {
-            if(subscribers.size()==maxAttendees)
-                return false;
-        }
-        if (!subscribers.contains(buyer)){
-            subscribers.add(buyer);
-
-            return true;
-        } else return false;
-    }
+//    public boolean subscribe(Buyer buyer) {
+//        if(maxAttendees!=0) {
+//            if(subscribers.size()==maxAttendees)
+//                return false;
+//        }
+//        if (!subscribers.contains(buyer)){
+//            subscribers.add(buyer);
+//
+//            return true;
+//        } else return false;
+//    }
 
 
 
@@ -77,23 +73,23 @@ public class Event implements Visitable {
      * @return true if the operation ended successfully, false otherwise.
      *
      */
-    public boolean unsubscribe(Buyer buyer) {
-        if (subscribers.contains(buyer)){
-            subscribers.remove(buyer);
-            return true;
-        } else return false;
-    }
+//    public boolean unsubscribe(Buyer buyer) {
+//        if (subscribers.contains(buyer)){
+//            subscribers.remove(buyer);
+//            return true;
+//        } else return false;
+//    }
 
     /**
      * This method notifies the subscribers when needed
      *
      * @param message, the message to spread
      */
-    public void notifySubscribers(String message) {
-        for (Buyer sub : subscribers) {
-            sub.update(this, message);
-        }
-    }
+//    public void notifySubscribers(String message) {
+//        for (Buyer sub : subscribers) {
+//            sub.update(this, message);
+//        }
+//    }
 
 
     @Override

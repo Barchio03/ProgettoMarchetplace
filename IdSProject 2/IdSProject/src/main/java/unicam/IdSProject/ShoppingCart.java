@@ -1,5 +1,7 @@
 package unicam.IdSProject;
-import unicam.IdSProject.users.Buyer;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 
@@ -10,32 +12,21 @@ import java.util.ArrayList;
 * @author Erika Aguiari, Luca Barchiesi
 *
 */
+@Getter
+@Setter
+@RequiredArgsConstructor
 public class ShoppingCart {
 
-    private final Buyer buyer;
+    private final String buyer;
     private final ArrayList<QuantifiedProduct> quantifiedProducts;
     private double totalPrice;
 
     /**
     * This method creates a new ShoppingCart object
     */
-    public ShoppingCart(Buyer buyer){
+    public ShoppingCart(String buyer){
         this.buyer = buyer;
         this.quantifiedProducts = new ArrayList<>();
-    }
-
-
-
-    public Buyer getBuyer(){
-        return buyer;
-    }
-    
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public ArrayList<QuantifiedProduct> getQuantifiedProducts() {
-        return quantifiedProducts;
     }
 
     
