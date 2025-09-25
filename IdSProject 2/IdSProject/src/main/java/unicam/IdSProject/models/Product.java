@@ -21,6 +21,7 @@ import java.util.Objects;
 @Setter
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Table(name="products")
 public abstract class Product implements Visitable {
 
     @Id
@@ -37,7 +38,7 @@ public abstract class Product implements Visitable {
     @NotNull
     private int stockNumber;
     @NotNull
-    private Long creator;
+    private String creator;
 
     /**
     * This method creates a new Product object.

@@ -1,5 +1,7 @@
 package unicam.IdSProject;
 
+import lombok.Getter;
+import lombok.Setter;
 import unicam.IdSProject.models.Product;
 
 /**
@@ -9,6 +11,9 @@ import unicam.IdSProject.models.Product;
 * @author Erika Aguiari, Luca Barchiesi
 *
 */
+
+@Getter
+@Setter
 public class QuantifiedProduct {
 
     private Product product;
@@ -23,24 +28,5 @@ public class QuantifiedProduct {
         this.stockNumber=stockNumber;
         this.totalPrice=product.getPrice() * stockNumber;
     }
-
-    
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public int getStockNumber() {
-        return stockNumber;
-    }
-
-    public void setStockNumber(int stockNumber) {
-        this.stockNumber = stockNumber;
-    }
-
-    public double getTotalPrice() { return totalPrice; }
 
 }

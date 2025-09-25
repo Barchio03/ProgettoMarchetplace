@@ -18,9 +18,8 @@ public class Buyer {
     
     private String name;
     private ShoppingCart shoppingCart;
-    private Mailbox mailbox;
+//    private Mailbox mailbox;
     private int id;
-    private static int currentId;
 
     /**
     * This method creates a new Buyer object
@@ -29,11 +28,6 @@ public class Buyer {
         this.name = name;
     }
 
-    
-    
-    private static int getCurrentId() {
-        return currentId;
-    }
 
     public String getName() {
         return name;
@@ -45,9 +39,9 @@ public class Buyer {
         return id;
     }
 
-    public Mailbox getMailbox() {
-        return mailbox;
-    }
+//    public Mailbox getMailbox() {
+//        return mailbox;
+//    }
 
 
 

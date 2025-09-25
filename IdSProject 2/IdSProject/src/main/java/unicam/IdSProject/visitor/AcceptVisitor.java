@@ -3,9 +3,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import unicam.IdSProject.models.Event;
+import unicam.IdSProject.models.Message;
 import unicam.IdSProject.repositories.AnimatorRepository;
 import unicam.IdSProject.repositories.EventBoard;
 import unicam.IdSProject.models.Product;
+import unicam.IdSProject.repositories.MessageRepository;
 import unicam.IdSProject.repositories.ProductBoard;
 
 /**
@@ -19,6 +21,8 @@ import unicam.IdSProject.repositories.ProductBoard;
 @RequiredArgsConstructor
 public class AcceptVisitor implements Visitor {
 
+    private final MessageRepository messageRepository;
+
     private final AnimatorRepository animatorRepository;
 
 
@@ -29,14 +33,14 @@ public class AcceptVisitor implements Visitor {
     @Override
     public void visit(Product product) {
         productBoard.addProduct(product);
-        product.getCreator().getMailbox().addMessage("La tua richiesta per il prodotto "+
-                product.getName()+ " è stata accettata");
+        messageRepository.save(new Message(null, product.getCreator(), "La tua richiesta per il prodotto "+
+                product.getName()+ " è stata accettata"));
     }
 
     @Override
     public void visit(Event event) {
         eventBoard.addEvent(event);
-        animatorRepository.findById(event.getCreator()).getMailbox().addMessage("La tua richiesta per l'evento "+
-                event.getName()+ " è stata accettata");
+        messageRepository.save(new Message(null, event.getCreator(), "La tua richiesta per l'evento "+
+                event.getName()+ " è stata accettata"));
     }
 }

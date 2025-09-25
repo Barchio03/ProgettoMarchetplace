@@ -29,9 +29,9 @@ public class Animator {
     @NotNull
     private String description;
 
-    @JsonInclude()
-    @Transient
-    private final Mailbox mailbox;
+
+//    @Transient
+//    private final Mailbox mailbox;
 
     /**
      * This method creates a new Animator object

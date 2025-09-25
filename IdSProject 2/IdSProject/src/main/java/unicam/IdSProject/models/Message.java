@@ -2,13 +2,15 @@ package unicam.IdSProject.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "messagges")
+@Table(name = "messages")
+@AllArgsConstructor
 public class Message {
 
     @Id

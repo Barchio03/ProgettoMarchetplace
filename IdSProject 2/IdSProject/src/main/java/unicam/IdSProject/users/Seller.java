@@ -37,9 +37,9 @@ public class Seller {
     @NotNull
     private Location location;
 
-    private ArrayList<Tag> tags;
+//    private ArrayList<Tag> tags;
 
-    private final Mailbox mailbox;
+//    private final Mailbox mailbox;
 
 
 
@@ -47,9 +47,9 @@ public class Seller {
     /**
     * This method creates a new Seller object
     */
-    public Seller(String name, String description ) {
-        this.mailbox=new Mailbox();
-    }
+//    public Seller(String name, String description ) {
+//        this.mailbox=new Mailbox();
+//    }
 
 
     @Override
