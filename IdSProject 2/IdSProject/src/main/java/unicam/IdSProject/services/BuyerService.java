@@ -74,6 +74,10 @@ public class BuyerService {
         if (subcriberRepository.existsById(subscriber.getId()))
             return new ResponseEntity<>("Utente già iscritto", HttpStatus.CONFLICT);
 
+        Event event = eventBoard.getEvent(eventBoughtDTO.getId());
+        if (event.getMaxAttendees()=! && event.getMaxAttendees()==event.getAttendees())
+            return new ResponseEntity<>("Ticket Terminati", HttpStatus.NOT_ACCEPTABLE);
+        eventBoard.addSubscriberToEvent(event);
         subcriberRepository.save(subscriber);
         return new ResponseEntity<>("Iscrizione avvenuta con successo", HttpStatus.OK);
 

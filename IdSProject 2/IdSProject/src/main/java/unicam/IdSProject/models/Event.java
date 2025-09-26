@@ -31,14 +31,13 @@ public class Event implements Visitable {
     @NotNull
     private String creator;
     @NotNull
+    private int attendees = 0;
+    @NotNull
     private int maxAttendees;
     @NotNull
     private String description;
     @NotNull
     private String collaborators;
-
-
-//    private ArrayList<Buyer> subscribers;
 
 
 
