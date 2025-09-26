@@ -110,4 +110,12 @@ public class EventBoard {
         return sublist;
     }
 
+    public void addSubscriberToEvent(Event event) {
+    }
+
+    public Event getEvent(Long id) {
+    }
+
+    public void removeSubscriberToEvent(Event event) {
+    }
 }

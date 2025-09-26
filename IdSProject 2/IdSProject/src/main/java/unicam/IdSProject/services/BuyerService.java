@@ -57,7 +57,7 @@ public class BuyerService {
         }
 
         buyer.getShoppingCart().getQuantifiedProducts()
-                .stream().map(quantifiedProduct -> this.decreaseStock(quantifiedProduct));
+                .stream().peek(quantifiedProduct -> this.decreaseStock(quantifiedProduct));
         
         String receipt = this.makeReceipt(buyer.getShoppingCart());
         buyer.getShoppingCart().clear();     
@@ -75,8 +75,9 @@ public class BuyerService {
             return new ResponseEntity<>("Utente già iscritto", HttpStatus.CONFLICT);
 
         Event event = eventBoard.getEvent(eventBoughtDTO.getId());
-        if (event.getMaxAttendees()=! && event.getMaxAttendees()==event.getAttendees())
+        if (event.getMaxAttendees()!= 0 && event.getMaxAttendees()==event.getAttendees())
             return new ResponseEntity<>("Ticket Terminati", HttpStatus.NOT_ACCEPTABLE);
+
         eventBoard.addSubscriberToEvent(event);
         subcriberRepository.save(subscriber);
         return new ResponseEntity<>("Iscrizione avvenuta con successo", HttpStatus.OK);
@@ -91,14 +92,19 @@ public class BuyerService {
         Subscriber subscriber = new Subscriber(new SubId(eventBoughtDTO.getId(), buyer.getId()), eventBoughtDTO.getId(), buyer.getId());
         if (!subcriberRepository.existsById(subscriber.getId()))
             return new ResponseEntity<>("Iscrizione non possibile", HttpStatus.CONFLICT);
+
+        Event event = eventBoard.getEvent(eventBoughtDTO.getId());
+        if (event.getMaxAttendees()!= 0)
+            eventBoard.removeSubscriberToEvent(event);
+
         subcriberRepository.delete(subscriber);
         return new ResponseEntity<>("Disiscrizione avvenuta con successo", HttpStatus.OK);
     }
 
 
-    private QuantifiedProduct decreaseStock(QuantifiedProduct product) {
+    private void decreaseStock(QuantifiedProduct product) {
         product.getProduct().setStockNumber(product.getProduct().getStockNumber()-product.getStockNumber());
-        return product;
+
     }
 
     private String makeReceipt(ShoppingCart shoppingCart){
