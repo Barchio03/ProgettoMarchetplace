@@ -83,6 +83,17 @@ public class EventBoard {
         return eventRepository.existsById(event.getId());
     }
 
+    /**
+     * This method verifies whether an Event is in the Event Board
+     *
+     * @param id, the id of the Event to search for
+     *
+     * @return true if the Event is present, false otherwise
+     */
+    public boolean contains(Long id) {
+        return eventRepository.existsById(id);
+    }
+
      /**
      * This method return a list of Events organized by the same Animator
      *

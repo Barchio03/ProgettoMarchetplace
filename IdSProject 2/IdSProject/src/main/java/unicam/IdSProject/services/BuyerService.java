@@ -7,10 +7,18 @@ import org.springframework.stereotype.Service;
 import unicam.IdSProject.QuantifiedProduct;
 import unicam.IdSProject.ShoppingCart;
 import unicam.IdSProject.dtos.requests.ProductBoughtDTO;
+import unicam.IdSProject.dtos.requests.EventBoughtDTO;
+import unicam.IdSProject.ids.SubId;
 import unicam.IdSProject.mappers.EventMapper;
 import unicam.IdSProject.mappers.ProductMapper;
+import unicam.IdSProject.models.Event;
+import unicam.IdSProject.models.Message;
+import unicam.IdSProject.models.Product;
+import unicam.IdSProject.models.Subscriber;
+import unicam.IdSProject.repositories.EventBoard;
 import unicam.IdSProject.repositories.MessageRepository;
 import unicam.IdSProject.repositories.ProductBoard;
+import unicam.IdSProject.repositories.SubcriberRepository;
 import unicam.IdSProject.users.Buyer;
 
 @RequiredArgsConstructor
@@ -21,8 +29,10 @@ public class BuyerService {
     private final EventMapper eventMapper;
 
     private final MessageRepository messageRepository;
+    private final SubcriberRepository subcriberRepository;
 
     private final ProductBoard productBoard;
+    private final EventBoard eventBoard;
 
     private final Buyer buyer;
 
@@ -55,30 +65,31 @@ public class BuyerService {
 
     }
 
-//    public ResponseEntity<Object> subscribeToEvent(EventBoughtDTO eventBoughtDTO) {
-//        Event event = eventMapper.toEntityWithAllFields(eventBoughtDTO);
-//
-//        if (event == null){
-//            return new ResponseEntity<>("Evento nullo", HttpStatus.BAD_REQUEST);
-//        }
-//
-//        if (event.subscribe(buyer))
-//            return new ResponseEntity<>("Iscrizione avvenuta con successo", HttpStatus.OK);
-//        else return new ResponseEntity<>("Utente già iscritto", HttpStatus.CONFLICT);
-//
-//    }
+    public ResponseEntity<Object> subscribeToEvent(EventBoughtDTO eventBoughtDTO) {
+        if (!eventBoard.contains(eventBoughtDTO.getId())){
+            return new ResponseEntity<>("Evento nullo", HttpStatus.BAD_REQUEST);
+        }
 
-//    public ResponseEntity<Object> unsubscribeToEvent(EventBoughtDTO eventBoughtDTO) {
-//        Event event = eventMapper.toEntityWithAllFields(eventBoughtDTO);
-//
-//        if (event == null){
-//            return new ResponseEntity<>("Evento nullo", HttpStatus.BAD_REQUEST);
-//        }
-//
-//        if (event.unsubscribe(buyer))
-//            return new ResponseEntity<>("Disiscrizione avvenuta con successo", HttpStatus.OK);
-//        else return new ResponseEntity<>("Iscrizione non possibile", HttpStatus.CONFLICT);
-//    }
+        Subscriber subscriber = new Subscriber(new SubId(eventBoughtDTO.getId(), buyer.getId()), eventBoughtDTO.getId(), buyer.getId());
+        if (subcriberRepository.existsById(subscriber.getId()))
+            return new ResponseEntity<>("Utente già iscritto", HttpStatus.CONFLICT);
+
+        subcriberRepository.save(subscriber);
+        return new ResponseEntity<>("Iscrizione avvenuta con successo", HttpStatus.OK);
+
+    }
+
+    public ResponseEntity<Object> unsubscribeToEvent(EventBoughtDTO eventBoughtDTO) {
+        if (!eventBoard.contains(eventBoughtDTO.getId())){
+            return new ResponseEntity<>("Evento nullo", HttpStatus.BAD_REQUEST);
+        }
+
+        Subscriber subscriber = new Subscriber(new SubId(eventBoughtDTO.getId(), buyer.getId()), eventBoughtDTO.getId(), buyer.getId());
+        if (!subcriberRepository.existsById(subscriber.getId()))
+            return new ResponseEntity<>("Iscrizione non possibile", HttpStatus.CONFLICT);
+        subcriberRepository.delete(subscriber);
+        return new ResponseEntity<>("Disiscrizione avvenuta con successo", HttpStatus.OK);
+    }
 
 
     private QuantifiedProduct decreaseStock(QuantifiedProduct product) {
@@ -94,7 +105,7 @@ public class BuyerService {
                     "\nPrezzo: " + qProduct.getProduct().getPrice() * qProduct.getStockNumber() +"€\n\n";
             receipt = receipt + printProduct;
         }
-        receipt = receipt + "Prezzo totale: " + shoppingCart.getTotalPrice() + "$";
+        receipt = receipt + "Prezzo totale: " + shoppingCart.getTotalPrice() + "€";
         messageRepository.save(new Message(null, shoppingCart.getBuyer(),receipt));
         // Aggiungere ReceiptRepository per PlatformHandler
         return receipt;

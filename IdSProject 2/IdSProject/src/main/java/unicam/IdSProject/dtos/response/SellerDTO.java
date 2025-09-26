@@ -1,5 +1,6 @@
 package unicam.IdSProject.dtos.response;
 
+import lombok.Data;
 import unicam.IdSProject.models.Location;
 import unicam.IdSProject.models.Mailbox;
 import unicam.IdSProject.enumerations.Tag;
