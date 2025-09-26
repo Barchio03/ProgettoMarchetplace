@@ -14,6 +14,7 @@ import unicam.IdSProject.repositories.RequestHandler;
 public class CuratorService {
 
     private final AcceptVisitor acceptVisitor;
+    private final DenyVisitor denyVisitor;
     private final RequestHandler requestHandler;
 
     private Visitable toCheck;
@@ -38,7 +39,8 @@ public class CuratorService {
 
     public ResponseEntity<Object> deny(String message) {
         if (toCheck==null) return new ResponseEntity<>("Nessun elemento selezionato", HttpStatus.NOT_FOUND);
-        toCheck.accept(new DenyVisitor(message));
+        denyVisitor.setMessage(message);
+        toCheck.accept(denyVisitor);
         return new ResponseEntity<>("Elemento rifiutato con successo", HttpStatus.OK);
     }
 
