@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb77262b-e258-4074-bd19-d064dcf94648" name="Changes" comment="Adapted Event Actions">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="bb77262b-e258-4074-bd19-d064dcf94648" name="Changes" comment="Added methods to EventBoard">
       <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/EventBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/EventBoard.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -118,13 +116,22 @@
       <option name="project" value="LOCAL" />
       <updated>1758912286332</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added methods to EventBoard">
+      <option name="closed" value="true" />
+      <created>1758915751258</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1758915751258</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Dto related changes" />
     <MESSAGE value="Adapted Event Actions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adapted Event Actions" />
+    <MESSAGE value="Added methods to EventBoard" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added methods to EventBoard" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
