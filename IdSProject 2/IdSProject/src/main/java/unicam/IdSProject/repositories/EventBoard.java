@@ -111,11 +111,16 @@ public class EventBoard {
     }
 
     public void addSubscriberToEvent(Event event) {
+        event.setAttendees(event.getAttendees() + 1);
+        eventRepository.save(event);
     }
 
     public Event getEvent(Long id) {
+        return eventRepository.findById(id).orElseThrow();
     }
 
     public void removeSubscriberToEvent(Event event) {
+        event.setAttendees(event.getAttendees() - 1);
+        eventRepository.save(event);
     }
 }
