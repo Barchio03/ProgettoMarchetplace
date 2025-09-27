@@ -1,13 +1,12 @@
 package unicam.IdSProject.users;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import unicam.IdSProject.enumerations.Tag;
+import unicam.IdSProject.models.Mailbox;
 
 import java.util.ArrayList;
 
@@ -21,6 +20,8 @@ import java.util.ArrayList;
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@Table(name = "sellers")
 public class Seller {
 
     @Id
@@ -38,7 +39,8 @@ public class Seller {
 
     private ArrayList<Tag> tags;
 
-//    private final Mailbox mailbox;
+//    @Transient
+//    private Mailbox mailbox;
 
 
 
@@ -46,9 +48,9 @@ public class Seller {
     /**
     * This method creates a new Seller object
     */
-//    public Seller(String name, String description ) {
-//        this.mailbox=new Mailbox();
-//    }
+    public Seller(String name, String description ) {
+
+    }
 
 
     @Override

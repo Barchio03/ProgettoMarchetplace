@@ -12,18 +12,18 @@ import unicam.IdSProject.repositories.ReceiptRepository;
 @AllArgsConstructor
 public class PlatformHandlerService {
 
-    private final ReceiptRepository receiptRepository;
-
-    private final PlatformHandler platformHandler;
-
-    private Mailbox mailbox;
-
-    public ResponseEntity<Object> getReceipts() {
-        return new ResponseEntity<>(receiptRepository.findAll(), HttpStatus.OK);
-    }
-
-    public ResponseEntity<Object> openMailbox() {
-        return new ResponseEntity<>(mailbox.getMessages(), HttpStatus.OK);
-    }
+//    private final ReceiptRepository receiptRepository;
+//
+//    private final PlatformHandler platformHandler;
+//
+//    private Mailbox mailbox;
+//
+//    public ResponseEntity<Object> getReceipts() {
+//        return new ResponseEntity<>(receiptRepository.findAll(), HttpStatus.OK);
+//    }
+//
+//    public ResponseEntity<Object> openMailbox() {
+//        return new ResponseEntity<>(mailbox.getMessages(), HttpStatus.OK);
+//    }
 
 }

@@ -24,7 +24,7 @@ public class Receipt {
     private Long id;
 
     @NotNull
-    private Buyer buyer;
+    private String buyer;
 
     @NotNull
     private String receipt;

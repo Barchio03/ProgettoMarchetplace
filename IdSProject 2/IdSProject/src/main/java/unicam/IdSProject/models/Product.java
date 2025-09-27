@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Tolerate;
 import unicam.IdSProject.visitor.Visitable;
 import unicam.IdSProject.visitor.Visitor;
 
@@ -45,11 +46,12 @@ public abstract class Product implements Visitable {
     public Product() {}
 
 
+    @Tolerate
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
-
+    @Tolerate
     @Override
     public boolean equals(Object obj){
 

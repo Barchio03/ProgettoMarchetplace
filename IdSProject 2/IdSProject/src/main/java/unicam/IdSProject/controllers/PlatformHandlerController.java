@@ -18,38 +18,38 @@ import unicam.IdSProject.services.PlatformHandlerService;
 @AllArgsConstructor
 public class PlatformHandlerController {
 
-    private final PlatformHandlerService platformHandlerService;
-    private ProductBoard productBoard;
-    private EventBoard eventBoard;
-    
-    /**
-    * This method blocks the application to a specific user
-    */
-    public void blockBuyer() {}
-
-
-    /**
-    * This method unblocks a previously blocked user
-    */
-    public void unblockBuyer() {}
-
-    /**
-     * This method verifies if a receipt has been received
-     *
-     * @return the response of the method
-     */
-    public ResponseEntity<Object> viewReceipts() {
-        return platformHandlerService.getReceipts();
-    }
-
-    /**
-    * This method verifies if a message has been received
-    *
-    * @return the response of the method
-    */
-    public ResponseEntity<Object> viewMessages() {
-        return platformHandlerService.openMailbox();
-    }
+//    private final PlatformHandlerService platformHandlerService;
+//    private ProductBoard productBoard;
+//    private EventBoard eventBoard;
+//
+//    /**
+//    * This method blocks the application to a specific user
+//    */
+//    public void blockBuyer() {}
+//
+//
+//    /**
+//    * This method unblocks a previously blocked user
+//    */
+//    public void unblockBuyer() {}
+//
+//    /**
+//     * This method verifies if a receipt has been received
+//     *
+//     * @return the response of the method
+//     */
+//    public ResponseEntity<Object> viewReceipts() {
+//        return platformHandlerService.getReceipts();
+//    }
+//
+//    /**
+//    * This method verifies if a message has been received
+//    *
+//    * @return the response of the method
+//    */
+//    public ResponseEntity<Object> viewMessages() {
+//        return platformHandlerService.openMailbox();
+//    }
 
 
 }

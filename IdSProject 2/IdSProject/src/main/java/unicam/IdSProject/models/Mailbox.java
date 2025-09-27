@@ -1,5 +1,13 @@
 package unicam.IdSProject.models;
 
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.Tolerate;
+import org.springframework.beans.factory.annotation.Autowired;
+import unicam.IdSProject.repositories.MessageRepository;
+
 import java.util.ArrayList;
 
 /**
@@ -9,42 +17,33 @@ import java.util.ArrayList;
 * @author Aguiari Erika, Barchiesi Luca
 *
 */
+@RequiredArgsConstructor
 public class Mailbox {
 
-    private final ArrayList<String> mailbox;
+    private static MessageRepository messageRepository;
 
-    /**
-     * This method creates a new Mailbox object
-     */
-    public Mailbox(){
-        mailbox = new ArrayList<String>();
-    }
-
-
-    
     /**
      * This method adds a message into the Mailbox
      *
      * @param message, the message to add
      */
-    public void addMessage(String message) {
-            mailbox.add(message);
+    public static void addMessage(String owner, String message) {
+        messageRepository.save(new Message(null, owner, message));
     }
-    
 
     /**
      * This method returns all the messages inside the Mailbox
      *
      * @return the messages inside the Mailbox
      */
-    public ArrayList<String> getMessages() {
-        return mailbox;
+    public static ArrayList<String> getMessages(String owner) {
+        return (ArrayList<String>) messageRepository.findMessagesByReceiver(owner);
     }
 
     /**
      * This method deletes all the messages inside the Mailbox
      */
-    public void refresh() {
-        mailbox.clear();
+    public void refresh(String owner) {
+        messageRepository.deleteAllById(messageRepository.findIdsByReceiver(owner));
     }
 }

@@ -16,6 +16,7 @@ import unicam.IdSProject.services.CuratorService;
  */
 @Controller
 @RequiredArgsConstructor
+@RequestMapping(value = "/curator")
 public class CuratorController {
 
     private final CuratorService curatorService;
@@ -25,7 +26,7 @@ public class CuratorController {
      *
      * @return responce, the Responce Entity for the method
      */
-    @RequestMapping(value="/curator/getProduct")
+    @RequestMapping(value="/getProduct")
     public ResponseEntity<Object> getProduct() {
         return curatorService.getProduct();
     }
@@ -35,7 +36,7 @@ public class CuratorController {
      *
      * @return responce, the Responce Entity for the method
      */
-    @RequestMapping(value="/curator/getEvent")
+    @RequestMapping(value="/getEvent")
     public ResponseEntity<Object> getEvent() {
         return curatorService.getEvent();
     }
@@ -45,7 +46,7 @@ public class CuratorController {
      *
      * @return responce, the Responce Entity for the method
      */
-    @RequestMapping(value="/curator/approve")
+    @RequestMapping(value="/approve")
     public ResponseEntity<Object> approve(){
         return curatorService.accept();
     }
@@ -55,7 +56,7 @@ public class CuratorController {
      *
      * @return responce, the Responce Entity for the method
      */
-    @RequestMapping(value="/curator/deny")
+    @RequestMapping(value="/deny")
     public ResponseEntity<Object> deny( @PathParam("message") String message){
         return curatorService.deny(message);
     }

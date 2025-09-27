@@ -34,6 +34,7 @@ public class BuyerService {
     private final ProductBoard productBoard;
     private final EventBoard eventBoard;
 
+    private final ShoppingCart shoppingCart= new ShoppingCart();
     private final Buyer buyer;
 
 
@@ -45,22 +46,22 @@ public class BuyerService {
 
         QuantifiedProduct qProduct = new QuantifiedProduct(product, quantity);
 
-        if (buyer.getShoppingCart().addQuantifiedProduct(qProduct)) {
+        if (shoppingCart.addQuantifiedProduct(qProduct)) {
             return new ResponseEntity<>("Prodotto aggiunto al carrello", HttpStatus.OK);
         } else return new ResponseEntity<>("Errore", HttpStatus.BAD_REQUEST);
 
     }
 
     public ResponseEntity<Object> buyShoppingCart() {
-        if (buyer.getShoppingCart() == null || buyer.getShoppingCart().getQuantifiedProducts().isEmpty()){
+        if (shoppingCart == null || shoppingCart.getQuantifiedProducts().isEmpty()){
             return new ResponseEntity<>("Carrello Vuoto", HttpStatus.BAD_REQUEST);
         }
 
-        buyer.getShoppingCart().getQuantifiedProducts()
+        shoppingCart.getQuantifiedProducts()
                 .stream().peek(quantifiedProduct -> this.decreaseStock(quantifiedProduct));
         
-        String receipt = this.makeReceipt(buyer.getShoppingCart());
-        buyer.getShoppingCart().clear();     
+        String receipt = this.makeReceipt(shoppingCart);
+        shoppingCart.clear();
         return new ResponseEntity<>(receipt, HttpStatus.OK);
 
     }
@@ -70,8 +71,8 @@ public class BuyerService {
             return new ResponseEntity<>("Evento nullo", HttpStatus.BAD_REQUEST);
         }
 
-        Subscriber subscriber = new Subscriber(new SubId(eventBoughtDTO.getId(), buyer.getId()), eventBoughtDTO.getId(), buyer.getId());
-        if (subcriberRepository.existsById(subscriber.getId()))
+        Subscriber subscriber = new Subscriber(eventBoughtDTO.getId(), buyer.getId());
+        if (subcriberRepository.existsById(new SubId(eventBoughtDTO.getId(), buyer.getId())))
             return new ResponseEntity<>("Utente già iscritto", HttpStatus.CONFLICT);
 
         Event event = eventBoard.getEvent(eventBoughtDTO.getId());
@@ -89,8 +90,8 @@ public class BuyerService {
             return new ResponseEntity<>("Evento nullo", HttpStatus.BAD_REQUEST);
         }
 
-        Subscriber subscriber = new Subscriber(new SubId(eventBoughtDTO.getId(), buyer.getId()), eventBoughtDTO.getId(), buyer.getId());
-        if (!subcriberRepository.existsById(subscriber.getId()))
+        Subscriber subscriber = new Subscriber(eventBoughtDTO.getId(), buyer.getId());
+        if (!subcriberRepository.existsById(new SubId(eventBoughtDTO.getId(), buyer.getId())))
             return new ResponseEntity<>("Iscrizione non possibile", HttpStatus.CONFLICT);
 
         Event event = eventBoard.getEvent(eventBoughtDTO.getId());
@@ -116,8 +117,7 @@ public class BuyerService {
             receipt = receipt + printProduct;
         }
         receipt = receipt + "Prezzo totale: " + shoppingCart.getTotalPrice() + "€";
-        messageRepository.save(new Message(null, shoppingCart.getBuyer(),receipt));
-        // Aggiungere ReceiptRepository per PlatformHandler
+        messageRepository.save(new Message(null, buyer.getId(),receipt));
         return receipt;
     }
 

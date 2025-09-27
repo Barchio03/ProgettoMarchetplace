@@ -14,14 +14,8 @@ import unicam.IdSProject.ids.SubId;
 @AllArgsConstructor
 @IdClass(SubId.class)
 public class Subscriber {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private SubId id;
-
-    @NotNull
-    private Long event;
-
-    @NotNull
-    private String buyer;
+    private Long eventId;
+    @Id
+    private String buyerId;
 }

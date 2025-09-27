@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import unicam.IdSProject.models.Mailbox;
 
 /**
 *
@@ -15,6 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@Table(name="animators")
 public class Animator {
 
     @Id

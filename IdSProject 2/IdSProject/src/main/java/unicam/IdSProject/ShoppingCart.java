@@ -17,15 +17,14 @@ import java.util.ArrayList;
 @RequiredArgsConstructor
 public class ShoppingCart {
 
-    private final String buyer;
+//    private final String buyer;
     private final ArrayList<QuantifiedProduct> quantifiedProducts;
     private double totalPrice;
 
     /**
     * This method creates a new ShoppingCart object
     */
-    public ShoppingCart(String buyer){
-        this.buyer = buyer;
+    public ShoppingCart(){
         this.quantifiedProducts = new ArrayList<>();
     }
 
