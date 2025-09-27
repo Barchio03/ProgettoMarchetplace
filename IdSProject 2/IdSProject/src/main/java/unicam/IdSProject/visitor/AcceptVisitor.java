@@ -1,5 +1,6 @@
 package unicam.IdSProject.visitor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import unicam.IdSProject.models.Event;
 import unicam.IdSProject.models.Message;
 import unicam.IdSProject.repositories.EventBoard;
@@ -15,6 +16,7 @@ import unicam.IdSProject.repositories.ProductBoard;
  *
  */
 
+@Component
 @RequiredArgsConstructor
 public class AcceptVisitor implements Visitor {
 

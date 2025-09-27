@@ -1,6 +1,7 @@
 package unicam.IdSProject.visitor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 import unicam.IdSProject.models.Event;
 import unicam.IdSProject.models.Message;
 import unicam.IdSProject.models.Product;
@@ -14,6 +15,7 @@ import unicam.IdSProject.repositories.MessageRepository;
  *
  */
 @Setter
+@Component
 @RequiredArgsConstructor
 public class DenyVisitor implements Visitor {
 

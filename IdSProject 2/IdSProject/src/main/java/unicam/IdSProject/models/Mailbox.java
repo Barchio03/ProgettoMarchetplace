@@ -37,13 +37,16 @@ public class Mailbox {
      * @return the messages inside the Mailbox
      */
     public static ArrayList<String> getMessages(String owner) {
-        return (ArrayList<String>) messageRepository.findMessagesByReceiver(owner);
+        ArrayList<Message> messages = (ArrayList<Message>) messageRepository.findByReceiver(owner);
+        return (ArrayList<String>) messages.stream().map(Message::getMessage).toList();
     }
 
     /**
      * This method deletes all the messages inside the Mailbox
      */
     public void refresh(String owner) {
-        messageRepository.deleteAllById(messageRepository.findIdsByReceiver(owner));
+        ArrayList<Message> messages = (ArrayList<Message>) messageRepository.findByReceiver(owner);
+        ArrayList<Long> ids = (ArrayList<Long>) messages.stream().map(Message::getId).toList();
+        messageRepository.deleteAllById(ids);
     }
 }

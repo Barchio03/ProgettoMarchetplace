@@ -9,9 +9,9 @@ import unicam.IdSProject.models.Message;
 @Repository
 public interface MessageRepository extends CrudRepository<Message,Long> {
 
-    @Query("select message from messages where owner=:receiver")
-    public Iterable<String> findMessagesByReceiver(@Param("receiver") String receiver);
+//    @Query(value = "select message from Message m where m.owner=:receiver")
+    Iterable<Message> findByReceiver(@Param("receiver") String receiver);
 
-    @Query("select id from messages where owner=:receiver")
-    public Iterable<Long> findIdsByReceiver(@Param("receiver") String receiver);
+//    @Query(value = "select id from Message m where m.owner=:receiver")
+//    public Iterable<Long> findIdsByReceiver(@Param("receiver") String receiver);
 }
