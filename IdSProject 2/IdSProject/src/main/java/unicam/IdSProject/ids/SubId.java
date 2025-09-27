@@ -22,10 +22,9 @@ public class SubId implements Serializable {
         if(!(obj instanceof SubId other)){
             return false;
         }
-        else if (this.getEventId().equals(other.getEventId()) || this.getBuyerId().equals(other.getBuyerId())) {
-            return true;
+        else {
+            return this.getEventId().equals(other.getEventId()) || this.getBuyerId().equals(other.getBuyerId());
         }
-        return false;
     }
 
 }
