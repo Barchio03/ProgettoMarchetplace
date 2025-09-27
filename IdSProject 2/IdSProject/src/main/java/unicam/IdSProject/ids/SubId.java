@@ -1,9 +1,11 @@
 package unicam.IdSProject.ids;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.io.Serializable;
 
+@Getter
 @AllArgsConstructor
 public class SubId implements Serializable {
 
@@ -12,8 +14,17 @@ public class SubId implements Serializable {
 
 
 
-    public boolean equals(Object other){
-        //TODO
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null){
+            return false;
+        }
+        if(!(obj instanceof SubId other)){
+            return false;
+        }
+        else if (this.getEventId().equals(other.getEventId()) || this.getBuyerId().equals(other.getBuyerId())) {
+            return true;
+        }
         return false;
     }
 
