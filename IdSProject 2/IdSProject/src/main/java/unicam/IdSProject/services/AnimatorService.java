@@ -21,7 +21,7 @@ public class AnimatorService {
 
     private final EventBoard eventBoard;
 
-    private final Animator animator;
+    private Animator animator = new Animator("anim1", "Animator", "Just an animator");
 
 
     public ResponseEntity<Object> addEvent(EventCreationDTO eventDTO){

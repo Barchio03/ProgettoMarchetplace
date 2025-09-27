@@ -1,7 +1,5 @@
 package unicam.IdSProject.models;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,19 +12,11 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@Entity
 @AllArgsConstructor
-@Table(name="locations")
 public class Location {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @NotNull
     private String latitude;
 
-    @NotNull
     private String longitude;
 
     @Override

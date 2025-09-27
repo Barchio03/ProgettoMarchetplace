@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import unicam.IdSProject.enumerations.Tag;
+import unicam.IdSProject.models.Location;
 import unicam.IdSProject.models.Mailbox;
 
 import java.util.ArrayList;
@@ -19,38 +20,18 @@ import java.util.ArrayList;
 */
 @Getter
 @Setter
-@Entity
 @AllArgsConstructor
-@Table(name = "sellers")
 public class Seller {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
-    @NotNull
     private String name;
 
-    @NotNull
     private String description;
 
-    @NotNull
-    private Long location;
+    private Location location;
 
     private ArrayList<Tag> tags;
-
-//    @Transient
-//    private Mailbox mailbox;
-
-
-
-    
-    /**
-    * This method creates a new Seller object
-    */
-    public Seller(String name, String description ) {
-
-    }
 
 
     @Override

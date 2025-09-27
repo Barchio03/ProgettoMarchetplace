@@ -8,11 +8,14 @@ import unicam.IdSProject.dtos.requests.ProducerProductCreationDTO;
 import unicam.IdSProject.dtos.requests.TransformerProductCreationDTO;
 import unicam.IdSProject.enumerations.Tag;
 import unicam.IdSProject.mappers.ProductMapper;
+import unicam.IdSProject.models.Location;
 import unicam.IdSProject.models.ProducerProduct;
 import unicam.IdSProject.models.TransformerProduct;
 import unicam.IdSProject.repositories.ProductBoard;
 import unicam.IdSProject.repositories.RequestHandler;
 import unicam.IdSProject.users.Seller;
+
+import java.util.ArrayList;
 
 
 @Service
@@ -25,7 +28,9 @@ public class SellerService {
 
     private final ProductBoard productBoard;
 
-    private final Seller seller;
+    private Seller seller = new Seller("sel1", "Seller", "Just a seller",
+            new Location("43.0000 N", "12.000 E"),
+            new ArrayList<>());
 
 
     public ResponseEntity<Object> addProducerProduct(ProducerProductCreationDTO productDTO){

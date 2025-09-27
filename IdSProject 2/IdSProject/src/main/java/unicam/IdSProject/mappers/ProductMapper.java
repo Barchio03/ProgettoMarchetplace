@@ -19,4 +19,7 @@ public interface ProductMapper {
      TransformerProduct toEntityWithAllFields(TransformerProductCreationDTO dto);
      TransformerProduct toEntityWithAllFields(TransformerProductBoughtDTO dto);
      TransformerProductDTO toDtoWithAllFields(TransformerProduct product);
+
+     ProducerProduct map(Long value);
+     String map(Product value);
 }

@@ -1,6 +1,7 @@
 package unicam.IdSProject.repositories;
 
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 import unicam.IdSProject.users.Animator;
 import unicam.IdSProject.models.Event;
 
@@ -12,6 +13,7 @@ import java.util.ArrayList;
  * @author Erika Aguiari, Luca Barchiesi
  */
 @AllArgsConstructor
+@Component
 public class EventBoard {
 
     private final EventRepository eventRepository ;

@@ -32,7 +32,7 @@ public class BuyerService {
     private final EventBoard eventBoard;
 
     private final ShoppingCart shoppingCart= new ShoppingCart();
-    private final Buyer buyer;
+    private Buyer buyer = new Buyer("buyer1", "Buyer");
 
 
     public ResponseEntity<Object> addProductToShoppingKart(ProductBoughtDTO productBoughtDTO, int quantity) {

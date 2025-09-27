@@ -4,9 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb77262b-e258-4074-bd19-d064dcf94648" name="Changes" comment="Aggiunto metodo toDTO in MarketService">
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/requests/ProductBoughtDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/requests/ProductBoughtDTO.java" afterDir="false" />
+    <list default="true" id="bb77262b-e258-4074-bd19-d064dcf94648" name="Changes" comment="Aggiunti DTOBought e risolti conflitti con il BuyerService">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/EventWrapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/ProductWrapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/response/AnimatorDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/response/BuyerDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/response/EventDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/response/EventDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/response/LocationDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/response/ProducerProductDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/response/ProducerProductDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/response/SellerDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/response/TransformerProductDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/response/TransformerProductDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/mappers/AnimatorMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/mappers/ProductMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/mappers/ProductMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/mappers/SellerMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/AnimatorRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/EventBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/EventBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/LocationRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/ProductBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/ProductBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/SellerRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/AnimatorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/AnimatorService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/BuyerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/BuyerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/SellerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/SellerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Animator.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Animator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Buyer.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Buyer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Seller.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Seller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/visitor/AcceptVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/visitor/AcceptVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/generated-sources/annotations/unicam/IdSProject/mappers/AnimatorMapperImpl.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +41,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -149,8 +174,27 @@
       <option name="project" value="LOCAL" />
       <updated>1758990699582</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Aggiunti DTOBought e risolti conflitti con il BuyerService">
+      <option name="closed" value="true" />
+      <created>1758991576852</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1758991576852</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Dto related changes" />
@@ -159,7 +203,8 @@
     <MESSAGE value="Aggiunti i javadoc ai metodi di EventBoard" />
     <MESSAGE value="aggiunto l'equals alla classe SubId" />
     <MESSAGE value="Aggiunto metodo toDTO in MarketService" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiunto metodo toDTO in MarketService" />
+    <MESSAGE value="Aggiunti DTOBought e risolti conflitti con il BuyerService" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiunti DTOBought e risolti conflitti con il BuyerService" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

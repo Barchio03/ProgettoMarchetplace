@@ -1,5 +1,6 @@
 package unicam.IdSProject.repositories;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 import unicam.IdSProject.models.Product;
 import unicam.IdSProject.users.Seller;
 
@@ -14,6 +15,7 @@ import java.util.ArrayList;
  */
 
 @AllArgsConstructor
+@Component
 public class ProductBoard {
 
     private final ProductRepository productRepository;

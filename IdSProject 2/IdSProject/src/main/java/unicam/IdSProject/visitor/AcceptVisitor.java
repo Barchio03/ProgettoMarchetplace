@@ -2,7 +2,6 @@ package unicam.IdSProject.visitor;
 import lombok.RequiredArgsConstructor;
 import unicam.IdSProject.models.Event;
 import unicam.IdSProject.models.Message;
-import unicam.IdSProject.repositories.AnimatorRepository;
 import unicam.IdSProject.repositories.EventBoard;
 import unicam.IdSProject.models.Product;
 import unicam.IdSProject.repositories.MessageRepository;
@@ -20,9 +19,6 @@ import unicam.IdSProject.repositories.ProductBoard;
 public class AcceptVisitor implements Visitor {
 
     private final MessageRepository messageRepository;
-
-    private final AnimatorRepository animatorRepository;
-
 
     private final ProductBoard productBoard;
 

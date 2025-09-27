@@ -15,28 +15,18 @@ import unicam.IdSProject.models.Mailbox;
 
 @Getter
 @Setter
-@Entity
-@Table(name="animators")
 public class Animator {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @NotNull
     private String name;
 
-    @NotNull
     private String description;
-
-
-//    @Transient
-//    private final Mailbox mailbox;
 
     /**
      * This method creates a new Animator object
      */
-    public Animator(String name, String description) {
+    public Animator(String id, String name, String description) {
         this.name=name;
         this.description=description;
     }

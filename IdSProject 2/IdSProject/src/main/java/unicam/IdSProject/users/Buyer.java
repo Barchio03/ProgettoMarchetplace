@@ -19,21 +19,13 @@ import unicam.IdSProject.visitor.Visitable;
 */
 @Getter
 @Setter
-//@Entity
-@Table(name = "buyers")
 public class Buyer {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-//    @NotNull
+
     private String name;
 
-//    @Transient
-//    private ShoppingCart shoppingCart;
-
-//    @Transient
-//    private Mailbox mailbox;
+    private Mailbox mailbox;
 
     /**
     * This method creates a new Buyer object
@@ -41,14 +33,15 @@ public class Buyer {
     public Buyer(String id, String name){
         this.id = id;
         this.name = name;
+        this.mailbox = new Mailbox();
     }
 
-//    /**
-//     * This method is used to update the Buyer about the Event status.
-//     *
-//     * @param event, the Event that is being observed.
-//     */
-//    public void update(Event event, String message) {
-//        Mailbox.addMessage(this.id, "Notifica da " + event.getName() + ": " + message);
-//    }
+    /**
+     * This method is used to update the Buyer about the Event status.
+     *
+     * @param event, the Event that is being observed.
+     */
+    public void update(Event event, String message) {
+        Mailbox.addMessage(this.id, "Notifica da " + event.getName() + ": " + message);
+    }
 }
