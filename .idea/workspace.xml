@@ -4,92 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb77262b-e258-4074-bd19-d064dcf94648" name="Changes" comment="Changes">
-      <change afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/EventWrapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/ProductWrapper.java" afterDir="false" />
+    <list default="true" id="bb77262b-e258-4074-bd19-d064dcf94648" name="Changes" comment="aggiunto l'equals alla classe SubId">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/requests/EventCreationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/requests/EventCreationDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/requests/TransformerProductCreationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/requests/TransformerProductCreationDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/response/ProducerProductDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/response/ProducerProductDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/response/SellerDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/response/SellerDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/response/TransformerProductDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/response/TransformerProductDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/mappers/EventMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/mappers/EventMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/mappers/ProductMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/mappers/ProductMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/ProducerProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/ProducerProduct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/ProductBundle.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/ProductBundle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/TransformerProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/TransformerProduct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/RequestHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/BuyerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/BuyerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Buyer.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Buyer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/IdSProjectApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/QuantifiedProduct.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/ShoppingCart.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/controllers/AnimatorController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/controllers/BuyerController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/controllers/CuratorController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/controllers/DistributorController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/controllers/MarketController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/controllers/PlatformHandlerController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/controllers/SellerController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/dtos/requests/EventBoughtDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/dtos/requests/EventCreationDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/dtos/requests/ProducerProductCreationDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/dtos/requests/ProductBoughtDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/dtos/requests/TransformerProductCreationDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/dtos/response/AnimatorDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/dtos/response/BuyerDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/dtos/response/EventDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/dtos/response/LocationDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/dtos/response/ProducerProductDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/dtos/response/ProductDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/dtos/response/SellerDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/dtos/response/TransformerProductDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/enumerations/Tag.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/ids/SubId.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/mappers/AnimatorMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/mappers/EventMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/mappers/MessageMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/mappers/ProductMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/mappers/SellerMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/Event.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/Location.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/Mailbox.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/Message.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/ProducerProduct.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/Product.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/ProductBundle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/Receipt.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/Subscriber.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/TransformerProduct.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/AnimatorRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/EventBoard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/EventRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/LocationRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/MessageRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/ProductBoard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/ProductRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/ReceiptRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/RequestHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/SellerRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/SubcriberRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/AnimatorService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/BuyerService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/CuratorService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/DistributorService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/MarketService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/PlatformHandlerService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/SellerService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/users/Animator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/users/Buyer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/users/Distributor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/users/PlatformHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/users/Seller.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/visitor/AcceptVisitor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/visitor/DenyVisitor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/visitor/Visitable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/visitor/Visitor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/MarketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/MarketService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,6 +25,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
