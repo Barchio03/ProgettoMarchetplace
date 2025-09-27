@@ -13,7 +13,7 @@ public class SellerDTO {
     private String name;
     private String description;
     private LocationDTO location;
-    private ArrayList<Tag> tags;
+//    private ArrayList<Tag> tags;
 
 
 

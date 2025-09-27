@@ -13,7 +13,6 @@ import unicam.IdSProject.models.TransformerProduct;
 
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
-     Product toEntityWithAllFields(ProductDTO dto);
      ProductDTO toDtoWithAllFields(Product product);
 
      Product toEntityWithAllFields(ProductBoughtDTO dto);

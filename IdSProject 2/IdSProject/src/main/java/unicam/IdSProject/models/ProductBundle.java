@@ -1,4 +1,5 @@
 package unicam.IdSProject.models;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 @Entity
 @Getter
 @Setter
+@DiscriminatorValue("3")
 public class ProductBundle extends Product{
 
     @ElementCollection(targetClass = Long.class, fetch = FetchType.EAGER)

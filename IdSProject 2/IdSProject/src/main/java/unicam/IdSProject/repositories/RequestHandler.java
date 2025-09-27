@@ -1,4 +1,6 @@
 package unicam.IdSProject.repositories;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 import unicam.IdSProject.models.Event;
 import unicam.IdSProject.models.Product;
 
@@ -11,7 +13,7 @@ import java.util.ArrayList;
 * @author Erika Aguiari, Luca Barchiesi
 *
 */
-
+@Component
 public class RequestHandler {
 
     private final ArrayList<Product> productRequests;
@@ -42,8 +44,8 @@ public class RequestHandler {
      * @return the next Product to verify
      */
     public Product getNextProduct(){
-        Product temp = productRequests.get(0);
-        productRequests.remove(0);
+        Product temp = productRequests.getFirst();
+        productRequests.removeFirst();
         return temp;
     }
 
@@ -64,8 +66,8 @@ public class RequestHandler {
      * @return the next Event to verify
      */
     public Event getNextEvent(){
-        Event temp = eventRequests.get(0);
-        eventRequests.remove(0);
+        Event temp = eventRequests.getFirst();
+        eventRequests.removeFirst();
         return temp;
     }
 }

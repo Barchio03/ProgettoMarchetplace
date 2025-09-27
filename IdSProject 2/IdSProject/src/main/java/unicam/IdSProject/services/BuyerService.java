@@ -39,6 +39,8 @@ public class BuyerService {
 
 
     public ResponseEntity<Object> addProductToShoppingKart(ProductBoughtDTO productBoughtDTO, int quantity) {
+        if (productBoughtDTO)
+
         Product product = productMapper.toEntityWithAllFields(productBoughtDTO);
 
         if (!productBoard.contains(product)) return new ResponseEntity<>("Il prodotto non esiste", HttpStatus.BAD_REQUEST);

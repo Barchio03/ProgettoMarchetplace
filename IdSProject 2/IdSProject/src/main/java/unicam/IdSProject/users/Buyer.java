@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import unicam.IdSProject.ShoppingCart;
 import unicam.IdSProject.models.Event;
 import unicam.IdSProject.models.Mailbox;
+import unicam.IdSProject.visitor.Visitable;
 
 /**
 *

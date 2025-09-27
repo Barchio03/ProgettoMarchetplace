@@ -11,7 +11,7 @@ public class TransformerProductDTO implements ProductDTO {
     private String description;
     private String distributorDescription;
     private int stockNumber;
-    private Seller creator;
-    private Product sourceProduct;
+    private SellerDTO creator;
+    private ProductDTO sourceProduct;
 
 }

@@ -8,6 +8,7 @@ import lombok.experimental.Tolerate;
 import unicam.IdSProject.visitor.Visitable;
 import unicam.IdSProject.visitor.Visitor;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -20,9 +21,12 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="product_type",
+        discriminatorType = DiscriminatorType.INTEGER)
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name="products")
-public abstract class Product implements Visitable {
+public abstract class Product implements Visitable, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

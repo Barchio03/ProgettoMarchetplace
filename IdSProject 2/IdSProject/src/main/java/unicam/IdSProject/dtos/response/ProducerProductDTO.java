@@ -10,6 +10,6 @@ public class ProducerProductDTO implements ProductDTO {
     private String description;
     private String distributorDescription;
     private int stockNumber;
-    private Seller creator;
+    private SellerDTO creator;
 
 }

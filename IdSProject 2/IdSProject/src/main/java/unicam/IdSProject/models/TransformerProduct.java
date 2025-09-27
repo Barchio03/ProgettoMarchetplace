@@ -1,5 +1,6 @@
 package unicam.IdSProject.models;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -15,6 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@DiscriminatorValue("2")
 public class TransformerProduct extends Product {
 
     @NotNull
