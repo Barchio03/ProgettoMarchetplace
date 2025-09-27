@@ -1,0 +1,24 @@
+<changelist name="Uncommitted_changes_before_Update_at_27_09_2025_18_28_[Changes]1" date="1758990562552" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_09_2025_18_28_[Changes]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 27/09/2025 18:28 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/ids/SubId.class" />
+    <option name="AFTER_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/ids/SubId.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_09_2025_18_28_[Changes]1/SubId.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/EventBoard.class" />
+    <option name="AFTER_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/EventBoard.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_09_2025_18_28_[Changes]1/EventBoard.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/Product.class" />
+    <option name="AFTER_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/Product.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_09_2025_18_28_[Changes]1/Product.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/MarketService.class" />
+    <option name="AFTER_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/MarketService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_09_2025_18_28_[Changes]1/MarketService.class" />
+  </binary>
+</changelist>

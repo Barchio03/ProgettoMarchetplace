@@ -1,0 +1,163 @@
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Product.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package unicam.IdSProject.models;\r\n\r\nimport jakarta.persistence.*;\r\nimport jakarta.validation.constraints.NotNull;\r\nimport lombok.Getter;\r\nimport lombok.Setter;\r\nimport lombok.experimental.Tolerate;\r\nimport unicam.IdSProject.visitor.Visitable;\r\nimport unicam.IdSProject.visitor.Visitor;\r\n\r\nimport java.util.Objects;\r\n\r\n/**\r\n*\r\n* This class represents a Product.\r\n*\r\n* @author Erika Aguiari, Luca Barchiesi\r\n*\r\n*/\r\n@Getter\r\n@Setter\r\n@Entity\r\n@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)\r\n@Table(name=\"products\")\r\npublic abstract class Product implements Visitable {\r\n\r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    private Long id;\r\n    @NotNull\r\n    private String name;\r\n    @NotNull\r\n    private float price;\r\n    @NotNull\r\n    private String description;\r\n\r\n    private String distributorDescription;\r\n    @NotNull\r\n    private int stockNumber;\r\n    @NotNull\r\n    private String creator;\r\n\r\n    /**\r\n    * This method creates a new Product object.\r\n    */\r\n    public Product() {}\r\n\r\n\r\n    @Tolerate\r\n    @Override\r\n    public void accept(Visitor visitor) {\r\n        visitor.visit(this);\r\n    }\r\n    @Tolerate\r\n    @Override\r\n    public boolean equals(Object obj){\r\n\r\n        if (obj == null){\r\n            return false;\r\n        }\r\n        if(!(obj instanceof Product product)){\r\n            return false;\r\n        }\r\n        else{\r\n            return Objects.equals(this.id, product.id);\r\n        }\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Product.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Product.java
+--- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Product.java	(revision f49a5b98fe2a6adcdd57c26a7f20a0b7dc35dabd)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Product.java	(date 1758985830360)
+@@ -8,6 +8,7 @@
+ import unicam.IdSProject.visitor.Visitable;
+ import unicam.IdSProject.visitor.Visitor;
+ 
++import java.io.Serializable;
+ import java.util.Objects;
+ 
+ /**
+@@ -22,7 +23,7 @@
+ @Entity
+ @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+ @Table(name="products")
+-public abstract class Product implements Visitable {
++public abstract class Product implements Visitable, Serializable {
+ 
+     @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/MarketService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package unicam.IdSProject.services;\r\n\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.springframework.http.HttpStatus;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.stereotype.Service;\r\nimport unicam.IdSProject.mappers.EventMapper;\r\nimport unicam.IdSProject.mappers.ProductMapper;\r\nimport unicam.IdSProject.repositories.EventBoard;\r\nimport unicam.IdSProject.repositories.ProductBoard;\r\n\r\n@Service\r\n@RequiredArgsConstructor\r\npublic class MarketService {\r\n\r\n    private final ProductMapper productMapper;\r\n\r\n    private final EventMapper eventMapper;\r\n\r\n    private final ProductBoard productBoard;\r\n\r\n    private final EventBoard eventBoard;\r\n\r\n    public ResponseEntity<Object> getProducts(){\r\n        return new ResponseEntity<>(productBoard.getProducts().stream().map(\r\n                product -> productMapper.toDtoWithAllFields(product)\r\n                ).toList(), HttpStatus.OK);\r\n    }\r\n\r\n    public ResponseEntity<Object> getEvents(){\r\n        return new ResponseEntity<>(eventBoard.getEvents().stream().map(\r\n                event -> eventMapper.toDtoWithAllFields(event)\r\n        ).toList(), HttpStatus.OK);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/MarketService.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/MarketService.java
+--- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/MarketService.java	(revision f49a5b98fe2a6adcdd57c26a7f20a0b7dc35dabd)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/MarketService.java	(date 1758990498273)
+@@ -4,11 +4,17 @@
+ import org.springframework.http.HttpStatus;
+ import org.springframework.http.ResponseEntity;
+ import org.springframework.stereotype.Service;
++import unicam.IdSProject.dtos.response.ProductDTO;
+ import unicam.IdSProject.mappers.EventMapper;
+ import unicam.IdSProject.mappers.ProductMapper;
++import unicam.IdSProject.models.ProducerProduct;
++import unicam.IdSProject.models.Product;
++import unicam.IdSProject.models.TransformerProduct;
+ import unicam.IdSProject.repositories.EventBoard;
+ import unicam.IdSProject.repositories.ProductBoard;
+ 
++import java.util.ArrayList;
++
+ @Service
+ @RequiredArgsConstructor
+ public class MarketService {
+@@ -23,13 +29,22 @@
+ 
+     public ResponseEntity<Object> getProducts(){
+         return new ResponseEntity<>(productBoard.getProducts().stream().map(
+-                product -> productMapper.toDtoWithAllFields(product)
++                this::toDTO
+                 ).toList(), HttpStatus.OK);
+     }
+ 
+     public ResponseEntity<Object> getEvents(){
+         return new ResponseEntity<>(eventBoard.getEvents().stream().map(
+-                event -> eventMapper.toDtoWithAllFields(event)
++                eventMapper::toDtoWithAllFields
+         ).toList(), HttpStatus.OK);
+     }
++
++    private ProductDTO toDTO(Product product) {
++        if (product instanceof ProducerProduct){
++            return productMapper.toDtoWithAllFields((ProducerProduct) product);
++        }
++        else{
++            return productMapper.toDtoWithAllFields((TransformerProduct) product);
++        }
++    }
+ }
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/mappers/ProductMapper.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package unicam.IdSProject.mappers;\r\n\r\nimport org.mapstruct.Mapper;\r\nimport unicam.IdSProject.dtos.requests.ProducerProductCreationDTO;\r\nimport unicam.IdSProject.dtos.requests.ProductBoughtDTO;\r\nimport unicam.IdSProject.dtos.response.ProducerProductDTO;\r\nimport unicam.IdSProject.dtos.requests.TransformerProductCreationDTO;\r\nimport unicam.IdSProject.dtos.response.ProductDTO;\r\nimport unicam.IdSProject.dtos.response.TransformerProductDTO;\r\nimport unicam.IdSProject.models.ProducerProduct;\r\nimport unicam.IdSProject.models.Product;\r\nimport unicam.IdSProject.models.TransformerProduct;\r\n\r\n@Mapper(componentModel = \"spring\")\r\npublic interface ProductMapper {\r\n     Product toEntityWithAllFields(ProductDTO dto);\r\n     ProductDTO toDtoWithAllFields(Product product);\r\n\r\n     Product toEntityWithAllFields(ProductBoughtDTO dto);\r\n\r\n     ProducerProduct toEntityWithAllFields(ProducerProductCreationDTO dto);\r\n     ProducerProductDTO toDtoWithAllFields(ProducerProduct product);\r\n\r\n     TransformerProduct toEntityWithAllFields(TransformerProductCreationDTO dto);\r\n     TransformerProductDTO toDtoWithAllFields(TransformerProduct product);\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/mappers/ProductMapper.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/mappers/ProductMapper.java
+--- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/mappers/ProductMapper.java	(revision f49a5b98fe2a6adcdd57c26a7f20a0b7dc35dabd)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/mappers/ProductMapper.java	(date 1758990361362)
+@@ -13,8 +13,6 @@
+ 
+ @Mapper(componentModel = "spring")
+ public interface ProductMapper {
+-     Product toEntityWithAllFields(ProductDTO dto);
+-     ProductDTO toDtoWithAllFields(Product product);
+ 
+      Product toEntityWithAllFields(ProductBoughtDTO dto);
+ 
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"bb77262b-e258-4074-bd19-d064dcf94648\" name=\"Changes\" comment=\"aggiunto l'equals alla classe SubId\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/ids/SubId.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/ids/SubId.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Interface\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n    <option name=\"UPDATE_TYPE\" value=\"REBASE\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;erik-agu&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/Barchio03/ProgettoMarchetplace&quot;,\r\n    &quot;accountId&quot;: &quot;676e0b8e-6166-45d9-9b29-b10c6f631b9e&quot;\r\n  }\r\n}</component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 2\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"33Co6kwtBBN5ViRRRkQozTPKNRG\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Application.IdSProjectApplication.executor&quot;: &quot;Run&quot;,\r\n    &quot;Maven.IdSProject [clean,install,-U].executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;main&quot;,\r\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;,\r\n    &quot;settings.editor.splitter.proportion&quot;: &quot;0.24872579&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"$PROJECT_DIR$/IdSProject 2/IdSProject\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunAnythingCache\">\r\n    <option name=\"myCommands\">\r\n      <command value=\"mvn  clean install -U\" />\r\n    </option>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"IdSProjectApplication\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"unicam.IdSProject.IdSProjectApplication\" />\r\n      <module name=\"IdSProject\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"unicam.IdSProject.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.IdSProjectApplication\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"bb77262b-e258-4074-bd19-d064dcf94648\" name=\"Changes\" comment=\"\" />\r\n      <created>1758830241783</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1758830241783</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Dto related changes\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1758830725737</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1758830725737</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Adapted Event Actions\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1758912286332</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1758912286332</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Added methods to EventBoard\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1758915751258</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1758915751258</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Aggiunti i javadoc ai metodi di EventBoard\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1758916068715</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1758916068715</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"aggiunto l'equals alla classe SubId\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1758963667801</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1758963667801</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"6\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Dto related changes\" />\r\n    <MESSAGE value=\"Adapted Event Actions\" />\r\n    <MESSAGE value=\"Added methods to EventBoard\" />\r\n    <MESSAGE value=\"Aggiunti i javadoc ai metodi di EventBoard\" />\r\n    <MESSAGE value=\"aggiunto l'equals alla classe SubId\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"aggiunto l'equals alla classe SubId\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/IdSProjectApplication.java</url>\r\n          <line>9</line>\r\n          <option name=\"timeStamp\" value=\"1\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision f49a5b98fe2a6adcdd57c26a7f20a0b7dc35dabd)
++++ b/.idea/workspace.xml	(date 1758990361789)
+@@ -5,8 +5,15 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="bb77262b-e258-4074-bd19-d064dcf94648" name="Changes" comment="aggiunto l'equals alla classe SubId">
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/ids/SubId.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/ids/SubId.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/mappers/ProductMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/mappers/ProductMapper.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Product.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/MarketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/MarketService.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/ids/SubId.class" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/ids/SubId.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/Product.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/EventBoard.class" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/EventBoard.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/MarketService.class" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/MarketService.class" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -141,7 +148,15 @@
+       <option name="project" value="LOCAL" />
+       <updated>1758963667801</updated>
+     </task>
+-    <option name="localTasksCounter" value="6" />
++    <task id="LOCAL-00006" summary="aggiunto l'equals alla classe SubId">
++      <option name="closed" value="true" />
++      <created>1758963761896</created>
++      <option name="number" value="00006" />
++      <option name="presentableId" value="LOCAL-00006" />
++      <option name="project" value="LOCAL" />
++      <updated>1758963761896</updated>
++    </task>
++    <option name="localTasksCounter" value="7" />
+     <servers />
+   </component>
+   <component name="VcsManagerConfiguration">
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"MavenProjectsManager\">\r\n    <option name=\"originalFiles\">\r\n      <list>\r\n        <option value=\"$PROJECT_DIR$/IdSProject 2/IdSProject/pom.xml\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_X\" default=\"true\" project-jdk-name=\"openjdk-24\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision f49a5b98fe2a6adcdd57c26a7f20a0b7dc35dabd)
++++ b/.idea/misc.xml	(date 1758985368585)
+@@ -8,7 +8,7 @@
+       </list>
+     </option>
+   </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="openjdk-24" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="openjdk-24" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file

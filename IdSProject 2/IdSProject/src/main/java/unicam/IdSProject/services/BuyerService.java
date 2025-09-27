@@ -6,15 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import unicam.IdSProject.QuantifiedProduct;
 import unicam.IdSProject.ShoppingCart;
-import unicam.IdSProject.dtos.requests.ProductBoughtDTO;
-import unicam.IdSProject.dtos.requests.EventBoughtDTO;
+import unicam.IdSProject.dtos.requests.*;
+import unicam.IdSProject.dtos.response.ProducerProductDTO;
 import unicam.IdSProject.ids.SubId;
 import unicam.IdSProject.mappers.EventMapper;
 import unicam.IdSProject.mappers.ProductMapper;
-import unicam.IdSProject.models.Event;
-import unicam.IdSProject.models.Message;
-import unicam.IdSProject.models.Product;
-import unicam.IdSProject.models.Subscriber;
+import unicam.IdSProject.models.*;
 import unicam.IdSProject.repositories.EventBoard;
 import unicam.IdSProject.repositories.MessageRepository;
 import unicam.IdSProject.repositories.ProductBoard;
@@ -39,9 +36,14 @@ public class BuyerService {
 
 
     public ResponseEntity<Object> addProductToShoppingKart(ProductBoughtDTO productBoughtDTO, int quantity) {
-        if (productBoughtDTO)
+        Product product;
 
-        Product product = productMapper.toEntityWithAllFields(productBoughtDTO);
+        if (productBoughtDTO.getType() == 1){
+            product = productMapper.toEntityWithAllFields(new ProducerProductBoughtDTO(productBoughtDTO.getId()));
+        }
+        else{
+            product =  productMapper.toEntityWithAllFields(new TransformerProductBoughtDTO(productBoughtDTO.getId()));
+        }
 
         if (!productBoard.contains(product)) return new ResponseEntity<>("Il prodotto non esiste", HttpStatus.BAD_REQUEST);
         if (product.getStockNumber() <= quantity) return new ResponseEntity<>("Non ci sono abbastanza scorte di questo prodotto", HttpStatus.BAD_REQUEST); 
