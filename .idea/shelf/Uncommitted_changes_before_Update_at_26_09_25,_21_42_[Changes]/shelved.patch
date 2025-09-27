@@ -1,0 +1,122 @@
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Buyer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package unicam.IdSProject.users;\n\nimport com.fasterxml.jackson.annotation.JsonIgnoreType;\nimport jakarta.persistence.GeneratedValue;\nimport jakarta.persistence.GenerationType;\nimport jakarta.persistence.Id;\nimport jakarta.persistence.Transient;\nimport jakarta.validation.constraints.NotNull;\nimport lombok.Getter;\nimport lombok.Setter;\nimport unicam.IdSProject.ShoppingCart;\nimport unicam.IdSProject.models.Event;\n\n/**\n*\n* This class represents a Buyer\n*\n* @author Erika Aguiari, Luca Barchiesi\n*/\n@Getter\n@Setter\npublic class Buyer {\n\n    @Id\n    @GeneratedValue(strategy = GenerationType.UUID)\n    private String id;\n    @NotNull\n    private String name;\n\n    @Transient\n    private ShoppingCart shoppingCart;\n\n\n    /**\n    * This method creates a new Buyer object\n    */\n    public Buyer(String name){\n        this.name = name;\n    }\n\n    /**\n     * This method is used to update the Buyer about the Event status.\n     *\n     * @param event, the Event that is being observed.\n     */\n    public void update(Event event, String message) {\n//        this.getMailbox().addMessage(message);\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Buyer.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Buyer.java
+--- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Buyer.java	(revision af4f5aebc732a8a855c3b09f3fb910b3acef7990)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Buyer.java	(date 1758915116591)
+@@ -10,6 +10,7 @@
+ import lombok.Setter;
+ import unicam.IdSProject.ShoppingCart;
+ import unicam.IdSProject.models.Event;
++import unicam.IdSProject.models.Mailbox;
+ 
+ /**
+ *
+@@ -30,6 +31,7 @@
+     @Transient
+     private ShoppingCart shoppingCart;
+ 
++    private Mailbox mailbox;
+ 
+     /**
+     * This method creates a new Buyer object
+@@ -44,6 +46,6 @@
+      * @param event, the Event that is being observed.
+      */
+     public void update(Event event, String message) {
+-//        this.getMailbox().addMessage(message);
++        this.getMailbox().addMessage(message);
+     }
+ }
+Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/EventBoard.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package unicam.IdSProject.repositories;\n\nimport lombok.AllArgsConstructor;\nimport unicam.IdSProject.users.Animator;\nimport unicam.IdSProject.models.Event;\n\nimport java.util.ArrayList;\n\n/**\n * This class represents an Event Board, it contains all the Events\n *\n * @author Erika Aguiari, Luca Barchiesi\n */\n@AllArgsConstructor\npublic class EventBoard {\n\n    private final EventRepository eventRepository ;\n\n\n    /**\n     * This method returns a list of all the Event in the repository\n     *\n     * @return a list of all the Event in the repository\n     */\n    public ArrayList<Event> getEvents(){\n        return (ArrayList<Event>) eventRepository.findAll();\n    }\n\n\n    /**\n     * This method adds an Event to the Event Board\n     *\n     * @param event, the Event to add\n     *\n     * @return true if the Event was added successfully, false otherwise\n     */\n    public boolean addEvent(Event event) {\n        if (eventRepository.existsById(event.getId())){\n            return false;\n        }\n        eventRepository.save(event);\n        return true;\n    }\n\n    /**\n     * This method removes an Event from the Event Board\n     *\n     * @param event, the Event to delete\n     *\n     * @return true is the Event was deleted successfully, false otherwise\n     */\n    public boolean removeEvent(Event event) {\n        if (!eventRepository.existsById(event.getId())){\n            return false;\n        }\n        eventRepository.delete(event);\n        return true;\n    }\n\n    /**\n     * This method removes an Event from the Event Board\n     *\n     * @param id, the id of the Event to delete\n     *\n     * @return true is the Event was deleted successfully, false otherwise\n     */\n    public boolean removeEvent(Long id) {\n        if (eventRepository.existsById(id)){\n            return false;\n        }\n        eventRepository.deleteById(id);\n        return true;\n    }\n\n    /**\n     * This method verifies whether an Event is in the Event Board\n     *\n     * @param event, the Event to search for\n     *\n     * @return true if the Event is present, false otherwise\n     */\n    public boolean contains(Event event) {\n        return eventRepository.existsById(event.getId());\n    }\n\n    /**\n     * This method verifies whether an Event is in the Event Board\n     *\n     * @param id, the id of the Event to search for\n     *\n     * @return true if the Event is present, false otherwise\n     */\n    public boolean contains(Long id) {\n        return eventRepository.existsById(id);\n    }\n\n     /**\n     * This method return a list of Events organized by the same Animator\n     *\n     * @param animator, the Animator from witch searching the Events\n     *\n     * @return the list of Events organized by the Animator\n     */\n    public ArrayList<Event> getEvents(Animator animator) {\n        ArrayList<Event> sublist = new ArrayList<>();\n        ArrayList<Event> events = (ArrayList<Event>) eventRepository.findAll();\n        for (Event event : events) {\n            if (event.getCreator().equals(animator.getId())) sublist.add(event);\n        }\n        return sublist;\n    }\n\n    public void addSubscriberToEvent(Event event) {\n    }\n\n    public Event getEvent(Long id) {\n    }\n\n    public void removeSubscriberToEvent(Event event) {\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/EventBoard.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/EventBoard.java
+--- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/EventBoard.java	(revision af4f5aebc732a8a855c3b09f3fb910b3acef7990)
++++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/EventBoard.java	(date 1758915769926)
+@@ -111,9 +111,12 @@
+     }
+ 
+     public void addSubscriberToEvent(Event event) {
++        event.setAttendees(event.getAttendees()+1);
++        eventRepository.save(event);
+     }
+ 
+     public Event getEvent(Long id) {
++        return eventRepository.findById(id).orElseThrow();
+     }
+ 
+     public void removeSubscriberToEvent(Event event) {
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"bb77262b-e258-4074-bd19-d064dcf94648\" name=\"Changes\" comment=\"Adapted Event Actions 2\">\n      <change beforePath=\"$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/BuyerService.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/BuyerService.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Buyer.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Buyer.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Interface\" />\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n    <option name=\"UPDATE_TYPE\" value=\"REBASE\" />\n  </component>\n  <component name=\"GitHubPullRequestSearchHistory\">{\n  &quot;lastFilter&quot;: {\n    &quot;state&quot;: &quot;OPEN&quot;,\n    &quot;assignee&quot;: &quot;erik-agu&quot;\n  }\n}</component>\n  <component name=\"GithubPullRequestsUISettings\">{\n  &quot;selectedUrlAndAccountId&quot;: {\n    &quot;url&quot;: &quot;https://github.com/Barchio03/ProgettoMarchetplace.git&quot;,\n    &quot;accountId&quot;: &quot;1b032380-7267-4e1f-9dfd-10c5784ac6c3&quot;\n  }\n}</component>\n  <component name=\"ProjectColorInfo\">{\n  &quot;associatedIndex&quot;: 2\n}</component>\n  <component name=\"ProjectId\" id=\"33Co6kwtBBN5ViRRRkQozTPKNRG\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"Application.IdSProjectApplication.executor\": \"Run\",\n    \"Maven.IdSProject [clean,install,-U].executor\": \"Run\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"RunOnceActivity.git.unshallow\": \"true\",\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\n    \"git-widget-placeholder\": \"main\",\n    \"kotlin-language-version-configured\": \"true\",\n    \"project.structure.last.edited\": \"Project\",\n    \"project.structure.proportion\": \"0.15\",\n    \"project.structure.side.proportion\": \"0.4218391\",\n    \"settings.editor.selected.configurable\": \"reference.projectsettings.compiler.annotationProcessors\",\n    \"settings.editor.splitter.proportion\": \"0.24872579\"\n  }\n}]]></component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/IdSProject 2/IdSProject\" />\n    </key>\n  </component>\n  <component name=\"RunAnythingCache\">\n    <option name=\"myCommands\">\n      <command value=\"mvn  clean install -U\" />\n    </option>\n  </component>\n  <component name=\"RunManager\">\n    <configuration name=\"IdSProjectApplication\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"unicam.IdSProject.IdSProjectApplication\" />\n      <module name=\"IdSProject\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"unicam.IdSProject.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Application.IdSProjectApplication\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"bb77262b-e258-4074-bd19-d064dcf94648\" name=\"Changes\" comment=\"\" />\n      <created>1758830241783</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1758830241783</updated>\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"Dto related changes\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1758830725737</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1758830725737</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"Adapted Event Actions\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1758912286332</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1758912286332</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"Adapted Event Actions 2\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1758913491038</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1758913491038</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"4\" />\n    <servers />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"Dto related changes\" />\n    <MESSAGE value=\"Adapted Event Actions\" />\n    <MESSAGE value=\"Adapted Event Actions 2\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Adapted Event Actions 2\" />\n  </component>\n  <component name=\"XDebuggerManager\">\n    <breakpoint-manager>\n      <breakpoints>\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\n          <url>file://$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/IdSProjectApplication.java</url>\n          <line>9</line>\n          <option name=\"timeStamp\" value=\"1\" />\n        </line-breakpoint>\n      </breakpoints>\n    </breakpoint-manager>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision af4f5aebc732a8a855c3b09f3fb910b3acef7990)
++++ b/.idea/workspace.xml	(date 1758915769994)
+@@ -4,8 +4,9 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="bb77262b-e258-4074-bd19-d064dcf94648" name="Changes" comment="Adapted Event Actions 2">
+-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/BuyerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/BuyerService.java" afterDir="false" />
++    <list default="true" id="bb77262b-e258-4074-bd19-d064dcf94648" name="Changes" comment="Fixed Deny Visitor">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/EventBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/EventBoard.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Buyer.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/users/Buyer.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -23,7 +24,6 @@
+   </component>
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+-    <option name="UPDATE_TYPE" value="REBASE" />
+   </component>
+   <component name="GitHubPullRequestSearchHistory">{
+   &quot;lastFilter&quot;: {
+@@ -125,14 +125,32 @@
+       <option name="project" value="LOCAL" />
+       <updated>1758913491038</updated>
+     </task>
+-    <option name="localTasksCounter" value="4" />
++    <task id="LOCAL-00004" summary="Adapted Event Actions 3">
++      <option name="closed" value="true" />
++      <created>1758914492845</created>
++      <option name="number" value="00004" />
++      <option name="presentableId" value="LOCAL-00004" />
++      <option name="project" value="LOCAL" />
++      <updated>1758914492845</updated>
++    </task>
++    <task id="LOCAL-00005" summary="Fixed Deny Visitor">
++      <option name="closed" value="true" />
++      <created>1758914743157</created>
++      <option name="number" value="00005" />
++      <option name="presentableId" value="LOCAL-00005" />
++      <option name="project" value="LOCAL" />
++      <updated>1758914743157</updated>
++    </task>
++    <option name="localTasksCounter" value="6" />
+     <servers />
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="Dto related changes" />
+     <MESSAGE value="Adapted Event Actions" />
+     <MESSAGE value="Adapted Event Actions 2" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Adapted Event Actions 2" />
++    <MESSAGE value="Adapted Event Actions 3" />
++    <MESSAGE value="Fixed Deny Visitor" />
++    <option name="LAST_COMMIT_MESSAGE" value="Fixed Deny Visitor" />
+   </component>
+   <component name="XDebuggerManager">
+     <breakpoint-manager>
