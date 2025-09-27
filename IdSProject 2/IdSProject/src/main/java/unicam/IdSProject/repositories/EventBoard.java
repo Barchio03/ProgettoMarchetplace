@@ -97,7 +97,7 @@ public class EventBoard {
      /**
      * This method return a list of Events organized by the same Animator
      *
-     * @param animator, the Animator from witch searching the Events
+     * @param animator, the Animator from which searching the Events
      *
      * @return the list of Events organized by the Animator
      */
@@ -110,17 +110,36 @@ public class EventBoard {
         return sublist;
     }
 
+    /**
+     * This method adds a subscriber to the number of total attendees
+     *
+     * @param event, the Event from which adding a subscriber
+     */
     public void addSubscriberToEvent(Event event) {
         event.setAttendees(event.getAttendees() + 1);
         eventRepository.save(event);
     }
 
-    public Event getEvent(Long id) {
-        return eventRepository.findById(id).orElseThrow();
-    }
-
+    /**
+     * This method removes a subscriber from the number of total attendees
+     *
+     * @param event, the Event from which removing a subscriber
+     */
     public void removeSubscriberToEvent(Event event) {
         event.setAttendees(event.getAttendees() - 1);
         eventRepository.save(event);
     }
+
+    /**
+     * This method return the Event by its id
+     *
+     * @param id, the id of the Event
+     *
+     * @return the Event searched
+     */
+    public Event getEvent(Long id) {
+        return eventRepository.findById(id).orElseThrow();
+    }
+
+
 }

@@ -1,24 +1,30 @@
 package unicam.IdSProject.ids;
 
-import jakarta.persistence.Entity;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.io.Serializable;
 
-
+@Getter
 @AllArgsConstructor
 public class SubId implements Serializable {
-    @NotNull
+
     private Long eventId;
-    @NotNull
     private String buyerId;
 
 
 
-    public boolean equals(Object other){
-        //TODO
-        return false;
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null){
+            return false;
+        }
+        if(!(obj instanceof SubId other)){
+            return false;
+        }
+        else {
+            return this.getEventId().equals(other.getEventId()) || this.getBuyerId().equals(other.getBuyerId());
+        }
     }
 
 }
