@@ -37,9 +37,9 @@ public class EventBoard {
      * @return true if the Event was added successfully, false otherwise
      */
     public boolean addEvent(Event event) {
-        if (eventRepository.existsById(event.getId())){
-            return false;
-        }
+//        if (eventRepository.existsById(event.getId())){
+//            return false;
+//        }
         eventRepository.save(event);
         return true;
     }
@@ -82,7 +82,7 @@ public class EventBoard {
      * @return true if the Event is present, false otherwise
      */
     public boolean contains(Event event) {
-        return eventRepository.existsById(event.getId());
+        return eventRepository.existsByName(event.getName()) && eventRepository.existsByCreator(event.getCreator());
     }
 
     /**

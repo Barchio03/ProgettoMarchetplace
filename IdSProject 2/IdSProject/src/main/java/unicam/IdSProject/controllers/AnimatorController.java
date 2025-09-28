@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import unicam.IdSProject.dtos.requests.EventCreationDTO;
+import unicam.IdSProject.dtos.requests.EventCreatedDTO;
 import unicam.IdSProject.services.AnimatorService;
 
 /**
@@ -34,7 +34,7 @@ public class AnimatorController {
      * @return ResponseEntity<Object>, the response about the procedure
      */
     @PostMapping(value = "/addEvent")
-    public ResponseEntity<Object> addEvent(@RequestBody EventCreationDTO event){
+    public ResponseEntity<Object> addEvent(@RequestBody EventCreatedDTO event){
         return animatorService.addEvent(event);
     }
 

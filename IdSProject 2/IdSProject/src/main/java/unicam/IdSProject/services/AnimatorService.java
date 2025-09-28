@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import unicam.IdSProject.dtos.requests.EventCreationDTO;
+import unicam.IdSProject.dtos.requests.EventCreatedDTO;
 import unicam.IdSProject.mappers.EventMapper;
 import unicam.IdSProject.models.Event;
 import unicam.IdSProject.repositories.EventBoard;
@@ -24,7 +24,7 @@ public class AnimatorService {
     private Animator animator = new Animator("anim1", "Animator", "Just an animator");
 
 
-    public ResponseEntity<Object> addEvent(EventCreationDTO eventDTO){
+    public ResponseEntity<Object> addEvent(EventCreatedDTO eventDTO){
         Event event = eventMapper.toEntityWithAllFields(eventDTO);
         event.setCreator(animator.getId());
         if(!eventBoard.contains(event)){
