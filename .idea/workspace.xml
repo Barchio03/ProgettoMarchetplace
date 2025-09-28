@@ -4,18 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb77262b-e258-4074-bd19-d064dcf94648" name="Changes" comment="h2 changes">
+    <list default="true" id="bb77262b-e258-4074-bd19-d064dcf94648" name="Changes" comment="events changes">
+      <change afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/requests/EventCreatedDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/requests/EventCreationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/requests/EventCreationDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/EventBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/EventBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/EventRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/EventRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/AnimatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/AnimatorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/requests/EventCreationDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/mappers/EventMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/mappers/EventMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/AnimatorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/AnimatorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/EventBoard.class" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/EventBoard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/EventRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/EventRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/users/Animator.class" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/users/Animator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/controllers/AnimatorController.class" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/controllers/AnimatorController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/dtos/requests/EventCreationDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/mappers/EventMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/mappers/EventMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/mappers/EventMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/mappers/EventMapperImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/AnimatorService.class" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/AnimatorService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/generated-sources/annotations/unicam/IdSProject/mappers/EventMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/generated-sources/annotations/unicam/IdSProject/mappers/EventMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/generated-sources/annotations/unicam/IdSProject/mappers/ProductMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/generated-sources/annotations/unicam/IdSProject/mappers/ProductMapperImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,12 +41,12 @@
     &quot;assignee&quot;: &quot;erik-agu&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Barchio03/ProgettoMarchetplace&quot;,
-    &quot;accountId&quot;: &quot;676e0b8e-6166-45d9-9b29-b10c6f631b9e&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Barchio03/ProgettoMarchetplace.git",
+    "accountId": "1b032380-7267-4e1f-9dfd-10c5784ac6c3"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -57,7 +58,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.IdSProjectApplication.executor": "Debug",
+    "Application.IdSProjectApplication.executor": "Run",
     "Maven.IdSProject [clean,install,-U].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -166,7 +167,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759067730013</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="events changes">
+      <option name="closed" value="true" />
+      <created>1759069651481</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1759069651481</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -177,7 +186,8 @@
     <MESSAGE value="aggiunto l'equals alla classe SubId" />
     <MESSAGE value="Modifiche generiche delle chiamate http" />
     <MESSAGE value="h2 changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="h2 changes" />
+    <MESSAGE value="events changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="events changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

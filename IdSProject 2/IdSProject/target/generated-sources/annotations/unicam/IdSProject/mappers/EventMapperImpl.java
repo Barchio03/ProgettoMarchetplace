@@ -2,20 +2,20 @@ package unicam.IdSProject.mappers;
 
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
-import unicam.IdSProject.dtos.requests.EventCreationDTO;
+import unicam.IdSProject.dtos.requests.EventCreatedDTO;
 import unicam.IdSProject.dtos.response.EventDTO;
 import unicam.IdSProject.models.Event;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-09-28T16:20:58+0200",
+    date = "2025-09-28T16:34:28+0200",
     comments = "version: 1.6.3, compiler: javac, environment: Java 24.0.2 (Oracle Corporation)"
 )
 @Component
 public class EventMapperImpl implements EventMapper {
 
     @Override
-    public Event toEntityWithAllFields(EventCreationDTO dto) {
+    public Event toEntityWithAllFields(EventCreatedDTO dto) {
         if ( dto == null ) {
             return null;
         }
@@ -24,6 +24,8 @@ public class EventMapperImpl implements EventMapper {
 
         event.setName( dto.getName() );
         event.setMaxAttendees( dto.getMaxAttendees() );
+        event.setDescription( dto.getDescription() );
+        event.setCollaborators( dto.getCollaborators() );
 
         return event;
     }
