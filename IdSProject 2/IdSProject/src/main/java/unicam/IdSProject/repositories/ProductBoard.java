@@ -1,7 +1,9 @@
 package unicam.IdSProject.repositories;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
+import unicam.IdSProject.models.ProducerProduct;
 import unicam.IdSProject.models.Product;
+import unicam.IdSProject.models.TransformerProduct;
 import unicam.IdSProject.users.Seller;
 
 import java.util.ArrayList;
@@ -19,6 +21,8 @@ import java.util.ArrayList;
 public class ProductBoard {
 
     private final ProductRepository productRepository;
+    private final ProducerProductRepository producerProductRepository;
+    private final TransformerProductRepository transformerProductRepository;
 
     /**
      * This method returns a list of all the Product in the repository
@@ -69,6 +73,12 @@ public class ProductBoard {
         return false;
     }
 
+    public Product getProduct(Long id) {
+        Product product = productRepository.findById(id).orElseThrow();
+        if (producerProductRepository.existsById(id)) return (ProducerProduct) product;
+        else return (TransformerProduct) product;
+    }
+
     /**
      * This method verifies whether a Product is in the Product Board
      *
@@ -78,6 +88,17 @@ public class ProductBoard {
      */
     public boolean contains(Product product) {
         return productRepository.existsByName(product.getName()) && productRepository.existsByCreator(product.getCreator());
+    }
+
+    /**
+     * This method verifies whether a Product is in the Product Board
+     *
+     * @param id, the Product searched for
+     *
+     * @return true if it is contained, false otherwise
+     */
+    public boolean contains(Long id) {
+        return productRepository.existsById(id);
     }
 
 

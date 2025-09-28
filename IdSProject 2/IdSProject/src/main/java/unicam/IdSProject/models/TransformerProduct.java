@@ -20,7 +20,7 @@ import lombok.Setter;
 public class TransformerProduct extends Product {
 
     @NotNull
-    private Product sourceProduct;
+    private String sourceProduct;
 
     /**
     * This method creates a new TrasformerProduct object

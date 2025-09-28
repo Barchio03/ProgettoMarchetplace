@@ -23,7 +23,6 @@ import unicam.IdSProject.users.Buyer;
 public class BuyerService {
 
     private final ProductMapper productMapper;
-    private final EventMapper eventMapper;
 
     private final MessageRepository messageRepository;
     private final SubcriberRepository subcriberRepository;
@@ -35,25 +34,26 @@ public class BuyerService {
     private Buyer buyer = new Buyer("buyer1", "Buyer");
 
 
-    public ResponseEntity<Object> addProductToShoppingKart(ProductBoughtDTO productBoughtDTO, int quantity) {
-        Product product;
+//    public ResponseEntity<Object> addProducerProductToShoppingCart(Long id, int quantity) {
+////        ProducerProduct product = productMapper.toEntityWithAllFields(new ProducerProductBoughtDTO(productBoughtDTO.getId()));
+//        return addProductToShoppingCart(id, quantity);
+//    }
+//
+//    public ResponseEntity<Object> addTransformerProductToShoppingCart(ProductBoughtDTO productBoughtDTO, int quantity) {
+//        Product product =  productMapper.toEntityWithAllFields(new TransformerProductBoughtDTO(productBoughtDTO.getId()));
+//        return addProductToShoppingCart(product, quantity);
+//    }
 
-        if (productBoughtDTO.getType() == 1){
-            product = productMapper.toEntityWithAllFields(new ProducerProductBoughtDTO(productBoughtDTO.getId()));
-        }
-        else{
-            product =  productMapper.toEntityWithAllFields(new TransformerProductBoughtDTO(productBoughtDTO.getId()));
-        }
-
-        if (!productBoard.contains(product)) return new ResponseEntity<>("Il prodotto non esiste", HttpStatus.BAD_REQUEST);
-        if (product.getStockNumber() <= quantity) return new ResponseEntity<>("Non ci sono abbastanza scorte di questo prodotto", HttpStatus.BAD_REQUEST); 
+    public ResponseEntity<Object> addProductToShoppingCart(Long id, int quantity) {
+        if (!productBoard.contains(id)) return new ResponseEntity<>("Il prodotto non esiste", HttpStatus.BAD_REQUEST);
+        Product product = productBoard.getProduct(id);
+        if (product.getStockNumber() <= quantity) return new ResponseEntity<>("Non ci sono abbastanza scorte di questo prodotto", HttpStatus.BAD_REQUEST);
 
         QuantifiedProduct qProduct = new QuantifiedProduct(product, quantity);
 
         if (shoppingCart.addQuantifiedProduct(qProduct)) {
             return new ResponseEntity<>("Prodotto aggiunto al carrello", HttpStatus.OK);
         } else return new ResponseEntity<>("Errore", HttpStatus.BAD_REQUEST);
-
     }
 
     public ResponseEntity<Object> buyShoppingCart() {

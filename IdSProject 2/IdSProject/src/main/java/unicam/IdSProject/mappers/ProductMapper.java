@@ -13,13 +13,11 @@ import unicam.IdSProject.models.TransformerProduct;
 public interface ProductMapper {
 
      ProducerProduct toEntityWithAllFields(ProducerProductCreationDTO dto);
-     ProducerProduct toEntityWithAllFields(ProducerProductBoughtDTO dto);
+//     ProducerProduct toEntityWithAllFields(ProducerProductBoughtDTO dto);
      ProducerProductDTO toDtoWithAllFields(ProducerProduct product);
 
      TransformerProduct toEntityWithAllFields(TransformerProductCreationDTO dto);
-     TransformerProduct toEntityWithAllFields(TransformerProductBoughtDTO dto);
+//     TransformerProduct toEntityWithAllFields(TransformerProductBoughtDTO dto);
      TransformerProductDTO toDtoWithAllFields(TransformerProduct product);
 
-     ProducerProduct map(Long value);
-     String map(Product value);
 }

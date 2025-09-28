@@ -29,13 +29,13 @@ public class BuyerController {
     /**
      * This method adds a Product to the Shopping Cart.
      *
-     * @param productDTO, the Product that needs to be added.
+     * @param id, the Product that needs to be added.
      *
      * @return the response of the method
      */
     @PostMapping(value = "/addToShoppingCart")
-    public ResponseEntity<Object> addToShoppingCart(@RequestBody ProductBoughtDTO productDTO, @PathParam("quantity") int quantity) {
-        return buyerService.addProductToShoppingKart(productDTO, quantity);
+    public ResponseEntity<Object> addToShoppingCart(@RequestBody Long id, @PathParam("quantity") int quantity) {
+        return buyerService.addProductToShoppingCart(id, quantity);
     }
 
     /**
