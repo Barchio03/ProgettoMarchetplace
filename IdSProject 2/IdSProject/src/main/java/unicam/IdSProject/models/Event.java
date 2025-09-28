@@ -40,6 +40,19 @@ public class Event implements Visitable {
     private String collaborators;
 
 
+
+//    /**
+//     * This method notifies the subscribers when needed
+//     *
+//     * @param message, the message to spread
+//     */
+//    public void notifySubscribers(String message) {
+//        for (Buyer sub : subscribers) {
+//            sub.update(this, message);
+//        }
+//    }
+
+
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
