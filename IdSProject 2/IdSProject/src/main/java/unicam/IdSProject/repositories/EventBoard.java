@@ -81,8 +81,8 @@ public class EventBoard {
      *
      * @return true if the Event is present, false otherwise
      */
-    public boolean contains(String name) {
-        return eventRepository.existsByName(name);
+    public boolean contains(Event event) {
+        return eventRepository.existsByName(event.getName()) && eventRepository.existsByCreator(event.getCreator());
     }
 
     /**

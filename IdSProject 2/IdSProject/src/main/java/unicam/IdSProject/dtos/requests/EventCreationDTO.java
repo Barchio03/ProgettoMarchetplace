@@ -11,5 +11,6 @@ public class EventCreationDTO {
     private String name;
     private int maxAttendees;
     private String description;
+    private String collaborators;
 
 }

@@ -36,7 +36,7 @@ public class Event implements Visitable {
     private int maxAttendees;
     @NotNull
     private String description;
-    @NotNull
+
     private String collaborators;
 
 
