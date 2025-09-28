@@ -22,7 +22,7 @@ import java.util.Objects;
 @Setter
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="product_type",
+@DiscriminatorColumn(name="type",
         discriminatorType = DiscriminatorType.INTEGER)
 //@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name="products")

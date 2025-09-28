@@ -10,6 +10,6 @@ public class TransformerProductCreationDTO {
     private float price;
     private String description;
     private int stockNumber;
-    private Long sourceProduct;
+    private String sourceProduct;
 
 }

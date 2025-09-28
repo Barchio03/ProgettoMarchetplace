@@ -21,6 +21,7 @@ import unicam.IdSProject.services.BuyerService;
 */
 @Controller
 @RequiredArgsConstructor
+@RequestMapping(value = "/buyer")
 public class BuyerController {
 
     private final BuyerService buyerService;

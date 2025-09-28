@@ -41,49 +41,11 @@ public class Event implements Visitable {
 
 
 
-    /**
-     *
-     * This method is used by a Buyer to subscribe to an Event.
-     *
-     * @param buyer, the Buyer who wants to subscribe to an Event.
-     *
-     * @return true if the operation ended successfully, false otherwise.
-     */
-//    public boolean subscribe(Buyer buyer) {
-//        if(maxAttendees!=0) {
-//            if(subscribers.size()==maxAttendees)
-//                return false;
-//        }
-//        if (!subscribers.contains(buyer)){
-//            subscribers.add(buyer);
-//
-//            return true;
-//        } else return false;
-//    }
-
-
-
-    /**
-     *
-     * This method is used by a Buyer to unsubscribe to an Event.
-     *
-     * @param buyer, the Buyer who wants to unsubscribe to an Event.
-     *
-     * @return true if the operation ended successfully, false otherwise.
-     *
-     */
-//    public boolean unsubscribe(Buyer buyer) {
-//        if (subscribers.contains(buyer)){
-//            subscribers.remove(buyer);
-//            return true;
-//        } else return false;
-//    }
-
-    /**
-     * This method notifies the subscribers when needed
-     *
-     * @param message, the message to spread
-     */
+//    /**
+//     * This method notifies the subscribers when needed
+//     *
+//     * @param message, the message to spread
+//     */
 //    public void notifySubscribers(String message) {
 //        for (Buyer sub : subscribers) {
 //            sub.update(this, message);

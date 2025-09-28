@@ -7,16 +7,17 @@
     <list default="true" id="bb77262b-e258-4074-bd19-d064dcf94648" name="Changes" comment="events fixed">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/BuyerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/BuyerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/requests/ProductBoughtDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/requests/ProductBoughtDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/requests/TransformerProductCreationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/requests/TransformerProductCreationDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Event.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/SellerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/SellerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/controllers/SellerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/controllers/SellerController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/RequestHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/Event.class" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/Event.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/Product.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/ProductBoard.class" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/ProductBoard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/ProductRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/ProductRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/RequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/RequestHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/SellerService.class" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/SellerService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/generated-sources/annotations/unicam/IdSProject/mappers/EventMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/generated-sources/annotations/unicam/IdSProject/mappers/EventMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/generated-sources/annotations/unicam/IdSProject/mappers/ProductMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/generated-sources/annotations/unicam/IdSProject/mappers/ProductMapperImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,12 +41,12 @@
     &quot;assignee&quot;: &quot;erik-agu&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Barchio03/ProgettoMarchetplace.git",
-    "accountId": "1b032380-7267-4e1f-9dfd-10c5784ac6c3"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Barchio03/ProgettoMarchetplace.git&quot;,
+    &quot;accountId&quot;: &quot;1b032380-7267-4e1f-9dfd-10c5784ac6c3&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -209,6 +210,16 @@
           <url>file://$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/AnimatorService.java</url>
           <line>28</line>
           <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/BuyerService.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/BuyerService.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

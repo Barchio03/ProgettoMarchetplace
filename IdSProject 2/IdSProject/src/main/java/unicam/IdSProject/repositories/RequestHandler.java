@@ -1,5 +1,4 @@
 package unicam.IdSProject.repositories;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import unicam.IdSProject.models.Event;
 import unicam.IdSProject.models.Product;

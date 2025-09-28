@@ -14,8 +14,8 @@ import unicam.IdSProject.models.TransformerProduct;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-09-28T16:20:58+0200",
-    comments = "version: 1.6.3, compiler: javac, environment: Java 24.0.2 (Oracle Corporation)"
+    date = "2025-09-28T17:25:12+0200",
+    comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.8 (Microsoft)"
 )
 @Component
 public class ProductMapperImpl implements ProductMapper {
@@ -79,7 +79,9 @@ public class ProductMapperImpl implements ProductMapper {
         transformerProduct.setPrice( dto.getPrice() );
         transformerProduct.setDescription( dto.getDescription() );
         transformerProduct.setStockNumber( dto.getStockNumber() );
-        transformerProduct.setSourceProduct( map( dto.getSourceProduct() ) );
+        if ( dto.getSourceProduct() != null ) {
+            transformerProduct.setSourceProduct( map( Long.parseLong( dto.getSourceProduct() ) ) );
+        }
 
         return transformerProduct;
     }

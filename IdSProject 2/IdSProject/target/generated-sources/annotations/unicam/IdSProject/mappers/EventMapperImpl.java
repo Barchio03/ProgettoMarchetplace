@@ -8,8 +8,8 @@ import unicam.IdSProject.models.Event;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-09-28T16:34:28+0200",
-    comments = "version: 1.6.3, compiler: javac, environment: Java 24.0.2 (Oracle Corporation)"
+    date = "2025-09-28T17:25:12+0200",
+    comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.8 (Microsoft)"
 )
 @Component
 public class EventMapperImpl implements EventMapper {
