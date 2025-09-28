@@ -101,12 +101,11 @@ public class Event implements Visitable {
         if (obj == null){
             return false;
         }
-        if(!(obj instanceof Event event)){
+        if(!(obj instanceof Event)){
             return false;
         }
         else{
-            return Objects.equals(this.id, event.id);
+            return this.getName().equals(((Event) obj).getName()) && this.getCreator().equals(((Event) obj).getCreator());
         }
     }
-
 }

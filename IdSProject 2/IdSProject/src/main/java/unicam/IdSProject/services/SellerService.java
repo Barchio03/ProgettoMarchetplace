@@ -70,7 +70,7 @@ public class SellerService {
 
     }
 
-    public ResponseEntity<Object> addProducerTag (){
+    public ResponseEntity<Object> addProducerTag(){
         if (seller.getTags().contains(Tag.PRODUCER)){
             return new ResponseEntity<>("Il tag è già presente" , HttpStatus.BAD_REQUEST);
         }
@@ -78,7 +78,7 @@ public class SellerService {
         return new ResponseEntity<>("Tag aggiunto con successo" , HttpStatus.OK);
     }
 
-    public ResponseEntity<Object> addTransformerTag (){
+    public ResponseEntity<Object> addTransformerTag(){
         if (seller.getTags().contains(Tag.TRANSFORMER)){
             return new ResponseEntity<>("Il tag è già presente" , HttpStatus.BAD_REQUEST);
         }

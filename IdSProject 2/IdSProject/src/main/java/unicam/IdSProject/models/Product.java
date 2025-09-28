@@ -62,11 +62,11 @@ public abstract class Product implements Visitable, Serializable {
         if (obj == null){
             return false;
         }
-        if(!(obj instanceof Product product)){
+        if(!(obj instanceof Product)){
             return false;
         }
         else{
-            return Objects.equals(this.id, product.id);
+            return this.getName().equals(((Product) obj).getName()) && this.getCreator().equals(((Product) obj).getCreator());
         }
     }
 
