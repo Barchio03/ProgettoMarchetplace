@@ -1,0 +1,64 @@
+<changelist name="Uncommitted_changes_before_Update_at_28_09_2025_16_43_[Changes]" date="1759070580213" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_09_2025_16_43_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 28/09/2025 16:43 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/ProductBoard.class" />
+    <option name="AFTER_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/ProductBoard.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_09_2025_16_43_[Changes]/ProductBoard.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/controllers/BuyerController.class" />
+    <option name="AFTER_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/controllers/BuyerController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_09_2025_16_43_[Changes]/BuyerController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/controllers/SellerController.class" />
+    <option name="AFTER_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/controllers/SellerController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_09_2025_16_43_[Changes]/SellerController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/controllers/CuratorController.class" />
+    <option name="AFTER_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/controllers/CuratorController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_09_2025_16_43_[Changes]/CuratorController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/ids/SubId.class" />
+    <option name="AFTER_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/ids/SubId.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_09_2025_16_43_[Changes]/SubId.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/SellerService.class" />
+    <option name="AFTER_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/SellerService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_09_2025_16_43_[Changes]/SellerService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/controllers/AnimatorController.class" />
+    <option name="AFTER_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/controllers/AnimatorController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_09_2025_16_43_[Changes]/AnimatorController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/Message.class" />
+    <option name="AFTER_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/Message.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_09_2025_16_43_[Changes]/Message.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/users/Animator.class" />
+    <option name="AFTER_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/users/Animator.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_09_2025_16_43_[Changes]/Animator.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/ProductRepository.class" />
+    <option name="AFTER_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/ProductRepository.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_09_2025_16_43_[Changes]/ProductRepository.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/controllers/MarketController.class" />
+    <option name="AFTER_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/controllers/MarketController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_09_2025_16_43_[Changes]/MarketController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/Subscriber.class" />
+    <option name="AFTER_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/Subscriber.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_09_2025_16_43_[Changes]/Subscriber.class" />
+  </binary>
+</changelist>
