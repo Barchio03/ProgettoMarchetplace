@@ -2,11 +2,13 @@ package unicam.IdSProject.ids;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class SubId implements Serializable {
 
     private Long eventId;

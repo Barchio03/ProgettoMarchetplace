@@ -1,0 +1,832 @@
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_21_09_25,_11_41_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_21_09_25,_11_41_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_21_09_25,_11_41_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_21_09_25,_11_41_[Changes]/shelved.patch	(revision 68063ad2711075e3627ceb0bf9ffa80e709a42d4)
++++ /dev/null	(revision 68063ad2711075e3627ceb0bf9ffa80e709a42d4)
+@@ -1,20 +0,0 @@
+-Index: .idea/misc.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\n  <component name=\"MavenProjectsManager\">\n    <option name=\"originalFiles\">\n      <list>\n        <option value=\"$PROJECT_DIR$/IdSProject 2/IdSProject/pom.xml\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_21\" default=\"true\" project-jdk-name=\"21\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/out\" />\n  </component>\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/misc.xml b/.idea/misc.xml
+---- a/.idea/misc.xml	(revision a2f8a5fbb7b4335b4c2a6fdc1bcae0a8167c0429)
+-+++ b/.idea/misc.xml	(date 1758447602003)
+-@@ -8,7 +8,7 @@
+-       </list>
+-     </option>
+-   </component>
+--  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="21" project-jdk-type="JavaSDK">
+-+  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="ms-21" project-jdk-type="JavaSDK">
+-     <output url="file://$PROJECT_DIR$/out" />
+-   </component>
+- </project>
+-\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_20_09_25__16_13__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_20_09_25__16_13__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_20_09_25__16_13__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_20_09_25__16_13__Changes_.xml	(revision 68063ad2711075e3627ceb0bf9ffa80e709a42d4)
++++ /dev/null	(revision 68063ad2711075e3627ceb0bf9ffa80e709a42d4)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_20_09_25,_16_13_[Changes]" date="1758377649424" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_09_25,_16_13_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 20/09/25, 16:13 [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_21_09_25,_10_40_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_21_09_25,_10_40_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_21_09_25,_10_40_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_21_09_25,_10_40_[Changes]/shelved.patch	(revision 68063ad2711075e3627ceb0bf9ffa80e709a42d4)
++++ /dev/null	(revision 68063ad2711075e3627ceb0bf9ffa80e709a42d4)
+@@ -1,420 +0,0 @@
+-Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/BuyerService.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package unicam.IdSProject.services;\n\nimport lombok.RequiredArgsConstructor;\nimport org.springframework.http.HttpStatus;\nimport org.springframework.http.RequestEntity;\nimport org.springframework.http.ResponseEntity;\nimport org.springframework.stereotype.Service;\nimport org.springframework.web.bind.annotation.RequestBody;\nimport unicam.IdSProject.dtos.EventDTO;\nimport unicam.IdSProject.dtos.ProductDTO;\nimport unicam.IdSProject.mappers.EventMapper;\nimport unicam.IdSProject.mappers.ProductMapper;\nimport unicam.IdSProject.models.*;\n\n@RequiredArgsConstructor\n@Service\npublic class BuyerService {\n\n    private final ProductMapper productMapper;\n    private final EventMapper eventMapper;\n\n    private final ProductBoard productBoard;\n\n    private final Buyer buyer;\n\n\n    public ResponseEntity<Object> addProductToShoppingKart(ProductDTO productDto, int quantity) {\n        Product product = productMapper.toEntityWithAllFields(productDto);\n        if (!productBoard.contains(product)) return new ResponseEntity<>(\"Il prodotto non esiste\", HttpStatus.BAD_REQUEST);\n        if (product.getStockNumber()> quantity) return new ResponseEntity<>(\"Non ci sono abbastanza scorte di questo prodotto\", HttpStatus.BAD_REQUEST);\n\n        QuantifiedProduct qProduct = new QuantifiedProduct(product, quantity);\n\n        if (buyer.getShoppingCart().addQuantifiedProduct(qProduct)) {\n            return new ResponseEntity<>(\"Prodotto aggiunto al carrello\", HttpStatus.OK);\n        } else return new ResponseEntity<>(\"Errore\", HttpStatus.BAD_REQUEST);\n\n    }\n\n    public ResponseEntity<Object> buyShoppingCart() {\n        if (buyer.getShoppingCart() == null || buyer.getShoppingCart().getQuantifiedProducts().isEmpty()){\n            return new ResponseEntity<>(\"Carrello Vuoto\", HttpStatus.BAD_REQUEST);\n        }\n\n        buyer.getShoppingCart().getQuantifiedProducts()\n                .stream().map(quantifiedProduct -> this.decreaseStock(quantifiedProduct));\n\n        buyer.getShoppingCart().clear();\n        String receipt = this.makeReceipt(buyer.getShoppingCart());\n        return new ResponseEntity<>(receipt, HttpStatus.OK);\n\n    }\n\n    public ResponseEntity<Object> subscribeToEvent(EventDTO eventDTO) {\n        Event event = eventMapper.toEntityWithAllFields(eventDTO);\n\n        if (event == null){\n            return new ResponseEntity<>(\"Evento nullo\", HttpStatus.BAD_REQUEST);\n        }\n\n        if (event.subscribe(buyer))\n            return new ResponseEntity<>(\"Iscrizione avvenuta con successo\", HttpStatus.OK);\n        else return new ResponseEntity<>(\"Utente già iscritto\", HttpStatus.CONFLICT);\n\n    }\n\n    public ResponseEntity<Object> unsubscribeToEvent(EventDTO eventDTO) {\n        Event event = eventMapper.toEntityWithAllFields(eventDTO);\n\n        if (event == null){\n            return new ResponseEntity<>(\"Evento nullo\", HttpStatus.BAD_REQUEST);\n        }\n\n        if (event.unsubscribe(buyer))\n            return new ResponseEntity<>(\"Disiscrizione avvenuta con successo\", HttpStatus.OK);\n        else return new ResponseEntity<>(\"Iscrizione non possibile\", HttpStatus.CONFLICT);\n    }\n\n\n    private QuantifiedProduct decreaseStock(QuantifiedProduct product) {\n        product.getProduct().setStockNumber(product.getProduct().getStockNumber()-product.getStockNumber());\n        return product;\n    }\n\n\n\n    private String makeReceipt(ShoppingCart shoppingCart){\n        String receipt = \"Ricevuta di \" + shoppingCart.getBuyer().getName() + \"\\n\";\n        for (QuantifiedProduct qProduct : shoppingCart.getQuantifiedProducts()){\n            String printProduct = \"Nome: \" + qProduct.getProduct().getName() +\n                    \"\\nNumero stock: \" + qProduct.getStockNumber() +\n                    \"\\nPrezzo: \" + qProduct.getProduct().getPrice() * qProduct.getStockNumber() +\"€\\n\\n\";\n            receipt = receipt + printProduct;\n        }\n        receipt = receipt + \"Prezzo totale: \" + shoppingCart.getTotalPrice() + \"$\";\n        shoppingCart.getBuyer().getMailbox().addMessage(receipt);\n        // Aggiungere ReceiptRepository per PlatformHandler\n        return receipt;\n    }\n\n}\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/BuyerService.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/BuyerService.java
+---- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/BuyerService.java	(revision 58f23084a0a51839624466044bf7bc1cc3a9bd37)
+-+++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/services/BuyerService.java	(date 1758444001222)
+-@@ -2,15 +2,14 @@
+- 
+- import lombok.RequiredArgsConstructor;
+- import org.springframework.http.HttpStatus;
+--import org.springframework.http.RequestEntity;
+- import org.springframework.http.ResponseEntity;
+- import org.springframework.stereotype.Service;
+--import org.springframework.web.bind.annotation.RequestBody;
+- import unicam.IdSProject.dtos.EventDTO;
+- import unicam.IdSProject.dtos.ProductDTO;
+- import unicam.IdSProject.mappers.EventMapper;
+- import unicam.IdSProject.mappers.ProductMapper;
+- import unicam.IdSProject.models.*;
+-+import unicam.IdSProject.repositories.ProductBoard;
+- 
+- @RequiredArgsConstructor
+- @Service
+-Index: IdSProject 2/IdSProject/pom.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n\txsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n\t<modelVersion>4.0.0</modelVersion>\n\t<parent>\n\t\t<groupId>org.springframework.boot</groupId>\n\t\t<artifactId>spring-boot-starter-parent</artifactId>\n\t\t<version>3.5.5</version>\n\t\t<relativePath/> <!-- lookup parent from repository -->\n\t</parent>\n\t<groupId>unicam</groupId>\n\t<artifactId>IdSProject</artifactId>\n\t<version>0.0.1-SNAPSHOT</version>\n\t<name>IdSProject</name>\n\t<description>Demo project for Spring Boot</description>\n\t<url/>\n\t<licenses>\n\t\t<license/>\n\t</licenses>\n\t<developers>\n\t\t<developer/>\n\t</developers>\n\t<scm>\n\t\t<connection/>\n\t\t<developerConnection/>\n\t\t<tag/>\n\t\t<url/>\n\t</scm>\n\t<properties>\n\t\t<java.version>17</java.version>\n\t\t<mapstruct.version>1.5.5.Final</mapstruct.version>\n\t</properties>\n\t<dependencies>\n\n\t\t<!-- Spring boot JPA -->\n\t\t<dependency>\n\t\t\t<groupId>org.springframework.boot</groupId>\n\t\t\t<artifactId>spring-boot-starter-data-jpa</artifactId>\n\t\t</dependency>\n\n\t\t<!-- Spring Web -->\n\t\t<dependency>\n\t\t\t<groupId>org.springframework.boot</groupId>\n\t\t\t<artifactId>spring-boot-starter-web</artifactId>\n\t\t</dependency>\n\n\t\t<!-- h2 -->\n\t\t<dependency>\n\t\t\t<groupId>com.h2database</groupId>\n\t\t\t<artifactId>h2</artifactId>\n\t\t\t<scope>runtime</scope>\n\t\t</dependency>\n\n\t\t<dependency>\n\t\t\t<groupId>org.projectlombok</groupId>\n\t\t\t<artifactId>lombok</artifactId>\n\t\t</dependency>\n\n\t\t<dependency>\n\t\t\t<groupId>org.mapstruct</groupId>\n\t\t\t<artifactId>mapstruct</artifactId>\n\t\t\t<version>${mapstruct.version}</version>\n\t\t</dependency>\n\n\t\t<!-- Spring Test -->\n\t\t<dependency>\n\t\t\t<groupId>org.springframework.boot</groupId>\n\t\t\t<artifactId>spring-boot-starter-test</artifactId>\n\t\t\t<scope>test</scope>\n\t\t</dependency>\n\n\t\t<!-- Spring Security -->\n\n<!--\t\t<dependency>-->\n<!--\t\t\t<groupId>org.springframework.boot</groupId>-->\n<!--\t\t\t<artifactId>spring-boot-starter-security</artifactId>-->\n<!--\t\t</dependency>-->\n\n<!--\t\t<dependency>-->\n<!--\t\t\t<groupId>org.thymeleaf.extras</groupId>-->\n<!--\t\t\t<artifactId>thymeleaf-extras-springsecurity6</artifactId>-->\n<!--\t\t\t&lt;!&ndash; Temporary explicit version to fix Thymeleaf bug &ndash;&gt;-->\n<!--\t\t\t<version>3.1.1.RELEASE</version>-->\n<!--\t\t</dependency>-->\n\t</dependencies>\n\n\t<build>\n\t\t<plugins>\n\t\t\t<plugin>\n\t\t\t\t<groupId>org.springframework.boot</groupId>\n\t\t\t\t<artifactId>spring-boot-maven-plugin</artifactId>\n\t\t\t</plugin>\n\t\t</plugins>\n\t</build>\n\n</project>\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/IdSProject 2/IdSProject/pom.xml b/IdSProject 2/IdSProject/pom.xml
+---- a/IdSProject 2/IdSProject/pom.xml	(revision 58f23084a0a51839624466044bf7bc1cc3a9bd37)
+-+++ b/IdSProject 2/IdSProject/pom.xml	(date 1758443789037)
+-@@ -56,6 +56,11 @@
+- 			<artifactId>lombok</artifactId>
+- 		</dependency>
+- 
+-+		<dependency>
+-+			<groupId>org.springframework.boot</groupId>
+-+			<artifactId>spring-boot-starter-validation</artifactId>
+-+		</dependency>
+-+
+- 		<dependency>
+- 			<groupId>org.mapstruct</groupId>
+- 			<artifactId>mapstruct</artifactId>
+-Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/BuyerController.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package unicam.IdSProject.controllers;\n\nimport jakarta.websocket.server.PathParam;\nimport lombok.AllArgsConstructor;\nimport lombok.NoArgsConstructor;\nimport lombok.RequiredArgsConstructor;\nimport org.springframework.http.ResponseEntity;\nimport org.springframework.stereotype.Controller;\nimport org.springframework.web.bind.annotation.PostMapping;\nimport org.springframework.web.bind.annotation.RequestBody;\nimport unicam.IdSProject.dtos.ProductDTO;\nimport unicam.IdSProject.models.*;\nimport unicam.IdSProject.services.BuyerService;\n\n/**\n*\n* This class implements the methods for handling all the Buyer interaction with the marketplace\n*\n* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi\n*\n*/\n\n@Controller\n@RequiredArgsConstructor\npublic class BuyerController {\n\n    private final ProductBoard productBoard;\n    private final EventBoard eventboard;\n\n    private final BuyerService buyerService;\n\n\n    /**\n     * This method adds a Product to the Shopping Cart.\n     *\n     * @param productDto, the Product that needs to be added.\n     *\n     * @return\n     */\n    @PostMapping(value = \"/addToShoppingKart\")\n    public ResponseEntity<Object> addToShoppingCart(@RequestBody ProductDTO productDto, @PathParam(\"quantity\") int quantity) {\n        return buyerService.addProductToShoppingKart(productDto, quantity);\n    }\n\n    /**\n     * This method is used to buy all the Products in the Shopping Cart.\n     *\n     * @return true  if the purchase was successfull, false otherwise\n     */\n    public ResponseEntity<Object> buyShoppingCart(){\n        return buyerService.buyShoppingCart();\n    }\n\n    /**\n     * This method allows to buy an Event tickey\n     *\n     * @param event, the Event from which buying the ticket\n     *\n     * @return true if the purchase was successfull, false otherwise\n     */\n    public boolean buyEventTicket(Event event){\n\n    }\n\n\n\n    \n    /**\n    * This method is used to update the Buyer about the Event status.\n    *\n    * @param event, the Event that is being observed.\n    */\n    public void update(Event event, String message) {\n        buyer.getMailbox().addMessage(\"message\");\n    }\n}\n\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/BuyerController.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/BuyerController.java
+---- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/BuyerController.java	(revision 58f23084a0a51839624466044bf7bc1cc3a9bd37)
+-+++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/BuyerController.java	(date 1758444001210)
+-@@ -1,8 +1,6 @@
+- package unicam.IdSProject.controllers;
+- 
+- import jakarta.websocket.server.PathParam;
+--import lombok.AllArgsConstructor;
+--import lombok.NoArgsConstructor;
+- import lombok.RequiredArgsConstructor;
+- import org.springframework.http.ResponseEntity;
+- import org.springframework.stereotype.Controller;
+-@@ -10,6 +8,8 @@
+- import org.springframework.web.bind.annotation.RequestBody;
+- import unicam.IdSProject.dtos.ProductDTO;
+- import unicam.IdSProject.models.*;
+-+import unicam.IdSProject.repositories.EventBoard;
+-+import unicam.IdSProject.repositories.ProductBoard;
+- import unicam.IdSProject.services.BuyerService;
+- 
+- /**
+-Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/DistributorController.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package unicam.IdSProject.controllers;\nimport unicam.IdSProject.models.Distributor;\nimport unicam.IdSProject.models.Product;\nimport unicam.IdSProject.models.ProductBoard;\nimport unicam.IdSProject.models.ProductBundle;\nimport java.util.ArrayList;\n\n/**\n*\n* This class implements the methods used by the Distributor to interact with the marketplace\n*\n* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi\n *\n*/\npublic class DistributorController {\n\n    private final Distributor distributor;\n    private ProductBoard productBoard;\n\n    /**\n    *\n    * This method creates a new DistributorController object\n    */\n    public DistributorController(Distributor distributor, ProductBoard productBoard){\n        this.distributor = distributor;\n        this.productBoard = productBoard;\n    }\n\n\n    /**\n     *\n     * This method creates a new Bundle with a set of Product present in the marketplace\n     *\n     * @param products: the Products present in the Bundle\n     *\n     * @return true, if the Bundle was created, false otherwise\n     */\n    public boolean createBundle(ArrayList<Product> products){\n        if (products.isEmpty()){\n            return false;\n        }\n        for(Product product : products){\n            if((product == null || !productBoard.contains(product))) {\n               return false;\n            }\n        }\n        ProductBundle bundle = new ProductBundle(products, distributor.getName());\n        return true;\n    }\n\n\n\n    /**\n     *\n     * This method adds a Product from the marketplace inside a Bundle\n     *\n     * @param bundle: the Bundle in question\n     *\n     * @param product: the Product that needs to be added\n     *\n     * @return true, if the Bundle was created, false otherwise\n     */\n    public boolean addProductToBundle(ProductBundle bundle, Product product){\n        if(product == null || !productBoard.contains(product)){\n            return false;\n        }\n        if(bundle.getProducts().contains(product)){\n            return false;\n        }\n        bundle.getProducts().add(product);\n        return true;\n    }\n\n\n\n    /**\n     *\n     * This method deletes a Bundle from the marketplace\n     *\n     * @param bundle: the Bundle in question\n     *\n     * @return true, if the Product was deleted, false otherwise\n     */\n    public boolean deleteBundle(ProductBundle bundle) {\n        if(bundle == null || !productBoard.contains(bundle)){\n            return false;\n        }\n        productBoard.removeProduct(bundle);\n        return true;\n    }\n\n\n    /**\n     *\n     * This method adds Distributor infos to a Product\n     *\n     * @param product: the Product to witch add the information\n     *\n     * @param info: the info about the Product\n     *\n     * @return true, if the information was added, false otherwise\n     */\n    public boolean addInfo(Product product, String info) {\n        if (product == null || !productBoard.contains(product)) {\n            return false;\n        }\n        if (info == null || info.isEmpty()){\n            return false;\n        }\n        product.setDistributorDescription(info);\n        return true;\n    }\n}
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/DistributorController.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/DistributorController.java
+---- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/DistributorController.java	(revision 58f23084a0a51839624466044bf7bc1cc3a9bd37)
+-+++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/DistributorController.java	(date 1758444001206)
+-@@ -1,7 +1,7 @@
+- package unicam.IdSProject.controllers;
+- import unicam.IdSProject.models.Distributor;
+- import unicam.IdSProject.models.Product;
+--import unicam.IdSProject.models.ProductBoard;
+-+import unicam.IdSProject.repositories.ProductBoard;
+- import unicam.IdSProject.models.ProductBundle;
+- import java.util.ArrayList;
+- 
+-Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/MarketController.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package unicam.IdSProject.controllers;\n\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.http.HttpStatus;\nimport org.springframework.http.ResponseEntity;\nimport org.springframework.stereotype.Controller;\nimport org.springframework.web.bind.annotation.PathVariable;\nimport org.springframework.web.bind.annotation.RequestMapping;\nimport unicam.IdSProject.models.*;\n\n\n/**\n*\n* This class implements the methods and the features of the marketplace\n*\n* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi\n*/\n@Controller\npublic class MarketController {\n\n    private final ProductBoard productBoard;\n\n    @Autowired\n    private RequestHandler requestHandler;\n\n    private final Seller seller;\n    private final Buyer buyer;\n    private final Animator animator;\n    private final PlatformHandler platformHandler;\n\n    /**\n    * This method creates a new MarketController object\n    */\n    public MarketController(){\n        this.productBoard = new ProductBoard();\n        //this.requestHandler = new RequestHandler();\n        this.seller=new Seller(\"Vendor 1\", \"Just a vendor\");\n        this.buyer=new Buyer();\n        this.animator=new Animator(\"Animator 1\", \"Just an animator\");\n        this.platformHandler=new PlatformHandler();\n\n        Product product = new ProducerProduct();\n        product.setName(\"Prodotto A\");\n        product.setDescription(\"Un prodotto generico\");\n        product.setPrice(5);\n        product.setStockNumber(5);\n        productBoard.addProduct(product);\n\n        seller.setName(\"Vendor 1\");\n        seller.setDescription(\"Just a vendor\");\n        seller.setLocation(new Location(\"43.000 N\", \"12.000 E\"));\n        seller.getMailbox().addMessage(\"mi vedi?\");\n    }\n\n    // -- MARKET --\n    /**\n    * This method return the products from the product board and sets a route to it\n    */\n    @RequestMapping(value=\"/market\")\n    public ResponseEntity<Object> getProducts(){\n        return new ResponseEntity<>(productBoard.getProducts(), HttpStatus.OK);\n    }\n\n    /**\n    * This method return the profile of a specified user and sets a route to it\n    */\n    @RequestMapping(value = \"/profile/{user}\")\n    public ResponseEntity<Object> showProfile(@PathVariable(\"user\") String user){\n        return switch (user) {\n            case \"seller\" -> new ResponseEntity<>(seller.toString(), HttpStatus.OK);\n            case \"buyer\" -> new ResponseEntity<>(buyer, HttpStatus.OK);\n            case \"animator\" -> new ResponseEntity<>(animator, HttpStatus.OK);\n            default -> new ResponseEntity<>(\"Il profilo \" + user + \" non esiste\", HttpStatus.NOT_FOUND);\n        };\n    }\n\n    /**\n    * This method returns the mailbox of a specified user and sets a route to it\n    */\n    @RequestMapping(value=\"/profile/{user}/mailbox\")\n    public ResponseEntity<Object> openSellerMailbox(@PathVariable(\"user\") String user){\n        return switch (user) {\n            case \"seller\" -> new ResponseEntity<>(seller.getMailbox().getMessages(), HttpStatus.OK);\n            case \"buyer\" -> new ResponseEntity<>(buyer.getMailbox().getMessages(), HttpStatus.OK);\n            case \"animator\" -> new ResponseEntity<>(animator.getMailbox().getMessages(), HttpStatus.OK);\n            case \"handler\" -> new ResponseEntity<>(platformHandler.getMailbox().getMessages(), HttpStatus.OK);\n            default -> new ResponseEntity<>(\"Il profilo \" + user + \" non ha una mailbox\", HttpStatus.NOT_FOUND);\n        };\n    }\n\n\n}\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/MarketController.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/MarketController.java
+---- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/MarketController.java	(revision 58f23084a0a51839624466044bf7bc1cc3a9bd37)
+-+++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/MarketController.java	(date 1758444001240)
+-@@ -7,6 +7,8 @@
+- import org.springframework.web.bind.annotation.PathVariable;
+- import org.springframework.web.bind.annotation.RequestMapping;
+- import unicam.IdSProject.models.*;
+-+import unicam.IdSProject.repositories.ProductBoard;
+-+import unicam.IdSProject.repositories.RequestHandler;
+- 
+- 
+- /**
+-Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/AcceptVisitor.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package unicam.IdSProject;\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.stereotype.Component;\nimport unicam.IdSProject.models.Event;\nimport unicam.IdSProject.models.EventBoard;\nimport unicam.IdSProject.models.Product;\nimport unicam.IdSProject.models.ProductBoard;\n\n/**\n*\n * This class contains the logic behind the acceptance of a Visitable object\n *\n * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi \n *\n */\n@Component\npublic class AcceptVisitor implements Visitor {\n\n    @Autowired\n    private final ProductBoard productBoard;\n    @Autowired\n    private final EventBoard eventBoard;\n\n    /**\n    * This method creates a new AcceptVisitor object\n    */\n    @Autowired\n    public AcceptVisitor(ProductBoard productBoard, EventBoard eventBoard) {\n        this.productBoard=productBoard;\n        this.eventBoard=eventBoard;\n    }\n\n    @Override\n    public void visit(Product product) {\n        productBoard.addProduct(product);\n        product.getCreator().getMailbox().addMessage(\"La tua richiesta per il prodotto \"+\n                product.getName()+ \" è stata accettata\");\n    }\n\n    @Override\n    public void visit(Event event) {\n        eventBoard.addEvent(event);\n        event.getCreator().getMailbox().addMessage(\"La tua richiesta per l'evento \"+\n                event.getName()+ \" è stata accettata\");\n    }\n}\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/AcceptVisitor.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/AcceptVisitor.java
+---- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/AcceptVisitor.java	(revision 58f23084a0a51839624466044bf7bc1cc3a9bd37)
+-+++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/AcceptVisitor.java	(date 1758444001238)
+-@@ -2,9 +2,9 @@
+- import org.springframework.beans.factory.annotation.Autowired;
+- import org.springframework.stereotype.Component;
+- import unicam.IdSProject.models.Event;
+--import unicam.IdSProject.models.EventBoard;
+-+import unicam.IdSProject.repositories.EventBoard;
+- import unicam.IdSProject.models.Product;
+--import unicam.IdSProject.models.ProductBoard;
+-+import unicam.IdSProject.repositories.ProductBoard;
+- 
+- /**
+- *
+-Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/OpenVisitor.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package unicam.IdSProject;\nimport unicam.IdSProject.models.Event;\nimport unicam.IdSProject.models.Product;\nimport unicam.IdSProject.models.RequestHandler;\n\n/**\n*\n * This class contains the logic behind the opening of a Visitable object\n *\n * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi \n *\n */\npublic class OpenVisitor implements Visitor {\n\n    private RequestHandler requestHandler;\n\n    @Override\n    public void visit(Product product) {\n        product.toString();\n    }\n\n    @Override\n    public void visit(Event event) {\n        event.toString();\n    }\n}\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/OpenVisitor.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/OpenVisitor.java
+---- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/OpenVisitor.java	(revision 58f23084a0a51839624466044bf7bc1cc3a9bd37)
+-+++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/OpenVisitor.java	(date 1758444001233)
+-@@ -1,7 +1,7 @@
+- package unicam.IdSProject;
+- import unicam.IdSProject.models.Event;
+- import unicam.IdSProject.models.Product;
+--import unicam.IdSProject.models.RequestHandler;
+-+import unicam.IdSProject.repositories.RequestHandler;
+- 
+- /**
+- *
+-Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/PlatformHandler.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package unicam.IdSProject.models;\n\nimport unicam.IdSProject.controllers.Curator;\nimport java.util.ArrayList;\n\n/**\n*\n* This class represents the Platform Handler of the marketplace\n*\n* @author Aguiari Erika, Ilaria Morettini, Barchiesi Luca\n*\n*/\npublic class PlatformHandler {\n\n    private Mailbox mailbox;\n    private ArrayList<Curator> curators;\n\n    /**\n    * This method creates a new PlatformHandler object\n    */\n    public PlatformHandler(){\n    }\n\n\n    \n    public Mailbox getMailbox() {\n        return mailbox;\n    }\n\n    public ArrayList<Curator> getCurators(){\n        return curators;\n    }\n\n}\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/PlatformHandler.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/PlatformHandler.java
+---- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/PlatformHandler.java	(revision 58f23084a0a51839624466044bf7bc1cc3a9bd37)
+-+++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/PlatformHandler.java	(date 1758444001201)
+-@@ -1,6 +1,6 @@
+- package unicam.IdSProject.models;
+- 
+--import unicam.IdSProject.controllers.Curator;
+-+import unicam.IdSProject.controllers.CuratorController;
+- import java.util.ArrayList;
+- 
+- /**
+-@@ -13,7 +13,7 @@
+- public class PlatformHandler {
+- 
+-     private Mailbox mailbox;
+--    private ArrayList<Curator> curators;
+-+    private ArrayList<CuratorController> curators;
+- 
+-     /**
+-     * This method creates a new PlatformHandler object
+-@@ -27,7 +27,7 @@
+-         return mailbox;
+-     }
+- 
+--    public ArrayList<Curator> getCurators(){
+-+    public ArrayList<CuratorController> getCurators(){
+-         return curators;
+-     }
+- 
+-Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/ProductBoard.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/ProductBoard.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/ProductBoard.java
+-rename from IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/ProductBoard.java
+-rename to IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/ProductBoard.java
+---- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/ProductBoard.java	(revision 58f23084a0a51839624466044bf7bc1cc3a9bd37)
+-+++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/ProductBoard.java	(date 1758444001230)
+-@@ -1,5 +1,8 @@
+--package unicam.IdSProject.models;
+-+package unicam.IdSProject.repositories;
+- import org.springframework.stereotype.Component;
+-+import unicam.IdSProject.models.Product;
+-+import unicam.IdSProject.models.Seller;
+-+
+- import java.util.ArrayList;
+- 
+- /**
+-Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/AnimatorController.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package unicam.IdSProject.controllers;\n\nimport jakarta.websocket.server.PathParam;\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.http.HttpStatus;\nimport org.springframework.http.ResponseEntity;\nimport org.springframework.web.bind.annotation.RequestBody;\nimport org.springframework.web.bind.annotation.RequestMapping;\nimport unicam.IdSProject.models.EventBoard;\nimport unicam.IdSProject.models.Animator;\nimport unicam.IdSProject.models.Event;\nimport unicam.IdSProject.models.RequestHandler;\n\n/**\n*\n* This class implements the methods for handling all the Animator interaction with the marketplace\n*\n* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi\n*\n*/\npublic class AnimatorController {\n\n    @Autowired\n    private RequestHandler requestHandler;\n    @Autowired\n    private EventBoard eventBoard;\n\n    private final Animator animator;\n\n    public AnimatorController(Animator animator){\n        this.animator = animator;\n    }\n\n\n\n    /**\n     * This method is used to create a new event\n     *\n     * @param event , the body of the event that needs to be created\n     *\n     * @return ResponseEntity<Object>, the response about the procedure\n     */\n    @RequestMapping(value = \"/animator/addEvent\")\n    public ResponseEntity<Object> addEvent(@RequestBody Event event){\n        event.setCreator(animator);\n        if(!eventBoard.contains(event)){\n            if (requestHandler.addEvent(event)) {\n                return new ResponseEntity<>(\"Evento in processo di verifica\", HttpStatus.CREATED);\n            }\n            return new ResponseEntity<>(\"Richiesta già in atto\", HttpStatus.BAD_REQUEST);\n        }\n        return new ResponseEntity<>(\"L'evento esiste già\", HttpStatus.BAD_REQUEST);\n\n\n    }\n\n    /**\n     * This method is used to create a new event\n     *\n     * @param id , the id of the event that needs to be deleted\n     *\n     * @return ResponseEntity<Object>, the response about the procedure\n     */\n    @RequestMapping(value = \"/animator/removeEvent\")\n    public ResponseEntity<Object> removeEvent(@PathParam(\"id\") int id) {\n        if (eventBoard.removeEvent(id)) {\n            return new ResponseEntity<>(\"Evento rimosso con successo\", HttpStatus.OK);\n        }\n        return new ResponseEntity<>(\"Id non pervenuto\", HttpStatus.NOT_FOUND);\n    }\n}\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/AnimatorController.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/AnimatorController.java
+---- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/AnimatorController.java	(revision 58f23084a0a51839624466044bf7bc1cc3a9bd37)
+-+++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/AnimatorController.java	(date 1758444001235)
+-@@ -6,10 +6,10 @@
+- import org.springframework.http.ResponseEntity;
+- import org.springframework.web.bind.annotation.RequestBody;
+- import org.springframework.web.bind.annotation.RequestMapping;
+--import unicam.IdSProject.models.EventBoard;
+-+import unicam.IdSProject.repositories.EventBoard;
+- import unicam.IdSProject.models.Animator;
+- import unicam.IdSProject.models.Event;
+--import unicam.IdSProject.models.RequestHandler;
+-+import unicam.IdSProject.repositories.RequestHandler;
+- 
+- /**
+- *
+-Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/RequestHandler.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/RequestHandler.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/RequestHandler.java
+-rename from IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/RequestHandler.java
+-rename to IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/RequestHandler.java
+---- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/RequestHandler.java	(revision 58f23084a0a51839624466044bf7bc1cc3a9bd37)
+-+++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/RequestHandler.java	(date 1758444001218)
+-@@ -1,5 +1,8 @@
+--package unicam.IdSProject.models;
+-+package unicam.IdSProject.repositories;
+- import org.springframework.stereotype.Component;
+-+import unicam.IdSProject.models.Event;
+-+import unicam.IdSProject.models.Product;
+-+
+- import java.util.ArrayList;
+- 
+- /**
+-Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/SellerController.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package unicam.IdSProject.controllers;\n\nimport jakarta.websocket.server.PathParam;\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.http.HttpStatus;\nimport org.springframework.http.ResponseEntity;\nimport org.springframework.web.bind.annotation.RequestBody;\nimport org.springframework.web.bind.annotation.RequestMapping;\nimport unicam.IdSProject.*;\nimport unicam.IdSProject.models.*;\n\n/**\n*\n* This class implements the methods of a Seller used to interact with the marketplace\n*\n* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi\n*/\npublic class SellerController {\n\n    @Autowired\n    private RequestHandler requestHandler;\n    @Autowired\n    private ProductBoard productBoard;\n\n    private final Seller seller;\n\n    /**\n    * This method creates a new SellerController object\n    */\n    public SellerController(Seller seller){\n        this.seller = seller;\n    }\n\n\n    // -- PRODUCER --\n    /**\n    * This method implements the feature for a Seller with tag Producer to add a Product and sets a route for it\n    */\n    @RequestMapping(value = \"/producer/addProduct\")\n    public ResponseEntity<Object> addProducerProduct(@RequestBody ProducerProduct product){\n        if (seller.getTags().contains(Tag.PRODUCER)) {\n            product.setCreator(seller);\n            if(!productBoard.contains(product)){\n                if (requestHandler.addProduct(product))\n                    return new ResponseEntity<>(\"Prodotto in processo di verifica\", HttpStatus.CREATED);\n                else return new ResponseEntity<>(\"Richiesta già in atto\", HttpStatus.BAD_REQUEST);\n            }\n            return new ResponseEntity<>(\"Il prodotto è già presente\", HttpStatus.BAD_REQUEST);\n        } else return new ResponseEntity<>(\"Non autorizzato\", HttpStatus.UNAUTHORIZED);\n    }\n\n    // -- TRANSFORMER --\n    /**\n    * This method implements the feature for a Seller with tag Transformer to add a Product and sets a route for it\n    */\n    @RequestMapping(value = \"/transformer/addProduct\")\n    public ResponseEntity<Object> addTransformerProduct(@RequestBody TransformerProduct product){\n        if (seller.getTags().contains(Tag.TRANSFORMER)) {\n            product.setCreator(seller);\n            if(!productBoard.contains(product)){\n                if (requestHandler.addProduct(product))\n                    return new ResponseEntity<>(\"Prodotto in processo di verifica\", HttpStatus.CREATED);\n                else return new ResponseEntity<>(\"Richiesta già in atto\", HttpStatus.BAD_REQUEST);\n            }\n            return new ResponseEntity<>(\"Il prodotto è già presente\", HttpStatus.BAD_REQUEST);\n        }\n        return new ResponseEntity<>(\"Non autorizzato\", HttpStatus.UNAUTHORIZED);\n    }\n\n    /**\n    * This method implements the method for removing a Product made by the Seller from the marketplace and sets a route for it\n    */\n    @RequestMapping(value = \"/removeProduct\")\n    public ResponseEntity<Object> removeProduct(@PathParam(\"id\") int id) {\n        if (productBoard.removeProduct(id)){\n            return new ResponseEntity<>(\"Prodotto rimosso con successo\", HttpStatus.OK);\n        }\n        return new ResponseEntity<>(\"Id non pervenuto\", HttpStatus.NOT_FOUND);\n\n    }\n\n\n\n}\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/SellerController.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/SellerController.java
+---- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/SellerController.java	(revision 58f23084a0a51839624466044bf7bc1cc3a9bd37)
+-+++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/SellerController.java	(date 1758444001212)
+-@@ -6,8 +6,10 @@
+- import org.springframework.http.ResponseEntity;
+- import org.springframework.web.bind.annotation.RequestBody;
+- import org.springframework.web.bind.annotation.RequestMapping;
+--import unicam.IdSProject.*;
+-+import unicam.IdSProject.enumerations.Tag;
+- import unicam.IdSProject.models.*;
+-+import unicam.IdSProject.repositories.ProductBoard;
+-+import unicam.IdSProject.repositories.RequestHandler;
+- 
+- /**
+- *
+-Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/SellerDTO.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package unicam.IdSProject.dtos;\n\nimport unicam.IdSProject.models.Location;\nimport unicam.IdSProject.models.Mailbox;\nimport unicam.IdSProject.Tag;\n\nimport java.util.ArrayList;\n\npublic class SellerDTO {\n\n    private String name;\n    private String description;\n    private Location location;\n    private ArrayList<Tag> tags;\n    private final Mailbox mailbox;\n\n    public SellerDTO(String name, String description, Location location, ArrayList<Tag> tags ,Mailbox mailbox){\n        this.name = name;\n        this.description = description;\n        this.location = location;\n        this.tags = tags;\n        this.mailbox = mailbox;\n    }\n\n\n    public String getName() {\n        return name;\n    }\n\n    public void setName(String name) {\n        this.name = name;\n    }\n\n    public String getDescription() {\n        return description;\n    }\n\n    public void setDescription(String description) {\n        this.description = description;\n    }\n\n    public Location getLocation() {\n        return location;\n    }\n\n    public void setLocation(Location location) {\n        this.location = location;\n    }\n\n    public ArrayList<Tag> getTags() {\n        return tags;\n    }\n\n    public void setTags(ArrayList<Tag> tags) {\n        this.tags = tags;\n    }\n\n    public Mailbox getMailbox() {\n        return mailbox;\n    }\n}\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/SellerDTO.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/SellerDTO.java
+---- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/SellerDTO.java	(revision 58f23084a0a51839624466044bf7bc1cc3a9bd37)
+-+++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/SellerDTO.java	(date 1758444001190)
+-@@ -2,7 +2,7 @@
+- 
+- import unicam.IdSProject.models.Location;
+- import unicam.IdSProject.models.Mailbox;
+--import unicam.IdSProject.Tag;
+-+import unicam.IdSProject.enumerations.Tag;
+- 
+- import java.util.ArrayList;
+- 
+-Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Seller.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package unicam.IdSProject.models;\nimport unicam.IdSProject.Tag;\nimport java.util.ArrayList;\n\n/**\n*\n* This class represents a Seller\n*\n* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi\n*\n*/\npublic class Seller {\n\n    private String name;\n    private String description;\n    private Location location;\n    private ArrayList<Tag> tags;\n    private final Mailbox mailbox;\n    private int id;\n    private static int currentId;\n\n    \n    /**\n    * This method creates a new Seller object\n    */\n    public Seller(String name, String description ) {\n        this.mailbox=new Mailbox();\n    }\n\n    \n    private static int getCurrentId() {\n        return currentId;\n    }\n\n    public String getName() {\n        return name;\n    }\n\n    public void setName(String name) {\n        this.name = name;\n    }\n\n    public String getDescription() {\n        return description;\n    }\n\n    public void setDescription(String description) {\n        this.description = description;\n    }\n\n    public Location getLocation() {\n        return location;\n    }\n\n    public void setLocation(Location location) {\n        this.location = location;\n    }\n\n    public ArrayList<Tag> getTags() {\n        return tags;\n    }\n\n    public int getId() {\n        return id;\n    }\n\n    public Mailbox getMailbox() {\n        return mailbox;\n    }\n\n    @Override\n    public String toString(){\n        return \"Nome: \"+this.getName() +\n                \"\\nDescrizione: \"+this.getDescription() +\n                \"\\nLocation: \"+this.getLocation().toString();\n    }\n}\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Seller.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Seller.java
+---- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Seller.java	(revision 58f23084a0a51839624466044bf7bc1cc3a9bd37)
+-+++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Seller.java	(date 1758444001215)
+-@@ -1,5 +1,5 @@
+- package unicam.IdSProject.models;
+--import unicam.IdSProject.Tag;
+-+import unicam.IdSProject.enumerations.Tag;
+- import java.util.ArrayList;
+- 
+- /**
+-Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Receipt.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Receipt.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Receipt.java
+-new file mode 100644
+---- /dev/null	(date 1758443789049)
+-+++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Receipt.java	(date 1758443789049)
+-@@ -0,0 +1,24 @@
+-+package unicam.IdSProject.models;
+-+
+-+import jakarta.persistence.*;
+-+import jakarta.validation.constraints.NotNull;
+-+import lombok.Getter;
+-+import lombok.Setter;
+-+
+-+@Entity
+-+@Getter
+-+@Setter
+-+@Table(name="receipts")
+-+public class Receipt {
+-+
+-+    @Id
+-+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+-+    private Long id;
+-+
+-+    @NotNull
+-+    private Buyer buyer;
+-+
+-+    @NotNull
+-+    private String receipt;
+-+
+-+}
+-Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/EventBoard.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/EventBoard.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/EventBoard.java
+-rename from IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/EventBoard.java
+-rename to IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/EventBoard.java
+---- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/EventBoard.java	(revision 58f23084a0a51839624466044bf7bc1cc3a9bd37)
+-+++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/EventBoard.java	(date 1758444001228)
+-@@ -1,6 +1,8 @@
+--package unicam.IdSProject.models;
+-+package unicam.IdSProject.repositories;
+- 
+- import org.springframework.stereotype.Component;
+-+import unicam.IdSProject.models.Animator;
+-+import unicam.IdSProject.models.Event;
+- 
+- import java.util.ArrayList;
+- 
+-Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/Tag.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/Tag.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/enumerations/Tag.java
+-rename from IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/Tag.java
+-rename to IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/enumerations/Tag.java
+---- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/Tag.java	(revision 58f23084a0a51839624466044bf7bc1cc3a9bd37)
+-+++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/enumerations/Tag.java	(date 1758444001196)
+-@@ -1,4 +1,4 @@
+--package unicam.IdSProject;
+-+package unicam.IdSProject.enumerations;
+- 
+- /**
+- * Tipi di Venditore
+-Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/Curator.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/Curator.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/CuratorController.java
+-rename from IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/Curator.java
+-rename to IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/CuratorController.java
+---- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/Curator.java	(revision 58f23084a0a51839624466044bf7bc1cc3a9bd37)
+-+++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/CuratorController.java	(date 1758444001225)
+-@@ -7,7 +7,7 @@
+- import org.springframework.web.bind.annotation.RequestMapping;
+- import unicam.IdSProject.AcceptVisitor;
+- import unicam.IdSProject.DenyVisitor;
+--import unicam.IdSProject.models.RequestHandler;
+-+import unicam.IdSProject.repositories.RequestHandler;
+- import unicam.IdSProject.Visitable;
+- 
+- /**
+-@@ -18,7 +18,7 @@
+- *
+- */
+- @Controller
+--public class Curator {
+-+public class CuratorController {
+- 
+-     private final AcceptVisitor acceptVisitor;
+-     private final RequestHandler requestHandler;
+-@@ -27,7 +27,7 @@
+-     /**
+-      * This method creates a new Curator object
+-      */
+--    public Curator(AcceptVisitor acceptVisitor, RequestHandler requestHandler) {
+-+    public CuratorController(AcceptVisitor acceptVisitor, RequestHandler requestHandler) {
+-         this.acceptVisitor=acceptVisitor;
+-         this.requestHandler=requestHandler;
+-     }
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_21_09_25__10_40__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_21_09_25__10_40__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_21_09_25__10_40__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_21_09_25__10_40__Changes_.xml	(revision 68063ad2711075e3627ceb0bf9ffa80e709a42d4)
++++ /dev/null	(revision 68063ad2711075e3627ceb0bf9ffa80e709a42d4)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_21_09_25,_10_40_[Changes]" date="1758444005521" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_09_25,_10_40_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 21/09/25, 10:40 [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_20_09_25,_16_13_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_20_09_25,_16_13_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_20_09_25,_16_13_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_20_09_25,_16_13_[Changes]/shelved.patch	(revision 68063ad2711075e3627ceb0bf9ffa80e709a42d4)
++++ /dev/null	(revision 68063ad2711075e3627ceb0bf9ffa80e709a42d4)
+@@ -1,263 +0,0 @@
+-Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/DistributorController.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package unicam.IdSProject.controllers;\nimport unicam.IdSProject.models.Distributor;\nimport unicam.IdSProject.models.Product;\nimport unicam.IdSProject.models.ProductBoard;\nimport unicam.IdSProject.models.ProductBundle;\nimport java.util.ArrayList;\n\n/**\n*\n* This class implements the methods used by the Distributor to interact with the marketplace\n*\n* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi\n *\n*/\npublic class DistributorController {\n\n    private final Distributor distributor;\n    private ProductBoard productBoard;\n\n    /**\n    *\n    * This method creates a new DistributorController object\n    */\n    public DistributorController(Distributor distributor, ProductBoard productBoard){\n        this.distributor = distributor;\n        this.productBoard = productBoard;\n    }\n\n\n    /**\n     *\n     * This method creates a new Bundle with a set of Product present in the marketplace\n     *\n     * @param products: the Products present in the Bundle\n     *\n     * @return true, if the Bundle was created, false otherwise\n     */\n    public boolean createBundle(ArrayList<Product> products){\n        if (products.isEmpty()){\n            return false;\n        }\n        for(Product product : products){\n            if((product == null || !productBoard.contains(product))) {\n               return false;\n            }\n        }\n        ProductBundle bundle = new ProductBundle(products, distributor.getName());\n        return true;\n    }\n\n\n\n    /**\n     *\n     * This method adds a Product from the marketplace inside a Bundle\n     *\n     * @param bundle: the Bundle in question\n     *\n     * @param product: the Product that needs to be added\n     *\n     * @return true, if the Bundle was created, false otherwise\n     */\n    public boolean addProductToBundle(ProductBundle bundle, Product product){\n        if(product == null || !productBoard.contains(product)){\n            return false;\n        }\n        if(bundle.getProducts().contains(product)){\n            return false;\n        }\n        bundle.getProducts().add(product);\n        return true;\n    }\n\n\n\n    /**\n     *\n     * This method deletes a Bundle from the marketplace\n     *\n     * @param bundle: the Bundle in question\n     *\n     * @return true, if the Product was deleted, false otherwise\n     */\n    public boolean deleteBundle(ProductBundle bundle) {\n        if(bundle == null || !productBoard.contains(bundle)){\n            return false;\n        }\n        productBoard.removeProduct(bundle);\n        return true;\n    }\n\n\n    /**\n     *\n     * This method adds Distributor infos to a Product\n     *\n     * @param product: the Product to witch add the information\n     *\n     * @param info: the info about the Product\n     *\n     * @return true, if the information was added, false otherwise\n     */\n    public boolean addInfo(Product product, String info) {\n        if (product == null || !productBoard.contains(product)) {\n            return false;\n        }\n        if (info == null || info.isEmpty()){\n            return false;\n        }\n        product.setDistributorDescription(info);\n        return true;\n    }\n}
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/DistributorController.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/DistributorController.java
+---- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/DistributorController.java	(revision a56a64577f6733384d55556a34c6820a26c35eb8)
+-+++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/DistributorController.java	(date 1758357378438)
+-@@ -3,6 +3,7 @@
+- import unicam.IdSProject.models.Product;
+- import unicam.IdSProject.models.ProductBoard;
+- import unicam.IdSProject.models.ProductBundle;
+-+
+- import java.util.ArrayList;
+- 
+- /**
+-@@ -10,104 +11,111 @@
+- * This class implements the methods used by the Distributor to interact with the marketplace
+- *
+- * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+-- *
+- */
+- public class DistributorController {
+- 
+-     private final Distributor distributor;
+-     private ProductBoard productBoard;
+-+    private ArrayList<ProductBundle> bundlesList;
+- 
+-     /**
+-     *
+-     * This method creates a new DistributorController object
+-     */
+--    public DistributorController(Distributor distributor, ProductBoard productBoard){
+-+    public DistributorController(Distributor distributor, ProductBoard productBoard, ArrayList<ProductBundle> bundlesList){
+-         this.distributor = distributor;
+-         this.productBoard = productBoard;
+-+        this.bundlesList = bundlesList;
+-     }
+- 
+- 
+-     /**
+-      *
+--     * This method creates a new Bundle with a set of Product present in the marketplace
+-+     * This method creates a new bundle with a set of product present in the marketplace
+-      *
+--     * @param products: the Products present in the Bundle
+-+     * @param products: the products present in the bundle
+-      *
+--     * @return true, if the Bundle was created, false otherwise
+-+     * @return true, if the bundle was created, false otherwise
+-      */
+-     public boolean createBundle(ArrayList<Product> products){
+-         if (products.isEmpty()){
+--            return false;
+-+            throw new IllegalArgumentException("Deve essere inserito almeno un prodotto");
+-         }
+-         for(Product product : products){
+-             if((product == null || !productBoard.contains(product))) {
+--               return false;
+-+                throw new IllegalArgumentException("Prodotti inseriti non validi");
+-             }
+-         }
+-         ProductBundle bundle = new ProductBundle(products, distributor.getName());
+-+        bundlesList.add(bundle);
+-         return true;
+-     }
+- 
+--
+--
+-     /**
+-      *
+--     * This method adds a Product from the marketplace inside a Bundle
+-+     * This method adds a product from the marketplace inside a bundle
+-      *
+--     * @param bundle: the Bundle in question
+-+     * @param bundle: the bundle in question
+-      *
+--     * @param product: the Product that needs to be added
+-+     * @param product: the product that needs to be added
+-      *
+--     * @return true, if the Bundle was created, false otherwise
+-+     * @return true, if the bundle was created, false otherwise
+-      */
+-     public boolean addProductToBundle(ProductBundle bundle, Product product){
+-         if(product == null || !productBoard.contains(product)){
+--            return false;
+-+            throw new IllegalArgumentException("Prodotto inserito non valido");
+-         }
+-         if(bundle.getProducts().contains(product)){
+--            return false;
+-+            throw new IllegalArgumentException("Il prodotto è già presente nel bundle");
+-         }
+-         bundle.getProducts().add(product);
+-         return true;
+-     }
+- 
+- 
+--
+-     /**
+-      *
+--     * This method deletes a Bundle from the marketplace
+-+     * This method deletes a product from a bundle
+-+     *
+-+     * @param bundle: the bundle in question
+-      *
+--     * @param bundle: the Bundle in question
+-+     * @param product: the product that needs to be added
+-      *
+--     * @return true, if the Product was deleted, false otherwise
+-+     * @return true, if the product was deleted, false otherwise
+-      */
+--    public boolean deleteBundle(ProductBundle bundle) {
+--        if(bundle == null || !productBoard.contains(bundle)){
+--            return false;
+-+    public boolean deleteBundle(ProductBundle bundle, Product product) {
+-+        if(product == null || !productBoard.contains(product)){
+-+            throw new IllegalArgumentException("Prodotto inserito non valido");
+-         }
+--        productBoard.removeProduct(bundle);
+-+        if(!bundle.getProducts().contains(product)){
+-+            throw new IllegalArgumentException("Il prodotto non presente nel bundle");
+-+        }
+-+        bundle.getProducts().remove(product);
+-         return true;
+-     }
+- 
+- 
+-     /**
+-      *
+--     * This method adds Distributor infos to a Product
+-+     * This method adds distributor infos to a product
+-      *
+--     * @param product: the Product to witch add the information
+-+     * @param product: the product to witch add the information
+-      *
+--     * @param info: the info about the Product
+-+     * @param info: the info abouct the product
+-      *
+-      * @return true, if the information was added, false otherwise
+-      */
+-     public boolean addInfo(Product product, String info) {
+--        if (product == null || !productBoard.contains(product)) {
+--            return false;
+-+        if(product == null || !productBoard.contains(product)){
+-+            throw new IllegalArgumentException("Prodotto inserito non valido");
+-         }
+--        if (info == null || info.isEmpty()){
+--            return false;
+--        }
+--        product.setDistributorDescription(info);
+--        return true;
+-+        for(ProductBundle bundles : bundlesList){
+-+            ArrayList<Product> products = bundles.getProducts();
+-+            if (products.contains(product)){
+-+                product.setDistributorDescription(info);
+-+                return true;
+-+            }
+-+        }
+-+        throw new IllegalArgumentException("Prodotto non presente in alcun bundle");
+-     }
+--}
+-\ No newline at end of file
+-+}
+-Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/AnimatorDTO.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package unicam.IdSProject.dtos;\n\nimport unicam.IdSProject.models.Mailbox;\n\n\n@Data\npublic class AnimatorDTO\n{\n    private String name;\n\n    private String description;\n\n    private Mailbox mailbox;\n\n    public AnimatorDTO(String name, String description,Mailbox mailbox){\n        this.name = name;\n        this.description = description;\n        this.mailbox = mailbox;\n    }\n\n    public String getName() {\n        return name;\n    }\n\n    public void setName(String name) {\n        this.name = name;\n    }\n\n    public String getDescription() {\n        return description;\n    }\n\n    public void setDescription(String description) {\n        this.description = description;\n    }\n\n    public Mailbox getMailbox() {\n        return mailbox;\n    }\n\n    public void setMailbox(Mailbox mailbox) {\n        this.mailbox = mailbox;\n    }\n}\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/AnimatorDTO.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/AnimatorDTO.java
+---- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/AnimatorDTO.java	(revision a56a64577f6733384d55556a34c6820a26c35eb8)
+-+++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/dtos/AnimatorDTO.java	(date 1758357378464)
+-@@ -1,5 +1,6 @@
+- package unicam.IdSProject.dtos;
+- 
+-+import lombok.Data;
+- import unicam.IdSProject.models.Mailbox;
+- 
+- 
+-@@ -12,33 +13,4 @@
+- 
+-     private Mailbox mailbox;
+- 
+--    public AnimatorDTO(String name, String description,Mailbox mailbox){
+--        this.name = name;
+--        this.description = description;
+--        this.mailbox = mailbox;
+--    }
+--
+--    public String getName() {
+--        return name;
+--    }
+--
+--    public void setName(String name) {
+--        this.name = name;
+--    }
+--
+--    public String getDescription() {
+--        return description;
+--    }
+--
+--    public void setDescription(String description) {
+--        this.description = description;
+--    }
+--
+--    public Mailbox getMailbox() {
+--        return mailbox;
+--    }
+--
+--    public void setMailbox(Mailbox mailbox) {
+--        this.mailbox = mailbox;
+--    }
+- }
+-Index: IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Buyer.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package unicam.IdSProject.models;\n\n/**\n*\n* This class represents a Buyer\n*\n* @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi\n*/\npublic class Buyer {\n    \n    private String name;\n    private ShoppingCart shoppingCart; //Può essere final?\n    private Mailbox mailbox;\n    private int id;\n    private static int currentId;\n\n    /**\n    * This method creates a new Buyer object\n    */\n    public Buyer(String name){\n        this.name = name;\n    }\n\n    \n    \n    private static int getCurrentId() {\n        return currentId;\n    }\n\n    public String getName() {\n        return name;\n    }\n\n    public void setName(String name) {\n        this.name = name;\n    }\n\n    public ShoppingCart getShoppingCart(){ return shoppingCart; }\n\n    public int getId() {\n        return id;\n    }\n\n    public Mailbox getMailbox() {\n        return mailbox;\n    }\n\n\n}\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Buyer.java b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Buyer.java
+---- a/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Buyer.java	(revision a56a64577f6733384d55556a34c6820a26c35eb8)
+-+++ b/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Buyer.java	(date 1758357812069)
+-@@ -1,11 +1,14 @@
+- package unicam.IdSProject.models;
+- 
+-+import lombok.Getter;
+-+
+- /**
+- *
+- * This class represents a Buyer
+- *
+- * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+- */
+-+@Getter
+- public class Buyer {
+-     
+-     private String name;
+-Index: IdSProject 2/IdSProject/pom.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n\txsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n\t<modelVersion>4.0.0</modelVersion>\n\t<parent>\n\t\t<groupId>org.springframework.boot</groupId>\n\t\t<artifactId>spring-boot-starter-parent</artifactId>\n\t\t<version>3.5.5</version>\n\t\t<relativePath/> <!-- lookup parent from repository -->\n\t</parent>\n\t<groupId>unicam</groupId>\n\t<artifactId>IdSProject</artifactId>\n\t<version>0.0.1-SNAPSHOT</version>\n\t<name>IdSProject</name>\n\t<description>Demo project for Spring Boot</description>\n\t<url/>\n\t<licenses>\n\t\t<license/>\n\t</licenses>\n\t<developers>\n\t\t<developer/>\n\t</developers>\n\t<scm>\n\t\t<connection/>\n\t\t<developerConnection/>\n\t\t<tag/>\n\t\t<url/>\n\t</scm>\n\t<properties>\n\t\t<java.version>17</java.version>\n\t</properties>\n\t<dependencies>\n\n\t\t<!-- Spring boot JPA -->\n\t\t<dependency>\n\t\t\t<groupId>org.springframework.boot</groupId>\n\t\t\t<artifactId>spring-boot-starter-data-jpa</artifactId>\n\t\t</dependency>\n\n\t\t<!-- Spring Web -->\n\t\t<dependency>\n\t\t\t<groupId>org.springframework.boot</groupId>\n\t\t\t<artifactId>spring-boot-starter-web</artifactId>\n\t\t</dependency>\n\n\t\t<!-- h2 -->\n\t\t<dependency>\n\t\t\t<groupId>com.h2database</groupId>\n\t\t\t<artifactId>h2</artifactId>\n\t\t\t<scope>runtime</scope>\n\t\t</dependency>\n\n\t\t<!-- Spring Test -->\n\t\t<dependency>\n\t\t\t<groupId>org.springframework.boot</groupId>\n\t\t\t<artifactId>spring-boot-starter-test</artifactId>\n\t\t\t<scope>test</scope>\n\t\t</dependency>\n\n\t\t<!-- Spring Security -->\n\n<!--\t\t<dependency>-->\n<!--\t\t\t<groupId>org.springframework.boot</groupId>-->\n<!--\t\t\t<artifactId>spring-boot-starter-security</artifactId>-->\n<!--\t\t</dependency>-->\n\n<!--\t\t<dependency>-->\n<!--\t\t\t<groupId>org.thymeleaf.extras</groupId>-->\n<!--\t\t\t<artifactId>thymeleaf-extras-springsecurity6</artifactId>-->\n<!--\t\t\t&lt;!&ndash; Temporary explicit version to fix Thymeleaf bug &ndash;&gt;-->\n<!--\t\t\t<version>3.1.1.RELEASE</version>-->\n<!--\t\t</dependency>-->\n\t</dependencies>\n\n\t<build>\n\t\t<plugins>\n\t\t\t<plugin>\n\t\t\t\t<groupId>org.springframework.boot</groupId>\n\t\t\t\t<artifactId>spring-boot-maven-plugin</artifactId>\n\t\t\t</plugin>\n\t\t</plugins>\n\t</build>\n\n</project>\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/IdSProject 2/IdSProject/pom.xml b/IdSProject 2/IdSProject/pom.xml
+---- a/IdSProject 2/IdSProject/pom.xml	(revision a56a64577f6733384d55556a34c6820a26c35eb8)
+-+++ b/IdSProject 2/IdSProject/pom.xml	(date 1758357378460)
+-@@ -50,6 +50,11 @@
+- 			<scope>runtime</scope>
+- 		</dependency>
+- 
+-+		<dependency>
+-+			<groupId>org.projectlombok</groupId>
+-+			<artifactId>lombok</artifactId>
+-+		</dependency>
+-+
+- 		<!-- Spring Test -->
+- 		<dependency>
+- 			<groupId>org.springframework.boot</groupId>
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_21_09_25__11_41__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_21_09_25__11_41__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_21_09_25__11_41__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_21_09_25__11_41__Changes_.xml	(revision 68063ad2711075e3627ceb0bf9ffa80e709a42d4)
++++ /dev/null	(revision 68063ad2711075e3627ceb0bf9ffa80e709a42d4)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_21_09_25,_11_41_[Changes]" date="1758447683703" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_09_25,_11_41_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 21/09/25, 11:41 [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\n  <component name=\"MavenProjectsManager\">\n    <option name=\"originalFiles\">\n      <list>\n        <option value=\"$PROJECT_DIR$/IdSProject 2/IdSProject/pom.xml\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_21\" default=\"true\" project-jdk-name=\"openjdk-24\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/out\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 68063ad2711075e3627ceb0bf9ffa80e709a42d4)
++++ b/.idea/misc.xml	(date 1759062764361)
+@@ -8,7 +8,7 @@
+       </list>
+     </option>
+   </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="openjdk-24" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="openjdk-24" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"bb77262b-e258-4074-bd19-d064dcf94648\" name=\"Changes\" comment=\"aggiunto l'equals alla classe SubId\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Mailbox.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Mailbox.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/MessageRepository.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/MessageRepository.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/visitor/AcceptVisitor.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/visitor/AcceptVisitor.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/visitor/DenyVisitor.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/visitor/DenyVisitor.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Interface\" />\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"GitHubPullRequestSearchHistory\">{\n  &quot;lastFilter&quot;: {\n    &quot;state&quot;: &quot;OPEN&quot;,\n    &quot;assignee&quot;: &quot;erik-agu&quot;\n  }\n}</component>\n  <component name=\"GithubPullRequestsUISettings\">{\n  &quot;selectedUrlAndAccountId&quot;: {\n    &quot;url&quot;: &quot;https://github.com/Barchio03/ProgettoMarchetplace&quot;,\n    &quot;accountId&quot;: &quot;676e0b8e-6166-45d9-9b29-b10c6f631b9e&quot;\n  }\n}</component>\n  <component name=\"ProjectColorInfo\">{\n  &quot;associatedIndex&quot;: 2\n}</component>\n  <component name=\"ProjectId\" id=\"33Co6kwtBBN5ViRRRkQozTPKNRG\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;Application.IdSProjectApplication.executor&quot;: &quot;Run&quot;,\n    &quot;Maven.IdSProject [clean,install,-U].executor&quot;: &quot;Run&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\n    &quot;git-widget-placeholder&quot;: &quot;main&quot;,\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\n    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,\n    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,\n    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,\n    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;,\n    &quot;settings.editor.splitter.proportion&quot;: &quot;0.24872579&quot;\n  }\n}</component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/IdSProject 2/IdSProject\" />\n    </key>\n  </component>\n  <component name=\"RunAnythingCache\">\n    <option name=\"myCommands\">\n      <command value=\"mvn  clean install -U\" />\n    </option>\n  </component>\n  <component name=\"RunManager\">\n    <configuration name=\"IdSProjectApplication\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"unicam.IdSProject.IdSProjectApplication\" />\n      <module name=\"IdSProject\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"unicam.IdSProject.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Application.IdSProjectApplication\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"bb77262b-e258-4074-bd19-d064dcf94648\" name=\"Changes\" comment=\"\" />\n      <created>1758830241783</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1758830241783</updated>\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"Dto related changes\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1758830725737</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1758830725737</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"Adapted Event Actions\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1758912286332</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1758912286332</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"Added methods to EventBoard\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1758915751258</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1758915751258</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"Aggiunti i javadoc ai metodi di EventBoard\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1758916068715</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1758916068715</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"aggiunto l'equals alla classe SubId\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1758963667801</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1758963667801</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"6\" />\n    <servers />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"Dto related changes\" />\n    <MESSAGE value=\"Adapted Event Actions\" />\n    <MESSAGE value=\"Added methods to EventBoard\" />\n    <MESSAGE value=\"Aggiunti i javadoc ai metodi di EventBoard\" />\n    <MESSAGE value=\"aggiunto l'equals alla classe SubId\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"aggiunto l'equals alla classe SubId\" />\n  </component>\n  <component name=\"XDebuggerManager\">\n    <breakpoint-manager>\n      <breakpoints>\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\n          <url>file://$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/IdSProjectApplication.java</url>\n          <line>9</line>\n          <option name=\"timeStamp\" value=\"1\" />\n        </line-breakpoint>\n      </breakpoints>\n    </breakpoint-manager>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 68063ad2711075e3627ceb0bf9ffa80e709a42d4)
++++ b/.idea/workspace.xml	(date 1758995702892)
+@@ -4,13 +4,7 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="bb77262b-e258-4074-bd19-d064dcf94648" name="Changes" comment="aggiunto l'equals alla classe SubId">
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Mailbox.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Mailbox.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/MessageRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/repositories/MessageRepository.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/visitor/AcceptVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/visitor/AcceptVisitor.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/visitor/DenyVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/visitor/DenyVisitor.java" afterDir="false" />
+-    </list>
++    <list default="true" id="bb77262b-e258-4074-bd19-d064dcf94648" name="Changes" comment="Changes to make it work" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -143,7 +137,15 @@
+       <option name="project" value="LOCAL" />
+       <updated>1758963667801</updated>
+     </task>
+-    <option name="localTasksCounter" value="6" />
++    <task id="LOCAL-00006" summary="Changes to make it work">
++      <option name="closed" value="true" />
++      <created>1758995447676</created>
++      <option name="number" value="00006" />
++      <option name="presentableId" value="LOCAL-00006" />
++      <option name="project" value="LOCAL" />
++      <updated>1758995447676</updated>
++    </task>
++    <option name="localTasksCounter" value="7" />
+     <servers />
+   </component>
+   <component name="VcsManagerConfiguration">
+@@ -152,7 +154,8 @@
+     <MESSAGE value="Added methods to EventBoard" />
+     <MESSAGE value="Aggiunti i javadoc ai metodi di EventBoard" />
+     <MESSAGE value="aggiunto l'equals alla classe SubId" />
+-    <option name="LAST_COMMIT_MESSAGE" value="aggiunto l'equals alla classe SubId" />
++    <MESSAGE value="Changes to make it work" />
++    <option name="LAST_COMMIT_MESSAGE" value="Changes to make it work" />
+   </component>
+   <component name="XDebuggerManager">
+     <breakpoint-manager>

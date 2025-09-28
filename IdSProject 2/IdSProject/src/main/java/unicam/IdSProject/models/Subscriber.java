@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import unicam.IdSProject.ids.SubId;
 
@@ -13,6 +14,7 @@ import unicam.IdSProject.ids.SubId;
 @Table(name="subscribers")
 @AllArgsConstructor
 @IdClass(SubId.class)
+@NoArgsConstructor
 public class Subscriber {
     @Id
     private Long eventId;
