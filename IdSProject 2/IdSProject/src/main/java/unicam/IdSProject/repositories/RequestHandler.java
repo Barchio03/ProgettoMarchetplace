@@ -35,6 +35,9 @@ public class RequestHandler {
      * @return true if it was added successfully, false otherwise
      */
     public boolean addProduct(Product product) {
+        if (productRequests.contains(product)){
+            return false;
+        }
         return productRequests.add(product);
     }
 
@@ -57,6 +60,10 @@ public class RequestHandler {
      * @return true if it was added successfully, false otherwise
      */
     public boolean addEvent(Event event) {
+
+        if (eventRequests.contains(event)){
+            return false;
+        }
         return eventRequests.add(event);
     }
 

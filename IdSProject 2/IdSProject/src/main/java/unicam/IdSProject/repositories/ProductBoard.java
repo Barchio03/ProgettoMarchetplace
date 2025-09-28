@@ -77,7 +77,7 @@ public class ProductBoard {
      * @return true if it is contained, false otherwise
      */
     public boolean contains(Product product) {
-        return productRepository.existsById(product.getId());
+        return productRepository.existsByName(product.getName()) && productRepository.existsByCreator(product.getCreator());
     }
 
 

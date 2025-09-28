@@ -4,10 +4,7 @@ import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import unicam.IdSProject.dtos.requests.ProducerProductCreationDTO;
 import unicam.IdSProject.dtos.requests.TransformerProductCreationDTO;
 import unicam.IdSProject.services.SellerService;
@@ -51,6 +48,19 @@ public class SellerController {
         return sellerService.removeProduct(id);
     }
 
+    /**
+     * This method implements the feature for a Seller to enable permissions for a Producer
+     */
+    @PutMapping(value = "/addProducerTag")
+    public ResponseEntity<Object> addProducerTag(){
+        return sellerService.addProducerTag();
+    }
 
-
+    /**
+     * This method implements the feature for a Seller to enable permissions for a Transformer
+     */
+    @PutMapping(value = "/addTransformerTag")
+    public ResponseEntity<Object> addTransformerTag(){
+        return sellerService.addTransformerTag();
+    }
 }
