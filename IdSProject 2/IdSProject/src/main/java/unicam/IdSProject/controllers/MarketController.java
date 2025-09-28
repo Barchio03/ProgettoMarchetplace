@@ -3,7 +3,7 @@ package unicam.IdSProject.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import unicam.IdSProject.services.MarketService;
 
 
@@ -19,16 +19,22 @@ public class MarketController {
 
     private final MarketService marketService;
 
-    // -- MARKET --
     /**
-    * This method return the products from the product board and sets a route to it
-    */
-    @RequestMapping(value="/products")
+     * This method return the Products from the product board and sets a route to it
+     *
+     * @return the response of the method
+     */
+    @GetMapping(value="/products")
     public ResponseEntity<Object> getProducts(){
         return marketService.getProducts();
     }
 
-    @RequestMapping(value="/events")
+    /**
+     * This method return the Events from the event board and sets a route to it
+     *
+     * @return the response of the method
+     */
+    @GetMapping(value="/events")
     public ResponseEntity<Object> getEvents(){
         return marketService.getEvents();
     }

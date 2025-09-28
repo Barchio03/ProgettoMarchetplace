@@ -4,6 +4,7 @@ import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,13 +29,13 @@ public class BuyerController {
     /**
      * This method adds a Product to the Shopping Cart.
      *
-     * @param productDto, the Product that needs to be added.
+     * @param productDTO, the Product that needs to be added.
      *
      * @return the response of the method
      */
-    @PostMapping(value = "/addToShoppingKart")
-    public ResponseEntity<Object> addToShoppingCart(@RequestBody ProductBoughtDTO productDto, @PathParam("quantity") int quantity) {
-        return buyerService.addProductToShoppingKart(productDto, quantity);
+    @PostMapping(value = "/addToShoppingCart")
+    public ResponseEntity<Object> addToShoppingCart(@RequestBody ProductBoughtDTO productDTO, @PathParam("quantity") int quantity) {
+        return buyerService.addProductToShoppingKart(productDTO, quantity);
     }
 
     /**
@@ -42,26 +43,33 @@ public class BuyerController {
      *
      * @return the response of the method
      */
-    @RequestMapping(value = "/buyCart")
+    @PostMapping(value = "/buyShoppingCart")
     public ResponseEntity<Object> buyShoppingCart() {
         return buyerService.buyShoppingCart();
     }
 
     /**
-     * This method allows to buy an Event tickey
+     * This method allows to buy an Event ticket
      *
-     * @param eventDto, the Event from which buying the ticket
+     * @param eventDTO, the Event from which buying the ticket
      *
      * @return the response of the method
      */
     @PostMapping("/subscribe")
-    public ResponseEntity<Object> subscribeToEvent(@RequestBody EventBoughtDTO eventDto) {
-        return buyerService.subscribeToEvent(eventDto);
+    public ResponseEntity<Object> subscribeToEvent(@RequestBody EventBoughtDTO eventDTO) {
+        return buyerService.subscribeToEvent(eventDTO);
     }
 
-    @PostMapping(value = "/unsubscribe")
-    public ResponseEntity<Object> unsubscribeToEvent(@RequestBody EventBoughtDTO eventDto) {
-        return buyerService.unsubscribeToEvent(eventDto);
+    /**
+     * This method allows to unsubscribe from an Event from which the user is registered
+     *
+     * @param eventDTO, the Event from which unsubscribing
+     *
+     * @return the response of the method
+     */
+    @DeleteMapping(value = "/unsubscribe")
+    public ResponseEntity<Object> unsubscribeToEvent(@RequestBody EventBoughtDTO eventDTO) {
+        return buyerService.unsubscribeToEvent(eventDTO);
     }
 }
 

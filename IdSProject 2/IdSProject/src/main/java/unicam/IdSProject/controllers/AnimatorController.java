@@ -4,6 +4,8 @@ import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import unicam.IdSProject.dtos.requests.EventCreationDTO;
@@ -31,7 +33,7 @@ public class AnimatorController {
      *
      * @return ResponseEntity<Object>, the response about the procedure
      */
-    @RequestMapping(value = "/addEvent")
+    @PostMapping(value = "/addEvent")
     public ResponseEntity<Object> addEvent(@RequestBody EventCreationDTO event){
         return animatorService.addEvent(event);
     }
@@ -43,7 +45,7 @@ public class AnimatorController {
      *
      * @return ResponseEntity<Object>, the response about the procedure
      */
-    @RequestMapping(value = "/removeEvent")
+    @DeleteMapping(value = "/removeEvent")
     public ResponseEntity<Object> removeEvent(@PathParam("id") Long id) {
         return animatorService.removeEvent(id);
     }

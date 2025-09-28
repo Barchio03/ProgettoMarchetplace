@@ -4,6 +4,9 @@ import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import unicam.IdSProject.services.CuratorService;
 
@@ -24,9 +27,9 @@ public class CuratorController {
     /**
      * This method gets the next Product to verify
      *
-     * @return responce, the Responce Entity for the method
+     * @return the response Entity for the method
      */
-    @RequestMapping(value="/getProduct")
+    @GetMapping(value="/getProduct")
     public ResponseEntity<Object> getProduct() {
         return curatorService.getProduct();
     }
@@ -34,9 +37,9 @@ public class CuratorController {
     /**
      * This method gets the next Event to verify
      *
-     * @return responce, the Responce Entity for the method
+     * @return the response Entity for the method
      */
-    @RequestMapping(value="/getEvent")
+    @GetMapping(value="/getEvent")
     public ResponseEntity<Object> getEvent() {
         return curatorService.getEvent();
     }
@@ -44,9 +47,9 @@ public class CuratorController {
     /**
      * This method approves the Visitable
      *
-     * @return responce, the Responce Entity for the method
+     * @return the response Entity for the method
      */
-    @RequestMapping(value="/approve")
+    @PostMapping(value="/approve")
     public ResponseEntity<Object> approve(){
         return curatorService.accept();
     }
@@ -54,9 +57,9 @@ public class CuratorController {
     /**
      * This method denies the Visitable
      *
-     * @return responce, the Responce Entity for the method
+     * @return the response Entity for the method
      */
-    @RequestMapping(value="/deny")
+    @DeleteMapping(value="/deny")
     public ResponseEntity<Object> deny( @PathParam("message") String message){
         return curatorService.deny(message);
     }
