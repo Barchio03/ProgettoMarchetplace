@@ -47,7 +47,7 @@ public class BuyerService {
     public ResponseEntity<Object> addProductToShoppingCart(Long id, int quantity) {
         if (!productBoard.contains(id)) return new ResponseEntity<>("Il prodotto non esiste", HttpStatus.BAD_REQUEST);
         Product product = productBoard.getProduct(id);
-        if (product.getStockNumber() <= quantity) return new ResponseEntity<>("Non ci sono abbastanza scorte di questo prodotto", HttpStatus.BAD_REQUEST);
+        if (product.getStockNumber() < quantity) return new ResponseEntity<>("Non ci sono abbastanza scorte di questo prodotto", HttpStatus.BAD_REQUEST);
 
         QuantifiedProduct qProduct = new QuantifiedProduct(product, quantity);
 
