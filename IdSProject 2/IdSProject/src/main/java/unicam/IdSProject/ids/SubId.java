@@ -29,4 +29,21 @@ public class SubId implements Serializable {
         }
     }
 
+    @Override
+    public int hashCode(){
+
+        final int prime = 31;
+        int result = 1;
+        long temp;
+
+        temp = this.getEventId().hashCode();
+        result = prime*result+(int) (temp^(temp>>>32));
+
+        temp = this.getBuyerId().hashCode();
+        result = prime*result+(int) (temp^(temp>>>32));
+
+        return result;
+
+    }
+
 }

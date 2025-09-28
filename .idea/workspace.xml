@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb77262b-e258-4074-bd19-d064dcf94648" name="Changes" comment="Correzione errori">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_09_25,_16_13_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_09_25,_10_40_[Changes]/shelved.patch" beforeDir="false" />
+    <list default="true" id="bb77262b-e258-4074-bd19-d064dcf94648" name="Changes" comment="Modifiche generiche delle chiamate http">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_09_25,_11_41_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_09_25__11_41__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/AnimatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/AnimatorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/BuyerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/BuyerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/CuratorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/CuratorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/MarketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/MarketController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/SellerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/controllers/SellerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/ids/SubId.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/ids/SubId.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +25,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -146,7 +143,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758963667801</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Modifiche generiche delle chiamate http">
+      <option name="closed" value="true" />
+      <created>1759052790707</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1759052790707</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -155,7 +160,8 @@
     <MESSAGE value="Added methods to EventBoard" />
     <MESSAGE value="Aggiunti i javadoc ai metodi di EventBoard" />
     <MESSAGE value="aggiunto l'equals alla classe SubId" />
-    <option name="LAST_COMMIT_MESSAGE" value="aggiunto l'equals alla classe SubId" />
+    <MESSAGE value="Modifiche generiche delle chiamate http" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modifiche generiche delle chiamate http" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
