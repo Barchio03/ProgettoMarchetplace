@@ -61,8 +61,9 @@ public class BuyerService {
             return new ResponseEntity<>("Carrello Vuoto", HttpStatus.BAD_REQUEST);
         }
 
-        shoppingCart.getQuantifiedProducts()
-                .stream().peek(quantifiedProduct -> this.decreaseStock(quantifiedProduct));
+        for (QuantifiedProduct quantifiedProduct : shoppingCart.getQuantifiedProducts()) {
+            productBoard.updateStock(quantifiedProduct.getProduct(), quantifiedProduct.getProduct().getStockNumber()-quantifiedProduct.getStockNumber());
+        }
         
         String receipt = this.makeReceipt(shoppingCart);
         shoppingCart.clear();
@@ -104,12 +105,6 @@ public class BuyerService {
 
         subcriberRepository.delete(subscriber);
         return new ResponseEntity<>("Disiscrizione avvenuta con successo", HttpStatus.OK);
-    }
-
-
-    private void decreaseStock(QuantifiedProduct product) {
-        product.getProduct().setStockNumber(product.getProduct().getStockNumber()-product.getStockNumber());
-
     }
 
     private String makeReceipt(ShoppingCart shoppingCart){

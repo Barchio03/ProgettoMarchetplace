@@ -42,6 +42,7 @@ public class ShoppingCart {
         for (QuantifiedProduct product : quantifiedProducts) {
             if (product.getProduct().equals(quantifiedProduct.getProduct())) {
                 product.setStockNumber(product.getStockNumber()+quantifiedProduct.getStockNumber());
+                this.calculateTotal();
                 return true;
             }
         }
@@ -72,7 +73,7 @@ public class ShoppingCart {
     private void calculateTotal() {
         double total = 0;
         for (QuantifiedProduct quantifiedProduct : quantifiedProducts) {
-            total*=quantifiedProduct.getTotalPrice();
+            total=total+quantifiedProduct.getTotalPrice();
         }
         this.totalPrice=total;
     }

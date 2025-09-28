@@ -101,6 +101,11 @@ public class ProductBoard {
         return productRepository.existsById(id);
     }
 
+    public void updateStock(Product product, int stockNumber) {
+        product.setStockNumber(stockNumber);
+        productRepository.save(product);
+    }
+
 
     /**
      * This method returns a list of all the Products a specific Seller has published

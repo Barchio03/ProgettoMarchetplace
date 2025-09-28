@@ -35,7 +35,7 @@ public class BuyerController {
      * @return the response of the method
      */
     @PostMapping(value = "/addToShoppingCart")
-    public ResponseEntity<Object> addToShoppingCart(@RequestBody Long id, @PathParam("quantity") int quantity) {
+    public ResponseEntity<Object> addToShoppingCart(@PathParam("id") Long id, @PathParam("quantity") int quantity) {
         return buyerService.addProductToShoppingCart(id, quantity);
     }
 
