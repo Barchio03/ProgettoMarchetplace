@@ -66,8 +66,9 @@ public class AnimatorService {
      * @param message, the message to spread
      */
     private void notifySubscribers(Long id, String message) {
-        ArrayList<Subscriber> subs = (ArrayList<Subscriber>) subscriberRepository.findAllByEventId(id);
-        subs.stream().peek(sub -> messageRepository.save(new Message(null, sub.getBuyerId(), message)));
+        for (Subscriber sub : subscriberRepository.findAllByEventId(id)) {
+            messageRepository.save(new Message(null, sub.getBuyerId(), message));
+        }
     }
 
 }
