@@ -13,7 +13,7 @@ import java.util.Objects;
  *
  * This class represents an Event.
  *
- * @author Erika Aguiari, Ilaria Morettini, Luca Barchiesi
+ * @author Erika Aguiari, Luca Barchiesi
  *
  */
 

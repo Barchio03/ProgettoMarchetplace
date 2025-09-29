@@ -1,5 +1,4 @@
 package unicam.IdSProject.repositories;
-import org.mapstruct.ap.shaded.freemarker.template.utility.StringUtil;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import unicam.IdSProject.models.Product;

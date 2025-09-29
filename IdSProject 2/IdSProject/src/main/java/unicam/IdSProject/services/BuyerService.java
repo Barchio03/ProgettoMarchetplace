@@ -35,7 +35,7 @@ public class BuyerService {
 
 
 //    public ResponseEntity<Object> addProducerProductToShoppingCart(Long id, int quantity) {
-////        ProducerProduct product = productMapper.toEntityWithAllFields(new ProducerProductBoughtDTO(productBoughtDTO.getId()));
+//        ProducerProduct product = productMapper.toEntityWithAllFields(new ProducerProductBoughtDTO(productBoughtDTO.getId()));
 //        return addProductToShoppingCart(id, quantity);
 //    }
 //
@@ -47,7 +47,7 @@ public class BuyerService {
     public ResponseEntity<Object> addProductToShoppingCart(Long id, int quantity) {
         if (!productBoard.contains(id)) return new ResponseEntity<>("Il prodotto non esiste", HttpStatus.BAD_REQUEST);
         Product product = productBoard.getProduct(id);
-        if (product.getStockNumber() <= quantity) return new ResponseEntity<>("Non ci sono abbastanza scorte di questo prodotto", HttpStatus.BAD_REQUEST);
+        if (product.getStockNumber() < quantity) return new ResponseEntity<>("Non ci sono abbastanza scorte di questo prodotto", HttpStatus.BAD_REQUEST);
 
         QuantifiedProduct qProduct = new QuantifiedProduct(product, quantity);
 
@@ -97,7 +97,7 @@ public class BuyerService {
 
         Subscriber subscriber = new Subscriber(eventBoughtDTO.getId(), buyer.getId());
         if (!subcriberRepository.existsById(new SubId(eventBoughtDTO.getId(), buyer.getId())))
-            return new ResponseEntity<>("Iscrizione non possibile", HttpStatus.CONFLICT);
+            return new ResponseEntity<>("Utente già disiscritto", HttpStatus.CONFLICT);
 
         Event event = eventBoard.getEvent(eventBoughtDTO.getId());
         if (event.getMaxAttendees()!= 0)

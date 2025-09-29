@@ -11,5 +11,5 @@ import unicam.IdSProject.models.Event;
 
 public interface EventMapper {
     Event toEntityWithAllFields(EventCreatedDTO dto);
-    EventDTO toDtoWithAllFields(Event product);
+    EventDTO toDtoWithAllFields(Event event);
 }

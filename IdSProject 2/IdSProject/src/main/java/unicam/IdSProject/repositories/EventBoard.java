@@ -25,7 +25,9 @@ public class EventBoard {
      * @return a list of all the Event in the repository
      */
     public ArrayList<Event> getEvents(){
-        return (ArrayList<Event>) eventRepository.findAll();
+        ArrayList<Event> events = new ArrayList<>();
+        events = (ArrayList<Event>) eventRepository.findAll();
+        return events;
     }
 
 
@@ -37,9 +39,6 @@ public class EventBoard {
      * @return true if the Event was added successfully, false otherwise
      */
     public boolean addEvent(Event event) {
-//        if (eventRepository.existsById(event.getId())){
-//            return false;
-//        }
         eventRepository.save(event);
         return true;
     }
@@ -67,7 +66,7 @@ public class EventBoard {
      * @return true is the Event was deleted successfully, false otherwise
      */
     public boolean removeEvent(Long id) {
-        if (eventRepository.existsById(id)){
+        if (!eventRepository.existsById(id)){
             return false;
         }
         eventRepository.deleteById(id);

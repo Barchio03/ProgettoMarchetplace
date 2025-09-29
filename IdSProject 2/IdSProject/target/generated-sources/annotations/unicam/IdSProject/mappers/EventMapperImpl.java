@@ -8,7 +8,7 @@ import unicam.IdSProject.models.Event;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-09-28T17:25:12+0200",
+    date = "2025-09-29T09:48:12+0200",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.8 (Microsoft)"
 )
 @Component
@@ -31,18 +31,18 @@ public class EventMapperImpl implements EventMapper {
     }
 
     @Override
-    public EventDTO toDtoWithAllFields(Event product) {
-        if ( product == null ) {
+    public EventDTO toDtoWithAllFields(Event event) {
+        if ( event == null ) {
             return null;
         }
 
         EventDTO eventDTO = new EventDTO();
 
-        eventDTO.setName( product.getName() );
-        eventDTO.setCreator( product.getCreator() );
-        eventDTO.setMaxAttendees( product.getMaxAttendees() );
-        eventDTO.setDescription( product.getDescription() );
-        eventDTO.setCollaborators( product.getCollaborators() );
+        eventDTO.setName( event.getName() );
+        eventDTO.setCreator( event.getCreator() );
+        eventDTO.setMaxAttendees( event.getMaxAttendees() );
+        eventDTO.setDescription( event.getDescription() );
+        eventDTO.setCollaborators( event.getCollaborators() );
 
         return eventDTO;
     }

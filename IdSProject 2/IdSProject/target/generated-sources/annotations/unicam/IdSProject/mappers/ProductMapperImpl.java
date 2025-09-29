@@ -11,8 +11,8 @@ import unicam.IdSProject.models.TransformerProduct;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-09-28T21:47:56+0200",
-    comments = "version: 1.6.3, compiler: javac, environment: Java 24.0.2 (Oracle Corporation)"
+    date = "2025-09-28T22:26:16+0200",
+    comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.8 (Microsoft)"
 )
 @Component
 public class ProductMapperImpl implements ProductMapper {
