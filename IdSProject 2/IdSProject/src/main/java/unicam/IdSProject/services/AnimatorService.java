@@ -13,7 +13,7 @@ import unicam.IdSProject.models.Subscriber;
 import unicam.IdSProject.repositories.EventBoard;
 import unicam.IdSProject.repositories.MessageRepository;
 import unicam.IdSProject.repositories.RequestHandler;
-import unicam.IdSProject.repositories.SubcriberRepository;
+import unicam.IdSProject.repositories.SubscriberRepository;
 import unicam.IdSProject.users.Animator;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class AnimatorService {
     private final EventMapper eventMapper;
 
     private final EventBoard eventBoard;
-    private final SubcriberRepository subcriberRepository;
+    private final SubscriberRepository subscriberRepository;
     private final MessageRepository messageRepository;
 
     private Animator animator = new Animator("anim1", "Animator", "Just an animator");
@@ -50,7 +50,7 @@ public class AnimatorService {
     public ResponseEntity<Object> removeEvent(Long id) {
         if (eventBoard.removeEvent(id)) {
             notifySubscribers(id, "Evento cancellato");
-            subcriberRepository.deleteByEventId(id);
+            subscriberRepository.deleteByEventId(id);
             return new ResponseEntity<>("Evento rimosso con successo", HttpStatus.OK);
         }
         return new ResponseEntity<>("Id non pervenuto", HttpStatus.NOT_FOUND);
@@ -66,7 +66,7 @@ public class AnimatorService {
      * @param message, the message to spread
      */
     private void notifySubscribers(Long id, String message) {
-        ArrayList<Subscriber> subs = (ArrayList<Subscriber>) subcriberRepository.findAllByEventId(id);
+        ArrayList<Subscriber> subs = (ArrayList<Subscriber>) subscriberRepository.findAllByEventId(id);
         subs.stream().peek(sub -> messageRepository.save(new Message(null, sub.getBuyerId(), message)));
     }
 
