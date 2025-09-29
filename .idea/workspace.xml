@@ -6,15 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bb77262b-e258-4074-bd19-d064dcf94648" name="Changes" comment="last changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/Event.class" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/Event.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/models/Subscriber.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/SubscriberRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/SubscriberRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/AnimatorService.class" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/AnimatorService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/BuyerService.class" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/BuyerService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/generated-sources/annotations/unicam/IdSProject/mappers/EventMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/generated-sources/annotations/unicam/IdSProject/mappers/EventMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/generated-sources/annotations/unicam/IdSProject/mappers/MessageMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/generated-sources/annotations/unicam/IdSProject/mappers/MessageMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/generated-sources/annotations/unicam/IdSProject/mappers/ProductMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdSProject 2/IdSProject/target/generated-sources/annotations/unicam/IdSProject/mappers/ProductMapperImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +22,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -85,7 +77,7 @@
       <module name="IdSProject" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="unicam.IdSProject.*" />
+          <option name="PATTERN" value="unicam.IdSProject.classes.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -276,7 +268,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759155976994</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="last changes">
+      <option name="closed" value="true" />
+      <created>1759158160162</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1759158160162</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -310,36 +310,5 @@
     <MESSAGE value="added message" />
     <MESSAGE value="last changes" />
     <option name="LAST_COMMIT_MESSAGE" value="last changes" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Mailbox.java</url>
-          <line>53</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/models/Mailbox.java</url>
-          <line>56</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/visitor/DenyVisitor.java</url>
-          <line>34</line>
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/visitor/DenyVisitor.java</url>
-          <line>36</line>
-          <option name="timeStamp" value="30" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/IdSProject 2/IdSProject/src/main/java/unicam/IdSProject/visitor/DenyVisitor.java</url>
-          <line>35</line>
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
