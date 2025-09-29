@@ -3,7 +3,9 @@ package unicam.IdSProject.users;
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.context.annotation.Bean;
 import unicam.IdSProject.ShoppingCart;
@@ -19,6 +21,8 @@ import unicam.IdSProject.visitor.Visitable;
 */
 @Getter
 @Setter
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class Buyer {
 
     private String id;
@@ -33,7 +37,6 @@ public class Buyer {
     public Buyer(String id, String name){
         this.id = id;
         this.name = name;
-        this.mailbox = new Mailbox();
     }
 
     /**
@@ -42,6 +45,6 @@ public class Buyer {
      * @param event, the Event that is being observed.
      */
     public void update(Event event, String message) {
-        Mailbox.addMessage(this.id, "Notifica da " + event.getName() + ": " + message);
+        mailbox.addMessage(this.id, "Notifica da " + event.getName() + ": " + message);
     }
 }

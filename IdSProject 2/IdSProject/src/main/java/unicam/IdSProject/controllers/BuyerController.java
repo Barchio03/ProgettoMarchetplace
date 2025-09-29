@@ -4,10 +4,7 @@ import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import unicam.IdSProject.dtos.requests.EventBoughtDTO;
 import unicam.IdSProject.dtos.requests.ProductBoughtDTO;
 import unicam.IdSProject.services.BuyerService;
@@ -71,6 +68,11 @@ public class BuyerController {
     @DeleteMapping(value = "/unsubscribe")
     public ResponseEntity<Object> unsubscribeToEvent(@RequestBody EventBoughtDTO eventDTO) {
         return buyerService.unsubscribeToEvent(eventDTO);
+    }
+
+    @GetMapping(value = "/mailbox")
+    public ResponseEntity<Object> openMailbox() {
+        return buyerService.openMailbox();
     }
 }
 

@@ -30,6 +30,8 @@ public class BuyerService {
     private final ProductBoard productBoard;
     private final EventBoard eventBoard;
 
+    private final Mailbox mailbox;
+
     private final ShoppingCart shoppingCart= new ShoppingCart();
     private Buyer buyer = new Buyer("buyer1", "Buyer");
 
@@ -105,6 +107,10 @@ public class BuyerService {
 
         subcriberRepository.delete(subscriber);
         return new ResponseEntity<>("Disiscrizione avvenuta con successo", HttpStatus.OK);
+    }
+
+    public ResponseEntity<Object> openMailbox() {
+        return new ResponseEntity<>(mailbox.getMessages(buyer.getId()), HttpStatus.OK) ;
     }
 
     private String makeReceipt(ShoppingCart shoppingCart){

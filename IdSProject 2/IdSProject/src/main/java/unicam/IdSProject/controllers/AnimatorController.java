@@ -4,10 +4,7 @@ import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import unicam.IdSProject.dtos.requests.EventCreatedDTO;
 import unicam.IdSProject.services.AnimatorService;
 
@@ -48,5 +45,10 @@ public class AnimatorController {
     @DeleteMapping(value = "/removeEvent")
     public ResponseEntity<Object> removeEvent(@PathParam("id") Long id) {
         return animatorService.removeEvent(id);
+    }
+
+    @GetMapping(value = "/mailbox")
+    public ResponseEntity<Object> openMailbox() {
+        return animatorService.openMailbox();
     }
 }

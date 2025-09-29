@@ -63,4 +63,9 @@ public class SellerController {
     public ResponseEntity<Object> addTransformerTag(){
         return sellerService.addTransformerTag();
     }
+
+    @GetMapping(value = "/mailbox")
+    public ResponseEntity<Object> openMailbox() {
+        return sellerService.openMailbox();
+    }
 }

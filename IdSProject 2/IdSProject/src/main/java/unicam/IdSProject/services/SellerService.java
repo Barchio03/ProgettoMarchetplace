@@ -9,6 +9,7 @@ import unicam.IdSProject.dtos.requests.TransformerProductCreationDTO;
 import unicam.IdSProject.enumerations.Tag;
 import unicam.IdSProject.mappers.ProductMapper;
 import unicam.IdSProject.models.Location;
+import unicam.IdSProject.models.Mailbox;
 import unicam.IdSProject.models.ProducerProduct;
 import unicam.IdSProject.models.TransformerProduct;
 import unicam.IdSProject.repositories.ProductBoard;
@@ -27,6 +28,8 @@ public class SellerService {
     private final RequestHandler requestHandler;
 
     private final ProductBoard productBoard;
+
+    private final Mailbox mailbox;
 
     private Seller seller = new Seller("sel1", "Seller", "Just a seller",
             new Location("43.0000 N", "12.000 E"),
@@ -86,5 +89,8 @@ public class SellerService {
         return new ResponseEntity<>("Tag aggiunto con successo" , HttpStatus.OK);
     }
 
+    public ResponseEntity<Object> openMailbox() {
+        return new ResponseEntity<>(mailbox.getMessages(seller.getId()), HttpStatus.OK) ;
+    }
 
 }
