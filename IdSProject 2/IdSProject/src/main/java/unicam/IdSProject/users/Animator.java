@@ -1,10 +1,7 @@
 package unicam.IdSProject.users;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import unicam.IdSProject.models.Mailbox;
 
 /**
 *

@@ -1,4 +1,4 @@
-package unicam.IdSProject.models;
+package unicam.IdSProject.classes;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

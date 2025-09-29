@@ -9,7 +9,6 @@ import unicam.IdSProject.visitor.Visitable;
 import unicam.IdSProject.visitor.Visitor;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
 *

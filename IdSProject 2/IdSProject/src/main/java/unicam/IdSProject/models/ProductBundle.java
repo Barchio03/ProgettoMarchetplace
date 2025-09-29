@@ -20,26 +20,13 @@ import java.util.ArrayList;
 @Setter
 @DiscriminatorValue("3")
 public class ProductBundle extends Product{
-
     @ElementCollection(targetClass = Long.class, fetch = FetchType.EAGER)
     private ArrayList<Long> products;
 
     /**
-     * This method returns all the Sellers that made a Product that is in this Bundle.
-     *
-     * @return the list of Sellers.
+     * This method creates a new ProductBundle object
      */
-//    public ArrayList<Seller> getProductCreators() {
-//        ArrayList<Seller> prodCreators = new ArrayList<>();
-//        for (Product product : products){
-//            if(prodCreators.contains(product.getCreator())){
-//                continue;
-//            }
-//            prodCreators.add(product.getCreator());
-//        }
-//        return prodCreators;
-//    }
-
-
-
+    public ProductBundle() {
+        super();
+    }
 }

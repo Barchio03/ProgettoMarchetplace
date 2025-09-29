@@ -47,18 +47,6 @@ public class ProductBoard {
     }
 
     /**
-     * This method removes a Product to the Product Board
-     *
-     * @param product, the Product to remove
-     *
-     * @return true if it is removed successfully, false otherwise
-     */
-    public boolean removeProduct(Product product) {
-        productRepository.delete(product);
-        return true;
-    }
-
-    /**
      * This method removes a Product to the Product Board given its id
      *
      * @param id, the id of the Product to remove

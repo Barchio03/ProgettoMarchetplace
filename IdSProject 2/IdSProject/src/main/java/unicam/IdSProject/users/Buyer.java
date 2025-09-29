@@ -1,17 +1,11 @@
 package unicam.IdSProject.users;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.context.annotation.Bean;
-import unicam.IdSProject.ShoppingCart;
 import unicam.IdSProject.models.Event;
-import unicam.IdSProject.models.Mailbox;
-import unicam.IdSProject.visitor.Visitable;
+import unicam.IdSProject.classes.Mailbox;
 
 /**
 *

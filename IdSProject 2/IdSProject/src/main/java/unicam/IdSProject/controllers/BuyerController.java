@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import unicam.IdSProject.dtos.requests.EventBoughtDTO;
-import unicam.IdSProject.dtos.requests.ProductBoughtDTO;
 import unicam.IdSProject.services.BuyerService;
 
 /**

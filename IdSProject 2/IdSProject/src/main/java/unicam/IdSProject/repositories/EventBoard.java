@@ -46,21 +46,6 @@ public class EventBoard {
     /**
      * This method removes an Event from the Event Board
      *
-     * @param event, the Event to delete
-     *
-     * @return true is the Event was deleted successfully, false otherwise
-     */
-    public boolean removeEvent(Event event) {
-        if (!eventRepository.existsById(event.getId())){
-            return false;
-        }
-        eventRepository.delete(event);
-        return true;
-    }
-
-    /**
-     * This method removes an Event from the Event Board
-     *
      * @param id, the id of the Event to delete
      *
      * @return true is the Event was deleted successfully, false otherwise

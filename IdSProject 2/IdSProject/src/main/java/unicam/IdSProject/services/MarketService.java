@@ -13,8 +13,6 @@ import unicam.IdSProject.models.TransformerProduct;
 import unicam.IdSProject.repositories.EventBoard;
 import unicam.IdSProject.repositories.ProductBoard;
 
-import java.util.ArrayList;
-
 @Service
 @RequiredArgsConstructor
 public class MarketService {

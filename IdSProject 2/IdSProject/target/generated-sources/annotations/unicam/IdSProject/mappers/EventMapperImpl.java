@@ -8,7 +8,7 @@ import unicam.IdSProject.models.Event;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-09-29T15:04:32+0200",
+    date = "2025-09-29T16:32:37+0200",
     comments = "version: 1.6.3, compiler: javac, environment: Java 24.0.2 (Oracle Corporation)"
 )
 @Component

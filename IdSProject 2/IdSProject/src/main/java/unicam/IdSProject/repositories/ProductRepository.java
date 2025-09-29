@@ -5,6 +5,6 @@ import unicam.IdSProject.models.Product;
 
 @Repository
 public interface ProductRepository extends CrudRepository<Product, Long> {
-    public boolean existsByName(String name );
-    public boolean existsByCreator(String creator);
+    boolean existsByName(String name);
+    boolean existsByCreator(String creator);
 }

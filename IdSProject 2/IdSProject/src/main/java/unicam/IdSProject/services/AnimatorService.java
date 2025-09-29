@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import unicam.IdSProject.dtos.requests.EventCreatedDTO;
 import unicam.IdSProject.mappers.EventMapper;
 import unicam.IdSProject.models.Event;
-import unicam.IdSProject.models.Mailbox;
+import unicam.IdSProject.classes.Mailbox;
 import unicam.IdSProject.models.Message;
 import unicam.IdSProject.models.Subscription;
 import unicam.IdSProject.repositories.EventBoard;

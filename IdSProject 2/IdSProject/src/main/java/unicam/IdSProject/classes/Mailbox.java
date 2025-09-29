@@ -1,14 +1,10 @@
-package unicam.IdSProject.models;
+package unicam.IdSProject.classes;
 
-import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.Tolerate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import unicam.IdSProject.dtos.response.MessageDTO;
 import unicam.IdSProject.mappers.MessageMapper;
+import unicam.IdSProject.models.Message;
 import unicam.IdSProject.repositories.MessageRepository;
 
 import java.util.ArrayList;

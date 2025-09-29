@@ -5,5 +5,4 @@ import unicam.IdSProject.models.Receipt;
 
 @Repository
 public interface ReceiptRepository extends CrudRepository<Receipt, Long> {
-
 }

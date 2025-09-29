@@ -22,8 +22,8 @@ public class RequestHandler {
      * This method creates a new RequestHandler object
      */
     public RequestHandler() {
-        this.productRequests = new ArrayList<Product>();
-        this.eventRequests = new ArrayList<Event>();
+        this.productRequests = new ArrayList<>();
+        this.eventRequests = new ArrayList<>();
     }
 
     /**

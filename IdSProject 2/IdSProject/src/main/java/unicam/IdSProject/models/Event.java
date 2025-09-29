@@ -7,8 +7,6 @@ import lombok.Setter;
 import unicam.IdSProject.visitor.Visitable;
 import unicam.IdSProject.visitor.Visitor;
 
-import java.util.Objects;
-
 /**
  *
  * This class represents an Event.
@@ -38,19 +36,6 @@ public class Event implements Visitable {
     private String description;
     @NotNull
     private String collaborators;
-
-
-
-//    /**
-//     * This method notifies the subscribers when needed
-//     *
-//     * @param message, the message to spread
-//     */
-//    public void notifySubscribers(String message) {
-//        for (Buyer sub : subscribers) {
-//            sub.update(this, message);
-//        }
-//    }
 
 
     @Override

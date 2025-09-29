@@ -5,6 +5,6 @@ import unicam.IdSProject.models.Event;
 
 @Repository
 public interface EventRepository extends CrudRepository<Event, Long> {
-    public boolean existsByName(String name);
-    public boolean existsByCreator(String creator);
+    boolean existsByName(String name);
+    boolean existsByCreator(String creator);
 }

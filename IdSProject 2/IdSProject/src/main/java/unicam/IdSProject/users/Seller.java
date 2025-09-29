@@ -1,13 +1,10 @@
 package unicam.IdSProject.users;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import unicam.IdSProject.enumerations.Tag;
-import unicam.IdSProject.models.Location;
-import unicam.IdSProject.models.Mailbox;
+import unicam.IdSProject.classes.Location;
 
 import java.util.ArrayList;
 
@@ -32,7 +29,6 @@ public class Seller {
     private Location location;
 
     private ArrayList<Tag> tags;
-
 
     @Override
     public String toString(){
