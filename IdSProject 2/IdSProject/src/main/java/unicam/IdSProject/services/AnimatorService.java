@@ -50,7 +50,7 @@ public class AnimatorService {
     public ResponseEntity<Object> removeEvent(Long id) {
         if (eventBoard.removeEvent(id)) {
             notifySubscribers(id, "Evento cancellato");
-            subcriberRepository.deleteAllByEventId(id);
+            subcriberRepository.deleteByEventId(id);
             return new ResponseEntity<>("Evento rimosso con successo", HttpStatus.OK);
         }
         return new ResponseEntity<>("Id non pervenuto", HttpStatus.NOT_FOUND);

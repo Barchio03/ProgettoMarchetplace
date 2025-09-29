@@ -26,13 +26,15 @@ public class DenyVisitor implements Visitor {
     @Override
     public void visit(Product product) {
         messageRepository.save(new Message(null, product.getCreator(), "La tua richiesta per il prodotto "+
-                product.getName()+ " è stata negata. \nMotivo: "+message));
+                product.getName()+ (" è stata negata. " +
+                "Motivo: ").concat(message)));
     }
 
     @Override
     public void visit(Event event) {
         messageRepository.save(new Message(null, event.getCreator(), "La tua richiesta per l'evento "+
-                event.getName()+ " è stata negata. \nMotivo: "+message));
+                event.getName()+ (" è stata negata. " +
+                "Motivo: ").concat(message)));
     }
 
 }

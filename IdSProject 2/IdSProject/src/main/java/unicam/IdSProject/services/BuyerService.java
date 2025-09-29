@@ -15,7 +15,7 @@ import unicam.IdSProject.models.*;
 import unicam.IdSProject.repositories.EventBoard;
 import unicam.IdSProject.repositories.MessageRepository;
 import unicam.IdSProject.repositories.ProductBoard;
-import unicam.IdSProject.repositories.SubcriberRepository;
+import unicam.IdSProject.repositories.SubscriberRepository;
 import unicam.IdSProject.users.Buyer;
 
 @RequiredArgsConstructor
@@ -25,7 +25,7 @@ public class BuyerService {
     private final ProductMapper productMapper;
 
     private final MessageRepository messageRepository;
-    private final SubcriberRepository subcriberRepository;
+    private final SubscriberRepository subscriberRepository;
 
     private final ProductBoard productBoard;
     private final EventBoard eventBoard;
@@ -35,16 +35,6 @@ public class BuyerService {
     private final ShoppingCart shoppingCart= new ShoppingCart();
     private Buyer buyer = new Buyer("buyer1", "Buyer");
 
-
-//    public ResponseEntity<Object> addProducerProductToShoppingCart(Long id, int quantity) {
-//        ProducerProduct product = productMapper.toEntityWithAllFields(new ProducerProductBoughtDTO(productBoughtDTO.getId()));
-//        return addProductToShoppingCart(id, quantity);
-//    }
-//
-//    public ResponseEntity<Object> addTransformerProductToShoppingCart(ProductBoughtDTO productBoughtDTO, int quantity) {
-//        Product product =  productMapper.toEntityWithAllFields(new TransformerProductBoughtDTO(productBoughtDTO.getId()));
-//        return addProductToShoppingCart(product, quantity);
-//    }
 
     public ResponseEntity<Object> addProductToShoppingCart(Long id, int quantity) {
         if (!productBoard.contains(id)) return new ResponseEntity<>("Il prodotto non esiste", HttpStatus.BAD_REQUEST);
@@ -79,7 +69,7 @@ public class BuyerService {
         }
 
         Subscriber subscriber = new Subscriber(eventBoughtDTO.getId(), buyer.getId());
-        if (subcriberRepository.existsById(new SubId(eventBoughtDTO.getId(), buyer.getId())))
+        if (subscriberRepository.existsById(new SubId(eventBoughtDTO.getId(), buyer.getId())))
             return new ResponseEntity<>("Utente già iscritto", HttpStatus.CONFLICT);
 
         Event event = eventBoard.getEvent(eventBoughtDTO.getId());
@@ -87,7 +77,7 @@ public class BuyerService {
             return new ResponseEntity<>("Ticket Terminati", HttpStatus.NOT_ACCEPTABLE);
 
         eventBoard.addSubscriberToEvent(event);
-        subcriberRepository.save(subscriber);
+        subscriberRepository.save(subscriber);
         return new ResponseEntity<>("Iscrizione avvenuta con successo", HttpStatus.OK);
 
     }
@@ -98,14 +88,14 @@ public class BuyerService {
         }
 
         Subscriber subscriber = new Subscriber(eventBoughtDTO.getId(), buyer.getId());
-        if (!subcriberRepository.existsById(new SubId(eventBoughtDTO.getId(), buyer.getId())))
+        if (!subscriberRepository.existsById(new SubId(eventBoughtDTO.getId(), buyer.getId())))
             return new ResponseEntity<>("Utente già disiscritto", HttpStatus.CONFLICT);
 
         Event event = eventBoard.getEvent(eventBoughtDTO.getId());
         if (event.getMaxAttendees()!= 0)
             eventBoard.removeSubscriberToEvent(event);
 
-        subcriberRepository.delete(subscriber);
+        subscriberRepository.delete(subscriber);
         return new ResponseEntity<>("Disiscrizione avvenuta con successo", HttpStatus.OK);
     }
 
