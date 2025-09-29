@@ -1,0 +1,17 @@
+<changelist name="Uncommitted_changes_before_Update_at_29_09_2025_11_44_[Changes]" date="1759139094366" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_09_2025_11_44_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 29/09/2025 11:44 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/repositories/SubcriberRepository.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/AnimatorService.class" />
+    <option name="AFTER_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/AnimatorService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_09_2025_11_44_[Changes]/AnimatorService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/BuyerService.class" />
+    <option name="AFTER_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/services/BuyerService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_09_2025_11_44_[Changes]/BuyerService.class" />
+  </binary>
+</changelist>

@@ -1,0 +1,24 @@
+<changelist name="Uncommitted_changes_before_Update_at_28_09_2025_22_24_[Changes]" date="1759091097184" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_09_2025_22_24_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 28/09/2025 22:24 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/controllers/BuyerController.class" />
+    <option name="AFTER_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/controllers/BuyerController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_09_2025_22_24_[Changes]/BuyerController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/dtos/requests/TransformerProductCreationDTO.class" />
+    <option name="AFTER_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/dtos/requests/TransformerProductCreationDTO.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_09_2025_22_24_[Changes]/TransformerProductCreationDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/dtos/requests/ProductBoughtDTO.class" />
+    <option name="AFTER_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/dtos/requests/ProductBoughtDTO.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_09_2025_22_24_[Changes]/ProductBoughtDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/mappers/ProductMapperImpl.class" />
+    <option name="AFTER_PATH" value="IdSProject 2/IdSProject/target/classes/unicam/IdSProject/mappers/ProductMapperImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_09_2025_22_24_[Changes]/ProductMapperImpl.class" />
+  </binary>
+</changelist>
