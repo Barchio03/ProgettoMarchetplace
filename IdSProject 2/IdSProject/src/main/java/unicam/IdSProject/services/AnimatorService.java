@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import unicam.IdSProject.dtos.requests.EventCreatedDTO;
 import unicam.IdSProject.mappers.EventMapper;
 import unicam.IdSProject.models.Event;
+import unicam.IdSProject.models.Mailbox;
 import unicam.IdSProject.models.Message;
 import unicam.IdSProject.models.Subscriber;
 import unicam.IdSProject.repositories.EventBoard;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 public class AnimatorService {
 
     private final RequestHandler requestHandler;
+
+    private final Mailbox mailbox;
 
     private final EventMapper eventMapper;
 
@@ -51,6 +54,10 @@ public class AnimatorService {
             return new ResponseEntity<>("Evento rimosso con successo", HttpStatus.OK);
         }
         return new ResponseEntity<>("Id non pervenuto", HttpStatus.NOT_FOUND);
+    }
+
+    public ResponseEntity<Object> openMailbox() {
+        return new ResponseEntity<>(mailbox.getMessages(animator.getId()), HttpStatus.OK) ;
     }
 
     /**

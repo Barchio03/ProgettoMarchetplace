@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.Tolerate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import unicam.IdSProject.dtos.response.MessageDTO;
+import unicam.IdSProject.mappers.MessageMapper;
 import unicam.IdSProject.repositories.MessageRepository;
 
 import java.util.ArrayList;
@@ -18,16 +21,18 @@ import java.util.ArrayList;
 *
 */
 @RequiredArgsConstructor
+@Component
 public class Mailbox {
 
-    private static MessageRepository messageRepository;
+    private final MessageRepository messageRepository;
+    private final MessageMapper messageMapper;
 
     /**
      * This method adds a message into the Mailbox
      *
      * @param message, the message to add
      */
-    public static void addMessage(String owner, String message) {
+    public void addMessage(String owner, String message) {
         messageRepository.save(new Message(null, owner, message));
     }
 
@@ -36,16 +41,20 @@ public class Mailbox {
      *
      * @return the messages inside the Mailbox
      */
-    public static ArrayList<String> getMessages(String owner) {
-        ArrayList<Message> messages = (ArrayList<Message>) messageRepository.findByReceiver(owner);
-        return (ArrayList<String>) messages.stream().map(Message::getMessage).toList();
+    public ArrayList<MessageDTO> getMessages(String owner) {
+        ArrayList<Message> messages = (ArrayList<Message>) messageRepository.findAllByReceiver(owner);
+        ArrayList<MessageDTO> dtos = new ArrayList<>();
+        for (Message message : messages) {
+            dtos.add(messageMapper.toDtoWithAllFields(message));
+        }
+        return dtos;
     }
 
     /**
      * This method deletes all the messages inside the Mailbox
      */
     public void refresh(String owner) {
-        ArrayList<Message> messages = (ArrayList<Message>) messageRepository.findByReceiver(owner);
+        ArrayList<Message> messages = (ArrayList<Message>) messageRepository.findAllByReceiver(owner);
         ArrayList<Long> ids = (ArrayList<Long>) messages.stream().map(Message::getId).toList();
         messageRepository.deleteAllById(ids);
     }
