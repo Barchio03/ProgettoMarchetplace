@@ -55,6 +55,9 @@ public class BuyerService {
 
         for (QuantifiedProduct quantifiedProduct : shoppingCart.getQuantifiedProducts()) {
             productBoard.updateStock(quantifiedProduct.getProduct(), quantifiedProduct.getProduct().getStockNumber()-quantifiedProduct.getStockNumber());
+            messageRepository.save(new Message(null, quantifiedProduct.getProduct().getCreator(),
+                    "Il tuo prodotto " + quantifiedProduct.getProduct().getName() + " è stato acquistato in "
+                            + quantifiedProduct.getStockNumber() + " quantità da "+ buyer.getName()));
         }
         
         String receipt = this.makeReceipt(shoppingCart);
