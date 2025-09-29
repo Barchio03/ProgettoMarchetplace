@@ -9,7 +9,7 @@ import unicam.IdSProject.mappers.EventMapper;
 import unicam.IdSProject.models.Event;
 import unicam.IdSProject.models.Mailbox;
 import unicam.IdSProject.models.Message;
-import unicam.IdSProject.models.Subscriber;
+import unicam.IdSProject.models.Subscription;
 import unicam.IdSProject.repositories.EventBoard;
 import unicam.IdSProject.repositories.MessageRepository;
 import unicam.IdSProject.repositories.RequestHandler;
@@ -50,7 +50,7 @@ public class AnimatorService {
     public ResponseEntity<Object> removeEvent(Long id) {
         if (eventBoard.removeEvent(id)) {
             notifySubscribers(id, "Evento cancellato");
-            subscriberRepository.deleteAll((ArrayList<Subscriber>) subscriberRepository.findAllByEventId(id));
+            subscriberRepository.deleteAll((ArrayList<Subscription>) subscriberRepository.findAllByEventId(id));
             return new ResponseEntity<>("Evento rimosso con successo", HttpStatus.OK);
         }
         return new ResponseEntity<>("Id non pervenuto", HttpStatus.NOT_FOUND);
@@ -66,7 +66,7 @@ public class AnimatorService {
      * @param message, the message to spread
      */
     private void notifySubscribers(Long id, String message) {
-        for (Subscriber sub : subscriberRepository.findAllByEventId(id)) {
+        for (Subscription sub : subscriberRepository.findAllByEventId(id)) {
             messageRepository.save(new Message(null, sub.getBuyerId(), message));
         }
     }

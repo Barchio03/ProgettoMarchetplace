@@ -7,10 +7,7 @@ import org.springframework.stereotype.Service;
 import unicam.IdSProject.QuantifiedProduct;
 import unicam.IdSProject.ShoppingCart;
 import unicam.IdSProject.dtos.requests.*;
-import unicam.IdSProject.dtos.response.ProducerProductDTO;
 import unicam.IdSProject.ids.SubId;
-import unicam.IdSProject.mappers.EventMapper;
-import unicam.IdSProject.mappers.ProductMapper;
 import unicam.IdSProject.models.*;
 import unicam.IdSProject.repositories.EventBoard;
 import unicam.IdSProject.repositories.MessageRepository;
@@ -21,8 +18,6 @@ import unicam.IdSProject.users.Buyer;
 @RequiredArgsConstructor
 @Service
 public class BuyerService {
-
-    private final ProductMapper productMapper;
 
     private final MessageRepository messageRepository;
     private final SubscriberRepository subscriberRepository;
@@ -71,7 +66,7 @@ public class BuyerService {
             return new ResponseEntity<>("Evento nullo", HttpStatus.BAD_REQUEST);
         }
 
-        Subscriber subscriber = new Subscriber(eventBoughtDTO.getId(), buyer.getId());
+        Subscription subscription = new Subscription(eventBoughtDTO.getId(), buyer.getId());
         if (subscriberRepository.existsById(new SubId(eventBoughtDTO.getId(), buyer.getId())))
             return new ResponseEntity<>("Utente già iscritto", HttpStatus.CONFLICT);
 
@@ -80,7 +75,9 @@ public class BuyerService {
             return new ResponseEntity<>("Ticket Terminati", HttpStatus.NOT_ACCEPTABLE);
 
         eventBoard.addSubscriberToEvent(event);
-        subscriberRepository.save(subscriber);
+        subscriberRepository.save(subscription);
+        messageRepository.save(new Message(null, event.getCreator(),
+                "L'acquirente "+ buyer.getName() + " si è iscritto all'evento " + event.getName()));
         return new ResponseEntity<>("Iscrizione avvenuta con successo", HttpStatus.OK);
 
     }
@@ -90,7 +87,7 @@ public class BuyerService {
             return new ResponseEntity<>("Evento nullo", HttpStatus.BAD_REQUEST);
         }
 
-        Subscriber subscriber = new Subscriber(eventBoughtDTO.getId(), buyer.getId());
+        Subscription subscription = new Subscription(eventBoughtDTO.getId(), buyer.getId());
         if (!subscriberRepository.existsById(new SubId(eventBoughtDTO.getId(), buyer.getId())))
             return new ResponseEntity<>("Utente già disiscritto", HttpStatus.CONFLICT);
 
@@ -98,7 +95,7 @@ public class BuyerService {
         if (event.getMaxAttendees()!= 0)
             eventBoard.removeSubscriberToEvent(event);
 
-        subscriberRepository.delete(subscriber);
+        subscriberRepository.delete(subscription);
         return new ResponseEntity<>("Disiscrizione avvenuta con successo", HttpStatus.OK);
     }
 
