@@ -25,12 +25,22 @@ public class MarketService {
 
     private final EventBoard eventBoard;
 
+    /**
+     * This method gets all the products in the marketplace
+     *
+     * @return the response entity
+     */
     public ResponseEntity<Object> getProducts(){
         return new ResponseEntity<>(productBoard.getProducts().stream().map(
                 this::toDTO
         ).toList(), HttpStatus.OK);
     }
 
+    /**
+     * This method gets all the event in the marketplace
+     *
+     * @return the response entity
+     */
     public ResponseEntity<Object> getEvents(){
         return new ResponseEntity<>(eventBoard.getEvents().stream().map(
                 eventMapper::toDtoWithAllFields

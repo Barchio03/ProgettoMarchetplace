@@ -47,6 +47,11 @@ public class AnimatorController {
         return animatorService.removeEvent(id);
     }
 
+    /**
+     * This method shows the messages sent to the animator
+     *
+     * @return the response of the method
+     */
     @GetMapping(value = "/mailbox")
     public ResponseEntity<Object> openMailbox() {
         return animatorService.openMailbox();

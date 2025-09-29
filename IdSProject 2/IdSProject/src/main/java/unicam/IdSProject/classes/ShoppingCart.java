@@ -64,6 +64,9 @@ public class ShoppingCart {
         return true;
     }
 
+    /**
+     * This method clears the shopping cart
+     */
     public void clear() {quantifiedProducts.clear();}
 
 

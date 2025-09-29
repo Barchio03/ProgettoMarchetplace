@@ -26,6 +26,7 @@ public class Mailbox {
     /**
      * This method adds a message into the Mailbox
      *
+     * @param owner, the owner of the mailbox
      * @param message, the message to add
      */
     public void addMessage(String owner, String message) {
@@ -34,6 +35,8 @@ public class Mailbox {
 
     /**
      * This method returns all the messages inside the Mailbox
+     *
+     * @param owner, the owner of the mailbox
      *
      * @return the messages inside the Mailbox
      */
@@ -48,6 +51,8 @@ public class Mailbox {
 
     /**
      * This method deletes all the messages inside the Mailbox
+     *
+     * @param owner, the owner of the mailbox
      */
     public void refresh(String owner) {
         ArrayList<Message> messages = (ArrayList<Message>) messageRepository.findAllByReceiver(owner);

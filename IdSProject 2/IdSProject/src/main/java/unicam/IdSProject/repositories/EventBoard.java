@@ -117,7 +117,7 @@ public class EventBoard {
     }
 
     /**
-     * This method return the Event by its id
+     * This method returns the Event by its id
      *
      * @param id, the id of the Event
      *

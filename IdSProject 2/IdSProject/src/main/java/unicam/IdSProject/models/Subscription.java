@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import unicam.IdSProject.ids.SubId;
 
+/**
+ * This class represents a subscription made by a buyer to an event
+ */
 @Entity
 @Getter
 @Setter

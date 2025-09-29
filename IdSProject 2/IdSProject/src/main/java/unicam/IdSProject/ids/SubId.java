@@ -6,12 +6,16 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+/**
+ * This class represents the Subscription's composite primary key
+ */
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class SubId implements Serializable {
 
     private Long eventId;
+
     private String buyerId;
 
 

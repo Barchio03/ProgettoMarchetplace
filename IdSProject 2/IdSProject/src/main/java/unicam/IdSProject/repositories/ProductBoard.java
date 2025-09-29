@@ -61,6 +61,12 @@ public class ProductBoard {
         return false;
     }
 
+    /**
+     * This method gets a product by its id
+     *
+     * @param id , the id
+     * @return the product
+     */
     public Product getProduct(Long id) {
         Product product = productRepository.findById(id).orElseThrow();
         if (producerProductRepository.existsById(id)) return (ProducerProduct) product;

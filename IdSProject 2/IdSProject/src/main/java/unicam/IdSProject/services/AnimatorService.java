@@ -35,6 +35,12 @@ public class AnimatorService {
     private Animator animator = new Animator("anim1", "Animator", "Just an animator");
 
 
+    /**
+     * This method adds an event
+     *
+     * @param eventDTO, the dto
+     * @return the response entity
+     */
     public ResponseEntity<Object> addEvent(EventCreatedDTO eventDTO){
         Event event = eventMapper.toEntityWithAllFields(eventDTO);
         event.setCreator(animator.getId());
@@ -47,6 +53,12 @@ public class AnimatorService {
         return new ResponseEntity<>("L'evento esiste già", HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * This method removes an event
+     *
+     * @param id, the id
+     * @return the response entity
+     */
     public ResponseEntity<Object> removeEvent(Long id) {
         if (eventBoard.removeEvent(id)) {
             notifySubscribers(id, "Evento cancellato");
@@ -56,15 +68,16 @@ public class AnimatorService {
         return new ResponseEntity<>("Id non pervenuto", HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * This method returns the messages
+     *
+     * @return the response entity
+     */
     public ResponseEntity<Object> openMailbox() {
         return new ResponseEntity<>(mailbox.getMessages(animator.getId()), HttpStatus.OK) ;
     }
 
-    /**
-     * This method notifies the subscribers when needed
-     *
-     * @param message, the message to spread
-     */
+
     private void notifySubscribers(Long id, String message) {
         for (Subscription sub : subscriberRepository.findAllByEventId(id)) {
             messageRepository.save(new Message(null, sub.getBuyerId(), message));

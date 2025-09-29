@@ -32,6 +32,13 @@ public class BuyerService {
     private Buyer buyer = new Buyer("buyer1", "Buyer");
 
 
+    /**
+     * This method adds a product to the shopping cart
+     *
+     * @param id, the id
+     * @param quantity, the quantity
+     * @return the response entity
+     */
     public ResponseEntity<Object> addProductToShoppingCart(Long id, int quantity) {
         if (!productBoard.contains(id)) return new ResponseEntity<>("Il prodotto non esiste", HttpStatus.BAD_REQUEST);
         Product product = productBoard.getProduct(id);
@@ -44,6 +51,9 @@ public class BuyerService {
         } else return new ResponseEntity<>("Errore", HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * This method lets you buy the products inside the shopping cart
+     */
     public ResponseEntity<Object> buyShoppingCart() {
         if (shoppingCart == null || shoppingCart.getQuantifiedProducts().isEmpty()){
             return new ResponseEntity<>("Carrello Vuoto", HttpStatus.BAD_REQUEST);
@@ -62,6 +72,12 @@ public class BuyerService {
 
     }
 
+    /**
+     * This method lets you subscribe to an event
+     *
+     * @param eventBoughtDTO, the event dto
+     * @return the response entity
+     */
     public ResponseEntity<Object> subscribeToEvent(EventBoughtDTO eventBoughtDTO) {
         if (!eventBoard.contains(eventBoughtDTO.getId())){
             return new ResponseEntity<>("Evento nullo", HttpStatus.BAD_REQUEST);
@@ -83,6 +99,12 @@ public class BuyerService {
 
     }
 
+    /**
+     * This method lets you unsubscribe to an event
+     *
+     * @param eventBoughtDTO, the event dto
+     * @return the response entity
+     */
     public ResponseEntity<Object> unsubscribeToEvent(EventBoughtDTO eventBoughtDTO) {
         if (!eventBoard.contains(eventBoughtDTO.getId())){
             return new ResponseEntity<>("Evento nullo", HttpStatus.BAD_REQUEST);
@@ -100,6 +122,11 @@ public class BuyerService {
         return new ResponseEntity<>("Disiscrizione avvenuta con successo", HttpStatus.OK);
     }
 
+    /**
+     * This method returns the messages
+     *
+     * @return the response entity
+     */
     public ResponseEntity<Object> openMailbox() {
         return new ResponseEntity<>(mailbox.getMessages(buyer.getId()), HttpStatus.OK) ;
     }

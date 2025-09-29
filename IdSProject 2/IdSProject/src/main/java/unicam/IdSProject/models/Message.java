@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * This class represent a message left to someone's mailbox
+ */
 @Entity
 @Getter
 @Setter

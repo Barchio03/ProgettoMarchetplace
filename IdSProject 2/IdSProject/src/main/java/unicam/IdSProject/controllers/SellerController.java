@@ -64,6 +64,11 @@ public class SellerController {
         return sellerService.addTransformerTag();
     }
 
+    /**
+     * This method shows the messages sent to the seller
+     *
+     * @return the response of the method
+     */
     @GetMapping(value = "/mailbox")
     public ResponseEntity<Object> openMailbox() {
         return sellerService.openMailbox();

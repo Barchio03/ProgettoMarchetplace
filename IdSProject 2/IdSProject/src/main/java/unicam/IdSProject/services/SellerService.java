@@ -36,6 +36,12 @@ public class SellerService {
             new ArrayList<>());
 
 
+    /**
+     * This method lets you add a Producer Product
+     *
+     * @param productDTO, the product dto
+     * @return the response entity
+     */
     public ResponseEntity<Object> addProducerProduct(ProducerProductCreationDTO productDTO){
         ProducerProduct product = productMapper.toEntityWithAllFields(productDTO);
 
@@ -50,6 +56,12 @@ public class SellerService {
         } else return new ResponseEntity<>("Non autorizzato", HttpStatus.UNAUTHORIZED);
     }
 
+    /**
+     * This method lets you add a Transformer Product
+     *
+     * @param productDTO, the product dto
+     * @return the response entity
+     */
     public ResponseEntity<Object> addTransformerProduct(TransformerProductCreationDTO productDTO){
         TransformerProduct product = productMapper.toEntityWithAllFields(productDTO);
 
@@ -65,6 +77,12 @@ public class SellerService {
         return new ResponseEntity<>("Non autorizzato", HttpStatus.UNAUTHORIZED);
     }
 
+    /**
+     * This method lets you remove a product
+     *
+     * @param id, the id
+     * @return the response entity
+     */
     public ResponseEntity<Object> removeProduct(Long id) {
         if (productBoard.removeProduct(id)){
             return new ResponseEntity<>("Prodotto rimosso con successo", HttpStatus.OK);
@@ -73,6 +91,11 @@ public class SellerService {
 
     }
 
+    /**
+     * This method lets you add the Producer tag
+     *
+     * @return the response entity
+     */
     public ResponseEntity<Object> addProducerTag(){
         if (seller.getTags().contains(Tag.PRODUCER)){
             return new ResponseEntity<>("Il tag è già presente" , HttpStatus.BAD_REQUEST);
@@ -81,6 +104,11 @@ public class SellerService {
         return new ResponseEntity<>("Tag aggiunto con successo" , HttpStatus.OK);
     }
 
+    /**
+     * This method lets you add the Transformer tag
+     *
+     * @return the response entity
+     */
     public ResponseEntity<Object> addTransformerTag(){
         if (seller.getTags().contains(Tag.TRANSFORMER)){
             return new ResponseEntity<>("Il tag è già presente" , HttpStatus.BAD_REQUEST);
@@ -89,6 +117,11 @@ public class SellerService {
         return new ResponseEntity<>("Tag aggiunto con successo" , HttpStatus.OK);
     }
 
+    /**
+     * This method returns the messages
+     *
+     * @return the response entity
+     */
     public ResponseEntity<Object> openMailbox() {
         return new ResponseEntity<>(mailbox.getMessages(seller.getId()), HttpStatus.OK) ;
     }

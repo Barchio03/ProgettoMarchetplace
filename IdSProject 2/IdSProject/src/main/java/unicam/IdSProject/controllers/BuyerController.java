@@ -69,6 +69,11 @@ public class BuyerController {
         return buyerService.unsubscribeToEvent(eventDTO);
     }
 
+    /**
+     * This method shows the messages sent to the buyer
+     *
+     * @return the response of the method
+     */
     @GetMapping(value = "/mailbox")
     public ResponseEntity<Object> openMailbox() {
         return buyerService.openMailbox();

@@ -19,24 +19,44 @@ public class CuratorService {
 
     private Visitable toCheck;
 
+    /**
+     * This method loads the next product to verify
+     *
+     * @return the response entity
+     */
     public ResponseEntity<Object> getProduct() {
         toCheck= requestHandler.getNextProduct();
         if (toCheck!=null) return new ResponseEntity<>(toCheck, HttpStatus.OK);
         else return new ResponseEntity<>("Nessun prodotto da verificare", HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * This method loads the next event to verify
+     *
+     * @return the response entity
+     */
     public ResponseEntity<Object> getEvent() {
         toCheck= requestHandler.getNextEvent();
         if (toCheck!=null) return new ResponseEntity<>(toCheck, HttpStatus.OK);
         else return new ResponseEntity<>("Nessun evento da verificare", HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * This method lets you approve the selected element
+     *
+     * @return the response entity
+     */
     public ResponseEntity<Object> accept() {
         if (toCheck==null) return new ResponseEntity<>("Nessun elemento selezionato", HttpStatus.NOT_FOUND);
         toCheck.accept(acceptVisitor);
         return new ResponseEntity<>("Elemento verificato con successo", HttpStatus.OK);
     }
 
+    /**
+     * This method lets you deny the selected element
+     *
+     * @return the response entity
+     */
     public ResponseEntity<Object> deny(String message) {
         if (toCheck==null) return new ResponseEntity<>("Nessun elemento selezionato", HttpStatus.NOT_FOUND);
         denyVisitor.setMessage(message);
